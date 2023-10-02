@@ -75,7 +75,7 @@ footer .fa-heart {
 }
 /* Add a background image to the body */
 body {
-    background: url('background.jpg') no-repeat center center fixed; 
+    background: url('https://cdn.discordapp.com/attachments/1036676063666901064/1158456244122685440/DALLE_2023-09-10_12.29.20_-_a_colorfull_oil_looking_painting_which_is_not_completely_oil_painint_showing_the_tradional_things_of_pakistans_village_curtule_and_an_exact_text__BUTT.png?ex=651c4ff3&is=651afe73&hm=3c476898598edf4119af3683c848fa5d61090ecb7f66083af2a3b6ea5490c9e2&') no-repeat center center fixed; 
     background-size: cover;
     color: #333;
 }
