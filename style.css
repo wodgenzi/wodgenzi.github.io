@@ -73,3 +73,27 @@ footer .fa-heart {
     transform: translateY(20px);
     animation: fadeInUp 0.5s forwards 0.2s;
 }
+/* Add a background image to the body */
+body {
+    background: url('background.jpg') no-repeat center center fixed; 
+    background-size: cover;
+    color: #333;
+}
+
+/* Add a semi-transparent background to the container for better text visibility */
+.container {
+    background: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
+}
+
+/* Add a backdrop filter to the navbar for a frosted glass effect */
+nav {
+    backdrop-filter: saturate(180%) blur(5px);
+    background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
+}
+
+/* Style the footer with a semi-transparent background */
+footer {
+    background-color: rgba(0, 0, 0, 0.7); /* Black background with 70% opacity */
+    backdrop-filter: saturate(180%) blur(5px);
+}
+
