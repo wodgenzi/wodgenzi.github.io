@@ -1,62 +1,49 @@
-/* Add smooth scrolling on all links inside the navbar */
-.navbar a {
-    cursor: pointer;
-    transition: color 0.2s ease-in-out;
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('https://cdn.discordapp.com/attachments/1036676063666901064/1158456244122685440/DALLE_2023-09-10_12.29.20_-_a_colorfull_oil_looking_painting_which_is_not_completely_oil_painint_showing_the_tradional_things_of_pakistans_village_curtule_and_an_exact_text__BUTT.png?ex=651c4ff3&is=651afe73&hm=3c476898598edf4119af3683c848fa5d61090ecb7f66083af2a3b6ea5490c9e2&') no-repeat center center fixed; 
+    background-size: cover;
+    color: #333;
 }
 
-.navbar a:hover {
-    color: #007bff; /* Match with Bootstrap primary color */
-}
-
-/* Add a smooth transition effect for the images */
-.card-img-top {
-    transition: transform .2s ease-in-out;
-}
-
-/* Scale the images on hover */
-.card:hover .card-img-top {
-    transform: scale(1.1);
-}
-
-/* Add some padding to the footer and style the heart icon */
-footer {
-    padding: 20px 0;
-}
-
-footer .fa-heart {
-    color: #e25555; /* You can choose any color you like */
-}
-
-/* Style the navbar brand */
-.navbar-brand {
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* Style the container for a smoother transition between sections */
 .container {
-    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #0000001a;
 }
 
-/* Add animations to the about me section */
-#about p {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.5s forwards 0.5s;
+nav {
+    margin-bottom: 20px;
+    backdrop-filter: saturate(180%) blur(5px);
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-/* Add animations to the project cards */
+h2::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #007bff;
+}
+
 .project-card {
+    transition: transform .2s, box-shadow .2s;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s forwards;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px 0px #0000001a;
 }
 
 .project-card:nth-child(2) {
@@ -67,33 +54,33 @@ footer .fa-heart {
     animation-delay: 0.4s;
 }
 
-/* Add animations to the contact button */
 .contact-btn {
+    transition: background-color .3s, color .3s;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s forwards 0.2s;
 }
-/* Add a background image to the body */
-body {
-    background: url('https://cdn.discordapp.com/attachments/1036676063666901064/1158456244122685440/DALLE_2023-09-10_12.29.20_-_a_colorfull_oil_looking_painting_which_is_not_completely_oil_painint_showing_the_tradional_things_of_pakistans_village_curtule_and_an_exact_text__BUTT.png?ex=651c4ff3&is=651afe73&hm=3c476898598edf4119af3683c848fa5d61090ecb7f66083af2a3b6ea5490c9e2&') no-repeat center center fixed; 
-    background-size: cover;
-    color: #333;
+
+.contact-btn:hover {
+    background-color: #333;
+    color: #fff;
 }
 
-/* Add a semi-transparent background to the container for better text visibility */
-.container {
-    background: rgba(255, 255, 255, 0.9); /* White background with 90% opacity */
-}
-
-/* Add a backdrop filter to the navbar for a frosted glass effect */
-nav {
-    backdrop-filter: saturate(180%) blur(5px);
-    background-color: rgba(255, 255, 255, 0.7); /* White background with 70% opacity */
-}
-
-/* Style the footer with a semi-transparent background */
 footer {
-    background-color: rgba(0, 0, 0, 0.7); /* Black background with 70% opacity */
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0;
     backdrop-filter: saturate(180%) blur(5px);
 }
+
+footer .fa-heart {
+    color: #e25555;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
