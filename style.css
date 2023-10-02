@@ -1,33 +1,75 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+/* Add smooth scrolling on all links inside the navbar */
+.navbar a {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
 }
 
-.container {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px 0px #0000001a;
+.navbar a:hover {
+    color: #007bff; /* Match with Bootstrap primary color */
 }
 
-nav {
-    margin-bottom: 20px;
+/* Add a smooth transition effect for the images */
+.card-img-top {
+    transition: transform .2s ease-in-out;
 }
 
-h2 {
-    font-weight: bold;
-    margin-bottom: 20px;
+/* Scale the images on hover */
+.card:hover .card-img-top {
+    transform: scale(1.1);
 }
 
-.card {
-    transition: transform .2s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
+/* Add some padding to the footer and style the heart icon */
 footer {
-    margin-top: 50px;
+    padding: 20px 0;
+}
+
+footer .fa-heart {
+    color: #e25555; /* You can choose any color you like */
+}
+
+/* Style the navbar brand */
+.navbar-brand {
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Style the container for a smoother transition between sections */
+.container {
+    margin-bottom: 40px;
+}
+
+/* Add animations to the about me section */
+#about p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards 0.5s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add animations to the project cards */
+.project-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+}
+
+.project-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.project-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* Add animations to the contact button */
+.contact-btn {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards 0.2s;
 }
