@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    /* background-color: #202020; */
+    height: 100vh;
+    background-image:url('https://cdn.discordapp.com/attachments/1036676063666901064/1189676370033393785/batman-animated.gif?ex=659f0775&is=658c9275&hm=1b694a2660d6bfd5d3a83aaddf66acc0dfaa4b9951d8d2f6152c27d64a72c2e8&'); background-repeat:repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+#batmanicon{
+    height: 50px;
+    margin-top: 10px;
+}
+
+#navbar{
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: space-between;
+    
+}
+
+.navbutton{
+    font-size:medium;
+    font-weight: bold;
+    color:#ffffff56;
+    text-decoration: none;
+}
+
+#searchBar{
+    padding-left: 5px;
+    border-radius: 2px;
+    border: none;
+    
+
+}
+
+#searchButton{
+    color: #8b7b7b;
+    background-color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+    padding: 2px;
+    border-radius: 2px;
+    
+}
+
+
+.search{
+    margin-left: 10px;
+    height: 20px;
+    align-items: center;
+}
+
