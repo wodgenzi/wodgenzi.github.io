@@ -12,9 +12,9 @@ body{
     background-position: center center;
 }
 #batmanicon{
-    height: 50px;
-    margin-top: 10px;
+    height: 100%;
 }
+
 
 #navbar{
     height: 35px;
@@ -27,28 +27,53 @@ body{
     
 }
 
+
+
+
 .navbutton{
+    height: 100%;
+    padding-left: 1%;
+    padding-right: 1%;
     font-size:medium;
     font-weight: bold;
     color:#ffffff56;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.navbutton:hover{
+    background-color: #8b7b7b42;
+    color: #ffffff;
+    border-radius: 5px;
+
+}
+.navbutton:active{
+    background-color: #8b7b7bad;
+    color: #ffffff;
+    border-radius: 5px;
 }
 
 #searchBar{
     padding-left: 5px;
     border-radius: 2px;
     border: none;
+    background-color: #ffffff1e;
     
-
 }
 
 #searchButton{
+    margin-right: 5px;
     color: #8b7b7b;
     background-color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
     padding: 2px;
     border-radius: 2px;
+    background-color: #ffffff1f;
     
 }
 
