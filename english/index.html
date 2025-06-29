@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portable Glossary App</title>
+    <title>NET Past Papers Words</title>
     <script src="index.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -34,29 +34,12 @@
 
 <div class="max-w-6xl mx-auto">
     <header class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-700">My Personal Glossary</h1>
-        <p class="text-gray-500">A portable, serverless glossary app. All data is saved in your browser.</p>
+        <h1 class="text-4xl font-bold text-gray-700">NET Past Papers Words</h1>
     </header>
-
-    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 class="text-2xl font-semibold mb-4">Add a New Word</h2>
-        <div class="flex space-x-2">
-            <input type="text" id="wordInput" placeholder="Enter a word (e.g., 'portable')" class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <button onclick="fetchWordFromAPI()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300">Fetch</button>
-        </div>
-
-        <div id="apiResponseBox" class="mt-4">
-            <span class='text-sm text-blue-500 hover:underline cursor-pointer' onclick="toggleRawResponse()">Show/Hide Raw API Response</span>
-            <pre id="apiResponse" class="text-xs bg-gray-50 p-4 mt-2 rounded-md overflow-auto" style="display: none;">Waiting for input...</pre>
-        </div>
-
-        <div id="definitionChoices" class="mt-4 space-y-2"></div>
-    </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold">Glossary</h2>
-            <button id="unhideAllBtn" onclick="unhideAll()" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">Unhide All</button>
         </div>
         <div class="overflow-x-auto">
             <table id="wordsTable" class="min-w-full bg-white">
@@ -64,7 +47,6 @@
                 <tr>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Word</th>
                     <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Definition & Details</th>
-                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
                 </tr>
                 </thead>
                 <tbody class="text-gray-700"></tbody>
@@ -75,9 +57,6 @@
 </div>
 
 <script>
-    // IMPORTANT: PASTE YOUR RAPIDAPI KEY HERE
-    const RAPIDAPI_KEY = '847c44fe86msh54e3f1b7246ea22p13005bjsncd302ec8f6dc'; // Replace with your actual key
-    const RAPIDAPI_HOST = 'wordsapiv1.p.rapidapi.com';
 
     let currentApiResults = null;
     let currentWord = '';
@@ -2742,19 +2721,6 @@
         return wordsJSON ? JSON.parse(wordsJSON) : {};
     }
 
-    /**
-     * Saves the current glossary words to local storage.
-     * @param {Object} words - The object containing words and their definitions to save.
-     */
-    function saveWordsToStorage(words) {
-        localStorage.setItem('glossaryAppWords', JSON.stringify(words, null, 2));
-    }
-
-    // --- Function to load initial data (now from embedded variable) ---
-    /**
-     * Loads initial glossary data. It prioritizes data from local storage.
-     * If local storage is empty, it uses the EMBEDDED_INITIAL_WORDS data.
-     */
     async function loadInitialData() {
         let existingWords = loadWordsFromStorage();
 
@@ -2771,126 +2737,7 @@
     }
 
 
-    // --- Core Application Logic ---
-    /**
-     * Fetches word definitions from the RapidAPI WordsAPI based on user input.
-     */
-    async function fetchWordFromAPI() {
-        // Check if the API key is provided
-        if (!RAPIDAPI_KEY || RAPIDAPI_KEY === 'PASTE_YOUR_API_KEY_HERE') {
-            // Using a custom message box instead of alert() for better UX
-            showMessageBox('Error: Please paste your RapidAPI Key into the script tag in the HTML file.');
-            return;
-        }
-        const word = document.getElementById('wordInput').value.trim().toLowerCase();
-        if (!word) return; // Do nothing if input is empty
-        currentWord = word; // Store the current word being searched
 
-        const apiResponseEl = document.getElementById('apiResponse');
-        apiResponseEl.textContent = 'Fetching...'; // Show fetching status
-
-        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': RAPIDAPI_KEY,
-                'X-RapidAPI-Host': RAPIDAPI_HOST
-            }
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const data = await response.json();
-            apiResponseEl.textContent = JSON.stringify(data, null, 2); // Display raw API response
-
-            // If response is OK and contains results, show definition options
-            if (response.ok && data.results && data.results.length > 0) {
-                currentApiResults = data.results;
-                showDefinitionOptions();
-            } else {
-                // Display error message if no definitions found or API error
-                document.getElementById('definitionChoices').innerHTML = `<p class="text-red-500">${data.message || `No definitions found for "${word}".`}</p>`;
-            }
-        } catch (error) {
-            console.error("API Fetch Error:", error);
-            apiResponseEl.textContent = `Error: ${error.message}`;
-            document.getElementById('definitionChoices').innerHTML = `<p class="text-red-500">Failed to fetch data. Check the console for details.</p>`;
-        }
-    }
-
-    /**
-     * Displays a list of definition choices for the fetched word.
-     */
-    function showDefinitionOptions() {
-        const container = document.getElementById('definitionChoices');
-        container.innerHTML = '<p class="font-semibold mb-2">Select one or more definitions to add:</p>';
-
-        // Iterate through API results and create checkboxes for each definition
-        currentApiResults.forEach((item, index) => {
-            container.innerHTML += `
-          <label class="flex items-start p-3 border rounded-lg hover:bg-gray-100 transition cursor-pointer">
-            <input type="checkbox" data-index="${index}" class="mt-1 mr-3 h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500">
-            <div>
-              <span class="font-bold">${item.partOfSpeech || 'N/A'}:</span>
-              <span>${item.definition}</span>
-            </div>
-          </label>
-        `;
-        });
-
-        // Add a button to add selected definitions
-        container.innerHTML += `<button onclick="addSelectedDefinitions()" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Add Selected Definitions</button>`;
-    }
-
-    /**
-     * Adds the selected definitions to the glossary and saves them to local storage.
-     */
-    function addSelectedDefinitions() {
-        const selectedIndices = Array.from(document.querySelectorAll('#definitionChoices input[type="checkbox"]:checked'))
-            .map(cb => parseInt(cb.dataset.index));
-
-        if (selectedIndices.length === 0) {
-            showMessageBox('Please select at least one definition.');
-            return;
-        }
-
-        const allWords = loadWordsFromStorage(); // Load existing words
-        if (!allWords[currentWord]) {
-            allWords[currentWord] = []; // Initialize array for new word if it doesn't exist
-        }
-
-        selectedIndices.forEach(index => {
-            const result = currentApiResults[index];
-            const newEntry = {
-                definition: result.definition || 'N/A',
-                partOfSpeech: result.partOfSpeech || '',
-                synonyms: result.synonyms || [],
-                example: result.examples ? result.examples[0] : '',
-                marked_red: false,
-                marked_green: false,
-                is_hidden: false
-            };
-
-            // Prevent adding duplicate definitions for the same word
-            if (!allWords[currentWord].some(e => e.definition === newEntry.definition)) {
-                allWords[currentWord].push(newEntry);
-            }
-        });
-
-        saveWordsToStorage(allWords); // Save updated words to local storage
-
-        // Clear input and choices, then re-render the table to reflect changes
-        document.getElementById('wordInput').value = '';
-        document.getElementById('definitionChoices').innerHTML = '';
-        document.getElementById('apiResponse').style.display = 'none';
-        renderTable(); // Re-render the entire table after adding definitions
-    }
-
-    /**
-     * Appends a single word definition row to the glossary table.
-     * @param {string} word - The word itself.
-     * @param {Object} entry - The definition entry object.
-     */
     function appendRow(word, entry) {
         if (entry.is_hidden) return; // Do not append if hidden
 
@@ -2909,25 +2756,17 @@
         tr.innerHTML = `
         <td class="py-3 px-4 font-medium">
               <span>${word}</span>
-              <span class="text-gray-500 hover:underline cursor-pointer ml-2" onclick="hideEntry('${word}', '${safeDefinition}', this)">Hide</span></td>
         <td class="py-3 px-4 definition-box">
           <div class="relative">
             <span>${entry.definition || 'N/A'}</span>
             <div class="text-sm mt-2 space-x-2">
               <span class="text-blue-500 hover:underline cursor-pointer" onclick="toggleDetails(this)">Details</span>
-              <span class="text-red-500 hover:underline cursor-pointer" onclick="deleteDefinition('${word}', '${safeDefinition}', this)">Delete</span>
             </div>
             <div class="details-panel mt-3 p-3 bg-gray-50 rounded-md border text-sm">
               <b>Part of Speech:</b> ${entry.partOfSpeech || 'N/A'}<br>
               <b>Synonyms:</b> ${(entry.synonyms || []).join(', ') || 'N/A'}<br>
               <b>Example:</b> ${entry.example || 'N/A'}
             </div>
-          </div>
-        </td>
-        <td class="py-3 px-4">
-          <div class="flex items-center space-x-2">
-            <div class="status-box ${greenMarkClass}" onclick="updateMark(this, '${word}', '${safeDefinition}', 'green')"></div>
-            <div class="status-box ${redMarkClass}" onclick="updateMark(this, '${word}', '${safeDefinition}', 'red')"></div>
           </div>
         </td>
       `;
@@ -2947,10 +2786,6 @@
         const entry = allWords[word]?.find(e => e.definition === safeDefinition);
 
         if (entry) {
-            const newStatus = !entry[`marked_${markType}`]; // Toggle the status
-            entry[`marked_${markType}`] = newStatus;
-            saveWordsToStorage(allWords); // Save changes to local storage
-
             // Update the class directly for immediate visual feedback
             element.classList.remove(`bg-${markType}-200`, `bg-${markType}-500`);
             element.classList.add(newStatus ? `bg-${markType}-500` : `bg-${markType}-200`);
@@ -2969,11 +2804,6 @@
         const safeDefinition = definition.replace(/&quot;/g, '"'); // Unescape HTML entities
         const entry = allWords[word]?.find(e => e.definition === safeDefinition);
 
-        if (entry) {
-            entry.is_hidden = true; // Mark as hidden
-            saveWordsToStorage(allWords); // Save changes
-            element.closest('tr').remove(); // Remove the row from the DOM
-        }
     }
 
     /**
@@ -2995,23 +2825,7 @@
      * @param {string} definitionText - The definition text to delete.
      * @param {HTMLElement} btn - The 'Delete' span element that was clicked.
      */
-    function deleteDefinition(word, definitionText, btn) {
-        const safeDefinition = definitionText.replace(/&quot;/g, '"'); // Unescape HTML entities
-        // Custom confirmation box instead of native alert/confirm
-        showConfirmBox(`Are you sure you want to delete the definition: "${safeDefinition}"?`, () => {
-            const allWords = loadWordsFromStorage();
-            if (allWords[word]) {
-                // Filter out the definition to be deleted
-                allWords[word] = allWords[word].filter(e => e.definition !== safeDefinition);
-                // If no definitions left for a word, remove the word entirely
-                if (allWords[word].length === 0) {
-                    delete allWords[word];
-                }
-                saveWordsToStorage(allWords); // Save updated words
-                btn.closest('tr').remove(); // Remove the row from the DOM
-            }
-        });
-    }
+    
 
     /**
      * Renders (or re-renders) the entire glossary table from local storage.
@@ -3036,67 +2850,8 @@
         panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
     }
 
-    /**
-     * Toggles the visibility of the raw API response box.
-     */
-    function toggleRawResponse() {
-        const raw = document.getElementById('apiResponse');
-        raw.style.display = (raw.style.display === 'none' || raw.style.display === '') ? 'block' : 'none';
-    }
-
-    /**
-     * Custom message box function (replaces alert()).
-     * @param {string} message - The message to display.
-     */
-    function showMessageBox(message) {
-        // Create a simple modal/message box dynamically
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50';
-        modal.innerHTML = `
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full text-center">
-                <p class="text-lg font-semibold mb-4">${message}</p>
-                <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300" onclick="this.closest('.fixed').remove()">OK</button>
-            </div>
-        `;
-        document.body.appendChild(modal);
-    }
-
-    /**
-     * Custom confirmation box function (replaces confirm()).
-     * @param {string} message - The message to display.
-     * @param {Function} onConfirm - Callback function to execute if confirmed.
-     */
-    function showConfirmBox(message, onConfirm) {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50';
-        modal.innerHTML = `
-            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full text-center">
-                <p class="text-lg font-semibold mb-4">${message}</p>
-                <div class="flex justify-center space-x-4">
-                    <button class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300" id="confirmYes">Yes</button>
-                    <button class="bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300" id="confirmNo">No</button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        document.getElementById('confirmYes').onclick = () => {
-            onConfirm();
-            modal.remove();
-        };
-        document.getElementById('confirmNo').onclick = () => {
-            modal.remove();
-        };
-    }
-
-
-    // Event listener for Enter key on the word input field
-    document.getElementById('wordInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault(); // Prevent default form submission
-            fetchWordFromAPI(); // Trigger API fetch
-        }
-    });
+    
+    
 
     // Call the new loadInitialData function when the window loads
     window.onload = loadInitialData;
