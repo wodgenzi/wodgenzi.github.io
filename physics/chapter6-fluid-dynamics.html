@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Fluid Dynamics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 6: Fluid Dynamics</h1>
+
+    <ul>
+        <li>
+            <h2>Fluid</h2>
+            <span class="toggle-button" onclick="toggleVisibility('fluidContent')">Show/Hide Details</span>
+            <div id="fluidContent" class="content">
+                <ul>
+                    <li>Substance that can flow (liquids and gases).</li>
+                    <li>No definite shape.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Density ($\rho$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('densityContent')">Show/Hide Details</span>
+            <div id="densityContent" class="content">
+                <ul>
+                    <li>Mass per unit volume.</li>
+                    <li>$\rho = \frac{m}{V}$.</li>
+                    <li>Unit: $kg/m^3$.</li>
+                    <li>Dimensions: $[ML^{-3}]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Pressure (P)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('pressureMainContent')">Show/Hide Details</span>
+            <div id="pressureMainContent" class="content">
+                <ul>
+                    <li>Force per unit area perpendicular to the surface.</li>
+                    <li>$P = \frac{F}{A}$.</li>
+                    <li>Unit: Pascal (Pa) = $N/m^2$.</li>
+                    <li>Dimensions: $[ML^{-1}T^{-2}]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Pressure in Fluids</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pressureInFluidsSubContent')">Show/Hide Details</span>
+                        <div id="pressureInFluidsSubContent" class="content">
+                            <ul>
+                                <li>Pressure at depth $h$: $P = \rho gh$.</li>
+                                <li>Total pressure at depth $h$: $P_{total} = P_{atm} + \rho gh$.</li>
+                                <li>Pressure is same at same horizontal level in a static fluid.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Atmospheric Pressure</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('atmosphericPressureSubContent')">Show/Hide Details</span>
+                        <div id="atmosphericPressureSubContent" class="content">
+                            <ul>
+                                <li>Pressure exerted by the weight of the atmosphere.</li>
+                                <li>Standard atmospheric pressure: $1~atm = 1.013 \times 10^5~Pa = 760~torr = 760~mmHg$.</li>
+                                <li>Measured by barometer.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Gauge Pressure</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('gaugePressureSubContent')">Show/Hide Details</span>
+                        <div id="gaugePressureSubContent" class="content">
+                            <ul>
+                                <li>Difference between absolute pressure and atmospheric pressure.</li>
+                                <li>$P_{gauge} = P_{abs} - P_{atm}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Pascal's Principle</h2>
+            <span class="toggle-button" onclick="toggleVisibility('pascalPrincipleContent')">Show/Hide Details</span>
+            <div id="pascalPrincipleContent" class="content">
+                <ul>
+                    <li>Pressure applied to an enclosed fluid is transmitted undiminished to every portion of the fluid and to the walls of the containing vessel.</li>
+                    <li>Hydraulic systems (e.g., hydraulic lift, brakes) work on this principle.</li>
+                    <li>$\frac{F_1}{A_1} = \frac{F_2}{A_2}$.</li>
+                    <li>Mechanical Advantage of hydraulic lift: $MA = \frac{F_2}{F_1} = \frac{A_2}{A_1}$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Archimedes' Principle (Buoyancy)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('archimedesPrincipleMainContent')">Show/Hide Details</span>
+            <div id="archimedesPrincipleMainContent" class="content">
+                <ul>
+                    <li>An object wholly or partially immersed in a fluid experiences an upward buoyant force equal to the weight of the fluid displaced.</li>
+                    <li>Buoyant Force ($F_b$) = Weight of displaced fluid = $\rho_f V_f g$.</li>
+                    <li>$\rho_f$: density of fluid.</li>
+                    <li>$V_f$: volume of displaced fluid.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Floating and Sinking</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('floatingSinkingSubContent')">Show/Hide Details</span>
+                        <div id="floatingSinkingSubContent" class="content">
+                            <ul>
+                                <li>Float: $F_b \ge W_{object}$ or $\rho_{object} \le \rho_{fluid}$.</li>
+                                <li>Sink: $F_b < W_{object}$ or $\rho_{object} > \rho_{fluid}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Apparent Weight</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('apparentWeightSubContent')">Show/Hide Details</span>
+                        <div id="apparentWeightSubContent" class="content">
+                            <ul>
+                                <li>Apparent Weight = Actual Weight - Buoyant Force.</li>
+                                <li>$W_{apparent} = W_{actual} - F_b$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Fluid Flow</h2>
+            <span class="toggle-button" onclick="toggleVisibility('fluidFlowMainContent')">Show/Hide Details</span>
+            <div id="fluidFlowMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Ideal Fluid Characteristics</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('idealFluidSubContent')">Show/Hide Details</span>
+                        <div id="idealFluidSubContent" class="content">
+                            <ul>
+                                <li>Non-viscous (no internal friction).</li>
+                                <li>Incompressible (density constant).</li>
+                                <li>Steady flow (velocity at any point constant over time).</li>
+                                <li>Irrotational flow (no turbulence, no swirling).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Streamline Flow (Laminar Flow)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('streamlineFlowSubContent')">Show/Hide Details</span>
+                        <div id="streamlineFlowSubContent" class="content">
+                            <ul>
+                                <li>Smooth, orderly flow.</li>
+                                <li>Fluid particles follow paths that do not cross.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Turbulent Flow</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('turbulentFlowSubContent')">Show/Hide Details</span>
+                        <div id="turbulentFlowSubContent" class="content">
+                            <ul>
+                                <li>Irregular, chaotic flow with eddies and swirls.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Equation of Continuity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('equationOfContinuityContent')">Show/Hide Details</span>
+            <div id="equationOfContinuityContent" class="content">
+                <ul>
+                    <li>For an incompressible, steady flow, the mass flow rate is constant.</li>
+                    <li>$A_1v_1 = A_2v_2 = \text{constant}$ (Volume flow rate).</li>
+                    <li>$Av = \text{constant}$.</li>
+                    <li>$A$: cross-sectional area.</li>
+                    <li>$v$: fluid speed.</li>
+                    <li>Implies: where area is smaller, speed is greater.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Bernoulli's Equation</h2>
+            <span class="toggle-button" onclick="toggleVisibility('bernoulliEquationMainContent')">Show/Hide Details</span>
+            <div id="bernoulliEquationMainContent" class="content">
+                <ul>
+                    <li>For an ideal fluid in steady flow, the sum of pressure, kinetic energy per unit volume, and potential energy per unit volume is constant along a streamline.</li>
+                    <li>$P + \frac{1}{2}\rho v^2 + \rho gh = \text{constant}$.</li>
+                    <li>$P$: static pressure.</li>
+                    <li>$\frac{1}{2}\rho v^2$: dynamic pressure.</li>
+                    <li>$\rho gh$: hydrostatic pressure.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Applications of Bernoulli's Principle</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bernoulliApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="bernoulliApplicationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Venturi Effect:</strong> Fluid speed increases as cross-sectional area decreases, leading to a drop in pressure.</li>
+                                <li><strong>Venturi Relation (from Bernoulli's):</strong> $P_1 - P_2 = \frac{1}{2}\rho (v_2^2 - v_1^2)$ (for horizontal flow).</li>
+                                <li><strong>Aerodynamics (Lift):</strong> Airfoil shape causes faster air flow over top surface, lower pressure, resulting in upward lift.</li>
+                                <li><strong>Blood Flow:</strong> Narrowed arteries increase blood velocity, decreasing pressure and potentially causing collapse.</li>
+                                <li><strong>Spray Guns/Carburetors:</strong> High-speed air creates low pressure, drawing liquid into the air stream.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Viscosity ($\eta$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('viscosityMainContent')">Show/Hide Details</span>
+            <div id="viscosityMainContent" class="content">
+                <ul>
+                    <li>Measure of a fluid's resistance to flow (internal friction).</li>
+                    <li>Unit: Pascal-second (Pa s) or Poise (P). $1~Pa~s = 10~Poise$.</li>
+                    <li>For liquids, viscosity decreases with temperature.</li>
+                    <li>For gases, viscosity increases with temperature.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Stokes' Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('stokesLawSubContent')">Show/Hide Details</span>
+                        <div id="stokesLawSubContent" class="content">
+                            <ul>
+                                <li>Drag force on a spherical object moving through a viscous fluid.</li>
+                                <li>$F_d = 6\pi\eta rv$.</li>
+                                <li>$r$: radius of sphere.</li>
+                                <li>$v$: speed of sphere.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Terminal Velocity ($v_t$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('terminalVelocitySubContent')">Show/Hide Details</span>
+                        <div id="terminalVelocitySubContent" class="content">
+                            <ul>
+                                <li>Constant velocity achieved by an object falling through a fluid when drag force equals gravitational force (and buoyant force).</li>
+                                <li>$v_t = \frac{2r^2g(\rho_s - \rho_f)}{9\eta}$.</li>
+                                <li>$\rho_s$: density of sphere.</li>
+                                <li>$\rho_f$: density of fluid.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Fluid Dynamics in Real World</h2>
+            <span class="toggle-button" onclick="toggleVisibility('realWorldFluidDynamicsContent')">Show/Hide Details</span>
+            <div id="realWorldFluidDynamicsContent" class="content">
+                <ul>
+                    <li>Applications in engineering (e.g., pipe design, aerodynamics).</li>
+                    <li>Biological systems (e.g., blood circulation).</li>
+                    <li>Meteorology (e.g., weather patterns).</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Waves</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 8: Waves</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction to Waves</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introWavesContent')">Show/Hide Details</span>
+            <div id="introWavesContent" class="content">
+                <ul>
+                    <li>Wave: Disturbance created in a medium.</li>
+                    <li>Waves transport energy without transporting matter.</li>
+                    <li>Waves transport both energy and momentum in a medium.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Classification of Waves</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('waveClassificationSubContent')">Show/Hide Details</span>
+                        <div id="waveClassificationSubContent" class="content">
+                            <ul>
+                                <li><strong>Mechanical Waves:</strong> Require a medium for propagation (e.g., sound waves, string waves, water waves).</li>
+                                <li><strong>Electromagnetic Waves:</strong> Do not require a medium for propagation (e.g., radio waves, heat waves, light waves).</li>
+                                <li><strong>Matter Waves:</strong> Associated with moving particles.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Progressive/Traveling Waves</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('travelingWavesSubContent')">Show/Hide Details</span>
+                        <div id="travelingWavesSubContent" class="content">
+                            <ul>
+                                <li>Propagates or distributes pulses in space along a specific direction.</li>
+                                <li>Examples: Waves on a string, waves on a water surface.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Periodic Waves</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('periodicWavesSubContent')">Show/Hide Details</span>
+                        <div id="periodicWavesSubContent" class="content">
+                            <ul>
+                                <li>Repeated in regular intervals of time.</li>
+                                <li>May be transverse or longitudinal.</li>
+                            </ul>
+                            <h4>Transverse Waves:</h4>
+                            <ul>
+                                <li>Displacement of medium is perpendicular to wave propagation.</li>
+                                <li>Examples: Ripple in a pond, wave on a string.</li>
+                                <li>Cannot propagate in gases or liquids.</li>
+                            </ul>
+                            <h4>Longitudinal Waves:</h4>
+                            <ul>
+                                <li>Displacement of medium is parallel to wave propagation.</li>
+                                <li>Examples: Wave in a spring, sound waves in air.</li>
+                            </ul>
+                            <li>For all waves: $v = f\lambda$.</li>
+                            <li>Particles separated by $n\lambda$ are in phase.</li>
+                            <li>Particles separated by $(n+\frac{1}{2})\lambda$ are out of phase.</li>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Sound Waves</h2>
+            <span class="toggle-button" onclick="toggleVisibility('soundWavesMainContent')">Show/Hide Details</span>
+            <div id="soundWavesMainContent" class="content">
+                <ul>
+                    <li>Produced by vibrating bodies ($\lambda \approx 1m$).</li>
+                    <li>Essentials for sound: Vibrating body, medium for propagation, listener.</li>
+                    <li>Longitudinal waves with 3D propagation in air.</li>
+                    <li>Consist of compressions (max crowding) and rarefactions (min crowding).</li>
+                    <li>Exhibit Reflection, Refraction, Diffraction, Interference, but NOT Polarization (because they are longitudinal).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Velocity of Sound in Air</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('velocitySoundAirSubContent')">Show/Hide Details</span>
+                        <div id="velocitySoundAirSubContent" class="content">
+                            <ul>
+                                <li>Speed of any mechanical wave: $v=\sqrt{\frac{E}{\rho}}$. ($E$: modulus of elasticity, $\rho$: density).</li>
+                                <li>For gases (compressional wave): $v=\sqrt{\frac{E_{bulk}}{\rho}}$.</li>
+                                <li>Newton's formula (isothermal assumption): $v=\sqrt{\frac{P}{\rho}}$.
+                                    <ul>
+                                        <li>At S.T.P: $v \approx 281~m/s$.</li>
+                                        <li>Experimental value: $332~m/s$.</li>
+                                        <li>Percentage error in Newton's calculation: 16%.</li>
+                                    </ul>
+                                </li>
+                                <li>Laplace's formula (adiabatic assumption): $v=\sqrt{\frac{\gamma P}{\rho}}$.
+                                    <ul>
+                                        <li>$\gamma = \frac{C_p}{C_v} = 1.42$ (for air).</li>
+                                    </ul>
+                                </li>
+                                <li>Speed increases by $0.61~m/s$ (or $61~cm/s$) for each $1^\circ C$ rise in temperature: $v_t = v_o + 0.61t$.</li>
+                                <li>Effect of Moisture: Presence of moisture reduces air density, increasing sound speed.</li>
+                                <li>Dependence:
+                                    <ul>
+                                        <li>Independent of pressure.</li>
+                                        <li>$v \propto \frac{1}{\sqrt{\rho}}$.</li>
+                                        <li>$v \propto \sqrt{T}$.</li>
+                                        <li>$\frac{v_1}{v_2} = \sqrt{\frac{T_1}{T_2}}$.</li>
+                                    </ul>
+                                </li>
+                                <li>Speed of sound in hydrogen is 4 times more than in oxygen at same temperature.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>WAVE</th>
+                                        <th>SPEED (m/s)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>EM waves</td>
+                                        <td>300,000,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sound in air</td>
+                                        <td>340</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sound in water</td>
+                                        <td>1500</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sound in steel</td>
+                                        <td>5000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Principle of Superposition</h2>
+            <span class="toggle-button" onclick="toggleVisibility('superpositionContent')">Show/Hide Details</span>
+            <div id="superpositionContent" class="content">
+                <ul>
+                    <li>When two or more waves reach a point simultaneously, the resultant displacement is the sum of individual displacements.</li>
+                    <li>$Y_{total} = Y_1 + Y_2 + Y_3 + ... + Y_n$.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Applications of Superposition</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('superpositionApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="superpositionApplicationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Interference:</strong> Superposition of two waves of same frequency, traveling in same direction.</li>
+                                <li><strong>Beats:</strong> Produced by two waves of slightly different frequencies traveling in the same direction.</li>
+                                <li><strong>Stationary Waves:</strong> Produced by two waves of equal frequency and amplitude traveling along same line in opposite direction.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Interference of Sound</h2>
+            <span class="toggle-button" onclick="toggleVisibility('interferenceSoundContent')">Show/Hide Details</span>
+            <div id="interferenceSoundContent" class="content">
+                <ul>
+                    <li>Mixing of two identical sound waves propagating along same direction.</li>
+                    <li>Conditions: coherent waves, same medium, same direction, identical waves, sources close.</li>
+                    <li><strong>Constructive Interference:</strong> Waves reinforce, louder sound.
+                        <ul>
+                            <li>Condition: Path difference $= n\lambda$ (where $n=0, \pm1, \pm2, ...$).</li>
+                            <li>Echoing zone.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Destructive Interference:</strong> Waves cancel, fainter sound.
+                        <ul>
+                            <li>Condition: Path difference $= (n+\frac{1}{2})\lambda$ (where $n=0, \pm1, \pm2, ...$).</li>
+                            <li>Silence zone.</li>
+                        </ul>
+                    </li>
+                    <li>Path difference: Difference between lengths of paths traveled by two waves.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Beats</h2>
+            <span class="toggle-button" onclick="toggleVisibility('beatsContent')">Show/Hide Details</span>
+            <div id="beatsContent" class="content">
+                <ul>
+                    <li>Periodic alterations of sound between maximum and minimum loudness.</li>
+                    <li>Produced by superposition of two waves with slightly different frequencies.</li>
+                    <li>Beat frequency ($f_{beat}$): Number of beats per second.</li>
+                    <li>$f_{beat} = |f_A - f_B|$.</li>
+                    <li>Maximum detectable beat frequency for normal human ear is 10Hz.</li>
+                    <li>Uses: Determine unknown frequencies, tune musical instruments.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Reflection of Waves</h2>
+            <span class="toggle-button" onclick="toggleVisibility('reflectionWavesContent')">Show/Hide Details</span>
+            <div id="reflectionWavesContent" class="content">
+                <ul>
+                    <li>All kinds of waves show reflection.</li>
+                    <li>From denser boundary: Phase reverses ($180^\circ$ change). Reflection coefficient maximum, transmission coefficient almost zero.</li>
+                    <li>From rarer boundary: No phase reversal. Reflection and transmission coefficients have considerable values.</li>
+                    <li>Reflected wave has same wavelength and frequency, but phase may change.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Transmission of Waves</h2>
+            <span class="toggle-button" onclick="toggleVisibility('transmissionWavesContent')">Show/Hide Details</span>
+            <div id="transmissionWavesContent" class="content">
+                <ul>
+                    <li>Amplitude of transmitted wave is less than incident wave (energy loss).</li>
+                    <li>Frequency of transmitted wave is same as incident wave.</li>
+                    <li>Velocity depends on density of medium: $\nu \propto \frac{1}{\sqrt{\rho}}$.</li>
+                    <li>Wavelength changes because velocity changes while frequency remains constant.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Standing Waves (Stationary Waves)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('standingWavesMainContent')">Show/Hide Details</span>
+            <div id="standingWavesMainContent" class="content">
+                <ul>
+                    <li>Superposition of two identical waves traveling opposite to each other in the same medium.</li>
+                    <li>Involves both constructive and destructive interference.</li>
+                    <li><strong>Antinodes:</strong> Points of constructive interference (maximum amplitude). Energy is wholly potential at extreme position, wholly kinetic at equilibrium.</li>
+                    <li><strong>Nodes:</strong> Points of destructive interference (minimum/zero amplitude), stationary points.</li>
+                    <li>Distance between two consecutive nodes or antinodes: $\lambda/2$.</li>
+                    <li>Distance between a node and consecutive antinode: $\lambda/4$.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Standing Waves in Stretched String</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('standingWavesStringSubContent')">Show/Hide Details</span>
+                        <div id="standingWavesStringSubContent" class="content">
+                            <ul>
+                                <li>Fixed end: always a node. Free end: always an antinode.</li>
+                                <li>String fixed at both ends: Number of nodes = Number of antinodes + 1 ($N=A+1$).</li>
+                                <li>String free at one end: Number of antinodes = Number of nodes.</li>
+                                <li>Speed of string wave: $v = \sqrt{\frac{T}{m}} = \sqrt{\frac{F}{m}}$ ($m$: linear mass density).</li>
+                                <li>Speed of stationary waves is independent of number of loops.</li>
+                                <li>Quantized frequencies: $f_n = n f_1$ (where $n=1,2,3,...$).</li>
+                                <li>Fundamental frequency: $f_1 = \frac{1}{2l}\sqrt{\frac{T}{m}}$.</li>
+                                <li>Overtones/Harmonics: Integral multiples of fundamental frequency.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Standing Waves in Air Columns (Pipes)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('standingWavesPipesSubContent')">Show/Hide Details</span>
+                        <div id="standingWavesPipesSubContent" class="content">
+                            <ul>
+                                <li>Open end: Antinode. Closed end: Node.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Pipes open or closed at both ends / strings fixed at both ends</th>
+                                        <th>Pipes closed at one end</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Length L</td>
+                                        <td>$L = n\frac{\lambda}{2}$</td>
+                                        <td>$L = (2n-1)\frac{\lambda}{4}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fundamental</td>
+                                        <td>$f = v/2L$</td>
+                                        <td>$f = v/4L$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Harmonics</td>
+                                        <td>$2f, 3f, ... , nf$</td>
+                                        <td>$3f, 5f, ... , (2n-1)f$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul>
+                                <li>Fundamental frequency of open pipe = $2 \times$ fundamental frequency of closed pipe.</li>
+                                <li>Number of harmonics in open pipe = $2 \times$ Number of harmonics in closed pipe.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Doppler's Effect</h2>
+            <span class="toggle-button" onclick="toggleVisibility('dopplersEffectMainContent')">Show/Hide Details</span>
+            <div id="dopplersEffectMainContent" class="content">
+                <ul>
+                    <li>Apparent change in pitch (frequency) of sound due to relative motion of source and observer.</li>
+                    <li>Discovered by Doppler in 1845.</li>
+                    <li>$v$: true speed of sound. $u_o$: speed of listener. $u_s$: speed of source.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Formulas for Apparent Frequency ($f'$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('dopplerFormulasSubContent')">Show/Hide Details</span>
+                        <div id="dopplerFormulasSubContent" class="content">
+                            <ul>
+                                <li><strong>Source moving towards stationary listener:</strong> $f' = \left(\frac{v}{v-u_s}\right)f$ ($f' > f$).</li>
+                                <li><strong>Source moving away from stationary listener:</strong> $f' = \left(\frac{v}{v+u_s}\right)f$ ($f' < f$).</li>
+                                <li><strong>Listener moving towards stationary source:</strong> $f' = \left(\frac{v+u_o}{v}\right)f$ ($f' > f$).</li>
+                                <li><strong>Listener moving away from stationary source:</strong> $f' = \left(\frac{v-u_o}{v}\right)f$ ($f' < f$).</li>
+                                <li><strong>Source and listener moving towards each other:</strong> $f' = \left(\frac{v+u_o}{v-u_s}\right)f$.</li>
+                                <li><strong>Source and observer moving away from each other:</strong> $f' = \left(\frac{v-u_o}{v+u_s}\right)f$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Applications of Doppler's Effect</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('dopplerApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="dopplerApplicationsSubContent" class="content">
+                            <ul>
+                                <li>Ships and submarines (sonar devices).</li>
+                                <li>Bats (for traveling).</li>
+                                <li>Radar (for detection).</li>
+                                <li>Determining velocity of a star w.r.t. Earth.</li>
+                                <li>Monitoring blood flow in major arteries.</li>
+                                <li>Red shift: Wavelength of light increases when star moves away from Earth.</li>
+                                <li>Blue shift: Wavelength of light decreases when star moves towards Earth.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

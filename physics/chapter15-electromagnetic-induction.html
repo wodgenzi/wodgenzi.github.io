@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 15: Electromagnetic Induction</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 15: Electromagnetic Induction</h1>
+
+    <ul>
+        <li>
+            <h2>Electromagnetic Induction (EMI)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('emiContent')">Show/Hide Details</span>
+            <div id="emiContent" class="content">
+                <ul>
+                    <li>Phenomenon of producing an induced electromotive force (EMF) and hence an induced current in a conductor due to a change in magnetic flux linked with the conductor.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Magnetic Flux ($\Phi_B$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('magneticFluxContent')">Show/Hide Details</span>
+            <div id="magneticFluxContent" class="content">
+                <ul>
+                    <li>Measure of the number of magnetic field lines passing through a given area.</li>
+                    <li>$\Phi_B = \vec{B} \cdot \vec{A} = BA \cos\theta$.</li>
+                    <li>Unit: Weber (Wb).</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Faraday's Law of Electromagnetic Induction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('faradaysLawContent')">Show/Hide Details</span>
+            <div id="faradaysLawContent" class="content">
+                <ul>
+                    <li>Induced EMF is directly proportional to the negative rate of change of magnetic flux.</li>
+                    <li>$\mathcal{E} = -N \frac{\Delta\Phi_B}{\Delta t}$.</li>
+                    <li>For a single loop: $\mathcal{E} = -\frac{\Delta\Phi_B}{\Delta t}$.</li>
+                    <li>$N$: number of turns in the coil.</li>
+                    <li>Negative sign indicates direction of induced EMF (Lenz's Law).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Lenz's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('lenzsLawContent')">Show/Hide Details</span>
+            <div id="lenzsLawContent" class="content">
+                <ul>
+                    <li>The direction of the induced current (or EMF) is such that it opposes the cause producing it.</li>
+                    <li>Based on the principle of conservation of energy.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Motional EMF</h2>
+            <span class="toggle-button" onclick="toggleVisibility('motionalEmfContent')">Show/Hide Details</span>
+            <div id="motionalEmfContent" class="content">
+                <ul>
+                    <li>EMF induced in a conductor moving in a magnetic field.</li>
+                    <li>$\mathcal{E} = (vBL \sin\theta)$.</li>
+                    <li>$v$: velocity of conductor.</li>
+                    <li>$B$: magnetic field strength.</li>
+                    <li>$L$: length of conductor in the field.</li>
+                    <li>$\theta$: angle between $\vec{v}$ and $\vec{B}$.</li>
+                    <li>Maximum when $\vec{v}$ is perpendicular to $\vec{B}$ ($\mathcal{E} = vBL$).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Self-Induction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('selfInductionMainContent')">Show/Hide Details</span>
+            <div id="selfInductionMainContent" class="content">
+                <ul>
+                    <li>Phenomenon where a changing current in a coil induces an EMF in the same coil.</li>
+                    <li>Induced EMF: $\mathcal{E}_L = -L \frac{\Delta I}{\Delta t}$.</li>
+                    <li>$L$: self-inductance of the coil.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Self-Inductance (L)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('selfInductanceSubContent')">Show/Hide Details</span>
+                        <div id="selfInductanceSubContent" class="content">
+                            <ul>
+                                <li>Property of a coil that opposes change in current through it.</li>
+                                <li>Unit: Henry (H) = V s/A.</li>
+                                <li>Dimensions: $[ML^2T^{-2}A^{-2}]$.</li>
+                                <li>For a solenoid: $L = \frac{\mu_o N^2 A}{l}$.</li>
+                                <li>$\mu_o$: permeability of free space.</li>
+                                <li>$N$: number of turns.</li>
+                                <li>$A$: cross-sectional area.</li>
+                                <li>$l$: length of solenoid.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Energy Stored in an Inductor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('energyInductorSubContent')">Show/Hide Details</span>
+                        <div id="energyInductorSubContent" class="content">
+                            <ul>
+                                <li>$U = \frac{1}{2}LI^2$.</li>
+                                <li>Unit: Joule (J).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mutual Induction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('mutualInductionMainContent')">Show/Hide Details</span>
+            <div id="mutualInductionMainContent" class="content">
+                <ul>
+                    <li>Phenomenon where a changing current in one coil (primary) induces an EMF in a neighboring coil (secondary).</li>
+                    <li>Induced EMF in secondary: $\mathcal{E}_s = -M \frac{\Delta I_p}{\Delta t}$.</li>
+                    <li>$M$: mutual inductance.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Mutual Inductance (M)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('mutualInductanceSubContent')">Show/Hide Details</span>
+                        <div id="mutualInductanceSubContent" class="content">
+                            <ul>
+                                <li>Property of two coils that determines the EMF induced in one due to current change in the other.</li>
+                                <li>Unit: Henry (H).</li>
+                                <li>For two coaxial solenoids: $M = \frac{\mu_o N_p N_s A}{l}$.</li>
+                                <li>$N_p, N_s$: turns in primary and secondary coils.</li>
+                                <li>$A$: common cross-sectional area.</li>
+                                <li>$l$: length of coils.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>AC Generator (Dynamo)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('acGeneratorContent')">Show/Hide Details</span>
+            <div id="acGeneratorContent" class="content">
+                <ul>
+                    <li>Converts mechanical energy into electrical energy.</li>
+                    <li>Principle: Electromagnetic induction.</li>
+                    <li>Induced EMF: $\mathcal{E} = N A B \omega \sin(\omega t)$.</li>
+                    <li>Maximum EMF: $\mathcal{E}_{max} = N A B \omega$.</li>
+                    <li>Output is sinusoidal AC voltage.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Transformer</h2>
+            <span class="toggle-button" onclick="toggleVisibility('transformerMainContent')">Show/Hide Details</span>
+            <div id="transformerMainContent" class="content">
+                <ul>
+                    <li>Device that changes AC voltage levels.</li>
+                    <li>Principle: Mutual induction.</li>
+                    <li>Consists of primary and secondary coils wound on a soft iron core.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Transformer Equation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('transformerEquationSubContent')">Show/Hide Details</span>
+                        <div id="transformerEquationSubContent" class="content">
+                            <ul>
+                                <li>$\frac{V_s}{V_p} = \frac{N_s}{N_p} = \frac{I_p}{I_s}$.</li>
+                                <li>$V_s, V_p$: secondary and primary voltages.</li>
+                                <li>$N_s, N_p$: secondary and primary turns.</li>
+                                <li>$I_s, I_p$: secondary and primary currents.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Types of Transformers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('transformerTypesSubContent')">Show/Hide Details</span>
+                        <div id="transformerTypesSubContent" class="content">
+                            <ul>
+                                <li><strong>Step-up Transformer:</strong> $N_s > N_p \implies V_s > V_p$ (and $I_s < I_p$).</li>
+                                <li><strong>Step-down Transformer:</strong> $N_s < N_p \implies V_s < V_p$ (and $I_s > I_p$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Efficiency of Transformer</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('transformerEfficiencySubContent')">Show/Hide Details</span>
+                        <div id="transformerEfficiencySubContent" class="content">
+                            <ul>
+                                <li>$\eta = \frac{\text{Output Power}}{\text{Input Power}} \times 100\% = \frac{V_s I_s}{V_p I_p} \times 100\%$.</li>
+                                <li>Ideal transformer: $\eta = 100\%$.</li>
+                                <li>Energy losses due to: flux leakage, resistance of windings (copper loss), eddy currents, hysteresis loss.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Eddy Currents</h2>
+            <span class="toggle-button" onclick="toggleVisibility('eddyCurrentsContent')">Show/Hide Details</span>
+            <div id="eddyCurrentsContent" class="content">
+                <ul>
+                    <li>Circulating currents induced in bulk conductors when exposed to changing magnetic flux.</li>
+                    <li>Produce heat (energy loss).</li>
+                    <li>Minimized by laminating transformer cores.</li>
+                    <li>Applications: Induction furnaces, electromagnetic braking.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

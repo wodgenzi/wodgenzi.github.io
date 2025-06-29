@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11: Heat & Thermodynamics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 11: Heat & Thermodynamics</h1>
+
+    <ul>
+        <li>
+            <h2>Temperature & Heat</h2>
+            <span class="toggle-button" onclick="toggleVisibility('tempHeatContent')">Show/Hide Details</span>
+            <div id="tempHeatContent" class="content">
+                <ul>
+                    <li><strong>Temperature:</strong> Degree of hotness or coldness of a body. Quantity that determines direction of heat flow.</li>
+                    <li><strong>Heat:</strong> Energy transferred due to temperature difference. It is a form of energy.</li>
+                    <li>Temperature of system increases if heat is supplied. Decreases if heat is taken out.</li>
+                    <li>Heat exchange: $Q = mc\Delta T$. ($m$: mass, $c$: specific heat, $\Delta T$: change in temperature).</li>
+                    <li>SI unit of heat in MKS: Joule (J). In CGS: erg. Thermal unit: calorie.</li>
+                    <li>$1~\text{calorie} = 4.2~\text{Joule}$.</li>
+                    <li><strong>Specific Heat:</strong> Heat required to raise temperature of unit mass by $1^\circ C$. $c = \frac{Q}{m\Delta T}$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Thermal Equilibrium & Zeroth Law of Thermodynamics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('thermalEquilibriumContent')">Show/Hide Details</span>
+            <div id="thermalEquilibriumContent" class="content">
+                <ul>
+                    <li>If two systems (A and B) are in thermal contact and no net heat flows between them, they are in thermal equilibrium.</li>
+                    <li><strong>Zeroth Law of Thermodynamics:</strong> If two systems are each in thermal equilibrium with a third system, then they are in thermal equilibrium with each other.</li>
+                    <li>Temperature is an intrinsic property of an object.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Conversion Formulas of Temperature Scales</h2>
+            <span class="toggle-button" onclick="toggleVisibility('tempConversionContent')">Show/Hide Details</span>
+            <div id="tempConversionContent" class="content">
+                <ul>
+                    <li>Celsius to Fahrenheit: $T_F = \frac{9}{5}T_C + 32$.</li>
+                    <li>Fahrenheit to Celsius: $T_C = \frac{5}{9}(T_F - 32)$.</li>
+                    <li>Celsius to Kelvin: $T_K = T_C + 273$.</li>
+                    <li>Kelvin to Celsius: $T_C = T_K - 273$.</li>
+                    <li>Relation between scales: $\frac{T_C - 0}{100} = \frac{T_F - 32}{180} = \frac{T_K - 273}{100}$.</li>
+                    <li>Centigrade and Fahrenheit scales show same reading at $-40^\circ$.</li>
+                    <li>Celsius degree is larger than Fahrenheit degree by a factor of $9/5$.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sr. #</th>
+                            <th>Name of scale</th>
+                            <th>Lower Point</th>
+                            <th>Upper Point</th>
+                            <th>Number of divisions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Celsius scale</td>
+                            <td>$0^\circ C$</td>
+                            <td>$100^\circ C$</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Fahrenheit scale</td>
+                            <td>$32^\circ F$</td>
+                            <td>$212^\circ F$</td>
+                            <td>180</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Kelvin scale</td>
+                            <td>$273~K$</td>
+                            <td>$373~K$</td>
+                            <td>100</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Kinetic Molecular Theory of Gases (K.M.T)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('kmtContent')">Show/Hide Details</span>
+            <div id="kmtContent" class="content">
+                <ul>
+                    <li>Main points:
+                        <ul>
+                            <li>Small volume contains large number of molecules.</li>
+                            <li>Molecules move randomly and exert no force on one another except during elastic collisions.</li>
+                            <li>Collisions with walls give rise to gas pressure.</li>
+                            <li>Gravity does not affect molecular motion.</li>
+                            <li>Volume of gas molecules is negligible compared to actual volume of gas.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Pressure and Temperature of an Ideal Gas</h2>
+            <span class="toggle-button" onclick="toggleVisibility('pressureTempGasContent')">Show/Hide Details</span>
+            <div id="pressureTempGasContent" class="content">
+                <ul>
+                    <li>Study of microscopic behavior of molecules and their interactions.</li>
+                    <li>Applying Newton's law to an ideal gas under assumptions of KMT:
+                        <ul>
+                            <li>Average force on container walls: $F_{average} = \frac{mN\bar{v^2}}{L}$.</li>
+                            <li>Pressure: $P = \frac{2}{3} \frac{N}{V} \left(\frac{1}{2}m\bar{v^2}\right) = \frac{2}{3} \frac{N}{V} (K.E)_{avg}$.</li>
+                            <li>Absolute temperature of a gas is measure of its average translational K.E of all gas molecules.</li>
+                            <li>$\frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2}$.</li>
+                            <li>RMS speed: $v_{rms} = \sqrt{\bar{v^2}} = \sqrt{\frac{3KT}{m}}$.</li>
+                            <li>Average speed of oxygen molecules in air at STP is $461~m s^{-1}$, for nitrogen it is $493~m s^{-1}$.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Specific Heats</h2>
+            <span class="toggle-button" onclick="toggleVisibility('specificHeatsContent')">Show/Hide Details</span>
+            <div id="specificHeatsContent" class="content">
+                <ul>
+                    <li>Amount of heat required to raise temperature of substance through 1 K.</li>
+                    <li>$Q = Cm\Delta T$.</li>
+                    <li>Specific heat is amount of heat required to raise temperature of unit mass through unit temperature.</li>
+                    <li>Molar specific heat of diatomic gas is greater than that of monatomic gas.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Introduction to Thermodynamics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('thermodynamicsIntroContent')">Show/Hide Details</span>
+            <div id="thermodynamicsIntroContent" class="content">
+                <ul>
+                    <li>Study of relationship between heat and other forms of energy.</li>
+                    <li>Thermodynamic states describe state of a system.</li>
+                    <li>Any collection of matter having distinct boundaries is called a system.</li>
+                    <li>Boyle's Law: $PV = \text{constant}$ (Isothermal process).</li>
+                    <li>Charles's Law: $\frac{V}{T} = \text{constant}$ (Isobaric process).</li>
+                    <li>Total translational K.E, rotational K.E, vibrational K.E, and P.E due to intermolecular forces is called internal energy.</li>
+                    <li>Internal energy of an ideal gas system is translational K.E of its molecules.</li>
+                    <li>Increase in temperature indicates increase in internal energy.</li>
+                    <li>Thermodynamic work at constant pressure is $W = P\Delta V$. If pressure is not constant, $W = \sum P\Delta V$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Laws of Thermodynamics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('thermoLawsMainContent')">Show/Hide Details</span>
+            <div id="thermoLawsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>First Law of Thermodynamics</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('firstLawThermoSubContent')">Show/Hide Details</span>
+                        <div id="firstLawThermoSubContent" class="content">
+                            <ul>
+                                <li>Energy can be transformed from one form to another, but total amount of energy remains constant.</li>
+                                <li>$\Delta Q = \Delta U + \Delta W$.</li>
+                                <li>$\Delta Q$: heat added to system (+ve) or removed from system (-ve).</li>
+                                <li>$\Delta U$: change in internal energy (+ve for increase, -ve for decrease).</li>
+                                <li>$\Delta W$: work done by system (+ve for expansion), work done on system (-ve for compression).</li>
+                                <li>For a cyclic process, $\Delta U = 0 \implies \Delta Q = \Delta W$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Second Law of Thermodynamics</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('secondLawThermoSubContent')">Show/Hide Details</span>
+                        <div id="secondLawThermoSubContent" class="content">
+                            <ul>
+                                <li><strong>Kelvin Statement:</strong> It is impossible to construct a heat engine which converts all heat energy absorbed from source without having a sink.</li>
+                                <li><strong>Clausius' Statement:</strong> Heat cannot flow spontaneously from a colder body to a hotter body without external work.</li>
+                                <li><strong>Refrigerator:</strong> Heat engine operating in reverse, transfers heat from cold to hot region.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Applications of First Law of Thermodynamics (Thermodynamic Processes)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('thermoProcessesContent')">Show/Hide Details</span>
+            <div id="thermoProcessesContent" class="content">
+                <ul>
+                    <li><strong>Isothermal Process:</strong> Temperature remains constant. $\Delta Q = \Delta W$, $\Delta U = 0$. (Process should be very slow). Example: Isothermal expansion of ideal gas.</li>
+                    <li><strong>Isochoric (Isovolumetric) Process:</strong> Volume remains constant. $\Delta W = 0$, $\Delta Q = \Delta U$. (Heat supplied at constant volume). Example: Melting of ice, boiling of water.</li>
+                    <li><strong>Isobaric Process:</strong> Pressure remains constant. $\Delta P = 0$, $\Delta Q = \Delta U + P\Delta V$. (Heat supplied at constant pressure). Example: Burst of air tube.</li>
+                    <li><strong>Adiabatic Process:</strong> No heat enters or leaves the system. $\Delta Q = 0$, $\Delta U = -\Delta W$. (Process should be very rapid and system thermally insulated). Example: Propagation of sound in air, explosion in gases.</li>
+                    <li><strong>Isentropic Process:</strong> Reversible adiabatic process (entropy remains constant).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Work Done by Thermodynamic System</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('workDoneThermoSubContent')">Show/Hide Details</span>
+                        <div id="workDoneThermoSubContent" class="content">
+                            <ul>
+                                <li>Energy transferred by a system to other owing to a force that acts between them.</li>
+                                <li>Work done by a system is positive if volume increases (expansion).</li>
+                                <li>Work done on a system is negative if volume decreases (compression).</li>
+                                <li>Work done by indicator-diagram (P-V diagram) is area under the curve. Positive for clockwise direction (expansion), negative for anti-clockwise (compression).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Comparison of Different Thermo Dynamical Processes</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('thermoProcessComparisonSubContent')">Show/Hide Details</span>
+                        <div id="thermoProcessComparisonSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Property</th>
+                                        <th>Isothermal</th>
+                                        <th>Adiabatic</th>
+                                        <th>Isochoric</th>
+                                        <th>Isobaric</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1.</td>
+                                        <td>Condition</td>
+                                        <td>T=constant</td>
+                                        <td>Q=constant</td>
+                                        <td>V=constant</td>
+                                        <td>P=constant</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.</td>
+                                        <td>Form of first Law</td>
+                                        <td>$\Delta Q = \Delta W$</td>
+                                        <td>$\Delta U = -\Delta W$</td>
+                                        <td>$\Delta Q = \Delta U$</td>
+                                        <td>$\Delta Q = \Delta U + P\Delta V$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3.</td>
+                                        <td>P.V Diagram</td>
+                                        <td><img src="https://placehold.co/100x70/f2f2f2/333?text=P-V%20Isothermal" alt="Isothermal P-V Diagram"></td>
+                                        <td><img src="https://placehold.co/100x70/f2f2f2/333?text=P-V%20Adiabatic" alt="Adiabatic P-V Diagram"></td>
+                                        <td><img src="https://placehold.co/100x70/f2f2f2/333?text=P-V%20Isochoric" alt="Isochoric P-V Diagram"></td>
+                                        <td><img src="https://placehold.co/100x70/f2f2f2/333?text=P-V%20Isobaric" alt="Isobaric P-V Diagram"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4.</td>
+                                        <td>Equation of state</td>
+                                        <td>$PV=\text{constant}$</td>
+                                        <td>$PV^\gamma=\text{constant}$</td>
+                                        <td>$\frac{P}{T}=\text{constant}$</td>
+                                        <td>$\frac{V}{T}=\text{constant}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5.</td>
+                                        <td>Specific Heat</td>
+                                        <td>$c=\infty$</td>
+                                        <td>$c=0$</td>
+                                        <td>$c=C_V$</td>
+                                        <td>$c=C_P$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6.</td>
+                                        <td>Slope of P.V curve</td>
+                                        <td>$\frac{\Delta P}{\Delta V} = -\frac{P}{V}$</td>
+                                        <td>$\frac{\Delta P}{\Delta V} = -\gamma\frac{P}{V}$</td>
+                                        <td>$\frac{\Delta P}{\Delta V} = \infty$</td>
+                                        <td>$\frac{\Delta P}{\Delta V} = 0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7.</td>
+                                        <td>Elasticity</td>
+                                        <td>$E=P$</td>
+                                        <td>$E=\gamma P$</td>
+                                        <td>$E=\infty$</td>
+                                        <td>$E=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8.</td>
+                                        <td>Operating condition</td>
+                                        <td>Process should be completed very slowly</td>
+                                        <td>Process is to be completed rapidly and the system should be surrounded by thermally insulated medium</td>
+                                        <td>To supply heat at constant volume.</td>
+                                        <td>Melting of ice, Boiling of water</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9.</td>
+                                        <td>Example</td>
+                                        <td>Isothermal expansion of ideal gas</td>
+                                        <td>Propagation of sound in air, explosion in gases</td>
+                                        <td>Atmospheric changes</td>
+                                        <td>Boiling of water</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul>
+                                <li>$C_p$ is greater than $C_v$.</li>
+                                <li>$\Delta Q_v = n C_v \Delta T$ (Heat supplied at constant volume).</li>
+                                <li>$\Delta Q_p = n C_p \Delta T$ (Heat supplied at constant pressure).</li>
+                                <li>$C_p - C_v = R$.</li>
+                                <li>$\gamma = \frac{C_p}{C_v}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Reversible and Irreversible Processes</h2>
+            <span class="toggle-button" onclick="toggleVisibility('reversibleIrreversibleContent')">Show/Hide Details</span>
+            <div id="reversibleIrreversibleContent" class="content">
+                <ul>
+                    <li><strong>Reversible Process:</strong> Sequence of processes carried out in such a manner that the values of thermodynamic variables are retrieved at end of processes. Example: Liquefaction, evaporation, compression performed slowly.</li>
+                    <li><strong>Irreversible Process:</strong> All changes that occur suddenly or involve friction or dissipation of energy through conduction, convection or radiation.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Heat Engine</h2>
+            <span class="toggle-button" onclick="toggleVisibility('heatEngineMainContent')">Show/Hide Details</span>
+            <div id="heatEngineMainContent" class="content">
+                <ul>
+                    <li>Thermodynamic device that converts heat energy into mechanical energy.</li>
+                    <li>No perfect heat engine exists.</li>
+                    <li>Always operates in a cycle.</li>
+                    <li>Cycle means set of changes which bring system to its initial state.</li>
+                    <li>Area under PV graph gives work done by engine.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Carnot Heat Engine (Ideal Engine)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('carnotEngineSubContent')">Show/Hide Details</span>
+                        <div id="carnotEngineSubContent" class="content">
+                            <ul>
+                                <li>Proposed by Sadi Carnot in 1840.</li>
+                                <li>Has maximum efficiency, but not 100%.</li>
+                                <li>Efficiency: $\eta_c = \left(1-\frac{T_L}{T_H}\right) \times 100$. ($T_L$: temperature of cold reservoir/sink, $T_H$: temperature of hot reservoir/source).</li>
+                                <li>Carnot cycle consists of: (i) Isothermal expansion, (ii) Adiabatic expansion, (iii) Isothermal compression, (iv) Adiabatic compression.</li>
+                                <li>Efficiency depends on temperature difference between source and sink.</li>
+                                <li>Independent of nature of working substance.</li>
+                                <li>100% efficiency only when $T_L = 0~K$ (absolute zero), which is practically impossible.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Classification of Heat Engine</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('heatEngineClassificationSubContent')">Show/Hide Details</span>
+                        <div id="heatEngineClassificationSubContent" class="content">
+                            <ul>
+                                <li>Internal Combustion Engine (e.g., Petrol Engine, Diesel Engine).</li>
+                                <li>External Combustion Engine.</li>
+                            </ul>
+                            <h4>Petrol Engine (Four-stroke cycle principle):</h4>
+                            <ul>
+                                <li>Cylinder, Piston, Crank shaft, Connecting rod.</li>
+                                <li>Four successive processes:
+                                    <ol>
+                                        <li>Intake Stroke: Piston moves down, intake valve open, fuel enters.</li>
+                                        <li>Compression Stroke: Piston moves up, both valves closed, fuel compressed.</li>
+                                        <li>Power Stroke (Ignition): Piston moves down, both valves closed, burnt gases expand.</li>
+                                        <li>Exhaust Stroke: Piston moves up, exhaust valve open, burnt gases expelled.</li>
+                                    </ol>
+                                </li>
+                                <li>Efficiency of petrol engine is about 25% to 30%.</li>
+                                <li>Diesel engine has no spark plug. Efficiency is about 35% to 40%.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Entropy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('entropyContent')">Show/Hide Details</span>
+            <div id="entropyContent" class="content">
+                <ul>
+                    <li>Degree of disorderliness is called statistical entropy.</li>
+                    <li>Unavailability of heat energy is called thermo entropy.</li>
+                    <li>Law of increase of entropy: Entropy of a thermodynamic system either remains constant (during reversible process) or it increases (during irreversible process).</li>
+                    <li>Change in entropy: $\Delta S = \frac{\Delta Q}{T}$.</li>
+                    <li>Unit: $J~K^{-1}$.</li>
+                    <li>Entropy may remain constant for a reversible process.</li>
+                    <li>Entropy increases for all irreversible processes.</li>
+                    <li>Environmental crisis is an entropy or disorder crisis.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Entropy</th>
+                            <th>Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Entropy</td>
+                            <td>A state variable whose change is defined for a reversible process at $T$ where $Q$ is the heat absorbed.</td>
+                        </tr>
+                        <tr>
+                            <td>Entropy</td>
+                            <td>A measure of the amount of energy which is unavailable to do work.</td>
+                        </tr>
+                        <tr>
+                            <td>Entropy</td>
+                            <td>A measure of the disorder of a system.</td>
+                        </tr>
+                        <tr>
+                            <td>Entropy</td>
+                            <td>A measure of the multiplicity of a system.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

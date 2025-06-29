@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Oscillations</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 7: Oscillations</h1>
+
+    <ul>
+        <li>
+            <h2>Oscillation and Vibration</h2>
+            <span class="toggle-button" onclick="toggleVisibility('oscillationVibrationContent')">Show/Hide Details</span>
+            <div id="oscillationVibrationContent" class="content">
+                <ul>
+                    <li>Oscillation: Repetitive back-and-forth motion about an equilibrium position.</li>
+                    <li>Vibration: A rapid oscillation.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Simple Harmonic Motion (SHM)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('shmMainContent')">Show/Hide Details</span>
+            <div id="shmMainContent" class="content">
+                <ul>
+                    <li>Special type of oscillatory motion.</li>
+                    <li>Restoring force is directly proportional to displacement from equilibrium and acts opposite to displacement.</li>
+                    <li>$F = -kx$.</li>
+                    <li>Acceleration is directly proportional to displacement and opposite to it.</li>
+                    <li>$a = -\omega^2 x$.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Characteristics of SHM</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('shmCharacteristicsSubContent')">Show/Hide Details</span>
+                        <div id="shmCharacteristicsSubContent" class="content">
+                            <ul>
+                                <li>Acceleration is always directed towards the mean position.</li>
+                                <li>Velocity is maximum at mean position, zero at extreme positions.</li>
+                                <li>Acceleration is zero at mean position, maximum at extreme positions.</li>
+                                <li>Period and frequency are independent of amplitude (for ideal SHM).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Displacement in SHM</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('shmDisplacementSubContent')">Show/Hide Details</span>
+                        <div id="shmDisplacementSubContent" class="content">
+                            <ul>
+                                <li>$x = x_o \sin(\omega t + \phi)$ (if starting from equilibrium).</li>
+                                <li>$x = x_o \cos(\omega t + \phi)$ (if starting from extreme).</li>
+                                <li>$x_o$: amplitude (maximum displacement).</li>
+                                <li>$\omega$: angular frequency.</li>
+                                <li>$\phi$: phase angle.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Velocity in SHM</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('shmVelocitySubContent')">Show/Hide Details</span>
+                        <div id="shmVelocitySubContent" class="content">
+                            <ul>
+                                <li>$v = \omega \sqrt{x_o^2 - x^2}$.</li>
+                                <li>Maximum velocity at mean position ($x=0$): $v_{max} = \omega x_o$.</li>
+                                <li>Zero velocity at extreme positions ($x=\pm x_o$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Acceleration in SHM</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('shmAccelerationSubContent')">Show/Hide Details</span>
+                        <div id="shmAccelerationSubContent" class="content">
+                            <ul>
+                                <li>$a = -\omega^2 x$.</li>
+                                <li>Maximum acceleration at extreme positions ($x=\pm x_o$): $a_{max} = \omega^2 x_o$.</li>
+                                <li>Zero acceleration at mean position ($x=0$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mass-Spring System</h2>
+            <span class="toggle-button" onclick="toggleVisibility('massSpringSystemContent')">Show/Hide Details</span>
+            <div id="massSpringSystemContent" class="content">
+                <ul>
+                    <li>Period: $T = 2\pi\sqrt{\frac{m}{k}}$.</li>
+                    <li>Frequency: $f = \frac{1}{2\pi}\sqrt{\frac{k}{m}}$.</li>
+                    <li>Angular frequency: $\omega = \sqrt{\frac{k}{m}}$.</li>
+                    <li>$m$: mass.</li>
+                    <li>$k$: spring constant.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Simple Pendulum</h2>
+            <span class="toggle-button" onclick="toggleVisibility('simplePendulumMainContent')">Show/Hide Details</span>
+            <div id="simplePendulumMainContent" class="content">
+                <ul>
+                    <li>Period: $T = 2\pi\sqrt{\frac{L}{g}}$.</li>
+                    <li>Frequency: $f = \frac{1}{2\pi}\sqrt{\frac{g}{L}}$.</li>
+                    <li>Angular frequency: $\omega = \sqrt{\frac{g}{L}}$.</li>
+                    <li>$L$: length of pendulum.</li>
+                    <li>$g$: acceleration due to gravity.</li>
+                    <li>Valid for small angles of oscillation (typically less than $10^\circ$).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Factors Affecting Period</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pendulumFactorsSubContent')">Show/Hide Details</span>
+                        <div id="pendulumFactorsSubContent" class="content">
+                            <ul>
+                                <li>Length of pendulum (T $\propto \sqrt{L}$).</li>
+                                <li>Acceleration due to gravity (T $\propto \frac{1}{\sqrt{g}}$).</li>
+                                <li>Independent of mass of bob and amplitude (for small angles).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Energy in SHM</h2>
+            <span class="toggle-button" onclick="toggleVisibility('energySHMMainContent')">Show/Hide Details</span>
+            <div id="energySHMMainContent" class="content">
+                <ul>
+                    <li>Total mechanical energy is conserved (in absence of damping).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Kinetic Energy (KE)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('keSHMSubContent')">Show/Hide Details</span>
+                        <div id="keSHMSubContent" class="content">
+                            <ul>
+                                <li>$KE = \frac{1}{2}m\omega^2(x_o^2 - x^2)$.</li>
+                                <li>Maximum at mean position ($x=0$): $KE_{max} = \frac{1}{2}m\omega^2 x_o^2$.</li>
+                                <li>Zero at extreme positions ($x=\pm x_o$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Potential Energy (PE)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('peSHMSubContent')">Show/Hide Details</span>
+                        <div id="peSHMSubContent" class="content">
+                            <ul>
+                                <li>$PE = \frac{1}{2}kx^2 = \frac{1}{2}m\omega^2 x^2$.</li>
+                                <li>Maximum at extreme positions ($x=\pm x_o$): $PE_{max} = \frac{1}{2}kx_o^2 = \frac{1}{2}m\omega^2 x_o^2$.</li>
+                                <li>Zero at mean position ($x=0$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Total Energy (TE)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('teSHMSubContent')">Show/Hide Details</span>
+                        <div id="teSHMSubContent" class="content">
+                            <ul>
+                                <li>$TE = KE + PE = \frac{1}{2}m\omega^2 x_o^2$.</li>
+                                <li>Constant throughout SHM.</li>
+                                <li>Proportional to square of amplitude ($x_o^2$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Damped Oscillations</h2>
+            <span class="toggle-button" onclick="toggleVisibility('dampedOscillationsContent')">Show/Hide Details</span>
+            <div id="dampedOscillationsContent" class="content">
+                <ul>
+                    <li>Oscillations where amplitude decreases over time due to dissipative forces (e.g., friction, air resistance).</li>
+                    <li>Energy is lost from the system.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Forced Oscillations and Resonance</h2>
+            <span class="toggle-button" onclick="toggleVisibility('forcedOscillationsMainContent')">Show/Hide Details</span>
+            <div id="forcedOscillationsMainContent" class="content">
+                <ul>
+                    <li>Forced Oscillations: An external periodic force drives the oscillation.</li>
+                    <li>Resonance: Occurs when the frequency of the driving force matches the natural frequency of the oscillating system.</li>
+                    <li>At resonance, amplitude becomes maximum.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Examples of Resonance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resonanceExamplesSubContent')">Show/Hide Details</span>
+                        <div id="resonanceExamplesSubContent" class="content">
+                            <ul>
+                                <li>Shattering of glass by sound.</li>
+                                <li>Tacoma Narrows Bridge collapse.</li>
+                                <li>Tuning a radio.</li>
+                                <li>Microwave ovens.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

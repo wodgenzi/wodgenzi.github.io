@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Electrostatics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 12: Electrostatics</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction to Electrostatics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introElectrostaticsContent')">Show/Hide Details</span>
+            <div id="introElectrostaticsContent" class="content">
+                <ul>
+                    <li>Electrostatics: Deals with charges at rest.</li>
+                    <li>Electrodynamics: Deals with moving charges.</li>
+                    <li>Electric force: Holds positive and negative charges in atoms, molecules, bodies.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Charge & Its Relationship with Friction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chargeFrictionSubContent')">Show/Hide Details</span>
+                        <div id="chargeFrictionSubContent" class="content">
+                            <ul>
+                                <li>Bodies get charged by friction (rubbing).</li>
+                                <li>Rubbing: electrons gain energy, detach, causing positive charge.</li>
+                                <li>Similar charges repel; opposite charges attract.</li>
+                                <li>Excess electrons: negative charge. Deficiency of electrons: positive charge.</li>
+                                <li>SI unit of charge: Coulomb (C).</li>
+                                <li>$1~C$: force between two equal and opposite charges 1m apart is $9 \times 10^9~N$.</li>
+                                <li>$1~C$: charge when 1A current flows for 1s.</li>
+                                <li>$1~C = 6.25 \times 10^{18}$ electrons.</li>
+                                <li>Charge is conserved and quantized.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Coulomb's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('coulombsLawMainContent')">Show/Hide Details</span>
+            <div id="coulombsLawMainContent" class="content">
+                <ul>
+                    <li>Force between two point charges.</li>
+                    <li>Directly proportional to product of magnitudes of charges.</li>
+                    <li>Inversely proportional to square of distance between them.</li>
+                    <li>Acts along the line joining the charges.</li>
+                    <li>$F = k \frac{q_1 q_2}{r^2}$.</li>
+                    <li>$k = \frac{1}{4\pi\epsilon_o}$ (for vacuum/air).</li>
+                    <li>$k \approx 9 \times 10^9~N m^2 C^{-2}$.</li>
+                    <li>$\epsilon_o$: permittivity of free space ($8.85 \times 10^{-12}~C^2 N^{-1} m^{-2}$).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Coulomb's Law in Vector Form</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('coulombsLawVectorSubContent')">Show/Hide Details</span>
+                        <div id="coulombsLawVectorSubContent" class="content">
+                            <ul>
+                                <li>$\vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12}$ (force on $q_1$ due to $q_2$).</li>
+                                <li>$\hat{r}_{12}$: unit vector from $q_2$ to $q_1$.</li>
+                                <li>$\vec{F}_{12} = -\vec{F}_{21}$ (Newton's 3rd Law).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Effect of Medium (Dielectric)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('coulombsLawMediumSubContent')">Show/Hide Details</span>
+                        <div id="coulombsLawMediumSubContent" class="content">
+                            <ul>
+                                <li>Force in medium: $F_m = \frac{1}{4\pi\epsilon} \frac{q_1 q_2}{r^2}$.</li>
+                                <li>$\epsilon = \epsilon_r \epsilon_o = K \epsilon_o$.</li>
+                                <li>$\epsilon_r$ or $K$: relative permittivity or dielectric constant.</li>
+                                <li>$F_m = \frac{F_{vacuum}}{K}$.</li>
+                                <li>$K$ for vacuum/air = 1. For water $\approx 80$. For conductors, $K=\infty$.</li>
+                                <li>Force decreases in a dielectric medium.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Field (E)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricFieldMainContent')">Show/Hide Details</span>
+            <div id="electricFieldMainContent" class="content">
+                <ul>
+                    <li>Region around a charge where it exerts force on other charges.</li>
+                    <li>Electric field intensity: Force per unit positive test charge.</li>
+                    <li>$\vec{E} = \frac{\vec{F}}{q_o}$.</li>
+                    <li>Unit: N/C or V/m.</li>
+                    <li>Dimensions: $[MLT^{-3}A^{-1}]$.</li>
+                    <li>Vector quantity, direction same as force on positive test charge.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Electric Field due to a Point Charge</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldPointChargeSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldPointChargeSubContent" class="content">
+                            <ul>
+                                <li>$E = k \frac{q}{r^2}$.</li>
+                                <li>$\vec{E} = k \frac{q}{r^2} \hat{r}$.</li>
+                                <li>For positive charge, $\vec{E}$ is radially outward.</li>
+                                <li>For negative charge, $\vec{E}$ is radially inward.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Field Lines (Lines of Force)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldLinesSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldLinesSubContent" class="content">
+                            <ul>
+                                <li>Imaginary lines representing electric field.</li>
+                                <li>Originate from positive charges, terminate on negative charges.</li>
+                                <li>Tangent at any point gives direction of $\vec{E}$.</li>
+                                <li>Density of lines indicates strength of $\vec{E}$.</li>
+                                <li>Never cross each other.</li>
+                                <li>Never form closed loops.</li>
+                                <li>Perpendicular to conductor surfaces.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Field of a Parallel Plate Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldCapacitorSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldCapacitorSubContent" class="content">
+                            <ul>
+                                <li>Uniform field between plates (neglecting edge effects).</li>
+                                <li>$E = \frac{\sigma}{\epsilon_o}$ (in vacuum).</li>
+                                <li>$\sigma$: surface charge density ($q/A$).</li>
+                                <li>$E = \frac{\sigma}{\epsilon_r \epsilon_o} = \frac{\sigma}{K \epsilon_o}$ (with dielectric).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Flux ($\Phi_E$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricFluxContent')">Show/Hide Details</span>
+            <div id="electricFluxContent" class="content">
+                <ul>
+                    <li>Measure of the number of electric field lines passing through a given area.</li>
+                    <li>$\Phi_E = \vec{E} \cdot \vec{A} = EA \cos\theta$.</li>
+                    <li>Unit: $N m^2 C^{-1}$ or V m.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Gauss's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('gaussLawContent')">Show/Hide Details</span>
+            <div id="gaussLawContent" class="content">
+                <ul>
+                    <li>Total electric flux through any closed surface (Gaussian surface) is equal to the total charge enclosed divided by the permittivity of free space.</li>
+                    <li>$\Phi_E = \oint \vec{E} \cdot d\vec{A} = \frac{Q_{enclosed}}{\epsilon_o}$.</li>
+                    <li>Used to calculate electric field for symmetric charge distributions.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Applications of Gauss's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('gaussLawApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="gaussLawApplicationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Electric Field due to an Infinite Sheet of Charge:</strong> $E = \frac{\sigma}{2\epsilon_o}$.</li>
+                                <li><strong>Electric Field due to an Infinite Line of Charge:</strong> $E = \frac{\lambda}{2\pi\epsilon_o r}$. ($\lambda$: linear charge density).</li>
+                                <li><strong>Electric Field due to a Hollow Charged Sphere (outside):</strong> $E = k \frac{Q}{r^2}$.</li>
+                                <li><strong>Electric Field due to a Hollow Charged Sphere (inside):</strong> $E = 0$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Potential (V)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricPotentialMainContent')">Show/Hide Details</span>
+            <div id="electricPotentialMainContent" class="content">
+                <ul>
+                    <li>Work done per unit positive test charge to bring it from infinity to a point in the electric field without acceleration.</li>
+                    <li>$V = \frac{W}{q_o}$.</li>
+                    <li>Unit: Volt (V) = J/C.</li>
+                    <li>Dimensions: $[ML^2T^{-3}A^{-1}]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Electric Potential due to a Point Charge</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricPotentialPointChargeSubContent')">Show/Hide Details</span>
+                        <div id="electricPotentialPointChargeSubContent" class="content">
+                            <ul>
+                                <li>$V = k \frac{q}{r}$.</li>
+                                <li>For positive charge, V is positive. For negative charge, V is negative.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Potential Difference ($\Delta V$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricPotentialDifferenceSubContent')">Show/Hide Details</span>
+                        <div id="electricPotentialDifferenceSubContent" class="content">
+                            <ul>
+                                <li>Work done per unit positive test charge to move it from one point to another in an electric field.</li>
+                                <li>$\Delta V = V_B - V_A = \frac{W_{AB}}{q_o}$.</li>
+                                <li>Work done by electric field: $W_{AB} = -q_o(V_B - V_A) = -q_o\Delta V$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Equipotential Surfaces</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('equipotentialSurfacesSubContent')">Show/Hide Details</span>
+                        <div id="equipotentialSurfacesSubContent" class="content">
+                            <ul>
+                                <li>Surfaces where electric potential is constant.</li>
+                                <li>No work is done moving a charge along an equipotential surface.</li>
+                                <li>Electric field lines are always perpendicular to equipotential surfaces.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Relation between Electric Field and Potential</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('eAndVRelationSubContent')">Show/Hide Details</span>
+                        <div id="eAndVRelationSubContent" class="content">
+                            <ul>
+                                <li>$E = -\frac{\Delta V}{\Delta r}$ (for uniform field).</li>
+                                <li>Electric field points in direction of decreasing potential.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Capacitance (C)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('capacitanceMainContent')">Show/Hide Details</span>
+            <div id="capacitanceMainContent" class="content">
+                <ul>
+                    <li>Ability of a conductor to store electric charge.</li>
+                    <li>$C = \frac{Q}{V}$.</li>
+                    <li>Unit: Farad (F) = C/V.</li>
+                    <li>Dimensions: $[M^{-1}L^{-2}T^4A^2]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Capacitance of a Parallel Plate Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('capacitanceParallelPlateSubContent')">Show/Hide Details</span>
+                        <div id="capacitanceParallelPlateSubContent" class="content">
+                            <ul>
+                                <li>$C = \frac{\epsilon_o A}{d}$ (in vacuum/air).</li>
+                                <li>$C = \frac{\epsilon A}{d} = \frac{K\epsilon_o A}{d}$ (with dielectric).</li>
+                                <li>$A$: area of plates.</li>
+                                <li>$d$: distance between plates.</li>
+                                <li>Capacitance increases with dielectric.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Combinations of Capacitors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('capacitorCombinationsSubContent')">Show/Hide Details</span>
+                        <div id="capacitorCombinationsSubContent" class="content">
+                            <h4>Series Combination:</h4>
+                            <ul>
+                                <li>Charge (Q) is same across each capacitor.</li>
+                                <li>Total voltage: $V = V_1 + V_2 + ...$.</li>
+                                <li>Equivalent capacitance: $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + ...$.</li>
+                                <li>For two capacitors: $C_{eq} = \frac{C_1 C_2}{C_1 + C_2}$.</li>
+                                <li>$C_{eq}$ is always less than the smallest individual capacitance.</li>
+                            </ul>
+                            <h4>Parallel Combination:</h4>
+                            <ul>
+                                <li>Voltage (V) is same across each capacitor.</li>
+                                <li>Total charge: $Q = Q_1 + Q_2 + ...$.</li>
+                                <li>Equivalent capacitance: $C_{eq} = C_1 + C_2 + ...$.</li>
+                                <li>$C_{eq}$ is always greater than the largest individual capacitance.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Energy Stored in a Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('energyStoredCapacitorSubContent')">Show/Hide Details</span>
+                        <div id="energyStoredCapacitorSubContent" class="content">
+                            <ul>
+                                <li>$U = \frac{1}{2}QV = \frac{1}{2}CV^2 = \frac{Q^2}{2C}$.</li>
+                                <li>Unit: Joule (J).</li>
+                                <li>Energy density: Energy stored per unit volume.</li>
+                                <li>$u = \frac{1}{2}\epsilon_o E^2$ (in vacuum/air).</li>
+                                <li>$u = \frac{1}{2}K\epsilon_o E^2$ (with dielectric).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Millikan's Oil Drop Experiment</h2>
+            <span class="toggle-button" onclick="toggleVisibility('millikanExperimentContent')">Show/Hide Details</span>
+            <div id="millikanExperimentContent" class="content">
+                <ul>
+                    <li>Determined the elementary charge (charge of an electron).</li>
+                    <li>Balanced gravitational force on oil drop with electric force.</li>
+                    <li>At terminal velocity (no electric field): $mg = 6\pi\eta r v_t$.</li>
+                    <li>With electric field, balanced: $qE = mg$.</li>
+                    <li>Charge on oil drop: $q = \frac{mg}{E}$.</li>
+                    <li>Found charge $q$ is always an integer multiple of elementary charge $e$.</li>
+                    <li>$e = 1.602 \times 10^{-19}~C$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Charging and Discharging of a Capacitor</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chargingDischargingContent')">Show/Hide Details</span>
+            <div id="chargingDischargingContent" class="content">
+                <ul>
+                    <li>RC circuit: Resistor and capacitor in series.</li>
+                    <li>Time constant ($\tau$): Time for charge to reach 63% of max during charging, or discharge to 37% during discharging.</li>
+                    <li>$\tau = RC$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Applications of Electrostatics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('applicationsElectrostaticsContent')">Show/Hide Details</span>
+            <div id="applicationsElectrostaticsContent" class="content">
+                <ul>
+                    <li>Photocopiers (Xerography).</li>
+                    <li>Inkjet printers.</li>
+                    <li>Electrostatic paint spraying.</li>
+                    <li>Dust precipitators.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Electrostatics</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 12: Electrostatics</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction to Electrostatics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introElectrostaticsContent')">Show/Hide Details</span>
+            <div id="introElectrostaticsContent" class="content">
+                <ul>
+                    <li>Electrostatics: Deals with charges at rest.</li>
+                    <li>Electrodynamics: Deals with moving charges.</li>
+                    <li>Electric force: Holds positive and negative charges in atoms, molecules, bodies.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Charge & Its Relationship with Friction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chargeFrictionSubContent')">Show/Hide Details</span>
+                        <div id="chargeFrictionSubContent" class="content">
+                            <ul>
+                                <li>Bodies get charged by friction (rubbing).</li>
+                                <li>Rubbing: electrons gain energy, detach, causing positive charge.</li>
+                                <li>Similar charges repel; opposite charges attract.</li>
+                                <li>Excess electrons: negative charge. Deficiency of electrons: positive charge.</li>
+                                <li>SI unit of charge: Coulomb (C).</li>
+                                <li>$1~C$: force between two equal and opposite charges 1m apart is $9 \times 10^9~N$.</li>
+                                <li>$1~C$: charge when 1A current flows for 1s.</li>
+                                <li>$1~C = 6.25 \times 10^{18}$ electrons.</li>
+                                <li>Charge is conserved and quantized.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Coulomb's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('coulombsLawMainContent')">Show/Hide Details</span>
+            <div id="coulombsLawMainContent" class="content">
+                <ul>
+                    <li>Force between two point charges.</li>
+                    <li>Directly proportional to product of magnitudes of charges.</li>
+                    <li>Inversely proportional to square of distance between them.</li>
+                    <li>Acts along the line joining the charges.</li>
+                    <li>$F = k \frac{q_1 q_2}{r^2}$.</li>
+                    <li>$k = \frac{1}{4\pi\epsilon_o}$ (for vacuum/air).</li>
+                    <li>$k \approx 9 \times 10^9~N m^2 C^{-2}$.</li>
+                    <li>$\epsilon_o$: permittivity of free space ($8.85 \times 10^{-12}~C^2 N^{-1} m^{-2}$).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Coulomb's Law in Vector Form</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('coulombsLawVectorSubContent')">Show/Hide Details</span>
+                        <div id="coulombsLawVectorSubContent" class="content">
+                            <ul>
+                                <li>$\vec{F}_{12} = k \frac{q_1 q_2}{r^2} \hat{r}_{12}$ (force on $q_1$ due to $q_2$).</li>
+                                <li>$\hat{r}_{12}$: unit vector from $q_2$ to $q_1$.</li>
+                                <li>$\vec{F}_{12} = -\vec{F}_{21}$ (Newton's 3rd Law).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Effect of Medium (Dielectric)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('coulombsLawMediumSubContent')">Show/Hide Details</span>
+                        <div id="coulombsLawMediumSubContent" class="content">
+                            <ul>
+                                <li>Force in medium: $F_m = \frac{1}{4\pi\epsilon} \frac{q_1 q_2}{r^2}$.</li>
+                                <li>$\epsilon = \epsilon_r \epsilon_o = K \epsilon_o$.</li>
+                                <li>$\epsilon_r$ or $K$: relative permittivity or dielectric constant.</li>
+                                <li>$F_m = \frac{F_{vacuum}}{K}$.</li>
+                                <li>$K$ for vacuum/air = 1. For water $\approx 80$. For conductors, $K=\infty$.</li>
+                                <li>Force decreases in a dielectric medium.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Field (E)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricFieldMainContent')">Show/Hide Details</span>
+            <div id="electricFieldMainContent" class="content">
+                <ul>
+                    <li>Region around a charge where it exerts force on other charges.</li>
+                    <li>Electric field intensity: Force per unit positive test charge.</li>
+                    <li>$\vec{E} = \frac{\vec{F}}{q_o}$.</li>
+                    <li>Unit: N/C or V/m.</li>
+                    <li>Dimensions: $[MLT^{-3}A^{-1}]$.</li>
+                    <li>Vector quantity, direction same as force on positive test charge.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Electric Field due to a Point Charge</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldPointChargeSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldPointChargeSubContent" class="content">
+                            <ul>
+                                <li>$E = k \frac{q}{r^2}$.</li>
+                                <li>$\vec{E} = k \frac{q}{r^2} \hat{r}$.</li>
+                                <li>For positive charge, $\vec{E}$ is radially outward.</li>
+                                <li>For negative charge, $\vec{E}$ is radially inward.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Field Lines (Lines of Force)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldLinesSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldLinesSubContent" class="content">
+                            <ul>
+                                <li>Imaginary lines representing electric field.</li>
+                                <li>Originate from positive charges, terminate on negative charges.</li>
+                                <li>Tangent at any point gives direction of $\vec{E}$.</li>
+                                <li>Density of lines indicates strength of $\vec{E}$.</li>
+                                <li>Never cross each other.</li>
+                                <li>Never form closed loops.</li>
+                                <li>Perpendicular to conductor surfaces.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Field of a Parallel Plate Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricFieldCapacitorSubContent')">Show/Hide Details</span>
+                        <div id="electricFieldCapacitorSubContent" class="content">
+                            <ul>
+                                <li>Uniform field between plates (neglecting edge effects).</li>
+                                <li>$E = \frac{\sigma}{\epsilon_o}$ (in vacuum).</li>
+                                <li>$\sigma$: surface charge density ($q/A$).</li>
+                                <li>$E = \frac{\sigma}{\epsilon_r \epsilon_o} = \frac{\sigma}{K \epsilon_o}$ (with dielectric).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Flux ($\Phi_E$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricFluxContent')">Show/Hide Details</span>
+            <div id="electricFluxContent" class="content">
+                <ul>
+                    <li>Measure of the number of electric field lines passing through a given area.</li>
+                    <li>$\Phi_E = \vec{E} \cdot \vec{A} = EA \cos\theta$.</li>
+                    <li>Unit: $N m^2 C^{-1}$ or V m.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Gauss's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('gaussLawContent')">Show/Hide Details</span>
+            <div id="gaussLawContent" class="content">
+                <ul>
+                    <li>Total electric flux through any closed surface (Gaussian surface) is equal to the total charge enclosed divided by the permittivity of free space.</li>
+                    <li>$\Phi_E = \oint \vec{E} \cdot d\vec{A} = \frac{Q_{enclosed}}{\epsilon_o}$.</li>
+                    <li>Used to calculate electric field for symmetric charge distributions.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Applications of Gauss's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('gaussLawApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="gaussLawApplicationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Electric Field due to an Infinite Sheet of Charge:</strong> $E = \frac{\sigma}{2\epsilon_o}$.</li>
+                                <li><strong>Electric Field due to an Infinite Line of Charge:</strong> $E = \frac{\lambda}{2\pi\epsilon_o r}$. ($\lambda$: linear charge density).</li>
+                                <li><strong>Electric Field due to a Hollow Charged Sphere (outside):</strong> $E = k \frac{Q}{r^2}$.</li>
+                                <li><strong>Electric Field due to a Hollow Charged Sphere (inside):</strong> $E = 0$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Potential (V)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricPotentialMainContent')">Show/Hide Details</span>
+            <div id="electricPotentialMainContent" class="content">
+                <ul>
+                    <li>Work done per unit positive test charge to bring it from infinity to a point in the electric field without acceleration.</li>
+                    <li>$V = \frac{W}{q_o}$.</li>
+                    <li>Unit: Volt (V) = J/C.</li>
+                    <li>Dimensions: $[ML^2T^{-3}A^{-1}]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Electric Potential due to a Point Charge</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricPotentialPointChargeSubContent')">Show/Hide Details</span>
+                        <div id="electricPotentialPointChargeSubContent" class="content">
+                            <ul>
+                                <li>$V = k \frac{q}{r}$.</li>
+                                <li>For positive charge, V is positive. For negative charge, V is negative.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Potential Difference ($\Delta V$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('electricPotentialDifferenceSubContent')">Show/Hide Details</span>
+                        <div id="electricPotentialDifferenceSubContent" class="content">
+                            <ul>
+                                <li>Work done per unit positive test charge to move it from one point to another in an electric field.</li>
+                                <li>$\Delta V = V_B - V_A = \frac{W_{AB}}{q_o}$.</li>
+                                <li>Work done by electric field: $W_{AB} = -q_o(V_B - V_A) = -q_o\Delta V$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Equipotential Surfaces</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('equipotentialSurfacesSubContent')">Show/Hide Details</span>
+                        <div id="equipotentialSurfacesSubContent" class="content">
+                            <ul>
+                                <li>Surfaces where electric potential is constant.</li>
+                                <li>No work is done moving a charge along an equipotential surface.</li>
+                                <li>Electric field lines are always perpendicular to equipotential surfaces.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Relation between Electric Field and Potential</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('eAndVRelationSubContent')">Show/Hide Details</span>
+                        <div id="eAndVRelationSubContent" class="content">
+                            <ul>
+                                <li>$E = -\frac{\Delta V}{\Delta r}$ (for uniform field).</li>
+                                <li>Electric field points in direction of decreasing potential.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Capacitance (C)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('capacitanceMainContent')">Show/Hide Details</span>
+            <div id="capacitanceMainContent" class="content">
+                <ul>
+                    <li>Ability of a conductor to store electric charge.</li>
+                    <li>$C = \frac{Q}{V}$.</li>
+                    <li>Unit: Farad (F) = C/V.</li>
+                    <li>Dimensions: $[M^{-1}L^{-2}T^4A^2]$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Capacitance of a Parallel Plate Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('capacitanceParallelPlateSubContent')">Show/Hide Details</span>
+                        <div id="capacitanceParallelPlateSubContent" class="content">
+                            <ul>
+                                <li>$C = \frac{\epsilon_o A}{d}$ (in vacuum/air).</li>
+                                <li>$C = \frac{\epsilon A}{d} = \frac{K\epsilon_o A}{d}$ (with dielectric).</li>
+                                <li>$A$: area of plates.</li>
+                                <li>$d$: distance between plates.</li>
+                                <li>Capacitance increases with dielectric.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Combinations of Capacitors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('capacitorCombinationsSubContent')">Show/Hide Details</span>
+                        <div id="capacitorCombinationsSubContent" class="content">
+                            <h4>Series Combination:</h4>
+                            <ul>
+                                <li>Charge (Q) is same across each capacitor.</li>
+                                <li>Total voltage: $V = V_1 + V_2 + ...$.</li>
+                                <li>Equivalent capacitance: $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + ...$.</li>
+                                <li>For two capacitors: $C_{eq} = \frac{C_1 C_2}{C_1 + C_2}$.</li>
+                                <li>$C_{eq}$ is always less than the smallest individual capacitance.</li>
+                            </ul>
+                            <h4>Parallel Combination:</h4>
+                            <ul>
+                                <li>Voltage (V) is same across each capacitor.</li>
+                                <li>Total charge: $Q = Q_1 + Q_2 + ...$.</li>
+                                <li>Equivalent capacitance: $C_{eq} = C_1 + C_2 + ...$.</li>
+                                <li>$C_{eq}$ is always greater than the largest individual capacitance.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Energy Stored in a Capacitor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('energyStoredCapacitorSubContent')">Show/Hide Details</span>
+                        <div id="energyStoredCapacitorSubContent" class="content">
+                            <ul>
+                                <li>$U = \frac{1}{2}QV = \frac{1}{2}CV^2 = \frac{Q^2}{2C}$.</li>
+                                <li>Unit: Joule (J).</li>
+                                <li>Energy density: Energy stored per unit volume.</li>
+                                <li>$u = \frac{1}{2}\epsilon_o E^2$ (in vacuum/air).</li>
+                                <li>$u = \frac{1}{2}K\epsilon_o E^2$ (with dielectric).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Millikan's Oil Drop Experiment</h2>
+            <span class="toggle-button" onclick="toggleVisibility('millikanExperimentContent')">Show/Hide Details</span>
+            <div id="millikanExperimentContent" class="content">
+                <ul>
+                    <li>Determined the elementary charge (charge of an electron).</li>
+                    <li>Balanced gravitational force on oil drop with electric force.</li>
+                    <li>At terminal velocity (no electric field): $mg = 6\pi\eta r v_t$.</li>
+                    <li>With electric field, balanced: $qE = mg$.</li>
+                    <li>Charge on oil drop: $q = \frac{mg}{E}$.</li>
+                    <li>Found charge $q$ is always an integer multiple of elementary charge $e$.</li>
+                    <li>$e = 1.602 \times 10^{-19}~C$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Charging and Discharging of a Capacitor</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chargingDischargingContent')">Show/Hide Details</span>
+            <div id="chargingDischargingContent" class="content">
+                <ul>
+                    <li>RC circuit: Resistor and capacitor in series.</li>
+                    <li>Time constant ($\tau$): Time for charge to reach 63% of max during charging, or discharge to 37% during discharging.</li>
+                    <li>$\tau = RC$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Applications of Electrostatics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('applicationsElectrostaticsContent')">Show/Hide Details</span>
+            <div id="applicationsElectrostaticsContent" class="content">
+                <ul>
+                    <li>Photocopiers (Xerography).</li>
+                    <li>Inkjet printers.</li>
+                    <li>Electrostatic paint spraying.</li>
+                    <li>Dust precipitators.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

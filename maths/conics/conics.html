@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Conic Sections Glossary - Complete</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        ul ul li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+    <!-- MathJax for LaTeX rendering -->
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+</head>
+
+<body>
+
+    <h1>Conic Sections Glossary - Complete</h1>
+
+    <ul>
+        <li>
+            Circle
+            <span class="toggle-button" onclick="toggleVisibility('circleContent')">Show/Hide Details</span>
+            <div id="circleContent" class="content">
+                A set of points such that distance of each point from a fixed point (centre) remains constant.
+                <ul>
+                    <li>
+                        Center
+                        <span class="toggle-button" onclick="toggleVisibility('circleCenterContent')">Show/Hide
+                            Details</span>
+                        <div id="circleCenterContent" class="content">
+                            $(-g, -f)$.
+                        </div>
+                    </li>
+                    <li>
+                        Radius
+                        <span class="toggle-button" onclick="toggleVisibility('circleRadiusContent')">Show/Hide
+                            Details</span>
+                        <div id="circleRadiusContent" class="content">
+                            The constant distance. $r=\sqrt{g^{2}+f^{2}-c}>0$ (Real circle). $r=\sqrt{g^{2}+f^{2}-c}=0$
+                            (Point circle). If $g^{2}+f^{2}-c&lt0$ (Imaginary circle).
+                        </div>
+                    </li>
+                    <li>
+                        Standard Form of Equations of Circle
+                        <span class="toggle-button" onclick="toggleVisibility('circleStandardFormContent')">Show/Hide
+                            Details</span>
+                        <div id="circleStandardFormContent" class="content">
+                            Centre (h,k), radius = r: $(x-h)^{2}+(y-k)^{2}=\dot{r}^{2}$. <br>
+                            Centre (0,0), radius = r: $x^{2}+y^{2}=r^{2}$. <br>
+                            Centre (0,0), radius = 1 (Unit circle): $x^{2}+y^{2}=1$. <br>
+                            Centre (0,0), radius = 0 (Point circle): $x^{2}+y^{2}=0$. <br>
+                            If end points of the diameter are $A(x_{1},y_{1})\&B(x_{2},y_{2})$:
+                            $(x-x_{1})(x-x_{2})+(y-y_{1})(y-y_{2})=0$.
+                        </div>
+                    </li>
+                    <li>
+                        Parametric Form of Equations of Circle
+                        <span class="toggle-button" onclick="toggleVisibility('circleParametricFormContent')">Show/Hide
+                            Details</span>
+                        <div id="circleParametricFormContent" class="content">
+                            Standard form $(x-h)^{2}+(y-k)^{2}=r^{2}$: $x=h+r~cos~\theta,y=k+r~sin~\theta$. <br>
+                            $x^{2}+y^{2}=r^{2}$: $x=r~cos~\theta,y=r~sin~\theta$.
+                        </div>
+                    </li>
+                    <li>
+                        General Form of a Circle
+                        <span class="toggle-button" onclick="toggleVisibility('circleGeneralFormContent')">Show/Hide
+                            Details</span>
+                        <div id="circleGeneralFormContent" class="content">
+                            $x^{2}+y^{2}+2gx+2fy+c=0$.
+                            <ul>
+                                <li>Constants: g, f, c.</li>
+                                <li>Coefficients of $x^{2}$ and $y^{2}$ are 1.</li>
+                                <li>Does not contain the term involving the product xy.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Tangents and Normals
+                        <span class="toggle-button" onclick="toggleVisibility('circleTangentsNormalsContent')">Show/Hide
+                            Details</span>
+                        <div id="circleTangentsNormalsContent" class="content">
+                            Tangent: A straight line that touches the curve at a point without cutting the curve. <br>
+                            Normal: A straight line perpendicular to the curve at the point of tangency.
+                            <ul>
+                                <li>Equation of tangent to $x^{2}+y^{2}=a^{2}$ at $P(x_{1},y_{1})$:
+                                    $xx_{1}+yy_{1}=a^{2}$.</li>
+                                <li>Equation of normal to $x^{2}+y^{2}=a^{2}$ at $P(x_{1},y_{1})$: $xy_{1}-yx_{1}=0$.
+                                </li>
+                                <li>Equation of tangent to $x^{2}+y^{2}+2gx+2fy+c=0$ at $P(x_{1},y_{1})$:
+                                    $xx_{1}+yy_{1}+g(x+x_{1})+f(y+y_{1})+c=0$.</li>
+                                <li>Equation of normal to $x^{2}+y^{2}+2gx+2fy+c=0$ at $P(x_{1},y_{1})$:
+                                    $(x-x_{1})(y_{1}+f)-(y-y_{1})(x_{1}+g)=0$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Condition of Tangency
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('circleConditionTangencyContent')">Show/Hide Details</span>
+                        <div id="circleConditionTangencyContent" class="content">
+                            The line $y=mx+c$ touches the circle $x^{2}+y^{2}=a^{2}$ if $c=\pm a\sqrt{1+m^{2}}$.
+                            <ul>
+                                <li>Intersects in two distinct points if $a^{2}(1+m^{2})-c^{2}>0$.</li>
+                                <li>Intersects in real and coincident points if $a^{2}(1+m^{2})-c^{2}=0$.</li>
+                                <li>Intersects in imaginary points if $a^{2}(:+m^{2})-c^{2}<0$.< /li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Equation of a Circle in Some Special Cases
+                        <span class="toggle-button" onclick="toggleVisibility('circleSpecialCasesContent')">Show/Hide
+                            Details</span>
+                        <div id="circleSpecialCasesContent" class="content">
+                            <ul>
+                                <li>\(|k| = r\)</li>
+                                <li>Only one solution for \(x\) when \(y = 0\)</li>
+                                <li>If the circle touches x-axis then its equation is:
+                                    <ul>
+                                        <li>Center (h,k): $(x-h)^{2}+(y-k)^{2}=k^{2} \Rightarrow
+                                            x^{2}+y^{2}-2hx-2ky+h^{2}=0$.</li>
+                                        <li>Center (-h,k): $(x+h)^{2}+(y-k)^{2}=k^{2} \Rightarrow
+                                            x^{2}+y^{2}+2hx-2ky+h^{2}=0$.</li>
+                                        <li>Center (-h,-k): $(x+h)^{2}+(y+k)^{2}=k^{2} \Rightarrow
+                                            x^{2}+y^{2}+2hx+2ky+h^{2}=0$.</li>
+                                        <li>Center (h,-k): $(x-h)^{2}+(y+k)^{2}=k^{2} \Rightarrow
+                                            x^{2}+y^{2}-2hx+2ky+h^{2}=0$.</li>
+                                    </ul>
+                                </li>
+                                <li>\(|h| = r\)</li>
+                                <li>Only one solution for \(y\) when \(x = 0\)</li>
+                                <li>Equation of a circle touches y-axis then its equation is:
+                                    <ul>
+                                        <li>Center (h,k): $(x-h)^{2}+(y-k)^{2}=h^{2} \Rightarrow
+                                            x^{2}+y^{2}-2hx-2ky+k^{2}=0$.</li>
+                                        <li>Center (-h,k): $(x+h)^{2}+(y-k)^{2}=h^{2} \Rightarrow
+                                            x^{2}+y^{2}+2hx-2ky+k^{2}=0$.</li>
+                                        <li>Center (-h,-k): $(x+h)^{2}+(y+k)^{2}=h^{2} \Rightarrow
+                                            x^{2}+y^{2}+2hx+2ky+k^{2}=0$.</li>
+                                        <li>Center (h,-k): $(x-h)^{2}+(y+k)^{2}=h^{2} \Rightarrow
+                                            x^{2}+y^{2}-2hx+2ky+k^{2}=0$.</li>
+                                    </ul>
+                                </li>
+                                <li>\(|h| = |k| = r\)</li>
+                                <li>Equation of circle which touches both the axes is:
+                                    <ul>
+                                        <li>Center (r,r): $(x-r)^{2}+(y-r)^{2}=r^{2} \Rightarrow
+                                            x^{2}+y^{2}-2rx-2ry+r^{2}=0$.</li>
+                                        <li>Center (-r,r): $(x+r)^{2}+(y-r)^{2}=r^{2} \Rightarrow
+                                            x^{2}+y^{2}+2rx-2ry+r^{2}=0$.</li>
+                                        <li>Center (-r,-r): $(x+r)^{2}+(y+r)^{2}=r^{2} \Rightarrow
+                                            x^{2}+y^{2}+2rx+2ry+r^{2}=0$.</li>
+                                        <li>Center (r,-r): $(x-r)^{2}+(y+r)^{2}=r^{2} \Rightarrow
+                                            x^{2}+y^{2}-2rx+2ry+r^{2}=0$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Important Properties of a Circle
+                        <span class="toggle-button" onclick="toggleVisibility('circlePropertiesContent')">Show/Hide
+                            Details</span>
+                        <div id="circlePropertiesContent" class="content">
+                            <ul>
+                                <li>Perpendicular dropped from the center of a circle on a chord bisects the chord.</li>
+                                <li>The perpendicular bisector of any chord of a circle passes through the center of the
+                                    circle.</li>
+                                <li>The line joining the center of a circle to the midpoint of a chord is perpendicular
+                                    to the chord.</li>
+                                <li>Congruent chords of a circle are equidistant from its centre.</li>
+                                <li>Measure of the central angle of a minor arc is double the measure of the angle
+                                    subtended in the corresponding major arc.</li>
+                                <li>An angle in a semi-circle is a right angle.</li>
+                                <li>The tangent to a circle at any point of the circle is perpendicular to the radial
+                                    segment at that point.</li>
+                                <li>The perpendicular at the outer end of a radial segment is tangent to the circle.
+                                </li>
+                                <li>Normal lines of a circle pass through the centre of the circle.</li>
+                                <li>Mid point of the hypotenuse of a right triangle is the circumcentre of the triangle.
+                                </li>
+                                <li>Perpendicular dropped from a point of a circle on a diameter is a mean proportional
+                                    between the segments into which it divides the diameter.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Contact of Two Circles
+                        <span class="toggle-button" onclick="toggleVisibility('circleContactContent')">Show/Hide
+                            Details</span>
+                        <div id="circleContactContent" class="content">
+                            Let $r_{1}$ and $r_{2}$ be the radii of two circles and $C_{1}$, $C_{2}$ be their centers.
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Condition</th>
+                                        <th>Relationship</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Circles Touch Externally</td>
+                                        <td>$|C_{1}C_{2}|=r_{1}+r_{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Circles Touch Internally</td>
+                                        <td>$|C_{1}C_{2}|=|r_{1}-r_{2}|$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Circles Intersect in Two Real Distinct Points</td>
+                                        <td>$|r_{1}-r_{2}|&lt|C_{1}C_{2}|&ltr_{1}+r_{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Circles do not Touch</td>
+                                        <td>(i) $|C_{1}C_{2}|>r_{1}+r_{2}$ <br> (ii) $|C_{1}C_{2}|&lt|r_{1}-r_{2}|$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Parabola
+            <span class="toggle-button" onclick="toggleVisibility('parabolaContent')">Show/Hide Details</span>
+            <div id="parabolaContent" class="content">
+                A set of points in a plane such that the distance of each point from a fixed point (Focus, F) is equal
+                to its distance from a fixed straight line (Directrix, L).
+                <ul>
+                    <li>
+                        Terms Related to Parabola
+                        <span class="toggle-button" onclick="toggleVisibility('parabolaTermsContent')">Show/Hide
+                            Details</span>
+                        <a href="parabola.html"
+                            style="margin-left:15px; color:#2980b9; text-decoration:underline; font-size:0.95em;">visualize</a>
+                        <div id="parabolaTermsContent" class="content">
+                            <ul>
+                                <li>Axis of Parabola: The line through focus and perpendicular to directrix.</li>
+                                <li>Vertex: The midpoint of the perpendicular line joining focus and directrix.</li>
+                                <li>Focal Chord: A chord of the parabola through focus.</li>
+                                <li>Latus Rectum: The focal chord perpendicular to the axis of the parabola.</li>
+                                <li>Eccentricity: The ratio of the distance of any point on the parabola to its distance
+                                    from directrix.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Main Facts about Standard Forms of Parabola
+                        <span class="toggle-button" onclick="toggleVisibility('parabolaMainFactsContent')">Show/Hide
+                            Details</span>
+                        <div id="parabolaMainFactsContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>$y^{2}=4ax$</th>
+                                        <th>$y^{2}=-4ax$</th>
+                                        <th>$x^{2}=4ay$</th>
+                                        <th>$x^{2}=-4ay$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Focus</td>
+                                        <td>$(a,0)$</td>
+                                        <td>$(-a,0)$</td>
+                                        <td>$(0,a)$</td>
+                                        <td>$(0,-a)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertex</td>
+                                        <td>$(0,0)$</td>
+                                        <td>$(0,0)$</td>
+                                        <td>$(0,0)$</td>
+                                        <td>$(0,0)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Latus Rectum</td>
+                                        <td>$4a$</td>
+                                        <td>$4a$</td>
+                                        <td>$4a$</td>
+                                        <td>$4a$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Latus Rectum</td>
+                                        <td>$x=a$</td>
+                                        <td>$x=-a$</td>
+                                        <td>$y=a$</td>
+                                        <td>$y=-a$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Directrix</td>
+                                        <td>$x=-a$</td>
+                                        <td>$x=a$</td>
+                                        <td>$y=-a$</td>
+                                        <td>$y=a$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Axis</td>
+                                        <td>$y=0$</td>
+                                        <td>$y=0$</td>
+                                        <td>$x=0$</td>
+                                        <td>$x=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eccentricity</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Graph</td>
+                                        <td>(Opens right)</td>
+                                        <td>(Opens left)</td>
+                                        <td>(Opens up)</td>
+                                        <td>(Opens down)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Parametric Form of Equations of Parabola
+                        <span class="toggle-button" onclick="toggleVisibility('parabolaParametricContent')">Show/Hide
+                            Details</span>
+                        <div id="parabolaParametricContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Standard Form</th>
+                                        <th>Parametric Form</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$y^{2}=4ax$</td>
+                                        <td>$x=at^{2}$, $y=2at$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$y^{2}=-4ax$</td>
+                                        <td>$x=-at^{2}$, $y=2at$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=4ay$</td>
+                                        <td>$x=2at,$ $y=at^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=-4ay$</td>
+                                        <td>$x=2at$, $y=-at^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Theorems on Parabola
+                        <span class="toggle-button" onclick="toggleVisibility('parabolaTheoremsContent')">Show/Hide
+                            Details</span>
+                        <div id="parabolaTheoremsContent" class="content">
+                            <ul>
+                                <li>The point on the parabola closest to the focus is the vertex.</li>
+                                <li>The ordinate at any point P of the parabola is a mean proportional between the
+                                    length of the latus rectum and the abscissa of P.</li>
+                                <li>The tangent at any point P of a parabola makes equal angles with the line PF and the
+                                    line through P parallel to the axis of parabola, F being focus.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Tangents and Normals (Parabola)
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('parabolaTangentsNormalsContent')">Show/Hide Details</span>
+                        <div id="parabolaTangentsNormalsContent" class="content">
+                            <ul>
+                                <li>Equation of tangent to $y^{2}=4ax$: $yy_{1}=2a(x+x_{1})$.</li>
+                                <li>Equation of normal to $y^{2}=4ax$: $y-y_{1}=-\frac{y_{1}}{2a}(x-x_{1})$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Condition for $y=mx+c$ Tangent to Parabola
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('parabolaConditionTangentContent')">Show/Hide Details</span>
+                        <div id="parabolaConditionTangentContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$y^{2}=4ax$</td>
+                                        <td>$c=\frac{a}{m}, m\ne0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$y^{2}=-4ax$</td>
+                                        <td>$c=-\frac{a}{m}, m\ne0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=4ay$</td>
+                                        <td>$c=-am^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=-4ay$</td>
+                                        <td>$c=am^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>The line $y=mx+c$ will intersect parabola $y^{2}=4ax$ at:</p>
+                            <ul>
+                                <li>Two distinct points if $c<\frac{a}{m}$.< /li>
+                                <li>A single point if $c=\frac{a}{m}$.</li>
+                                <li>No point at all if $c>\frac{a}{m}$.</li>
+                            </ul>
+                            <p>The line $y=mx+c$ will be normal to parabola $y^{2}=4ax$ if $c=-2am-am^{3}$.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Ellipse
+            <span class="toggle-button" onclick="toggleVisibility('ellipseContent')">Show/Hide Details</span>
+            <div id="ellipseContent" class="content">
+                A set of points such that the distance of each point from a fixed point (Focus, F) bears a constant
+                ratio (Eccentricity, 0 &lt e &lt 1) to its perpendicular distance from a fixed straight line (Directrix,
+                L).
+                <ul>
+                    <li>
+                        Terms Related To Standard Ellipse
+                        <span class="toggle-button" onclick="toggleVisibility('ellipseTermsContent')">Show/Hide
+                            Details</span>
+                        <a href="ellipse.html"
+                            style="margin-left:15px; color:#2980b9; text-decoration:underline; font-size:0.95em;">visualize</a>
+                        <div id="ellipseTermsContent" class="content">
+                            <ul>
+                                <li>Vertices: Points on the standard ellipse where it crosses the major axis.</li>
+                                <li>Covertices: Points on the standard ellipse where it crosses the minor axis.</li>
+                                <li>Center: The midpoint of the line joining vertices (or covertices or Foci).</li>
+                                <li>Major Axis: The line joining vertices.</li>
+                                <li>Minor Axis: The line joining covertices.</li>
+                                <li>Latera Recta: Chords perpendicular to major axis passing through foci.</li>
+                                <li>Eccentricity: The ratio of the distance of any point on the ellipse from the focus
+                                    to its distance from the directrix.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Main Facts about Standard Forms of Ellipse
+                        <span class="toggle-button" onclick="toggleVisibility('ellipseMainFactsContent')">Show/Hide
+                            Details</span>
+                        <div id="ellipseMainFactsContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1, a>b$</th>
+                                        <th>$\frac{y^{2}}{a^{2}}+\frac{x^{2}}{b^{2}}=1, a>b$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Foci</td>
+                                        <td>$(\pm c,0)$ ($c^{2}=a^{2}-b^{2}$)</td>
+                                        <td>$(0,\pm c)$ ($c^{2}=a^{2}-b^{2}$)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eccentricity</td>
+                                        <td>$0&lte=\frac{c}{a}&lt1$</td>
+                                        <td>$0&lte=\frac{c}{a}&lt1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertices</td>
+                                        <td>$(\pm a,0)$</td>
+                                        <td>$(0,\pm a)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Co vertices</td>
+                                        <td>$(0,\pm b)$</td>
+                                        <td>$(\pm b,0)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Center</td>
+                                        <td>$(0,0)$</td>
+                                        <td>$(0,0)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Major Axis</td>
+                                        <td>$2a$</td>
+                                        <td>$2a$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Major Axis</td>
+                                        <td>$y=0$</td>
+                                        <td>$x=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Minor Axis</td>
+                                        <td>$2b$</td>
+                                        <td>$2b$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Minor Axis</td>
+                                        <td>$x=0$</td>
+                                        <td>$y=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Latus Rectum</td>
+                                        <td>$\frac{2b^{2}}{a}$</td>
+                                        <td>$\frac{2b^{2}}{a}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Directrices</td>
+                                        <td>$x=\pm\frac{c}{e^{2}}$</td>
+                                        <td>$y=\pm\frac{c}{e^{2}}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Graph</td>
+                                        <td>(Horizontal)</td>
+                                        <td>(Vertical)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Parametric Form of Equations of Ellipse
+                        <span class="toggle-button" onclick="toggleVisibility('ellipseParametricContent')">Show/Hide
+                            Details</span>
+                        <div id="ellipseParametricContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Standard Form</th>
+                                        <th>Parametric Form</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$x=a~cos~\theta, y=b~sin~\theta$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}+\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$x=b~cos~\theta, y=a~sin~\theta$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{(x-h)^{2}}{a^{2}}+\frac{(y-k)^{2}}{b^{2}}=1$</td>
+                                        <td>$x=h+a~cos~\theta, y=k+b~sin~\theta$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Theorems (Ellipse)
+                        <span class="toggle-button" onclick="toggleVisibility('ellipseTheoremsContent')">Show/Hide
+                            Details</span>
+                        <div id="ellipseTheoremsContent" class="content">
+                            <ul>
+                                <li>The sum of the focal distances of any point on an ellipse is equal to length of
+                                    major axis ($2a$).</li>
+                                <li>The distance between centre and any focus of the ellipse is denoted by c, and is
+                                    given as; $c=\sqrt{a^{2}-b^{2}}$.</li>
+                                <li>The distance between foci is $2c$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Tangents and Normals (Ellipse)
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('ellipseTangentsNormalsContent')">Show/Hide Details</span>
+                        <div id="ellipseTangentsNormalsContent" class="content">
+                            <ul>
+                                <li>Equation of tangent to Ellipse $\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$:
+                                    $\frac{xx_{1}}{a^{2}}+\frac{yy_{1}}{b^{2}}=1$.</li>
+                                <li>Equation of normal to Ellipse $\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$:
+                                    $\frac{a^{2}x}{x_{1}}-\frac{b^{2}y}{y_{1}}=a^{2}-b^{2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Condition for $y=mx+c$ Tangent to Ellipse
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('ellipseConditionTangentContent')">Show/Hide Details</span>
+                        <div id="ellipseConditionTangentContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}m^{2}+b^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}+\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}+m^{2}b^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>The line $y=mx+c$ will intersect Ellipse $\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$ at:
+                            </p>
+                            <ul>
+                                <li>Two distinct points if $c^{2}&lta^{2}m^{2}+b^{2}$.</li>
+                                <li>A single point if $c^{2}=a^{2}m^{2}+b^{2}$.</li>
+                                <li>No point at all if $c^{2}>a^{2}m^{2}+b^{2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Hyperbola
+            <span class="toggle-button" onclick="toggleVisibility('hyperbolaContent')">Show/Hide Details</span>
+            <div id="hyperbolaContent" class="content">
+                A set of points such that the distance of each point from a fixed point (focus, F) bears a constant
+                ratio (Eccentricity, $e>1$) to its perpendicular distance from a fixed straight line (directrix, L).
+                <ul>
+                    <li>
+                        Terms Related To Standard Hyperbola
+                        <span class="toggle-button" onclick="toggleVisibility('hyperbolaTermsContent')">Show/Hide
+                            Details</span>
+                        <a href="hyperbola.html"
+                            style="margin-left:15px; color:#2980b9; text-decoration:underline; font-size:0.95em;">visualize</a>
+                        <div id="hyperbolaTermsContent" class="content">
+                            <ul>
+                                <li>Vertices: Points on the standard hyperbola where it crosses the x-axis.</li>
+                                <li>Center: Midpoint of the line joining vertices (or co vertices).</li>
+                                <li>Transverse Axis: The line joining vertices.</li>
+                                <li>Conjugate Axis: The line joining co vertices.</li>
+                                <li>Latera Recta: Chords perpendicular to major axis passing through foci.</li>
+                                <li>Eccentricity: Ratio of the distance of any point on the ellipse from the focus to
+                                    its distance from the directrix.</li>
+                                <li>Asymptotes: Lines that approach a curve but never touch; every hyperbola has two.
+                                    <ul>
+                                        <li>Slope of asymptotes: $\pm\frac{b}{a}$ (hyperbola along x-axis).</li>
+                                        <li>Slope of asymptotes: $\pm\frac{a}{b}$ (hyperbola along y-axis).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Main Facts about Standard Forms of Hyperbola
+                        <span class="toggle-button" onclick="toggleVisibility('hyperbolaMainFactsContent')">Show/Hide
+                            Details</span>
+                        <div id="hyperbolaMainFactsContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>$\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$</th>
+                                        <th>$\frac{y^{2}}{a^{2}}-\frac{x^{2}}{b^{2}}=1$</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Foci</td>
+                                        <td>$(\pm c,0)$ ($c^{2}=a^{2}+b^{2}$)</td>
+                                        <td>$(0,\pm c)$ ($c^{2}=a^{2}+b^{2}$)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Eccentricity</td>
+                                        <td>$e=\frac{c}{a}>1$</td>
+                                        <td>$e=\frac{c}{a}>1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertices</td>
+                                        <td>$(\pm a,0)$</td>
+                                        <td>$(0,\pm a)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Center</td>
+                                        <td>$(0,0)$</td>
+                                        <td>$(0,0)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Transverse Axis</td>
+                                        <td>$2a$</td>
+                                        <td>$2a$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Transverse Axis</td>
+                                        <td>$y=0$</td>
+                                        <td>$x=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Conjugate Axis</td>
+                                        <td>$2b$</td>
+                                        <td>$2b$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Conjugate Axis</td>
+                                        <td>$x=0$</td>
+                                        <td>$y=0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Length of Latus Rectum</td>
+                                        <td>$\frac{2b^{2}}{a}$</td>
+                                        <td>$\frac{2b^{2}}{a}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Directrices</td>
+                                        <td>$x=\pm\frac{c}{e^{2}}$</td>
+                                        <td>$y=\pm\frac{c}{e^{2}}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equation of Asymptotes</td>
+                                        <td>$y=\pm\frac{b}{a}x$</td>
+                                        <td>$y=\pm\frac{a}{b}x$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Rectangular Hyperbola
+                        <span class="toggle-button" onclick="toggleVisibility('rectangularHyperbolaContent')">Show/Hide
+                            Details</span>
+                        <div id="rectangularHyperbolaContent" class="content">
+                            A hyperbola is said to be rectangular if its conjugate and transverse axis are equal ($2a=2b
+                            \Rightarrow a=b$).
+                            <ul>
+                                <li>Equation: $x^{2}-y^{2}=a^{2}$.</li>
+                                <li>Asymptotes are perpendicular to each other, equation $y=\pm x$.</li>
+                                <li>Eccentricity: $e=\sqrt{2}$.</li>
+                                <li>Equation referred to its asymptotes as co-ordinate axis: $xy=c^{2}$ where
+                                    $c^{2}=\frac{a^{2}}{2}$.</li>
+                                <li>Parametric equation: $x=ct, y=\frac{c}{t}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Parametric Form of Equations of Hyperbola
+                        <span class="toggle-button" onclick="toggleVisibility('hyperbolaParametricContent')">Show/Hide
+                            Details</span>
+                        <div id="hyperbolaParametricContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Standard Form</th>
+                                        <th>Parametric Form</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$x=a~sec~\theta, y=b~tan~\theta$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}-\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$x=b~tan~\theta, y=a~sec~\theta$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{(x-h)^{2}}{a^{2}}-\frac{(y-k)^{2}}{b^{2}}=1$</td>
+                                        <td>$x=h+a~sec~\theta, y=k+b~tan~\theta$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        Theorems (Hyperbola)
+                        <span class="toggle-button" onclick="toggleVisibility('hyperbolaTheoremsContent')">Show/Hide
+                            Details</span>
+                        <div id="hyperbolaTheoremsContent" class="content">
+                            <ul>
+                                <li>The difference of the focal distances of any point on the hyperbola is equal to the
+                                    length of transverse axis ($2a$).</li>
+                                <li>The distance between centre and any focus of the hyperbola is
+                                    $c=\sqrt{a^{2}+b^{2}}$.</li>
+                                <li>The distance between the foci is $2c$.</li>
+                                <li>Angle between the asymptotes is $2 \tan^{-1}\left(\frac{b}{a}\right)$.</li>
+                                <li>The product of distances from the foci to any tangent to the hyperbola is $b^2$.
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Tangents and Normals (Hyperbola)
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('hyperbolaTangentsNormalsContent')">Show/Hide Details</span>
+                        <div id="hyperbolaTangentsNormalsContent" class="content">
+                            <ul>
+                                <li>Equation of tangent to $\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$:
+                                    $\frac{xx_{1}}{a^{2}}-\frac{yy_{1}}{b^{2}}=1$.</li>
+                                <li>Equation of normal to $\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$:
+                                    $\frac{a^{2}x}{x_{1}}+\frac{b^{2}y}{y_{1}}=a^{2}+b^{2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Condition for $y=mx+c$ Tangent to Hyperbola
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('hyperbolaConditionTangentContent')">Show/Hide Details</span>
+                        <div id="hyperbolaConditionTangentContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}m^{2}-b^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}-\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}-m^{2}b^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Forms of Conics from General Equation
+            <span class="toggle-button" onclick="toggleVisibility('generalConicFormsContent')">Show/Hide Details</span>
+            <div id="generalConicFormsContent" class="content">
+                <p>The general second-degree form:
+                    \[
+                    Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+                    \]
+                    represents different conic sections depending on the values of \( A \), \( B \), and \( C \). Below
+                    are the simplified cases of conics in the form \( A(x-h)^2 \pm B(y-k)^2 = C \):
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Equation Form</th>
+                            <th>Conditions</th>
+                            <th>Conic Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>\( A(x - h)^2 - B(y - k)^2 = C \)</td>
+                            <td>\( A, B > 0;\ C > 0 \)</td>
+                            <td>Hyperbola (horizontal)</td>
+                        </tr>
+                        <tr>
+                            <td>\( B(y - k)^2 - A(x - h)^2 = C \)</td>
+                            <td>\( A, B > 0;\ C > 0 \)</td>
+                            <td>Hyperbola (vertical)</td>
+                        </tr>
+                        <tr>
+                            <td>\( A(x - h)^2 + B(y - k)^2 = C \)</td>
+                            <td>\( A, B > 0;\ C > 0 \)</td>
+                            <td>Ellipse</td>
+                        </tr>
+                        <tr>
+                            <td>\( A(x - h)^2 + A(y - k)^2 = C \)</td>
+                            <td>\( A > 0;\ C > 0 \)</td>
+                            <td>Circle</td>
+                        </tr>
+                        <tr>
+                            <td>\( A(x - h)^2 - B(y - k)^2 = 0 \)</td>
+                            <td>\( A, B > 0;\ C = 0 \)</td>
+                            <td>Degenerate Hyperbola (pair of lines)</td>
+                        </tr>
+                        <tr>
+                            <td>\( A(x - h)^2 + B(y - k)^2 = 0 \)</td>
+                            <td>\( A, B > 0;\ C = 0 \)</td>
+                            <td>Degenerate Ellipse (point)</td>
+                        </tr>
+                        <tr>
+                            <td>Only one squared term</td>
+                            <td>\( A \ne 0,\ B = 0 \) or vice versa</td>
+                            <td>Parabola</td>
+                        </tr>
+                        <tr>
+                            <td>No squared terms</td>
+                            <td>\( A = B = 0 \)</td>
+                            <td>Straight Line</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Key Rule:</strong> A conic is a hyperbola if it includes two squared terms with opposite
+                    signs. It's an ellipse or circle if both squared terms are positive and coefficients match (circle).
+                </p>
+            </div>
+        </li>
+        <li>
+            Foci of Conic Sections (Shifted Center)
+            <span class="toggle-button" onclick="toggleVisibility('conicFociContent')">Show/Hide Details</span>
+            <div id="conicFociContent" class="content">
+                <p>Given a conic centered or vertexed at \( (h, k) \), here are the formulas for the foci positions:</p>
+                <table border="1" cellpadding="6" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Conic</th>
+                            <th>Standard Equation</th>
+                            <th>Foci</th>
+                            <th>Where</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Circle -->
+                        <tr>
+                            <td>Circle</td>
+                            <td>\( (x - h)^2 + (y - k)^2 = r^2 \)</td>
+                            <td>Only center: \( (h, k) \)</td>
+                            <td>No separate foci — every point equidistant from center</td>
+                        </tr>
+                        <!-- Ellipse (Horizontal) -->
+                        <tr>
+                            <td>Ellipse (horizontal)</td>
+                            <td>\( \frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1,\ a > b \)</td>
+                            <td>\( (h \pm c,\, k) \), where \( c = \sqrt{a^2 - b^2} \)</td>
+                            <td>Along major axis (horizontal)</td>
+                        </tr>
+                        <!-- Ellipse (Vertical) -->
+                        <tr>
+                            <td>Ellipse (vertical)</td>
+                            <td>\( \frac{(x - h)^2}{b^2} + \frac{(y - k)^2}{a^2} = 1,\ a > b \)</td>
+                            <td>\( (h,\, k \pm c) \), where \( c = \sqrt{a^2 - b^2} \)</td>
+                            <td>Along major axis (vertical)</td>
+                        </tr>
+                        <!-- Hyperbola (horizontal) -->
+                        <tr>
+                            <td>Hyperbola (horizontal)</td>
+                            <td>\( \frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2} = 1 \)</td>
+                            <td>\( (h \pm c,\, k) \), where \( c = \sqrt{a^2 + b^2} \)</td>
+                            <td>Along transverse axis (horizontal)</td>
+                        </tr>
+                        <!-- Hyperbola (vertical) -->
+                        <tr>
+                            <td>Hyperbola (vertical)</td>
+                            <td>\( \frac{(y - k)^2}{a^2} - \frac{(x - h)^2}{b^2} = 1 \)</td>
+                            <td>\( (h,\, k \pm c) \), where \( c = \sqrt{a^2 + b^2} \)</td>
+                            <td>Along transverse axis (vertical)</td>
+                        </tr>
+                        <!-- Parabola (right/left) -->
+                        <tr>
+                            <td>Parabola (horizontal)</td>
+                            <td>\( (y - k)^2 = 4a(x - h) \)</td>
+                            <td>\( (h + a,\, k) \)</td>
+                            <td>Focus lies along x-axis direction</td>
+                        </tr>
+                        <!-- Parabola (up/down) -->
+                        <tr>
+                            <td>Parabola (vertical)</td>
+                            <td>\( (x - h)^2 = 4a(y - k) \)</td>
+                            <td>\( (h,\, k + a) \)</td>
+                            <td>Focus lies along y-axis direction</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Note:</strong> \( c \) represents distance from center to focus. Always check if \( a > b \)
+                    for ellipses to determine major axis direction.</p>
+            </div>
+        </li>
+
+        <li>
+            Condition for y = mx + c tangent to conic
+            <span class="toggle-button" onclick="toggleVisibility('conicTangentConditionsContent')">Show/Hide
+                Details</span>
+            <div id="conicTangentConditionsContent" class="content">
+                <ul>
+                    <li>
+                        General
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('tangentGeneralConditionContent')">Show/Hide Details</span>
+                        <div id="tangentGeneralConditionContent" class="content">
+                            <p>
+                                To check whether the line \( y = mx + c \) is tangent to any conic section:
+                            </p>
+                            <ol>
+                                <li>Substitute \( y = mx + c \) into the conic’s equation.</li>
+                                <li>Simplify to get a quadratic equation in \( x \).</li>
+                                <li>Compute the discriminant \( D = b^2 - 4ac \).</li>
+                            </ol>
+                            <ul>
+                                <li>\( D = 0 \): Line is <strong>tangent</strong> to the conic.</li>
+                                <li>\( D > 0 \): Line intersects conic at two points (secant).</li>
+                                <li>\( D &lt 0 \): Line does not intersect conic.</li>
+                            </ul>
+                            <p>This method works for any conic including general forms like:</p>
+                            <p>\[
+                                Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0
+                                \]</p>
+                        </div>
+                    </li>
+                    <li>
+                    Slope Form of Tangents for Conics
+                    <span class="toggle-button" onclick="toggleVisibility('tangentSlopeFormTable')">Show/Hide Details</span>
+                    <div id="tangentSlopeFormTable" class="content">
+                        <p>
+                        The following are standard equations of tangent lines with slope \(m\) for different conics:
+                        </p>
+                        <table>
+                        <thead>
+                            <tr>
+                            <th>Conic</th>
+                            <th>Equation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>Circle: \(x^2 + y^2 = r^2\)</td>
+                            <td>\(y = mx \pm \sqrt{r^2(1 + m^2)}\)</td>
+                            </tr>
+                            <tr>
+                            <td>Ellipse: \(\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\)</td>
+                            <td>\(y = mx \pm \sqrt{a^2m^2 + b^2}\)</td>
+                            </tr>
+                            <tr>
+                            <td>Hyperbola: \(\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\)</td>
+                            <td>\(y = mx \pm \sqrt{a^2m^2 - b^2}\)</td>
+                            </tr>
+                            <tr>
+                            <td>Hyperbola: \(\frac{y^2}{a^2} - \frac{x^2}{b^2} = 1\)</td>
+                            <td>\(y = mx \pm \sqrt{a^2 - m^2b^2}\)</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                        <p>
+                        Each form comes from substituting \(y = mx + c\) into the conic and applying the condition \(D = 0\) for tangency.
+                        </p>
+                    </div>
+                    </li>
+
+                    <li>
+                        Circle
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('tangentCircleConditionContent')">Show/Hide Details</span>
+                        <div id="tangentCircleConditionContent" class="content">
+                            The line $y=mx+c$ touches the circle $x^{2}+y^{2}=a^{2}$ if $c=\pm a\sqrt{1+m^{2}}$.
+                            <ul>
+                                <li>Intersects in two distinct points if $a^{2}(1+m^{2})-c^{2}>0$.</li>
+                                <li>Intersects in real and coincident points if $a^{2}(1+m^{2})-c^{2}=0$.</li>
+                                <li>Intersects in imaginary points if $a^{2}(1+m^{2})-c^{2}<0$.< /li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Ellipse
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('tangentEllipseConditionContent')">Show/Hide Details</span>
+                        <div id="tangentEllipseConditionContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}m^{2}+b^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}+\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}+m^{2}b^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>The line $y=mx+c$ will intersect Ellipse $\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1$ at:
+                            </p>
+                            <ul>
+                                <li>Two distinct points if $c^{2}&lt;a^{2}m^{2}+b^{2}$.</li>
+                                <li>A single point if $c^{2}=a^{2}m^{2}+b^{2}$.</li>
+                                <li>No point at all if $c^{2}&gt;a^{2}m^{2}+b^{2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        Parabola
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('tangentParabolaConditionContent')">Show/Hide Details</span>
+                        <div id="tangentParabolaConditionContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$y^{2}=4ax$</td>
+                                        <td>$c=\frac{a}{m}, m\ne0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$y^{2}=-4ax$</td>
+                                        <td>$c=-\frac{a}{m}, m\ne0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=4ay$</td>
+                                        <td>$c=-am^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$x^{2}=-4ay$</td>
+                                        <td>$c=am^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>The line $y=mx+c$ will intersect parabola $y^{2}=4ax$ at:</p>
+                            <ul>
+                                <li>Two distinct points if $c&lt;\frac{a}{m}$.</li>
+                                <li>A single point if $c=\frac{a}{m}$.</li>
+                                <li>No point at all if $c&gt;\frac{a}{m}$.</li>
+                            </ul>
+                            <p>The line $y=mx+c$ will be normal to parabola $y^{2}=4ax$ if $c=-2am-am^{3}$.</p>
+                        </div>
+                    </li>
+                    <li>
+                        Hyperbola
+                        <span class="toggle-button"
+                            onclick="toggleVisibility('tangentHyperbolaConditionContent')">Show/Hide Details</span>
+                        <div id="tangentHyperbolaConditionContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Equation</th>
+                                        <th>Condition</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$\frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}m^{2}-b^{2}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$\frac{y^{2}}{a^{2}}-\frac{x^{2}}{b^{2}}=1$</td>
+                                        <td>$c^{2}=a^{2}-m^{2}b^{2}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Equation of Tangent to a Curve
+            <span class="toggle-button" onclick="toggleVisibility('tangentCurveContent')">Show/Hide Details</span>
+            <div id="tangentCurveContent" class="content">
+                Generally, to find an equation of tangent at a point $P(x_{1},y_{1})$, make the replacements in the
+                given equation of the curve:
+                <ul>
+                    <li>$x^2$ by $xx_1$.</li>
+                    <li>$y^2$ by $yy_1$.</li>
+                    <li>$xy$ by $\frac{xy_1+yx_1}{2}$.</li>
+                    <li>$x$ by $\frac{x+x_1}{2}$.</li>
+                    <li>$y$ by $\frac{y+y_1}{2}$.</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Identification of a Conic From the General Equation
+            <span class="toggle-button" onclick="toggleVisibility('conicIdentificationContent')">Show/Hide
+                Details</span>
+            <div id="conicIdentificationContent" class="content">
+                The general equation of a conic $ax^2+2hxy+by^2+2gx+2fy+c=0$ represents:
+                <ul>
+                    <li>A pair of straight lines, if $\Delta = 0$.</li>
+                    <li>An ellipse or circle if $h^2-ab&lt0, \Delta\ne 0$.</li>
+                    <li>A parabola if $h^2-ab=0, \Delta\ne 0$.</li>
+                    <li>A hyperbola if $h^2-ab>0, \Delta\ne 0$.</li>
+                    <li>Centre of general conic is $\left(\frac{hf-bg}{ab-h^2}, \frac{gh-af}{ab-h^2}\right)$.</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            LOCUS
+            <span class="toggle-button" onclick="toggleVisibility('locusContent')">Show/Hide Details</span>
+            <div id="locusContent" class="content">
+                A locus is a set of points satisfying given condition(s).
+                <ul>
+                    <li>2-DIMENSIONAL
+                        <ul>
+                            <li>Set of all points in a plane at a constant distance from a fixed point: circle.</li>
+                            <li>Set of all points in a plane at a constant distance from a given straight line: a pair
+                                of straight lines parallel to the given line.</li>
+                            <li>Set of all points in a plane such that the sum of their distances from two fixed points
+                                is a constant: an ellipse.</li>
+                            <li>Set of all points in a plane such that the difference of their distances from two fixed
+                                points is a constant: a hyperbola.</li>
+                            <li>Set of all points such that their distances from a fixed point are equal to their
+                                distances from a fixed straight line: a parabola.</li>
+                            <li>Locus of a point in a plane that is equidistant from two fixed points: the perpendicular
+                                bisector (mediator) of the straight line joining those two points.</li>
+                            <li>Locus of a point in a plane equidistant from two intersecting straight lines: pair of
+                                straight lines bisects the angles between two given straight lines.</li>
+                        </ul>
+                    </li>
+                    <li>3-DIMENSIONAL
+                        <ul>
+                            <li>Set of all points in space at a constant distance from a fixed point: a sphere.</li>
+                            <li>Set of all points in space at a constant distance from a given straight line: a
+                                cylinder.</li>
+                            <li>In space an ellipse is changed into an ellipsoid.</li>
+                            <li>In space hyperbola is shifted to a hyperboloid.</li>
+                            <li>In space parabola is called paraboloid.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            Transformations
+            <span class="toggle-button" onclick="toggleVisibility('transformationsContent')">Show/Hide Details</span>
+            <div id="transformationsContent" class="content">
+                <ul>
+                    <li>Translation of Axis: To transform the given equation referred to the new origin $O'(h,k)$, put
+                        $x=X+h, y=Y+k$ in the given equation of the curve.</li>
+                    <li>Rotation of Axis: To find the new equation when axis are rotated through an angle $\theta$, put
+                        $x=X~cos~\theta-Y~sin~\theta, y=X~sin~\theta+Y~cos~\theta$ in the given equation.</li>
+                    <li>Elimination of the Xy-Term: To remove the xy-term from a second degree equation, determine the
+                        value of $\theta$ such that $\tan{2\theta}=\frac{2h}{a-b}$.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</body>
+
+</html>

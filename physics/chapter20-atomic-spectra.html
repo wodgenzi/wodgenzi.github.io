@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 20: Atomic Spectra</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 20: Atomic Spectra</h1>
+
+    <ul>
+        <li>
+            <h2>Spectrum</h2>
+            <span class="toggle-button" onclick="toggleVisibility('spectrumContent')">Show/Hide Details</span>
+            <div id="spectrumContent" class="content">
+                <ul>
+                    <li>Spectrum: Mean set of frequencies absorbed or emitted by a substance.</li>
+                    <li>Types:
+                        <ul>
+                            <li><strong>Emission Spectrum:</strong> Set of frequencies emitted by atoms of a substance. Each element has characteristic emission spectra in its vapor state.
+                                <ul>
+                                    <li>Continuous Spectra: Emitted from condensed matter (solid or liquid). A black body spectrum is continuous.</li>
+                                    <li>Line Spectra: Emitted by a gas or vapor state of element.</li>
+                                    <li>Band Spectra: Molecular spectra.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Absorption Spectrum:</strong> Set of frequencies absorbed by atoms of a substance. Caused by up transition of atomic electrons.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Spectrum of Hydrogen</h2>
+            <span class="toggle-button" onclick="toggleVisibility('hydrogenSpectrumContent')">Show/Hide Details</span>
+            <div id="hydrogenSpectrumContent" class="content">
+                <ul>
+                    <li>Emission spectrum of H-atom consists of five series of spectral lines.</li>
+                    <li>Formula: $\frac{1}{\lambda} = R \left(\frac{1}{p^2} - \frac{1}{n^2}\right)$, where $n > p$.</li>
+                    <li>$R$: Rydberg's constant = $1.0974 \times 10^7~m^{-1}$.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Series</th>
+                            <th>Relations</th>
+                            <th>Region</th>
+                            <th>Longest Wavelength</th>
+                            <th>Shortest Wavelength</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>LYMAN SERIES</td>
+                            <td>$\frac{1}{\lambda} = R \left(\frac{1}{1^2} - \frac{1}{n^2}\right)$, $n=2,3,4,...,\infty$</td>
+                            <td>U-V</td>
+                            <td>$n=2 \implies \lambda = \frac{4}{3R} = 1216~\text{Å}$</td>
+                            <td>$n=\infty \implies \lambda = \frac{1}{R} = 912~\text{Å}$</td>
+                        </tr>
+                        <tr>
+                            <td>BALMER SERIES</td>
+                            <td>$\frac{1}{\lambda} = R \left(\frac{1}{2^2} - \frac{1}{n^2}\right)$, $n=3,4,5,...,\infty$</td>
+                            <td>Visible</td>
+                            <td>$n=3 \implies \lambda = \frac{36}{5R} = 6563~\text{Å}$</td>
+                            <td>$n=\infty \implies \lambda = \frac{4}{R} = 3648~\text{Å}$</td>
+                        </tr>
+                        <tr>
+                            <td>PASCHEN SERIES</td>
+                            <td>$\frac{1}{\lambda} = R \left(\frac{1}{3^2} - \frac{1}{n^2}\right)$, $n=4,5,6,...,\infty$</td>
+                            <td>Infrared</td>
+                            <td>$n=4 \implies \lambda = \frac{144}{7R} = 18761.1~\text{Å}$</td>
+                            <td>$n=\infty \implies \lambda = \frac{9}{R} = 8208~\text{Å}$</td>
+                        </tr>
+                        <tr>
+                            <td>BRACKET SERIES</td>
+                            <td>$\frac{1}{\lambda} = R \left(\frac{1}{4^2} - \frac{1}{n^2}\right)$, $n=5,6,7,...,\infty$</td>
+                            <td>Infrared</td>
+                            <td>$n=5 \implies \lambda = \frac{400}{9R} = 40533.3~\text{Å}$</td>
+                            <td>$n=\infty \implies \lambda = \frac{16}{R} = 14592~\text{Å}$</td>
+                        </tr>
+                        <tr>
+                            <td>PFUND SERIES</td>
+                            <td>$\frac{1}{\lambda} = R \left(\frac{1}{5^2} - \frac{1}{n^2}\right)$, $n=6,7,8,...,\infty$</td>
+                            <td>Infrared</td>
+                            <td>$n=6 \implies \lambda = \frac{900}{11R} = 74618.18~\text{Å}$</td>
+                            <td>$n=\infty \implies \lambda = \frac{25}{R} = 22800~\text{Å}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li>All one-electron atoms have atomic spectra like hydrogen atom.</li>
+                    <li>Spectral lines get closer with increase in value of $n$ until they merge at $n=\infty$ (series limit).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Bohr's Model</h2>
+            <span class="toggle-button" onclick="toggleVisibility('bohrModelMainContent')">Show/Hide Details</span>
+            <div id="bohrModelMainContent" class="content">
+                <ul>
+                    <li>Proposed by Niels Bohr in 1913 to remove objections against Rutherford atomic model.</li>
+                    <li>Mixture of classical and modern physics.</li>
+                    <li>Both classical mechanics and quantum mechanics are applicable to atomic system.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Main Points of Bohr's Atomic Model</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bohrModelPointsSubContent')">Show/Hide Details</span>
+                        <div id="bohrModelPointsSubContent" class="content">
+                            <ul>
+                                <li>Electron revolves only in those orbits where its angular momentum is an integral multiple of $\frac{h}{2\pi}$.
+                                    <ul>
+                                        <li>$mvr_n = \frac{nh}{2\pi}$.</li>
+                                    </ul>
+                                </li>
+                                <li>As long as electron remains in an allowed orbit, its energy remains constant; it does not radiate.</li>
+                                <li>Emission or absorption of energy takes place only when electron undergoes transition between two allowed orbits.
+                                    <ul>
+                                        <li>$\Delta E = E_p - E_q = hf$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Bohr's Calculations</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bohrCalculationsSubContent')">Show/Hide Details</span>
+                        <div id="bohrCalculationsSubContent" class="content">
+                            <ul>
+                                <li>Radius of $n^{th}$ orbit: $r_n = \frac{n^2 h^2}{4\pi^2 m e^2 k} = r_o n^2$.</li>
+                                <li>$r_o = 0.53~\text{Å}$ (Bohr's Radius) for $n=1$.</li>
+                                <li>Radii are quantized and occur in ratio $1:4:9:...$ ($r_2=4r_1, r_3=9r_1$).</li>
+                                <li>Orbital velocity of electron in innermost orbit is $2.19 \times 10^6~m/s$.</li>
+                                <li>Energy of electron in $n^{th}$ orbit: $E_n = KE + PE = -\frac{ke^2}{2r_n} = -\frac{E_o}{n^2}$.</li>
+                                <li>$E_o = \frac{2\pi^2 m k^2 e^4}{h^2} = 13.6~eV$.</li>
+                                <li>$E_1 = -13.6~eV$ for $n=1$.</li>
+                                <li>$E_2 = -3.4~eV$ for $n=2$.</li>
+                                <li>$E_3 = -1.51~eV$ for $n=3$.</li>
+                                <li>Graph of energy $E_n = -E_o/n^2$ is called energy level diagram.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>De-Broglie's Interpretation of Bohr's Orbit</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('deBroglieBohrSubContent')">Show/Hide Details</span>
+                        <div id="deBroglieBohrSubContent" class="content">
+                            <ul>
+                                <li>Third postulate of Bohr's atomic model is deduced from Planck's hypothesis.</li>
+                                <li>Second postulate is justified by de-Broglie.</li>
+                                <li>Electrons move in orbits in the shape of standing waves.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Energies & Potentials (for Hydrogen Atom)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('energiesPotentialsContent')">Show/Hide Details</span>
+            <div id="energiesPotentialsContent" class="content">
+                <ul>
+                    <li><strong>Excitation Potential:</strong> Potential required to raise electron from ground state to higher state.
+                        <ul>
+                            <li>$1^{st}$ excitation potential = $10.2~eV$.</li>
+                            <li>$2^{nd}$ excitation potential = $12.1~eV$.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ionization Potential:</strong> Potential required for ionization of atom (to remove electron from atom).
+                        <ul>
+                            <li>For hydrogen, $13.6~V$.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ionization Energy:</strong> Energy required to remove electron from atom.</li>
+                    <li>Three ways for excitation or ionization of atom:
+                        <ol>
+                            <li>Photo ionization or excitation: photon of specified energy is incident.</li>
+                            <li>Bombardment ionization or excitation: charged particle (e.g., electron) is incident.</li>
+                            <li>Thermal ionization or excitation: heat is provided.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>X-Rays</h2>
+            <span class="toggle-button" onclick="toggleVisibility('xraysMainContent')">Show/Hide Details</span>
+            <div id="xraysMainContent" class="content">
+                <ul>
+                    <li>Discovered by German physicist Roentgen in December 1895.</li>
+                    <li>X-rays are E.M. waves having wavelength $1~\text{Å}$ to $0.5~\text{Å}$.</li>
+                    <li>X-rays are not affected by electric and magnetic fields.</li>
+                    <li>Frequency is greater than ultraviolet.</li>
+                    <li>Straight-line propagation.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Characteristic X-Rays</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('characteristicXraysSubContent')">Show/Hide Details</span>
+                        <div id="characteristicXraysSubContent" class="content">
+                            <ul>
+                                <li>When core electron is ionized from heavy atom, electron jumps down to occupy its place. This process is called inner shell transition.</li>
+                                <li>Characteristic X-rays are emitted due to down transition of electron.</li>
+                                <li>They appear as discrete lines on continuous spectrum.</li>
+                                <li>Primary X-rays: $K_\alpha, K_\beta, K_\gamma$, etc. produced due to transitions to K-shell.</li>
+                                <li>$hf_{K\alpha} = E_L - E_K$.</li>
+                                <li>$hf_{M\alpha} = E_M - E_K$.</li>
+                                <li>Such X-ray photons are emitted due to transition from L, M, N orbits to K-shell respectively.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Continuous X-Rays Spectrum (Bremsstrahlung or Breaking Radiation)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('continuousXraysSubContent')">Show/Hide Details</span>
+                        <div id="continuousXraysSubContent" class="content">
+                            <ul>
+                                <li>Due to deceleration of electrons in the target, X-ray radiation is emitted.</li>
+                                <li>$V_e = hf_{max}$. ($V$: accelerating voltage).</li>
+                                <li>Continuous background radiations are of relatively smaller wavelength.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>X-Ray Production</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('xrayProductionSubContent')">Show/Hide Details</span>
+                        <div id="xrayProductionSubContent" class="content">
+                            <ul>
+                                <li>Gas filled X-ray tube has drawbacks: quality can't be controlled, pressure decreases (so does X-rays intensity).</li>
+                                <li>98% of incident electron energy is wasted as heat, only 2% is converted to X-rays.</li>
+                                <li>Modern X-ray unit components: Step-up transformer (produces high voltage), Target (heavy metal like cadmium), Filament (electron source, shaped metal heated by DC current 100mA to 500mA), Copper Rod (conducts heat out), Cooling Fins (cooling water or oil circulates), Biological Shield (lead case), Window (transparent window for X-rays).</li>
+                                <li>Intensity of X-rays is controlled by heater current (100mA $\to$ 500mA).</li>
+                                <li>Quality of X-rays is controlled by source voltage (25KV $\to$ 100KV).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>X-Rays Exhibits</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('xrayExhibitsSubContent')">Show/Hide Details</span>
+                        <div id="xrayExhibitsSubContent" class="content">
+                            <ul>
+                                <li>Reflection, Refraction, Interference, Diffraction, Photoelectric effect, Compton effect.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Uses of X-Rays</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('xrayUsesSubContent')">Show/Hide Details</span>
+                        <div id="xrayUsesSubContent" class="content">
+                            <ul>
+                                <li>Fracture study (Shadow Photography).</li>
+                                <li>Medical diagnosis (tuberculosis).</li>
+                                <li>Medical treatment (cancer).</li>
+                                <li>Hidden things can be located (weapons, contraband).</li>
+                                <li>Research field (X-ray diffraction for crystal structure).</li>
+                                <li>Industrial uses (locate internal defects).</li>
+                                <li>Authenticity of paintings.</li>
+                                <li>CAT-scanner: Computerized axial tomography. X-ray source produces a thin fan shaped beam.</li>
+                                <li>Used for destruction of cancer cells.</li>
+                                <li>Can cause cancer.</li>
+                                <li>Can cause changes in productive system (damages organism's offspring).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Uncertainty in Atom</h2>
+            <span class="toggle-button" onclick="toggleVisibility('uncertaintyAtomContent')">Show/Hide Details</span>
+            <div id="uncertaintyAtomContent" class="content">
+                <ul>
+                    <li>Based on Heisenberg equation that electrons cannot exist in nucleus.</li>
+                    <li>If electron is in nucleus, $\Delta x = 10^{-14}~m$.</li>
+                    <li>$\Delta p \ge \frac{h}{\Delta x}$. This leads to $\Delta v > c$, which is not possible.</li>
+                    <li>So, electron is within atom but not in nucleus. Electrons only found in space between atom and nucleus (shells).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>LASER</h2>
+            <span class="toggle-button" onclick="toggleVisibility('laserMainContent')">Show/Hide Details</span>
+            <div id="laserMainContent" class="content">
+                <ul>
+                    <li>Light Amplification by Stimulated Emission of Radiation.</li>
+                    <li>Einstein developed theory of LASER in 1917.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>LASER Characteristics</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserCharacteristicsSubContent')">Show/Hide Details</span>
+                        <div id="laserCharacteristicsSubContent" class="content">
+                            <ul>
+                                <li>Monochromatic (single wavelength).</li>
+                                <li>Unidirectional (highly collimated).</li>
+                                <li>Coherent (in phase).</li>
+                                <li>Sharply focused.</li>
+                                <li>Highly polarized.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Basic Terms Regarding Laser Production</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserTermsSubContent')">Show/Hide Details</span>
+                        <div id="laserTermsSubContent" class="content">
+                            <ul>
+                                <li><strong>Metastable States:</strong> High energy level where electron can stay for long time ($10^{-3}~s$).</li>
+                                <li><strong>Optical Pumping:</strong> Process of providing energy to initiate and maintain the process.</li>
+                                <li><strong>Population Inversion:</strong> Situation where number of excited atoms exceeds number of atoms in ground state.</li>
+                                <li><strong>Resonance:</strong> When stimulated photon passes by excited atoms, it stimulates it to radiate photon of same energy.</li>
+                                <li><strong>Stimulated Emission:</strong> Incident photon induces atom to decay by emitting a photon that travels in direction of incident photon.</li>
+                                <li><strong>Coherence:</strong> Stimulated photons have same frequency and wavelength.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Laser Unit Components</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserUnitComponentsSubContent')">Show/Hide Details</span>
+                        <div id="laserUnitComponentsSubContent" class="content">
+                            <ul>
+                                <li>Cavity (Resonator).</li>
+                                <li>Lasing material (Active medium).</li>
+                                <li>Energy source (Pumping mechanism).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Types of Laser</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserTypesSubContent')">Show/Hide Details</span>
+                        <div id="laserTypesSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Type of Laser</th>
+                                        <th>Examples</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Solid laser</td>
+                                        <td>Ruby laser, Semi-conductor laser</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gas laser</td>
+                                        <td>He-Ne laser, CO$_2$ laser</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Liquid laser</td>
+                                        <td>Methanol + Die laser</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Properties of Laser</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserPropertiesSubContent')">Show/Hide Details</span>
+                        <div id="laserPropertiesSubContent" class="content">
+                            <ul>
+                                <li>Monochromatic, Coherency, Unidirectional, Reflection, Refraction, Diffraction, Polarization.</li>
+                                <li>May damage (high energy laser) living tissues.</li>
+                                <li>Affect photographic plate.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Applications of Laser</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('laserApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="laserApplicationsSubContent" class="content">
+                            <ul>
+                                <li>Laser as weapon (Laser-guided missiles).</li>
+                                <li>Laser in industry (Drill tiny holes in steel & diamond).</li>
+                                <li>Laser in research (Develop hidden finger prints).</li>
+                                <li>Laser in medical treatment (Surgery of tumors, welding of retina, crush gall stones and kidney stones).</li>
+                                <li>Potential energy source for inducing fusion reactions.</li>
+                                <li>Laser in holography (Hologram) - holograms are three-dimensional images.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

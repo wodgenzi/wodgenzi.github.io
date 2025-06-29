@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Circular Motion</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 5: Circular Motion</h1>
+
+    <ul>
+        <li>
+            <h2>Angular Displacement ($\Delta\theta$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('angularDisplacementContent')">Show/Hide Details</span>
+            <div id="angularDisplacementContent" class="content">
+                <ul>
+                    <li>Angle subtended at the center by the arc length.</li>
+                    <li>$\Delta\theta = \frac{\Delta s}{r}$.</li>
+                    <li>Unit: Radian (rad).</li>
+                    <li>Dimensionless.</li>
+                    <li>Vector quantity (direction by right-hand rule).</li>
+                    <li>Small angular displacements are vectors, large ones are scalars.</li>
+                    <li>$1~radian = 57.3^\circ$.</li>
+                    <li>$2\pi~rad = 360^\circ = 1~revolution$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Angular Velocity ($\omega$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('angularVelocityMainContent')">Show/Hide Details</span>
+            <div id="angularVelocityMainContent" class="content">
+                <ul>
+                    <li>Rate of change of angular displacement.</li>
+                    <li>$\omega_{avg} = \frac{\Delta\theta}{\Delta t}$.</li>
+                    <li>$\omega_{inst} = \frac{d\theta}{dt}$.</li>
+                    <li>Unit: rad/s.</li>
+                    <li>Dimensions: $[T^{-1}]$.</li>
+                    <li>Vector quantity (direction by right-hand rule).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Relation between Linear and Angular Velocity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('linearAngularVelocityRelationContent')">Show/Hide Details</span>
+                        <div id="linearAngularVelocityRelationContent" class="content">
+                            <ul>
+                                <li>$v = r\omega$.</li>
+                                <li>In vector form: $\vec{v} = \vec{\omega} \times \vec{r}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Period (T) and Frequency (f)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('periodFrequencyContent')">Show/Hide Details</span>
+                        <div id="periodFrequencyContent" class="content">
+                            <ul>
+                                <li>Period (T): Time for one complete revolution. Unit: second (s).</li>
+                                <li>Frequency (f): Number of revolutions per second. Unit: Hertz (Hz) or $s^{-1}$.</li>
+                                <li>$T = \frac{1}{f}$.</li>
+                                <li>Relation with angular velocity: $\omega = \frac{2\pi}{T} = 2\pi f$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Angular Acceleration ($\alpha$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('angularAccelerationMainContent')">Show/Hide Details</span>
+            <div id="angularAccelerationMainContent" class="content">
+                <ul>
+                    <li>Rate of change of angular velocity.</li>
+                    <li>$\alpha_{avg} = \frac{\Delta\omega}{\Delta t}$.</li>
+                    <li>$\alpha_{inst} = \frac{d\omega}{dt}$.</li>
+                    <li>Unit: rad/s$^2$.</li>
+                    <li>Dimensions: $[T^{-2}]$.</li>
+                    <li>Vector quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Relation between Linear and Angular Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('linearAngularAccelerationRelationContent')">Show/Hide Details</span>
+                        <div id="linearAngularAccelerationRelationContent" class="content">
+                            <ul>
+                                <li>$a_t = r\alpha$ (tangential acceleration).</li>
+                                <li>$\vec{a}_t = \vec{\alpha} \times \vec{r}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Centripetal Force ($F_c$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('centripetalForceMainContent')">Show/Hide Details</span>
+            <div id="centripetalForceMainContent" class="content">
+                <ul>
+                    <li>Force that keeps a body in circular path.</li>
+                    <li>Always directed towards the center.</li>
+                    <li>$F_c = \frac{mv^2}{r} = mr\omega^2 = m\omega v$.</li>
+                    <li>Unit: Newton (N).</li>
+                    <li>Work done by centripetal force is zero (force is perpendicular to displacement).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Centripetal Acceleration ($a_c$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('centripetalAccelerationMainContent')">Show/Hide Details</span>
+            <div id="centripetalAccelerationMainContent" class="content">
+                <ul>
+                    <li>Acceleration directed towards the center of the circular path.</li>
+                    <li>$a_c = \frac{v^2}{r} = r\omega^2 = v\omega$.</li>
+                    <li>Unit: m/s$^2$.</li>
+                    <li>Dimensions: $[LT^{-2}]$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Centrifugal Force</h2>
+            <span class="toggle-button" onclick="toggleVisibility('centrifugalForceContent')">Show/Hide Details</span>
+            <div id="centrifugalForceContent" class="content">
+                <ul>
+                    <li>Fictitious force, equal in magnitude to centripetal force but directed outwards.</li>
+                    <li>Experienced in a rotating non-inertial frame of reference.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Moment of Inertia (I)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('momentOfInertiaMainContent')">Show/Hide Details</span>
+            <div id="momentOfInertiaMainContent" class="content">
+                <ul>
+                    <li>Rotational analogue of mass.</li>
+                    <li>Measures resistance to angular acceleration.</li>
+                    <li>For a point mass: $I = mr^2$.</li>
+                    <li>For a system of particles: $I = \sum m_i r_i^2$.</li>
+                    <li>Unit: $kg~m^2$.</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Moment of Inertia for Various Shapes</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('inertiaShapesSubContent')">Show/Hide Details</span>
+                        <div id="inertiaShapesSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Shape</th>
+                                        <th>Axis</th>
+                                        <th>Moment of Inertia (I)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Solid cylinder/disc</td>
+                                        <td>Through center, perpendicular to plane</td>
+                                        <td>$\frac{1}{2}MR^2$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thin hoop/ring</td>
+                                        <td>Through center, perpendicular to plane</td>
+                                        <td>$MR^2$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Solid sphere</td>
+                                        <td>Through center</td>
+                                        <td>$\frac{2}{5}MR^2$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thin rod</td>
+                                        <td>Through center, perpendicular to length</td>
+                                        <td>$\frac{1}{12}ML^2$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Thin rod</td>
+                                        <td>Through end, perpendicular to length</td>
+                                        <td>$\frac{1}{3}ML^2$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Torque and Angular Acceleration</h2>
+            <span class="toggle-button" onclick="toggleVisibility('torqueAngularAccelerationContent')">Show/Hide Details</span>
+            <div id="torqueAngularAccelerationContent" class="content">
+                <ul>
+                    <li>Relationship between net torque and angular acceleration.</li>
+                    <li>$\vec{\tau}_{net} = I\vec{\alpha}$.</li>
+                    <li>Rotational analogue of Newton's second law ($F=ma$).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Angular Momentum (L)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('angularMomentumMainContent')">Show/Hide Details</span>
+            <div id="angularMomentumMainContent" class="content">
+                <ul>
+                    <li>Rotational analogue of linear momentum.</li>
+                    <li>For a point mass: $\vec{L} = \vec{r} \times \vec{p} = \vec{r} \times (m\vec{v})$.</li>
+                    <li>For a rigid body: $L = I\omega$.</li>
+                    <li>Unit: J s or N m s.</li>
+                    <li>Dimensions: $[ML^2T^{-1}]$.</li>
+                    <li>Vector quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Law of Conservation of Angular Momentum</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('conservationAngularMomentumContent')">Show/Hide Details</span>
+                        <div id="conservationAngularMomentumContent" class="content">
+                            <ul>
+                                <li>In an isolated system, total angular momentum remains constant.</li>
+                                <li>If external torque is zero, $I_1\omega_1 = I_2\omega_2$.</li>
+                                <li>Examples: Ice skater spinning, diver tucking in.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Rotational Kinetic Energy (KE$_r$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('rotationalKEContent')">Show/Hide Details</span>
+            <div id="rotationalKEContent" class="content">
+                <ul>
+                    <li>Kinetic energy due to rotation.</li>
+                    <li>$KE_r = \frac{1}{2}I\omega^2$.</li>
+                    <li>Unit: Joule (J).</li>
+                    <li>Dimensions: $[ML^2T^{-2}]$.</li>
+                    <li>Relation with angular momentum: $KE_r = \frac{L^2}{2I}$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Artificial Gravity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('artificialGravityContent')">Show/Hide Details</span>
+            <div id="artificialGravityContent" class="content">
+                <ul>
+                    <li>Simulated gravity in space stations via rotation.</li>
+                    <li>Centripetal force provides the sensation of weight.</li>
+                    <li>$g_{eff} = r\omega^2$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Banking of Roads</h2>
+            <span class="toggle-button" onclick="toggleVisibility('bankingRoadsMainContent')">Show/Hide Details</span>
+            <div id="bankingRoadsMainContent" class="content">
+                <ul>
+                    <li>Tilting of road curves to provide necessary centripetal force.</li>
+                    <li>Reduces reliance on friction, safer at high speeds.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Banking Angle ($\theta$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bankingAngleSubContent')">Show/Hide Details</span>
+                        <div id="bankingAngleSubContent" class="content">
+                            <ul>
+                                <li>$\tan\theta = \frac{v^2}{rg}$.</li>
+                                <li>$v$: speed of vehicle.</li>
+                                <li>$r$: radius of curve.</li>
+                                <li>$g$: acceleration due to gravity.</li>
+                                <li>Ideal banking angle: no friction required.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Vertical Circular Motion</h2>
+            <span class="toggle-button" onclick="toggleVisibility('verticalCircularMotionMainContent')">Show/Hide Details</span>
+            <div id="verticalCircularMotionMainContent" class="content">
+                <ul>
+                    <li>Motion in a vertical circle (e.g., roller coaster loop).</li>
+                    <li>Speed and tension vary throughout the motion due to gravity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Minimum Speed at Top</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('minSpeedTopSubContent')">Show/Hide Details</span>
+                        <div id="minSpeedTopSubContent" class="content">
+                            <ul>
+                                <li>For object to complete loop: $v_{top} = \sqrt{gr}$.</li>
+                                <li>Tension at top: $T_{top} = 0$ at minimum speed.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Speed at Bottom</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('speedBottomSubContent')">Show/Hide Details</span>
+                        <div id="speedBottomSubContent" class="content">
+                            <ul>
+                                <li>$v_{bottom} = \sqrt{5gr}$.</li>
+                                <li>Tension at bottom: $T_{bottom} = 6mg$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Speed at Mid-point (Horizontal)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('speedMidPointSubContent')">Show/Hide Details</span>
+                        <div id="speedMidPointSubContent" class="content">
+                            <ul>
+                                <li>$v_{mid} = \sqrt{3gr}$.</li>
+                                <li>Tension at mid-point: $T_{mid} = 3mg$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Orbital Velocity ($v_o$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('orbitalVelocityContent')">Show/Hide Details</span>
+            <div id="orbitalVelocityContent" class="content">
+                <ul>
+                    <li>Velocity required for an object to maintain a stable orbit around a celestial body.</li>
+                    <li>For an object orbiting Earth at radius $r$: $v_o = \sqrt{\frac{GM}{r}}$.</li>
+                    <li>For an object orbiting near Earth's surface ($r \approx R_e$): $v_o = \sqrt{gR_e}$.</li>
+                    <li>Value near Earth's surface: $v_o \approx 7.9~km/s$.</li>
+                    <li>Independent of the mass of the orbiting object.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Quantity Translation Relation Table</h2>
+            <span class="toggle-button" onclick="toggleVisibility('quantityTranslationTableContent')">Show/Hide Details</span>
+            <div id="quantityTranslationTableContent" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Linear Quantity</th>
+                            <th>Rotational Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Displacement ($s$)</td>
+                            <td>Angular Displacement ($\theta$)</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity ($v$)</td>
+                            <td>Angular Velocity ($\omega$)</td>
+                        </tr>
+                        <tr>
+                            <td>Acceleration ($a$)</td>
+                            <td>Angular Acceleration ($\alpha$)</td>
+                        </tr>
+                        <tr>
+                            <td>Mass ($m$)</td>
+                            <td>Moment of Inertia ($I$)</td>
+                        </tr>
+                        <tr>
+                            <td>Force ($F$)</td>
+                            <td>Torque ($\tau$)</td>
+                        </tr>
+                        <tr>
+                            <td>Linear Momentum ($p$)</td>
+                            <td>Angular Momentum ($L$)</td>
+                        </tr>
+                        <tr>
+                            <td>Kinetic Energy ($\frac{1}{2}mv^2$)</td>
+                            <td>Rotational Kinetic Energy ($\frac{1}{2}I\omega^2$)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Analogy between Translatory and Rotatory Motion</h2>
+            <span class="toggle-button" onclick="toggleVisibility('analogyMotionContent')">Show/Hide Details</span>
+            <div id="analogyMotionContent" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Translatory Motion</th>
+                            <th>Rotatory Motion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Displacement ($\vec{s}$)</td>
+                            <td>Angular Displacement ($\vec{\theta}$)</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity ($\vec{v}$)</td>
+                            <td>Angular Velocity ($\vec{\omega}$)</td>
+                        </tr>
+                        <tr>
+                            <td>Acceleration ($\vec{a}$)</td>
+                            <td>Angular Acceleration ($\vec{\alpha}$)</td>
+                        </tr>
+                        <tr>
+                            <td>Mass ($m$)</td>
+                            <td>Moment of Inertia ($I$)</td>
+                        </tr>
+                        <tr>
+                            <td>Force ($\vec{F}$)</td>
+                            <td>Torque ($\vec{\tau}$)</td>
+                        </tr>
+                        <tr>
+                            <td>Linear Momentum ($\vec{p} = m\vec{v}$)</td>
+                            <td>Angular Momentum ($\vec{L} = I\vec{\omega}$)</td>
+                        </tr>
+                        <tr>
+                            <td>Newton's 2nd Law: $\vec{F} = m\vec{a}$</td>
+                            <td>Newton's 2nd Law: $\vec{\tau} = I\vec{\alpha}$</td>
+                        </tr>
+                        <tr>
+                            <td>Kinetic Energy: $KE = \frac{1}{2}mv^2$</td>
+                            <td>Rotational Kinetic Energy: $KE_r = \frac{1}{2}I\omega^2$</td>
+                        </tr>
+                        <tr>
+                            <td>Work Done: $W = \vec{F} \cdot \vec{s}$</td>
+                            <td>Work Done: $W = \vec{\tau} \cdot \vec{\theta}$</td>
+                        </tr>
+                        <tr>
+                            <td>Power: $P = \vec{F} \cdot \vec{v}$</td>
+                            <td>Power: $P = \vec{\tau} \cdot \vec{\omega}$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 14: Electromagnetism</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 14: Electromagnetism</h1>
+
+    <ul>
+        <li>
+            <h2>Magnetic Field (B)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('magneticFieldMainContent')">Show/Hide Details</span>
+            <div id="magneticFieldMainContent" class="content">
+                <ul>
+                    <li>Region around a magnet or current-carrying conductor where magnetic force is exerted.</li>
+                    <li>Magnetic field strength (Magnetic Induction / Magnetic Flux Density).</li>
+                    <li>Unit: Tesla (T) or Weber per square meter ($Wb/m^2$).</li>
+                    <li>$1~T = 10^4~Gauss$.</li>
+                    <li>Dimensions: $[MT^{-2}A^{-1}]$.</li>
+                    <li>Vector quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Magnetic Field Lines</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('magneticFieldLinesSubContent')">Show/Hide Details</span>
+                        <div id="magneticFieldLinesSubContent" class="content">
+                            <ul>
+                                <li>Originate from North pole, terminate on South pole (outside magnet).</li>
+                                <li>Form closed loops (inside magnet, South to North).</li>
+                                <li>Tangent at any point gives direction of $\vec{B}$.</li>
+                                <li>Density of lines indicates strength of $\vec{B}$.</li>
+                                <li>Never cross each other.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Force on a Current-Carrying Conductor in a Magnetic Field</h2>
+            <span class="toggle-button" onclick="toggleVisibility('forceCurrentConductorContent')">Show/Hide Details</span>
+            <div id="forceCurrentConductorContent" class="content">
+                <ul>
+                    <li>Force experienced by a conductor carrying current in a magnetic field.</li>
+                    <li>$\vec{F} = I (\vec{L} \times \vec{B})$.</li>
+                    <li>Magnitude: $F = I L B \sin\theta$.</li>
+                    <li>Direction by Right-Hand Rule (for current) or Fleming's Left-Hand Rule.</li>
+                    <li>Maximum force when $\theta = 90^\circ$ ($F = ILB$).</li>
+                    <li>Zero force when $\theta = 0^\circ$ or $180^\circ$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Force on a Charge Moving in a Magnetic Field (Lorentz Force)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('lorentzForceContent')">Show/Hide Details</span>
+            <div id="lorentzForceContent" class="content">
+                <ul>
+                    <li>Force experienced by a moving charge in a magnetic field.</li>
+                    <li>$\vec{F} = q (\vec{v} \times \vec{B})$.</li>
+                    <li>Magnitude: $F = q v B \sin\theta$.</li>
+                    <li>Direction by Right-Hand Rule (for positive charge) or Fleming's Left-Hand Rule.</li>
+                    <li>Maximum force when $\theta = 90^\circ$ ($F = qvB$).</li>
+                    <li>Zero force when $\theta = 0^\circ$ or $180^\circ$.</li>
+                    <li>Magnetic force does no work on the charge (force perpendicular to velocity).</li>
+                    <li>If charge moves perpendicular to field, it follows a circular path.</li>
+                    <li>Radius of circular path: $r = \frac{mv}{qB}$.</li>
+                    <li>Frequency of revolution: $f = \frac{qB}{2\pi m}$ (cyclotron frequency).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Magnetic Flux ($\Phi_B$)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('magneticFluxContent')">Show/Hide Details</span>
+            <div id="magneticFluxContent" class="content">
+                <ul>
+                    <li>Measure of the number of magnetic field lines passing through a given area.</li>
+                    <li>$\Phi_B = \vec{B} \cdot \vec{A} = BA \cos\theta$.</li>
+                    <li>Unit: Weber (Wb).</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Ampere's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('amperesLawMainContent')">Show/Hide Details</span>
+            <div id="amperesLawMainContent" class="content">
+                <ul>
+                    <li>Line integral of magnetic field around any closed loop is proportional to the total current enclosed by the loop.</li>
+                    <li>$\oint \vec{B} \cdot d\vec{l} = \mu_o I_{enclosed}$.</li>
+                    <li>$\mu_o$: permeability of free space ($4\pi \times 10^{-7}~T m A^{-1}$).</li>
+                    <li>Used to calculate magnetic field for symmetric current distributions.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Applications of Ampere's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('amperesLawApplicationsSubContent')">Show/Hide Details</span>
+                        <div id="amperesLawApplicationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Magnetic Field due to a Long Straight Current-Carrying Wire:</strong> $B = \frac{\mu_o I}{2\pi r}$.</li>
+                                <li><strong>Magnetic Field inside a Solenoid:</strong> $B = \mu_o n I$. ($n$: number of turns per unit length).</li>
+                                <li><strong>Magnetic Field inside a Toroid:</strong> $B = \frac{\mu_o N I}{2\pi r}$. ($N$: total turns).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Magnetic Force between Two Parallel Current-Carrying Wires</h2>
+            <span class="toggle-button" onclick="toggleVisibility('forceParallelWiresContent')">Show/Hide Details</span>
+            <div id="forceParallelWiresContent" class="content">
+                <ul>
+                    <li>Force per unit length: $\frac{F}{L} = \frac{\mu_o I_1 I_2}{2\pi d}$.</li>
+                    <li>$d$: distance between wires.</li>
+                    <li>Attraction if currents are in same direction.</li>
+                    <li>Repulsion if currents are in opposite directions.</li>
+                    <li>Used to define the Ampere.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Torque on a Current Loop in a Magnetic Field</h2>
+            <span class="toggle-button" onclick="toggleVisibility('torqueCurrentLoopContent')">Show/Hide Details</span>
+            <div id="torqueCurrentLoopContent" class="content">
+                <ul>
+                    <li>A current loop in a uniform magnetic field experiences a torque.</li>
+                    <li>$\vec{\tau} = \vec{\mu} \times \vec{B}$.</li>
+                    <li>Magnitude: $\tau = NIAB \sin\alpha$.</li>
+                    <li>$N$: number of turns.</li>
+                    <li>$I$: current.</li>
+                    <li>$A$: area of loop.</li>
+                    <li>$\alpha$: angle between magnetic dipole moment ($\vec{\mu}$) and magnetic field ($\vec{B}$).</li>
+                    <li>Magnetic dipole moment: $\vec{\mu} = NI\vec{A}$.</li>
+                    <li>Maximum torque when $\alpha = 90^\circ$ ($\tau_{max} = NIAB$).</li>
+                    <li>Zero torque when $\alpha = 0^\circ$ or $180^\circ$.</li>
+                    <li>Principle behind electric motors.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Galvanometer</h2>
+            <span class="toggle-button" onclick="toggleVisibility('galvanometerMainContent')">Show/Hide Details</span>
+            <div id="galvanometerMainContent" class="content">
+                <ul>
+                    <li>Device used to detect and measure small electric currents.</li>
+                    <li>Works on the principle of torque on a current-carrying coil in a magnetic field.</li>
+                    <li>Deflection is proportional to current.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Conversion to Ammeter</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('ammeterConversionSubContent')">Show/Hide Details</span>
+                        <div id="ammeterConversionSubContent" class="content">
+                            <ul>
+                                <li>Low resistance shunt ($R_s$) connected in parallel with galvanometer.</li>
+                                <li>$R_s = \frac{I_g R_g}{I - I_g}$.</li>
+                                <li>$I_g$: full-scale deflection current of galvanometer.</li>
+                                <li>$R_g$: resistance of galvanometer.</li>
+                                <li>$I$: desired full-scale current of ammeter.</li>
+                                <li>Ammeter has very low resistance, connected in series.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Conversion to Voltmeter</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('voltmeterConversionSubContent')">Show/Hide Details</span>
+                        <div id="voltmeterConversionSubContent" class="content">
+                            <ul>
+                                <li>High resistance multiplier ($R_m$) connected in series with galvanometer.</li>
+                                <li>$R_m = \frac{V}{I_g} - R_g$.</li>
+                                <li>$V$: desired full-scale voltage of voltmeter.</li>
+                                <li>Voltmeter has very high resistance, connected in parallel.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Cathode Ray Oscilloscope (CRO)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('croContent')">Show/Hide Details</span>
+            <div id="croContent" class="content">
+                <ul>
+                    <li>Electronic instrument used to display varying voltage signals as a two-dimensional graph.</li>
+                    <li>Components: Electron gun, Deflecting plates (X and Y), Fluorescent screen.</li>
+                    <li>Used for:
+                        <ul>
+                            <li>Measuring AC/DC voltage.</li>
+                            <li>Measuring frequency.</li>
+                            <li>Phase difference measurement.</li>
+                            <li>Waveform analysis.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

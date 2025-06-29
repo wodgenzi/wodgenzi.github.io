@@ -1,14 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wodgenzi</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      hi
-    </header>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Subject Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      text-align: center;
+      width: 200px;
+      transition: transform 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    a {
+      text-decoration: none;
+      color: #0077cc;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Learning Hub</h1>
+  <div class="container">
+    <div class="card">
+      <a href="maths/index.html">📐 Maths</a>
+    </div>
+    <div class="card">
+      <a href="physics/index.html">🧲 Physics</a>
+    </div>
+    <div class="card">
+      <a href="english/index.html">📘 English</a>
+    </div>
+  </div>
+</body>
 </html>

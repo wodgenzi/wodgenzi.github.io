@@ -1,0 +1,3105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portable Glossary App</title>
+    <script src="index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Styles for the details panel, initially hidden */
+        .details-panel {
+            display: none;
+        }
+        /* Styles for the status boxes (green/red marks) */
+        .status-box {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        /* Styles for the definition box to control visibility on hover */
+        .definition-box div {
+            visibility: hidden;
+        }
+
+        .definition-box:hover div {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans p-8">
+
+<div class="max-w-6xl mx-auto">
+    <header class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-700">My Personal Glossary</h1>
+        <p class="text-gray-500">A portable, serverless glossary app. All data is saved in your browser.</p>
+    </header>
+
+    <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Add a New Word</h2>
+        <div class="flex space-x-2">
+            <input type="text" id="wordInput" placeholder="Enter a word (e.g., 'portable')" class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <button onclick="fetchWordFromAPI()" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-700 transition duration-300">Fetch</button>
+        </div>
+
+        <div id="apiResponseBox" class="mt-4">
+            <span class='text-sm text-blue-500 hover:underline cursor-pointer' onclick="toggleRawResponse()">Show/Hide Raw API Response</span>
+            <pre id="apiResponse" class="text-xs bg-gray-50 p-4 mt-2 rounded-md overflow-auto" style="display: none;">Waiting for input...</pre>
+        </div>
+
+        <div id="definitionChoices" class="mt-4 space-y-2"></div>
+    </div>
+
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-semibold">Glossary</h2>
+            <button id="unhideAllBtn" onclick="unhideAll()" class="bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition duration-300">Unhide All</button>
+        </div>
+        <div class="overflow-x-auto">
+            <table id="wordsTable" class="min-w-full bg-white">
+                <thead class="bg-gray-200">
+                <tr>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Word</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Definition & Details</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-700"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // IMPORTANT: PASTE YOUR RAPIDAPI KEY HERE
+    const RAPIDAPI_KEY = '847c44fe86msh54e3f1b7246ea22p13005bjsncd302ec8f6dc'; // Replace with your actual key
+    const RAPIDAPI_HOST = 'wordsapiv1.p.rapidapi.com';
+
+    let currentApiResults = null;
+    let currentWord = '';
+
+    // --- Embedded Initial Data ---
+    // This object contains the data that would normally be in words.json.
+    // It's embedded directly into the HTML for easy sharing and local file access.
+    const EMBEDDED_INITIAL_WORDS = {
+        "ebullient": [
+            {
+                "definition": "joyously unrestrained",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "exuberant",
+                    "high-spirited"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "ebullience"
+                ],
+                "example": "",
+                "marked_green": false,
+                "marked_red": false,
+                "is_hidden": false
+            }
+        ],
+        "serene": [
+            {
+                "definition": "not agitated; without losing self-possession",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "calm",
+                    "tranquil",
+                    "unagitated"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "he remained serene in the midst of turbulence",
+                "marked_green": false,
+                "marked_red": false,
+                "is_hidden": false
+            }
+        ],
+        "resilient": [
+            {
+                "definition": "recovering readily from adversity, depression, or the like",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "intransigent": [
+            {
+                "definition": "impervious to pleas, persuasion, requests, reason",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "adamant",
+                    "adamantine",
+                    "inexorable"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "intransigence",
+                    "intransigency"
+                ],
+                "example": "an intransigent conservative opposed to every liberal tendency",
+                "is_hidden": false
+            }
+        ],
+        "contempt": [
+            {
+                "definition": "lack of respect accompanied by a feeling of intense dislike",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "despite",
+                    "disdain",
+                    "scorn"
+                ],
+                "typeOf": [
+                    "dislike"
+                ],
+                "derivation": [
+                    "contemptuous"
+                ],
+                "example": "he was held in contempt",
+                "is_hidden": false
+            }
+        ],
+        "ostentatious": [
+            {
+                "definition": "(of a display) tawdry or vulgar",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "pretentious"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "ostentatiousness"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "sycophant": [
+            {
+                "definition": "a person who tries to please someone in order to gain a personal advantage",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "ass-kisser",
+                    "crawler",
+                    "lackey",
+                    "toady"
+                ],
+                "typeOf": [
+                    "adulator",
+                    "flatterer"
+                ],
+                "derivation": [
+                    "sycophancy",
+                    "sycophantic"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "ubiquitous": [
+            {
+                "definition": "being present everywhere at once",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "omnipresent"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "ubiquitousness",
+                    "ubiquity"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "impervious": [
+            {
+                "definition": "not admitting of passage or capable of being affected",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "imperviable"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "imperviousness"
+                ],
+                "example": "a material impervious to water",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "copious": [
+            {
+                "definition": "affording an abundant supply",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "ample",
+                    "plenteous",
+                    "plentiful",
+                    "rich"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "copiousness"
+                ],
+                "example": "copious provisions",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "tenacious": [
+            {
+                "definition": "stubbornly unyielding",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "dogged",
+                    "dour",
+                    "persistent",
+                    "pertinacious",
+                    "unyielding"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "tenaciousness",
+                    "tenacity"
+                ],
+                "example": "a mind not gifted to discover truth but tenacious to hold it",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "surreptitious": [
+            {
+                "definition": "conducted with or marked by hidden aims or methods",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "clandestine",
+                    "cloak-and-dagger",
+                    "hole-and-corner",
+                    "hugger-mugger",
+                    "hush-hush",
+                    "secret",
+                    "undercover",
+                    "underground"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "surreptitious mobilization of troops",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "voracious": [
+            {
+                "definition": "devouring or craving food in great quantities",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "edacious",
+                    "esurient",
+                    "rapacious",
+                    "ravening",
+                    "ravenous",
+                    "wolfish"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "voraciousness",
+                    "voracity"
+                ],
+                "example": "voracious sharks",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "officious": [
+            {
+                "definition": "intrusive in a meddling or offensive manner",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "busy",
+                    "busybodied",
+                    "interfering",
+                    "meddlesome",
+                    "meddling"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "officiousness"
+                ],
+                "example": "bustling about self-importantly making an officious nuisance of himself",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "spurious": [
+            {
+                "definition": "plausible but false",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "specious"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "spuriousness"
+                ],
+                "example": "spurious inferences",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "plausible": [
+            {
+                "definition": "apparently reasonable and credible, and therefore convincing",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "plausibility",
+                    "plausibleness"
+                ],
+                "example": "a plausible excuse",
+                "is_hidden": false,
+                "marked_red": false,
+                "marked_green": true
+            }
+        ],
+        "onerous": [
+            {
+                "definition": "not easily borne; wearing",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "burdensome",
+                    "taxing"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "onerousness"
+                ],
+                "example": "my duties weren't onerous; I only had to greet the guests",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "gregarious": [
+            {
+                "definition": "instinctively or temperamentally seeking and enjoying the company of others",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "gregariousness"
+                ],
+                "example": "he is a gregarious person who avoids solitude",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "pious": [
+            {
+                "definition": "having or showing or expressing reverence for a deity",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "piousness"
+                ],
+                "example": "pious readings",
+                "is_hidden": false,
+                "marked_green": false,
+                "marked_red": true
+            }
+        ],
+        "deity": [
+            {
+                "definition": "any supernatural being worshipped as controlling some part of the world or some aspect of life or who is the personification of a force",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "divinity",
+                    "god",
+                    "immortal"
+                ],
+                "typeOf": [
+                    "spiritual being",
+                    "supernatural being"
+                ],
+                "derivation": [
+                    "deify"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "reverence": [
+            {
+                "definition": "regard with feelings of respect and reverence; consider hallowed or exalted or be in awe of",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "fear",
+                    "revere",
+                    "venerate"
+                ],
+                "typeOf": [
+                    "prise",
+                    "prize",
+                    "esteem",
+                    "respect",
+                    "value"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "scrupulous": [
+            {
+                "definition": "characterized by extreme care and great effort",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "conscientious",
+                    "painstaking"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "scrupulousness"
+                ],
+                "example": "scrupulous attention to details",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "attrition": [
+            {
+                "definition": "the wearing down of rock particles by friction due to water or wind or ice",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "abrasion",
+                    "detrition",
+                    "grinding"
+                ],
+                "typeOf": [
+                    "friction",
+                    "rubbing"
+                ],
+                "derivation": [
+                    "attritional"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "edification": [
+            {
+                "definition": "uplifting enlightenment",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "sophistication"
+                ],
+                "typeOf": [
+                    "enlightenment"
+                ],
+                "derivation": [
+                    "edify"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_red": true
+            }
+        ],
+        "ablution": [
+            {
+                "definition": "the ritual washing of a priest's hands or of sacred vessels",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "lavation",
+                    "ritual",
+                    "wash",
+                    "washing"
+                ],
+                "derivation": [
+                    "ablutionary"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "elocution": [
+            {
+                "definition": "an expert manner of speaking involving control of voice and gesture",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "delivery",
+                    "manner of speaking",
+                    "speech"
+                ],
+                "derivation": [
+                    "elocute",
+                    "elocutionary",
+                    "elocutionist"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "writhe": [
+            {
+                "definition": "to move in a twisting or contorted motion, (especially when struggling)",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "squirm",
+                    "twist",
+                    "worm",
+                    "wrestle",
+                    "wriggle"
+                ],
+                "typeOf": [
+                    "move"
+                ],
+                "derivation": [],
+                "example": "The prisoner writhed in discomfort",
+                "is_hidden": false,
+                "marked_green": true,
+                "marked_red": false
+            }
+        ],
+        "pedestrian": [
+            {
+                "definition": "lacking wit or imagination",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "earthbound",
+                    "prosaic",
+                    "prosy"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a pedestrian movie plot",
+                "is_hidden": false
+            },
+            {
+                "definition": "a person who travels by foot",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "footer",
+                    "walker"
+                ],
+                "typeOf": [
+                    "traveler",
+                    "traveller"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "carrion": [
+            {
+                "definition": "the dead and rotting body of an animal; unfit for human food",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "body",
+                    "dead body"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "pinion": [
+            {
+                "definition": "cut the wings off (of birds)",
+                "partOfSpeech": "verb",
+                "synonyms": [],
+                "typeOf": [
+                    "disable",
+                    "disenable",
+                    "incapacitate"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "ambivalence": [
+            {
+                "definition": "mixed feelings or emotions",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "ambivalency"
+                ],
+                "typeOf": [
+                    "feeling"
+                ],
+                "derivation": [
+                    "ambivalent"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "cavalier": [
+            {
+                "definition": "a gallant or courtly gentleman",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "chevalier"
+                ],
+                "typeOf": [
+                    "male aristocrat"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "mete": [
+            {
+                "definition": "a line that indicates a boundary",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "border",
+                    "borderline",
+                    "boundary line",
+                    "delimitation"
+                ],
+                "typeOf": [
+                    "bounds",
+                    "boundary",
+                    "bound"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "nullify": [
+            {
+                "definition": "declare invalid",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "annul",
+                    "avoid",
+                    "invalidate",
+                    "quash",
+                    "void"
+                ],
+                "typeOf": [
+                    "strike down",
+                    "cancel"
+                ],
+                "derivation": [
+                    "nullification",
+                    "nullifier"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "embroil": [
+            {
+                "definition": "force into some kind of situation, condition, or course of action",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "drag",
+                    "drag in",
+                    "sweep",
+                    "sweep up",
+                    "tangle"
+                ],
+                "typeOf": [
+                    "involve"
+                ],
+                "derivation": [
+                    "embroilment"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "waffle": [
+            {
+                "definition": "pause or hold back in uncertainty or unwillingness",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "hesitate",
+                    "waver"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "waffler"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "ascribe": [
+            {
+                "definition": "attribute or credit to",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "assign",
+                    "attribute",
+                    "impute"
+                ],
+                "typeOf": [
+                    "pass judgment",
+                    "evaluate",
+                    "judge"
+                ],
+                "derivation": [
+                    "ascribable",
+                    "ascription"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "impair": [
+            {
+                "definition": "make imperfect",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "deflower",
+                    "mar",
+                    "spoil",
+                    "vitiate"
+                ],
+                "typeOf": [
+                    "damage"
+                ],
+                "derivation": [
+                    "impairer",
+                    "impairment"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "terse": [
+            {
+                "definition": "brief and to the point; effectively cut short",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "crisp",
+                    "curt",
+                    "laconic"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "terseness"
+                ],
+                "example": "short and terse and easy to understand",
+                "is_hidden": false
+            }
+        ],
+        "coerce": [
+            {
+                "definition": "to cause to do through pressure or necessity, by physical, moral or intellectual means",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "force",
+                    "hale",
+                    "pressure",
+                    "squeeze"
+                ],
+                "typeOf": [
+                    "compel",
+                    "obligate",
+                    "oblige"
+                ],
+                "derivation": [
+                    "coercion",
+                    "coercive"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "abate": [
+            {
+                "definition": "become less in amount or intensity",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "die away",
+                    "let up",
+                    "slack",
+                    "slack off"
+                ],
+                "typeOf": [
+                    "fall",
+                    "diminish",
+                    "decrease",
+                    "lessen"
+                ],
+                "derivation": [
+                    "abatement"
+                ],
+                "example": "The storm abated",
+                "is_hidden": false
+            }
+        ],
+        "abide": [
+            {
+                "definition": "put up with something or somebody unpleasant",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "bear",
+                    "brook",
+                    "digest",
+                    "endure",
+                    "put up",
+                    "stand",
+                    "stick out",
+                    "stomach",
+                    "suffer",
+                    "support",
+                    "tolerate"
+                ],
+                "typeOf": [
+                    "let",
+                    "countenance",
+                    "permit",
+                    "allow"
+                ],
+                "derivation": [
+                    "abidance"
+                ],
+                "example": "",
+                "is_hidden": false
+            },
+            {
+                "definition": "dwell",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "bide",
+                    "stay"
+                ],
+                "typeOf": [
+                    "remain",
+                    "stay on",
+                    "stay",
+                    "continue"
+                ],
+                "derivation": [
+                    "abidance"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "dwell": [
+            {
+                "definition": "exist or be situated within",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "inhabit"
+                ],
+                "typeOf": [
+                    "exist",
+                    "be"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "gambit": [
+            {
+                "definition": "a maneuver in a game or conversation",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "ploy",
+                    "stratagem"
+                ],
+                "typeOf": [
+                    "tactical manoeuvre",
+                    "maneuver",
+                    "manoeuvre",
+                    "tactical maneuver"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "maneuver": [
+            {
+                "definition": "act in order to achieve a certain goal",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "manoeuver",
+                    "manoeuvre"
+                ],
+                "typeOf": [
+                    "act",
+                    "move"
+                ],
+                "derivation": [],
+                "example": "He maneuvered to get the chairmanship",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "jaunt": [
+            {
+                "definition": "make a trip for pleasure",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "travel",
+                    "trip"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "frank": [
+            {
+                "definition": "clearly manifest; evident",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "frank enjoyment",
+                "is_hidden": false
+            },
+            {
+                "definition": "characterized by directness in manner or speech; without subtlety or evasion",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "blunt",
+                    "candid",
+                    "forthright",
+                    "free-spoken",
+                    "outspoken",
+                    "plainspoken",
+                    "point-blank",
+                    "straight-from-the-shoulder"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "frankness"
+                ],
+                "example": "tell me what you think--and you may just as well be frank",
+                "is_hidden": false
+            }
+        ],
+        "lithe": [
+            {
+                "definition": "gracefully thin and bending and moving with ease",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "lissom",
+                    "lissome",
+                    "lithesome",
+                    "sinuous",
+                    "supple"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "litheness"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "naive": [
+            {
+                "definition": "lacking information or instruction",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "unenlightened",
+                    "uninstructed"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "naiveness"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "mawkish": [
+            {
+                "definition": "effusively or insincerely emotional",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "bathetic",
+                    "drippy",
+                    "hokey",
+                    "kitschy",
+                    "maudlin",
+                    "mushy",
+                    "sappy",
+                    "schmaltzy",
+                    "schmalzy",
+                    "sentimental",
+                    "slushy",
+                    "soppy",
+                    "soupy"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "mawkishness"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "raffish": [
+            {
+                "definition": "marked by a carefree unconventionality or disreputableness",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "devil-may-care",
+                    "rakish"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a cocktail party given by some...raffish bachelors",
+                "is_hidden": false
+            }
+        ],
+        "vulgar": [
+            {
+                "definition": "being or characteristic of or appropriate to everyday language",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "common",
+                    "vernacular"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "the vulgar tongue of the masses",
+                "is_hidden": false
+            }
+        ],
+        "continuum": [
+            {
+                "definition": "a continuous nonspatial whole or extent or succession in which no part or portion is distinct or distinguishable from adjacent parts",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "time"
+                ],
+                "derivation": [
+                    "continuous"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "travail": [
+            {
+                "definition": "use of physical or mental energy; hard work",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "effort",
+                    "elbow grease",
+                    "exertion",
+                    "sweat"
+                ],
+                "typeOf": [
+                    "labor",
+                    "labour",
+                    "toil"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "intrepid": [
+            {
+                "definition": "invulnerable to fear or intimidation",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "audacious",
+                    "brave",
+                    "dauntless",
+                    "fearless",
+                    "hardy",
+                    "unfearing"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "intrepidity"
+                ],
+                "example": "intrepid pioneers",
+                "is_hidden": false
+            }
+        ],
+        "languid": [
+            {
+                "definition": "lacking spirit or liveliness",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "dreamy",
+                    "lackadaisical",
+                    "languorous"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a languid mood",
+                "is_hidden": false
+            }
+        ],
+        "exodus": [
+            {
+                "definition": "a journey by a large group to escape from a hostile environment",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "hegira",
+                    "hejira"
+                ],
+                "typeOf": [
+                    "escape",
+                    "flight"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "influx": [
+            {
+                "definition": "the process of flowing in",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "inflow"
+                ],
+                "typeOf": [
+                    "flow"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "abash": [
+            {
+                "definition": "cause to be embarrassed; cause to feel self-conscious",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "embarrass"
+                ],
+                "typeOf": [
+                    "upset",
+                    "discomfit",
+                    "discompose",
+                    "disconcert",
+                    "untune"
+                ],
+                "derivation": [
+                    "abashment"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "incessant": [
+            {
+                "definition": "uninterrupted in time and indefinitely long continuing",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "ceaseless",
+                    "constant",
+                    "never-ending",
+                    "perpetual",
+                    "unceasing",
+                    "unremitting"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "incessancy",
+                    "incessantness"
+                ],
+                "example": "night and day we live with the incessant noise of the city",
+                "is_hidden": false
+            }
+        ],
+        "latent": [
+            {
+                "definition": "potentially existing but not presently evident or realized",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a latent fingerprint",
+                "is_hidden": false
+            }
+        ],
+        "eloquent": [
+            {
+                "definition": "expressing yourself readily, clearly, effectively",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "facile",
+                    "fluent",
+                    "silver",
+                    "silver-tongued",
+                    "smooth-spoken"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "elocute",
+                    "eloquence"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "diffident": [
+            {
+                "definition": "lacking self-confidence",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "shy",
+                    "timid",
+                    "unsure"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "diffidence"
+                ],
+                "example": "stood in the doorway diffident and abashed",
+                "is_hidden": false,
+                "marked_green": false
+            }
+        ],
+        "timid": [
+            {
+                "definition": "lacking self-confidence",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "diffident",
+                    "shy",
+                    "unsure"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "timidness"
+                ],
+                "example": "problems that call for bold not timid responses",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "malcontent": [
+            {
+                "definition": "a person who is discontented or disgusted",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "mortal",
+                    "somebody",
+                    "someone",
+                    "person",
+                    "soul",
+                    "individual"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            },
+            {
+                "definition": "discontented as toward authority",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "disaffected",
+                    "ill-affected",
+                    "rebellious"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "eminent": [
+            {
+                "definition": "standing above others in quality or position",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "high"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "eminence"
+                ],
+                "example": "eminent members of the community",
+                "is_hidden": false
+            }
+        ],
+        "wince": [
+            {
+                "definition": "the facial expression of sudden pain",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "facial expression",
+                    "facial gesture"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            },
+            {
+                "definition": "make a face indicating disgust or dislike",
+                "partOfSpeech": "verb",
+                "synonyms": [],
+                "typeOf": [
+                    "grimace",
+                    "make a face",
+                    "pull a face"
+                ],
+                "derivation": [],
+                "example": "She winced when she heard his pompous speech",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "prudent": [
+            {
+                "definition": "careful and sensible; marked by sound judgment",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "prudence"
+                ],
+                "example": "a prudent manager",
+                "is_hidden": false
+            }
+        ],
+        "augment": [
+            {
+                "definition": "enlarge or increase",
+                "partOfSpeech": "verb",
+                "synonyms": [],
+                "typeOf": [
+                    "increase"
+                ],
+                "derivation": [
+                    "augmentation",
+                    "augmentative"
+                ],
+                "example": "The recent speech of the president augmented tensions in the Near East",
+                "is_hidden": false
+            }
+        ],
+        "rhetoric": [
+            {
+                "definition": "study of the technique and rules for using language effectively (especially in public speaking)",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "literary study"
+                ],
+                "derivation": [
+                    "rhetorical",
+                    "rhetorician"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "dogmatic": [
+            {
+                "definition": "characterized by assertion of unproved or unprovable principles",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "dogmatical"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "dogma"
+                ],
+                "example": "",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "philippic": [
+            {
+                "definition": "a speech of violent denunciation",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "broadside",
+                    "tirade"
+                ],
+                "typeOf": [
+                    "declamation",
+                    "denouncement",
+                    "denunciation"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "pandemic": [
+            {
+                "definition": "existing everywhere",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "pandemic fear of nuclear war",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "idyllic": [
+            {
+                "definition": "excellent and delightful in all respects",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "idyll"
+                ],
+                "example": "an idyllic spot for a picnic",
+                "is_hidden": false
+            }
+        ],
+        "cryptic": [
+            {
+                "definition": "of an obscure nature",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "cryptical",
+                    "deep",
+                    "inscrutable",
+                    "mysterious",
+                    "mystifying"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "the new insurance policy is written without cryptic or mysterious terms",
+                "is_hidden": false
+            }
+        ],
+        "choleric": [
+            {
+                "definition": "characterized by anger",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "irascible"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "choler"
+                ],
+                "example": "a choleric outburst",
+                "is_hidden": false
+            }
+        ],
+        "peccadillo": [
+            {
+                "definition": "a petty misdeed",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "indiscretion"
+                ],
+                "typeOf": [
+                    "misbehavior",
+                    "misbehaviour",
+                    "misdeed"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "emphatic": [
+            {
+                "definition": "forceful and definite in expression or action",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "forceful"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "emphasis"
+                ],
+                "example": "the document contained a particularly emphatic guarantee of religious liberty",
+                "is_hidden": false,
+                "marked_green": true
+            }
+        ],
+        "logistics": [
+            {
+                "definition": "handling an operation that involves providing labor and materials be supplied as needed",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "typeOf": [
+                    "provision",
+                    "supply",
+                    "supplying"
+                ],
+                "derivation": [
+                    "logistic",
+                    "logistical"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "circumspect": [
+            {
+                "definition": "heedful of potential consequences",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "discreet"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "circumspect actions",
+                "is_hidden": false
+            }
+        ],
+        "abstract": [
+            {
+                "definition": "a sketchy summary of the main points of an argument or theory",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "outline",
+                    "precis",
+                    "synopsis"
+                ],
+                "typeOf": [
+                    "summary",
+                    "sum-up"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "defunct": [
+            {
+                "definition": "having ceased to exist or live",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "defunctness"
+                ],
+                "example": "the will of a defunct aunt",
+                "is_hidden": false
+            }
+        ],
+        "succinct": [
+            {
+                "definition": "briefly giving the gist of something",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "compact",
+                    "compendious",
+                    "summary"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "succinctness"
+                ],
+                "example": "succinct comparisons",
+                "is_hidden": false
+            }
+        ],
+        "palpable": [
+            {
+                "definition": "capable of being perceived; especially capable of being handled or touched or felt",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "tangible"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a barely palpable dust",
+                "is_hidden": false
+            },
+            {
+                "definition": "so intense as to be almost touched or felt",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "there was a palpable sense of joy in the air",
+                "is_hidden": false
+            }
+        ],
+        "accountable": [
+            {
+                "definition": "liable to account for one's actions",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "account",
+                    "accountability"
+                ],
+                "example": "governments must be accountable to someone beside themselves",
+                "is_hidden": false
+            }
+        ],
+        "ostensible": [
+            {
+                "definition": "appearing as such but not necessarily so",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "apparent",
+                    "seeming"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "the ostensible truth of their theories",
+                "is_hidden": false
+            }
+        ],
+        "pliable": [
+            {
+                "definition": "able to adjust readily to different conditions",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "elastic",
+                    "flexible",
+                    "pliant"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "pliability"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "adroit": [
+            {
+                "definition": "quick or skillful or adept in action or thought",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [
+                    "adroitness"
+                ],
+                "example": "an exceptionally adroit pianist",
+                "is_hidden": false
+            }
+        ],
+        "bauble": [
+            {
+                "definition": "cheap showy jewelry or ornament on clothing",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "bangle",
+                    "fallal",
+                    "gaud",
+                    "gewgaw",
+                    "novelty",
+                    "trinket"
+                ],
+                "typeOf": [
+                    "adornment"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "skullduggery": [
+            {
+                "definition": "verbal misrepresentation intended to take advantage of you in some way",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "hanky panky",
+                    "hocus-pocus",
+                    "jiggery-pokery",
+                    "skulduggery",
+                    "slickness",
+                    "trickery"
+                ],
+                "typeOf": [
+                    "deceit",
+                    "deception",
+                    "misrepresentation"
+                ],
+                "derivation": [],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "ancillary": [
+            {
+                "definition": "furnishing added support",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "accessory",
+                    "adjunct",
+                    "adjuvant",
+                    "appurtenant",
+                    "auxiliary"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "an ancillary pump",
+                "is_hidden": false
+            }
+        ],
+        "sedentary": [
+            {
+                "definition": "requiring sitting or little activity",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "typeOf": [],
+                "derivation": [],
+                "example": "forced by illness to lead a sedentary life",
+                "is_hidden": false
+            }
+        ],
+        "cursory": [
+            {
+                "definition": "hasty and without attention to detail; not thorough",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "casual",
+                    "passing",
+                    "perfunctory",
+                    "superficial"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "a casual (or cursory) inspection failed to reveal the house's structural flaws",
+                "is_hidden": false
+            }
+        ],
+        "predatory": [
+            {
+                "definition": "living by or given to victimizing others for personal gain",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "predaceous",
+                    "predacious"
+                ],
+                "example": "predatory capitalists",
+                "is_hidden": false
+            }
+        ],
+        "symmetry": [
+            {
+                "definition": "balance among the parts of something",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "proportion"
+                ],
+                "typeOf": [
+                    "counterbalance",
+                    "balance",
+                    "equipoise",
+                    "equilibrium"
+                ],
+                "derivation": [
+                    "symmetric",
+                    "symmetrise",
+                    "symmetrize"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "tawdry": [
+            {
+                "definition": "tastelessly showy",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "brassy",
+                    "cheap",
+                    "flash",
+                    "flashy",
+                    "garish",
+                    "gaudy",
+                    "gimcrack",
+                    "loud",
+                    "meretricious",
+                    "tacky",
+                    "tatty",
+                    "trashy"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "tawdriness"
+                ],
+                "example": "tawdry ornaments",
+                "is_hidden": false
+            },
+            {
+                "definition": "made of inferior workmanship and materials",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "cheapjack",
+                    "shoddy"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "tawdriness"
+                ],
+                "example": "",
+                "is_hidden": false
+            }
+        ],
+        "ambulatory": [
+            {
+                "definition": "able to walk about",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "ambulant"
+                ],
+                "typeOf": [],
+                "derivation": [
+                    "ambulate"
+                ],
+                "example": "the patient is ambulatory",
+                "is_hidden": false
+            }
+        ],
+        "pecuniary": [
+            {
+                "definition": "relating to or involving money",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "monetary"
+                ],
+                "typeOf": [],
+                "derivation": [],
+                "example": "he received thanks but no pecuniary compensation for his services",
+                "is_hidden": false
+            }
+        ],
+        "paradox": [
+            {
+                "definition": "(logic) a statement that contradicts itself",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "`I always lie' is a paradox because if it is true it must be false",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "conundrum": [
+            {
+                "definition": "a difficult problem",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "brain-teaser",
+                    "enigma",
+                    "riddle"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "exacerbate": [
+            {
+                "definition": "make worse",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "aggravate",
+                    "exasperate",
+                    "worsen"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "exasperate": [
+            {
+                "definition": "make worse",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "aggravate",
+                    "exacerbate",
+                    "worsen"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "aggravate": [
+            {
+                "definition": "make worse",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "exacerbate",
+                    "exasperate",
+                    "worsen"
+                ],
+                "example": "This drug aggravates the pain",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "dilemma": [
+            {
+                "definition": "state of uncertainty or perplexity especially as requiring a choice between equally unfavorable options",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "quandary"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "preeminent": [
+            {
+                "definition": "greatest in importance or degree or significance or achievement",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "leading"
+                ],
+                "example": "a preeminent archeologist",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "indefatigable": [
+            {
+                "definition": "showing sustained enthusiastic action with unflagging vitality",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "tireless",
+                    "unflagging",
+                    "unwearying"
+                ],
+                "example": "an indefatigable advocate of equal rights",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "vitality": [
+            {
+                "definition": "a healthy capacity for vigorous activity",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "energy",
+                    "vim"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "an energetic style",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "verve"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "somnambulism": [
+            {
+                "definition": "walking by a person who is asleep",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "noctambulation",
+                    "noctambulism",
+                    "sleepwalking",
+                    "somnambulation"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "synopsis": [
+            {
+                "definition": "a sketchy summary of the main points of an argument or theory",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "abstract",
+                    "outline",
+                    "precis"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "antagonist": [
+            {
+                "definition": "someone who offers opposition",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "adversary",
+                    "opponent",
+                    "opposer",
+                    "resister"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "bane": [
+            {
+                "definition": "something causing misery or death",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "curse",
+                    "nemesis",
+                    "scourge"
+                ],
+                "example": "the bane of my life",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "blight": [
+            {
+                "definition": "any plant disease resulting in withering without rotting",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "boon": [
+            {
+                "definition": "a desirable state",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "blessing"
+                ],
+                "example": "a spanking breeze is a boon to sailors",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "very close and convivial",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "example": "boon companions",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "elixir": [
+            {
+                "definition": "hypothetical substance that the alchemists believed to be capable of changing base metals into gold",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "philosopher's stone",
+                    "philosophers' stone"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "hieroglyphs": [
+            {
+                "definition": "a writing system using picture symbols; used in ancient Egypt",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "hieroglyphic"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "somber": [
+            {
+                "definition": "lacking brightness or color; dull",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "drab",
+                    "sober",
+                    "sombre"
+                ],
+                "example": "children in somber brown clothes",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "despondent": [
+            {
+                "definition": "without or almost without hope",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "heartsick"
+                ],
+                "example": "despondent about his failure",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "monolithic": [
+            {
+                "definition": "characterized by massiveness and rigidity and total uniformity",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "example": "a monolithic society",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "sanguine": [
+            {
+                "definition": "confidently optimistic and cheerful",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "sanguineous"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "optimist": [
+            {
+                "definition": "a person disposed to take a favorable view of things",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "pessimist": [
+            {
+                "definition": "a person who expects the worst",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "melancholic": [
+            {
+                "definition": "characterized by or causing or expressing sadness",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "melancholy"
+                ],
+                "example": "her melancholic smile",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "shoal": [
+            {
+                "definition": "a large group of fish",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "school"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "a stretch of shallow water",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "shallow"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "a sandbank in a stretch of water that is visible at low tide",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "cobbler": [
+            {
+                "definition": "a pie made of fruit with rich biscuit dough usually only on top of the fruit",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "deep-dish pie"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "a person who makes or repairs shoes",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "shoemaker"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "eyre": [
+            {
+                "definition": "a shallow salt lake in south central Australia about 35 feet below sea level; the largest lake in the country and the lowest point on the continent",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "lake eyre"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "irksome": [
+            {
+                "definition": "so lacking in interest as to cause mental weariness",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "boring",
+                    "deadening",
+                    "dull",
+                    "ho-hum",
+                    "slow",
+                    "tedious",
+                    "tiresome",
+                    "wearisome"
+                ],
+                "example": "what an irksome task the writing of long letters is",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "idiosyncrasy": [
+            {
+                "definition": "a behavioral attribute that is distinctive and peculiar to an individual",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "foible",
+                    "mannerism"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "embarks": [
+            {
+                "definition": "proceed somewhere despite the risk of possible dangers",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "venture"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "dole": [
+            {
+                "definition": "a share of money or food or clothing that has been charitably given",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "furor": [
+            {
+                "definition": "a sudden outburst (as of protest)",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "furore"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "zeal": [
+            {
+                "definition": "excessive fervor to do something or accomplish some end",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "he had an absolute zeal for litigation",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "expedient": [
+            {
+                "definition": "a means to an end; not necessarily a principled or ethical one",
+                "partOfSpeech": "noun",
+                "synonyms": [],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "appropriate to a purpose; practical",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "example": "in the circumstances it was expedient to express loyalty",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "serving to promote your interest",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "example": "was merciful only when mercy was expedient",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "arable": [
+            {
+                "definition": "(of farmland) capable of being farmed productively",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "cultivable",
+                    "cultivatable",
+                    "tillable"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "perturbed": [
+            {
+                "definition": "thrown into a state of agitated confusion; (`rattled' is an informal term)",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "flustered",
+                    "hot and bothered",
+                    "rattled"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "impudent": [
+            {
+                "definition": "improperly forward or bold",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "fresh",
+                    "impertinent",
+                    "overbold",
+                    "sassy",
+                    "saucy",
+                    "smart",
+                    "wise"
+                ],
+                "example": "an impudent boy given to insulting strangers",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "abhor": [
+            {
+                "definition": "find repugnant",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "abominate",
+                    "execrate",
+                    "loathe"
+                ],
+                "example": "She abhors cats",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "repugnant": [
+            {
+                "definition": "offensive to the mind",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "abhorrent",
+                    "detestable",
+                    "obscene",
+                    "repulsive"
+                ],
+                "example": "morally repugnant customs",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "sober": [
+            {
+                "definition": "lacking brightness or color; dull",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "drab",
+                    "somber",
+                    "sombre"
+                ],
+                "example": "sober Puritan grey",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "intemperate": [
+            {
+                "definition": "given to excessive indulgence of bodily appetites especially for intoxicating liquors",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "hard",
+                    "heavy"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "excessive in behavior",
+                "partOfSpeech": "adjective",
+                "synonyms": [],
+                "example": "intemperate rage",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "audacious": [
+            {
+                "definition": "invulnerable to fear or intimidation",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "brave",
+                    "dauntless",
+                    "fearless",
+                    "hardy",
+                    "intrepid",
+                    "unfearing"
+                ],
+                "example": "audacious explorers",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "digress": [
+            {
+                "definition": "wander from a direct or straight course",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "depart",
+                    "sidetrack",
+                    "straggle"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "assuage": [
+            {
+                "definition": "provide physical relief, as from pain",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "alleviate",
+                    "palliate",
+                    "relieve"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "skeptical": [
+            {
+                "definition": "marked by or given to doubt",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "doubting",
+                    "questioning",
+                    "sceptical"
+                ],
+                "example": "a skeptical attitude",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "maverick": [
+            {
+                "definition": "independent in behavior or thought",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "irregular",
+                    "unorthodox"
+                ],
+                "example": "maverick politicians",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "pernicious": [
+            {
+                "definition": "working or spreading in a hidden and usually injurious way",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "insidious",
+                    "subtle"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "satiate": [
+            {
+                "definition": "supplied (especially fed) to satisfaction",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "satiated"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "abjure": [
+            {
+                "definition": "formally reject or disavow a formerly held belief, usually under pressure",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "forswear",
+                    "recant",
+                    "resile",
+                    "retract"
+                ],
+                "example": "She abjured her beliefs",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "baffle": [
+            {
+                "definition": "be a mystery or bewildering to",
+                "partOfSpeech": "verb",
+                "synonyms": [
+                    "amaze",
+                    "beat",
+                    "bewilder",
+                    "dumbfound",
+                    "flummox",
+                    "get",
+                    "gravel",
+                    "mystify",
+                    "nonplus",
+                    "perplex",
+                    "pose",
+                    "puzzle",
+                    "stick",
+                    "stupefy",
+                    "vex"
+                ],
+                "example": "",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "facet": [
+            {
+                "definition": "a distinct feature or element in a problem",
+                "partOfSpeech": "noun",
+                "synonyms": [
+                    "aspect"
+                ],
+                "example": "he studied every facet of the question",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ],
+        "judicial": [
+            {
+                "definition": "relating to the administration of justice or the function of a judge",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "juridic",
+                    "juridical"
+                ],
+                "example": "judicial system",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            },
+            {
+                "definition": "expressing careful judgment",
+                "partOfSpeech": "adjective",
+                "synonyms": [
+                    "discriminative"
+                ],
+                "example": "a biography ...appreciative and yet judicial in purpose",
+                "marked_red": false,
+                "marked_green": false,
+                "is_hidden": false
+            }
+        ]
+    };
+
+
+    // --- LocalStorage Data Management ---
+    /**
+     * Loads the glossary words from local storage.
+     * @returns {Object} An object containing words and their definitions.
+     */
+    function loadWordsFromStorage() {
+        const wordsJSON = localStorage.getItem('glossaryAppWords');
+        return wordsJSON ? JSON.parse(wordsJSON) : {};
+    }
+
+    /**
+     * Saves the current glossary words to local storage.
+     * @param {Object} words - The object containing words and their definitions to save.
+     */
+    function saveWordsToStorage(words) {
+        localStorage.setItem('glossaryAppWords', JSON.stringify(words, null, 2));
+    }
+
+    // --- Function to load initial data (now from embedded variable) ---
+    /**
+     * Loads initial glossary data. It prioritizes data from local storage.
+     * If local storage is empty, it uses the EMBEDDED_INITIAL_WORDS data.
+     */
+    async function loadInitialData() {
+        let existingWords = loadWordsFromStorage();
+
+        // If local storage is empty, use the embedded data as the initial set
+        if (Object.keys(existingWords).length === 0) {
+            console.log("Local storage is empty. Loading initial data from embedded JSON.");
+            existingWords = EMBEDDED_INITIAL_WORDS;
+            saveWordsToStorage(existingWords); // Save this initial data to local storage
+        } else {
+            console.log("Local storage contains data. Using existing data.");
+        }
+
+        renderTable(); // Always render the table with the loaded data
+    }
+
+
+    // --- Core Application Logic ---
+    /**
+     * Fetches word definitions from the RapidAPI WordsAPI based on user input.
+     */
+    async function fetchWordFromAPI() {
+        // Check if the API key is provided
+        if (!RAPIDAPI_KEY || RAPIDAPI_KEY === 'PASTE_YOUR_API_KEY_HERE') {
+            // Using a custom message box instead of alert() for better UX
+            showMessageBox('Error: Please paste your RapidAPI Key into the script tag in the HTML file.');
+            return;
+        }
+        const word = document.getElementById('wordInput').value.trim().toLowerCase();
+        if (!word) return; // Do nothing if input is empty
+        currentWord = word; // Store the current word being searched
+
+        const apiResponseEl = document.getElementById('apiResponse');
+        apiResponseEl.textContent = 'Fetching...'; // Show fetching status
+
+        const url = `https://wordsapiv1.p.rapidapi.com/words/${word}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': RAPIDAPI_KEY,
+                'X-RapidAPI-Host': RAPIDAPI_HOST
+            }
+        };
+
+        try {
+            const response = await fetch(url, options);
+            const data = await response.json();
+            apiResponseEl.textContent = JSON.stringify(data, null, 2); // Display raw API response
+
+            // If response is OK and contains results, show definition options
+            if (response.ok && data.results && data.results.length > 0) {
+                currentApiResults = data.results;
+                showDefinitionOptions();
+            } else {
+                // Display error message if no definitions found or API error
+                document.getElementById('definitionChoices').innerHTML = `<p class="text-red-500">${data.message || `No definitions found for "${word}".`}</p>`;
+            }
+        } catch (error) {
+            console.error("API Fetch Error:", error);
+            apiResponseEl.textContent = `Error: ${error.message}`;
+            document.getElementById('definitionChoices').innerHTML = `<p class="text-red-500">Failed to fetch data. Check the console for details.</p>`;
+        }
+    }
+
+    /**
+     * Displays a list of definition choices for the fetched word.
+     */
+    function showDefinitionOptions() {
+        const container = document.getElementById('definitionChoices');
+        container.innerHTML = '<p class="font-semibold mb-2">Select one or more definitions to add:</p>';
+
+        // Iterate through API results and create checkboxes for each definition
+        currentApiResults.forEach((item, index) => {
+            container.innerHTML += `
+          <label class="flex items-start p-3 border rounded-lg hover:bg-gray-100 transition cursor-pointer">
+            <input type="checkbox" data-index="${index}" class="mt-1 mr-3 h-5 w-5 rounded text-indigo-600 focus:ring-indigo-500">
+            <div>
+              <span class="font-bold">${item.partOfSpeech || 'N/A'}:</span>
+              <span>${item.definition}</span>
+            </div>
+          </label>
+        `;
+        });
+
+        // Add a button to add selected definitions
+        container.innerHTML += `<button onclick="addSelectedDefinitions()" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Add Selected Definitions</button>`;
+    }
+
+    /**
+     * Adds the selected definitions to the glossary and saves them to local storage.
+     */
+    function addSelectedDefinitions() {
+        const selectedIndices = Array.from(document.querySelectorAll('#definitionChoices input[type="checkbox"]:checked'))
+            .map(cb => parseInt(cb.dataset.index));
+
+        if (selectedIndices.length === 0) {
+            showMessageBox('Please select at least one definition.');
+            return;
+        }
+
+        const allWords = loadWordsFromStorage(); // Load existing words
+        if (!allWords[currentWord]) {
+            allWords[currentWord] = []; // Initialize array for new word if it doesn't exist
+        }
+
+        selectedIndices.forEach(index => {
+            const result = currentApiResults[index];
+            const newEntry = {
+                definition: result.definition || 'N/A',
+                partOfSpeech: result.partOfSpeech || '',
+                synonyms: result.synonyms || [],
+                example: result.examples ? result.examples[0] : '',
+                marked_red: false,
+                marked_green: false,
+                is_hidden: false
+            };
+
+            // Prevent adding duplicate definitions for the same word
+            if (!allWords[currentWord].some(e => e.definition === newEntry.definition)) {
+                allWords[currentWord].push(newEntry);
+            }
+        });
+
+        saveWordsToStorage(allWords); // Save updated words to local storage
+
+        // Clear input and choices, then re-render the table to reflect changes
+        document.getElementById('wordInput').value = '';
+        document.getElementById('definitionChoices').innerHTML = '';
+        document.getElementById('apiResponse').style.display = 'none';
+        renderTable(); // Re-render the entire table after adding definitions
+    }
+
+    /**
+     * Appends a single word definition row to the glossary table.
+     * @param {string} word - The word itself.
+     * @param {Object} entry - The definition entry object.
+     */
+    function appendRow(word, entry) {
+        if (entry.is_hidden) return; // Do not append if hidden
+
+        const tbody = document.querySelector('#wordsTable tbody');
+        const tr = document.createElement('tr');
+        tr.className = 'border-b border-gray-200 hover:bg-gray-50';
+        tr.dataset.word = word; // Store word in data attribute for easy lookup
+        tr.dataset.definition = entry.definition; // Store definition in data attribute
+
+        // Sanitize definition for use in HTML attributes
+        const safeDefinition = (entry.definition || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        // Determine initial classes for status boxes based on marked status
+        const greenMarkClass = entry.marked_green ? 'bg-green-500' : 'bg-green-200 hover:border-green-500';
+        const redMarkClass = entry.marked_red ? 'bg-red-500' : 'bg-red-200 hover:border-red-500';
+
+        tr.innerHTML = `
+        <td class="py-3 px-4 font-medium">
+              <span>${word}</span>
+              <span class="text-gray-500 hover:underline cursor-pointer ml-2" onclick="hideEntry('${word}', '${safeDefinition}', this)">Hide</span></td>
+        <td class="py-3 px-4 definition-box">
+          <div class="relative">
+            <span>${entry.definition || 'N/A'}</span>
+            <div class="text-sm mt-2 space-x-2">
+              <span class="text-blue-500 hover:underline cursor-pointer" onclick="toggleDetails(this)">Details</span>
+              <span class="text-red-500 hover:underline cursor-pointer" onclick="deleteDefinition('${word}', '${safeDefinition}', this)">Delete</span>
+            </div>
+            <div class="details-panel mt-3 p-3 bg-gray-50 rounded-md border text-sm">
+              <b>Part of Speech:</b> ${entry.partOfSpeech || 'N/A'}<br>
+              <b>Synonyms:</b> ${(entry.synonyms || []).join(', ') || 'N/A'}<br>
+              <b>Example:</b> ${entry.example || 'N/A'}
+            </div>
+          </div>
+        </td>
+        <td class="py-3 px-4">
+          <div class="flex items-center space-x-2">
+            <div class="status-box ${greenMarkClass}" onclick="updateMark(this, '${word}', '${safeDefinition}', 'green')"></div>
+            <div class="status-box ${redMarkClass}" onclick="updateMark(this, '${word}', '${safeDefinition}', 'red')"></div>
+          </div>
+        </td>
+      `;
+        tbody.appendChild(tr);
+    }
+
+    /**
+     * Updates the 'marked_green' or 'marked_red' status for a definition entry.
+     * @param {HTMLElement} element - The status box element that was clicked.
+     * @param {string} word - The word associated with the definition.
+     * @param {string} definition - The definition text.
+     * @param {string} markType - 'green' or 'red'.
+     */
+    function updateMark(element, word, definition, markType) {
+        const allWords = loadWordsFromStorage();
+        const safeDefinition = definition.replace(/&quot;/g, '"'); // Unescape HTML entities
+        const entry = allWords[word]?.find(e => e.definition === safeDefinition);
+
+        if (entry) {
+            const newStatus = !entry[`marked_${markType}`]; // Toggle the status
+            entry[`marked_${markType}`] = newStatus;
+            saveWordsToStorage(allWords); // Save changes to local storage
+
+            // Update the class directly for immediate visual feedback
+            element.classList.remove(`bg-${markType}-200`, `bg-${markType}-500`);
+            element.classList.add(newStatus ? `bg-${markType}-500` : `bg-${markType}-200`);
+            element.classList.toggle(`hover:border-${markType}-500`, !newStatus); // Re-add hover effect if not marked
+        }
+    }
+
+    /**
+     * Hides a specific definition entry from the table and marks it as hidden in storage.
+     * @param {string} word - The word associated with the definition.
+     * @param {string} definition - The definition text.
+     * @param {HTMLElement} element - The 'Hide' span element that was clicked.
+     */
+    function hideEntry(word, definition, element) {
+        const allWords = loadWordsFromStorage();
+        const safeDefinition = definition.replace(/&quot;/g, '"'); // Unescape HTML entities
+        const entry = allWords[word]?.find(e => e.definition === safeDefinition);
+
+        if (entry) {
+            entry.is_hidden = true; // Mark as hidden
+            saveWordsToStorage(allWords); // Save changes
+            element.closest('tr').remove(); // Remove the row from the DOM
+        }
+    }
+
+    /**
+     * Unhides all hidden definitions and re-renders the table.
+     */
+    function unhideAll() {
+        const allWords = loadWordsFromStorage();
+        // Iterate through all words and their definitions, setting is_hidden to false
+        Object.values(allWords).forEach(entries => {
+            entries.forEach(entry => entry.is_hidden = false);
+        });
+        saveWordsToStorage(allWords); // Save updated status
+        renderTable(); // Re-render the entire table to show unhidden entries
+    }
+
+    /**
+     * Deletes a specific definition entry from the glossary.
+     * @param {string} word - The word associated with the definition.
+     * @param {string} definitionText - The definition text to delete.
+     * @param {HTMLElement} btn - The 'Delete' span element that was clicked.
+     */
+    function deleteDefinition(word, definitionText, btn) {
+        const safeDefinition = definitionText.replace(/&quot;/g, '"'); // Unescape HTML entities
+        // Custom confirmation box instead of native alert/confirm
+        showConfirmBox(`Are you sure you want to delete the definition: "${safeDefinition}"?`, () => {
+            const allWords = loadWordsFromStorage();
+            if (allWords[word]) {
+                // Filter out the definition to be deleted
+                allWords[word] = allWords[word].filter(e => e.definition !== safeDefinition);
+                // If no definitions left for a word, remove the word entirely
+                if (allWords[word].length === 0) {
+                    delete allWords[word];
+                }
+                saveWordsToStorage(allWords); // Save updated words
+                btn.closest('tr').remove(); // Remove the row from the DOM
+            }
+        });
+    }
+
+    /**
+     * Renders (or re-renders) the entire glossary table from local storage.
+     */
+    function renderTable() {
+        const allWords = loadWordsFromStorage();
+        document.querySelector('#wordsTable tbody').innerHTML = ''; // Clear existing table rows
+        // Iterate through all words and their definitions to append them to the table
+        for (let word in allWords) {
+            allWords[word].forEach(entry => appendRow(word, entry));
+        }
+    }
+
+    // --- UI Helpers & Event Listeners ---
+    /**
+     * Toggles the visibility of the details panel for a definition.
+     * @param {HTMLElement} el - The 'Details' span element that was clicked.
+     */
+    function toggleDetails(el) {
+        // Find the details panel relative to the clicked element
+        const panel = el.closest('div').nextElementSibling;
+        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    /**
+     * Toggles the visibility of the raw API response box.
+     */
+    function toggleRawResponse() {
+        const raw = document.getElementById('apiResponse');
+        raw.style.display = (raw.style.display === 'none' || raw.style.display === '') ? 'block' : 'none';
+    }
+
+    /**
+     * Custom message box function (replaces alert()).
+     * @param {string} message - The message to display.
+     */
+    function showMessageBox(message) {
+        // Create a simple modal/message box dynamically
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50';
+        modal.innerHTML = `
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full text-center">
+                <p class="text-lg font-semibold mb-4">${message}</p>
+                <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300" onclick="this.closest('.fixed').remove()">OK</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    /**
+     * Custom confirmation box function (replaces confirm()).
+     * @param {string} message - The message to display.
+     * @param {Function} onConfirm - Callback function to execute if confirmed.
+     */
+    function showConfirmBox(message, onConfirm) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50';
+        modal.innerHTML = `
+            <div class="bg-white rounded-lg shadow-xl p-6 max-w-sm w-full text-center">
+                <p class="text-lg font-semibold mb-4">${message}</p>
+                <div class="flex justify-center space-x-4">
+                    <button class="bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition duration-300" id="confirmYes">Yes</button>
+                    <button class="bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg hover:bg-gray-400 transition duration-300" id="confirmNo">No</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        document.getElementById('confirmYes').onclick = () => {
+            onConfirm();
+            modal.remove();
+        };
+        document.getElementById('confirmNo').onclick = () => {
+            modal.remove();
+        };
+    }
+
+
+    // Event listener for Enter key on the word input field
+    document.getElementById('wordInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); // Prevent default form submission
+            fetchWordFromAPI(); // Trigger API fetch
+        }
+    });
+
+    // Call the new loadInitialData function when the window loads
+    window.onload = loadInitialData;
+</script>
+</body>
+</html>

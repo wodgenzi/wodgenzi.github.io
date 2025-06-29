@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Formula Sheet (Comprehensive)</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for main collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Style for nested collapsible content (context headings) */
+        .nested-content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dotted #e0e0e0; /* Lighter border for inner collapse */
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #666;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        /* Specific styling for lists within collapsible content */
+        .content > ul, .nested-content > ul {
+            list-style: disc; /* Default bullet for formulas */
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .content > ul > li, .nested-content > ul > li {
+            background-color: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 5px 0;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content, .nested-content {
+                margin-left: 10px;
+            }
+        }
+        /* .math {
+            visibility: hidden !important;
+        }
+
+        li:hover .MathJax:hover .math {
+            visibility: visible !important;
+        }
+         */
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+            "HTML-CSS": {
+            linebreaks: { automatic: true }
+            },
+            SVG: {
+            linebreaks: { automatic: true }
+            }
+        });
+    </script>
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Physics Formula Sheet</h1>
+
+    <ul>
+        <li>
+            <h2>Chapter 1: Measurements</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter1_main_content')">Show/Hide Details</span>
+            <div id="chapter1_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Uncertainties</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter1_uncertainties')">Show/Hide Formulas</span>
+                        <div id="chapter1_uncertainties" class="nested-content">
+                            <ul>
+                                <li>Absolute Uncertainty: $\delta X$</li>
+                                <li>Fractional Uncertainty: $\frac{\delta X}{X}$</li>
+                                <li>Percentage Uncertainty: $\frac{\delta X}{X} \times 100\%$</li>
+                                <li>Percentage uncertainty = $\frac{L.C}{\text{measured value}} \times 100$</li>
+                                <li>Uncertainty in timing experiment = $\frac{\text{L.C}}{\text{no. of vibration}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Algebra with Significant Figures</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter1_algebra_sig_figs')">Show/Hide Formulas</span>
+                        <div id="chapter1_algebra_sig_figs" class="nested-content">
+                            <ul>
+                                <li>Division and Multiplication Example: $\frac{4.54 \times 2.324}{1.3365} = 7.89447063 = 7.89$ (retained to 3 significant figures)</li>
+                                <li>Addition and Subtraction Example: $4.345 + 23.51 = 27.855 = 27.86$ (retained to 2 decimal places)</li>
+                                <li>Addition and Subtraction Example: $101.2401 - 1.0 = 100.2401 = 100.2$ (retained to 1 decimal place)</li>
+                                <li>Addition and Subtraction Example: $101.2401 - 1 = 100.2401 = 100$ (retained to no decimal place)</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Dimensional Analysis</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter1_dimensions')">Show/Hide Formulas</span>
+                        <div id="chapter1_dimensions" class="nested-content">
+                            <ul>
+                                <li>Velocity: $[L/T]$</li>
+                                <li>Acceleration: $[L/T^{2}]$</li>
+                                <li>Force: $[ML/T^{2}]$</li>
+                                <li>Work: $[ML^{2}/T^{2}]$</li>
+                                <li>Energy: $[ML^{2}/T^{2}]$</li>
+                                <li>Power: $[ML^{2}/T^{3}]$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Constants and Conversions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter1_constants')">Show/Hide Formulas</span>
+                        <div id="chapter1_constants" class="nested-content">
+                            <ul>
+                                <li>$1 N = 10^5 \text{ dyne}$</li>
+                                <li>$1 \text{ Joule} = 10^7 \text{ erg}$</li>
+                                <li>$1 \text{ Watt} = 10^7 \text{ erg/s}$</li>
+                                <li>$u_{1}=kx^{a}$ (Example of power factor rule)</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 2: Vectors and Equilibrium</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter2_main_content')">Show/Hide Details</span>
+            <div id="chapter2_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Vector Properties and Operations</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_vector_properties')">Show/Hide Formulas</span>
+                        <div id="chapter2_vector_properties" class="nested-content">
+                            <ul>
+                                <li>If $\vec{a}=(5N)(\text{East})$, $\vec{b}=(5N)(\text{West})$ then $\vec{a}\ne\vec{b}$ but $|\vec{a}|=|\vec{b}|=5N$</li>
+                                <li>Vector does not change when rotated through an angle $\theta=2n\pi$ where $n=1,2,3,\dots$</li>
+                                <li>$2\pi=360^{\circ}$</li>
+                                <li>Unit vector: $\hat{A} = \frac{\vec{A}}{|\vec{A}|}$</li>
+                                <li>Position vector in two dimensions: $\vec{r} = a\hat{i} + b\hat{j}$</li>
+                                <li>Position vector in three dimensions: $\vec{r} = a\hat{i} + b\hat{j} + c\hat{k}$</li>
+                                <li>Multiplication of a Vector with a Scalar: New vector $= n\vec{A}$</li>
+                                <li>Magnitude of new vector: $n|\vec{A}|$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Rectangular Components of a Vector</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_rectangular_components')">Show/Hide Formulas</span>
+                        <div id="chapter2_rectangular_components" class="nested-content">
+                            <ul>
+                                <li>X-component: $A_x = A\cos\theta$</li>
+                                <li>Y-component: $A_y = A\sin\theta$</li>
+                                <li>Magnitude from components: $|\vec{A}|^2 = A_x^2 + A_y^2$</li>
+                                <li>Trigonometric Identity: $(\cos^2\theta+\sin^2\theta=1)$</li>
+                                <li>Direction from components: $\theta = \tan^{-1}\left(\frac{A_y}{A_x}\right)$</li>
+                                <li>When vector A makes angle $\theta$ with y-axis: $A_y = A\sin\theta$</li>
+                                <li>When vector A makes angle $\theta$ with y-axis: $A_x = A\cos\theta$</li>
+                                <li>When vector A makes angle $\theta$ with y-axis: $\theta = \tan^{-1}\left(\frac{A_x}{A_y}\right)$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Addition of Vectors by Rectangular Components</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_add_components')">Show/Hide Formulas</span>
+                        <div id="chapter2_add_components" class="nested-content">
+                            <ul>
+                                <li>Resultant magnitude: $R = \sqrt{(R_x)^2 + (R_y)^2}$</li>
+                                <li>X-component of resultant: $R_x = A_x + B_x$</li>
+                                <li>Y-component of resultant: $R_y = A_y + B_y$</li>
+                                <li>Direction of resultant: $\theta = \tan^{-1}\left(\frac{R_y}{R_x}\right)$</li>
+                                <li>For multiple vectors (magnitude): $R = \sqrt{(A_x+B_x+\dots)^2 + (A_y+B_y+\dots)^2}$</li>
+                                <li>For multiple vectors (direction): $\theta = \tan^{-1}\left(\frac{A_y+B_y+\dots}{A_x+B_x+\dots}\right)$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Parallelogram Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_parallelogram_law')">Show/Hide Formulas</span>
+                        <div id="chapter2_parallelogram_law" class="nested-content">
+                            <ul>
+                                <li>Final resultant magnitude: $c^2=a^2+b^2+2ab\cos\theta$</li>
+                                <li>Final resultant magnitude (vector notation): $|\vec{c}|=\sqrt{a^2+b^2+2ab\cos\theta}$</li>
+                                <li>Maximum resultant: $c_{max} = \sqrt{(a+b)^2} = |a+b|$</li>
+                                <li>Minimum resultant: $c_{min} = \sqrt{(a-b)^2} = |a-b|$</li>
+                                <li>For subtraction: $|\vec{c}|=\sqrt{a^2+b^2-2ab\cos\theta}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Scalar or Dot Products</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_dot_product')">Show/Hide Formulas</span>
+                        <div id="chapter2_dot_product" class="nested-content">
+                            <ul>
+                                <li>Definition: $\vec{A} \cdot \vec{B} = AB\cos\theta$</li>
+                                <li>Commutative Law: $\vec{A} \cdot \vec{B} = \vec{B} \cdot \vec{A}$</li>
+                                <li>Associative Law: $\vec{A} \cdot (\vec{B} \cdot \vec{C}) = (\vec{A} \cdot \vec{B}) \cdot \vec{C}$</li>
+                                <li>Distributive Law: $\vec{A} \cdot (\vec{B}+\vec{C}) = \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}$</li>
+                                <li>Perpendicular vectors: If $\theta = 90^\circ$, then $\vec{A} \cdot \vec{B} = 0$</li>
+                                <li>Parallel vectors: If $\theta = 0^\circ$, then $\vec{A} \cdot \vec{B} = AB$</li>
+                                <li>Anti-parallel vectors: If $\theta = 180^\circ$, then $\vec{A} \cdot \vec{B} = -AB$</li>
+                                <li>Unit vector dot products (perpendicular): $\hat{i} \cdot \hat{j} = \hat{j} \cdot \hat{k} = \hat{k} \cdot \hat{i} = 0$</li>
+                                <li>Unit vector dot products (parallel): $\hat{i} \cdot \hat{i} = \hat{j} \cdot \hat{j} = \hat{k} \cdot \hat{k} = 1$</li>
+                                <li>Angle between two vectors: $\theta = \cos^{-1}\left(\frac{A_x B_x + A_y B_y + A_z B_z}{AB}\right)$</li>
+                                <li>Self scalar product: $\vec{A} \cdot \vec{A} = A^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Vector or Cross Product</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_cross_product')">Show/Hide Formulas</span>
+                        <div id="chapter2_cross_product" class="nested-content">
+                            <ul>
+                                <li>Definition: $\vec{A} \times \vec{B} = AB\sin\theta\hat{n}$</li>
+                                <li>Non-commutative: $\vec{A} \times \vec{B} \ne \vec{B} \times \vec{A}$</li>
+                                <li>Parallel/Anti-parallel vectors: $\vec{A} \times \vec{A} = 0$</li>
+                                <li>Unit vector cross products (cyclic): $\hat{i} \times \hat{j} = \hat{k}$, $\hat{j} \times \hat{k} = \hat{i}$, $\hat{k} \times \hat{i} = \hat{j}$</li>
+                                <li>Scalar multiplication: $(\vec{m} \vec{A}) \times \vec{B} = \vec{A} \times (m\vec{B})$</li>
+                                <li>Parallel/Anti-parallel vectors (zero product): $\vec{A} \times \vec{B} = \vec{0}$</li>
+                                <li>Component form: $\vec{A} \times \vec{B} = (A_x \hat{i} + A_y \hat{j} + A_z \hat{k}) \times (B_x \hat{i} + B_y \hat{j} + B_z \hat{k})$</li>
+                                <li>Determinant form: $\vec{A} \times \vec{B} = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ A_x & A_y & A_z \\ B_x & B_y & B_z \end{vmatrix}$</li>
+                                <li>Scalar triple product (expanded): $\vec{A} \cdot (\vec{B} \times \vec{C}) = A_x(B_y C_z - B_z C_y) - A_y(B_x C_z - B_z C_x) + A_z(B_x C_y - B_y C_x)$</li>
+                                <li>Scalar triple product (determinant): $\vec{A} \cdot (\vec{B} \times \vec{C}) = \begin{vmatrix} A_x & A_y & A_z \\ B_x & B_y & B_z \\ C_x & C_y & C_z \end{vmatrix}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Torque</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_torque')">Show/Hide Formulas</span>
+                        <div id="chapter2_torque" class="nested-content">
+                            <ul>
+                                <li>Vector definition: $\vec{\tau} = \vec{r} \times \vec{F}$</li>
+                                <li>Magnitude: $\tau = rF\sin\theta$</li>
+                                <li>Magnitude (perpendicular): $\tau = rF$ (if $\theta = 90^\circ$)</li>
+                                <li>Torque of a couple: $\tau = Fd$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Conditions of Equilibrium</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter2_equilibrium')">Show/Hide Formulas</span>
+                        <div id="chapter2_equilibrium" class="nested-content">
+                            <ul>
+                                <li>First Condition (Translational): $\sum \vec{F} = 0$</li>
+                                <li>For coplanar forces: $\sum F_x = 0$ and $\sum F_y = 0$</li>
+                                <li>Example X-component sum: $\sum F_x = 5N + 3N - 4N - 7N - 5N = \text{zero}$</li>
+                                <li>Example Y-component sum: $\sum F_y = 10N - 5N - 5N = \text{zero}$</li>
+                                <li>Second Condition (Rotational): $\sum \vec{\tau} = 0$</li>
+                                <li>Example Clockwise torque: $-10N \times 2m = -20~N~m$</li>
+                                <li>Example Anticlockwise torque: $10N \times 2m = 20N~m$</li>
+                                <li>Example Sum of torques: $\sum \tau = 20~N~m - (20~N~m) = \text{zero}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 3: Motion and Force</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter3_main_content')">Show/Hide Details</span>
+            <div id="chapter3_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_acceleration')">Show/Hide Formulas</span>
+                        <div id="chapter3_acceleration" class="nested-content">
+                            <ul>
+                                <li>Rate of change of velocity: $\vec{a} = \frac{\Delta \vec{v}}{\Delta t}$</li>
+                                <li>Slope of velocity-time graph: $\vec{a} = \tan\theta$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Average Speed/Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_average_motion')">Show/Hide Formulas</span>
+                        <div id="chapter3_average_motion" class="nested-content">
+                            <ul>
+                                <li>Average speed (equal distance): $v_{av} = \frac{2v_1v_2}{v_1+v_2}$</li>
+                                <li>Average speed (equal time): average speed = $\frac{v_1+v_2}{2}$</li>
+                                <li>Average acceleration (two intervals): $a = \frac{a_1+a_2}{t_1+t_2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Equations of Motion (Galileo)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_equations_of_motion')">Show/Hide Formulas</span>
+                        <div id="chapter3_equations_of_motion" class="nested-content">
+                            <ul>
+                                <li>First Equation: $v_f = v_i + at$ or $v_f = v_i + gt$</li>
+                                <li>Second Equation: $s = v_i t + \frac{1}{2}at^2$ or $s = v_i t + \frac{1}{2}gt^2$</li>
+                                <li>Third Equation: $v_f^2 = v_i^2 + 2as$ or $v_f^2 = v_i^2 + 2gs$</li>
+                                <li>Distance in nth second: $s_n = v_i + \frac{1}{2}a(2n-1)$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Newton's Laws of Motion</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_newtons_laws')">Show/Hide Formulas</span>
+                        <div id="chapter3_newtons_laws" class="nested-content">
+                            <ul>
+                                <li>Second Law (Proportionality): $F \propto \text{Mass}$ x $\text{Change in velocity per second}$</li>
+                                <li>Second Law (Standard Form): $F = ma$</li>
+                                <li>Third Law: $\vec{F}_{action} = -\vec{F}_{reaction}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Momentum and Impulse</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_momentum_impulse')">Show/Hide Formulas</span>
+                        <div id="chapter3_momentum_impulse" class="nested-content">
+                            <ul>
+                                <li>Linear Momentum: $\vec{p} = m\vec{v}$</li>
+                                <li>Zero Momentum: if $\vec{v} = 0$ then $\vec{p} = \vec{0}$</li>
+                                <li>Impulse Definition: $\vec{I} = \Delta \vec{p}$</li>
+                                <li>Impulse Definition: $\vec{I} = \vec{F}\Delta t$</li>
+                                <li>Law of Conservation of Linear Momentum: $m_1v_1+m_2v_2 = m_1v_1'+m_2v_2'$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Collisions (Elastic in One Dimension)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_elastic_collisions')">Show/Hide Formulas</span>
+                        <div id="chapter3_elastic_collisions" class="nested-content">
+                            <ul>
+                                <li>Relative velocities: $v_1+v_1' = v_2+v_2'$</li>
+                                <li>Relative velocities: $v_1-v_2 = -(v_1'-v_2')$</li>
+                                <li>Final velocity of $m_1$: $v_1' = \frac{(m_1-m_2)V_1}{(m_1+m_2)} + \frac{2m_2V_2}{(m_1+m_2)}$</li>
+                                <li>Final velocity of $m_2$: $v_2' = \frac{2m_1V_1}{(m_1+m_2)} + \frac{(m_2-m_1)V_2}{(m_1+m_2)}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Force Due to Water Flow</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_water_flow_force')">Show/Hide Formulas</span>
+                        <div id="chapter3_water_flow_force" class="nested-content">
+                            <ul>
+                                <li>Force: $\vec{F} = \frac{m}{t}\vec{v}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Momentum and Explosive Forces</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_explosive_forces')">Show/Hide Formulas</span>
+                        <div id="chapter3_explosive_forces" class="nested-content">
+                            <ul>
+                                <li>Recoil velocity: $v' = \frac{-m}{M}v$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Propulsion of Rocket</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_rocket_propulsion')">Show/Hide Formulas</span>
+                        <div id="chapter3_rocket_propulsion" class="nested-content">
+                            <ul>
+                                <li>Instantaneous acceleration: $a = mv/M$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Friction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_friction')">Show/Hide Formulas</span>
+                        <div id="chapter3_friction" class="nested-content">
+                            <ul>
+                                <li>Coefficient of friction: $\mu = \frac{\text{Limiting friction }(f)}{\text{Normal reaction }(R)}$</li>
+                                <li>Coefficient of friction: $\mu = \frac{f}{R}$</li>
+                                <li>Limiting friction: $f = \mu R$</li>
+                                <li>Force for horizontal surface: $F = mg$</li>
+                                <li>Static friction force: $f_s = \mu_s R$</li>
+                                <li>Kinetic friction force: $f_k = \mu_k R$</li>
+                                <li>Angle of friction: $\tan\theta = \frac{f}{R} = \mu$</li>
+                                <li>Angle of static friction: $\tan\theta_s = \frac{f_s}{R} = \mu_s$</li>
+                                <li>Angle of kinetic friction: $\tan\theta_k = \frac{f_k}{R} = \mu_k$</li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Masses in Contact</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_masses_contact')">Show/Hide Formulas</span>
+                        <div id="chapter3_masses_contact" class="nested-content">
+                            <ul>
+                                <li>Newton's second law for $m_1$: $F_1 - F_r = m_1 a$</li>
+                                <li>Newton's second law for $m_2$: $F_r = m_2 a$</li>
+                                <li>Force of reaction: $F_r = \frac{m_2 F}{m_1+m_2}$</li>
+                                <li>Acceleration: $a = \frac{F}{m_1+m_2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Masses Connected by Strings</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_masses_strings')">Show/Hide Formulas</span>
+                        <div id="chapter3_masses_strings" class="nested-content">
+                            <ul>
+                                <li>Tension (1 string 2 masses): $T = \frac{m_2 F}{m_1+m_2}$</li>
+                                <li>Acceleration (1 string 2 masses): $a = \frac{F}{m_1+m_2}$</li>
+                                <li>Acceleration (2 string 3 masses): $a = \frac{F}{m_1+m_2+m_3}$</li>
+                                <li>Tension string1 (2 string 3 masses): $T_1 = \frac{(m_1+m_2)F}{m_1+m_2+m_3}$</li>
+                                <li>Tension string2 (2 string 3 masses): $T_2 = \frac{(m_2+m_3)F}{m_1+m_2+m_3}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Tension and Acceleration in a String (Pulley)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_pulley')">Show/Hide Formulas</span>
+                        <div id="chapter3_pulley" class="nested-content">
+                            <ul>
+                                <li>Acceleration: $a = \frac{m_1 - m_2}{m_1 + m_2}g$</li>
+                                <li>Tension: $T = \frac{2m_1m_2}{m_1+m_2}g$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Atwood Machine</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_atwood')">Show/Hide Formulas</span>
+                        <div id="chapter3_atwood" class="nested-content">
+                            <ul>
+                                <li>Acceleration due to gravity: $g = \frac{m_1+m_2}{m_1-m_2}a$</li>
+                                <li>Acceleration (one body vertical): $a = \frac{m_1 g}{m_1+m_2}$</li>
+                                <li>Tension (one body vertical): $T = \frac{m_1 m_2 g}{m_1+m_2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Mechanical Advantage</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_mechanical_advantage')">Show/Hide Formulas</span>
+                        <div id="chapter3_mechanical_advantage" class="nested-content">
+                            <ul>
+                                <li>Definition: MECHANICAL ADVANTAGE = $\frac{\text{LOAD}}{\text{EFFORT}}$</li>
+                                <li>Load: LOAD = MECHANICAL ADVANTAGE $\times$ EFFORT</li>
+                                <li>Effort: EFFORT = $\frac{\text{LOAD}}{\text{MECHANICAL ADVANTAGE}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Projectile Motion</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter3_projectile_motion')">Show/Hide Formulas</span>
+                        <div id="chapter3_projectile_motion" class="nested-content">
+                            <ul>
+                                <li>Horizontal coordinate: $x = v_o \cos\theta_o t$</li>
+                                <li>Vertical coordinate: $y = v_o \sin\theta_o t - \frac{1}{2}gt^2$</li>
+                                <li>Time to max height: $t = \frac{v_y \sin\theta_o}{g}$</li>
+                                <li>Total time of flight: $T = \frac{2v_y \sin\theta_o}{g}$</li>
+                                <li>Maximum height: $H = \frac{v_y^2 \sin^2\theta_o}{2g}$</li>
+                                <li>Range (horizontal): $R = \frac{v_o^2 \sin(2\theta_o)}{g}$</li>
+                                <li>Maximum horizontal range ($\theta = 45^\circ$): $R_{max} = \frac{v_o^2}{g}$</li>
+                                <li>Relation between Range and Height: $R\tan\theta = 4H$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 4: Work and Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter4_main_content')">Show/Hide Details</span>
+            <div id="chapter4_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Work</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter4_work')">Show/Hide Formulas</span>
+                        <div id="chapter4_work" class="nested-content">
+                            <ul>
+                                <li>Dot product definition: $W = \vec{F} \cdot \vec{d}$</li>
+                                <li>Scalar definition: $W = Fd \cos\theta$</li>
+                                <li>Work along closed path (conservative field): $W_{total} = 0$</li>
+                                <li>Work along closed path (non-conservative field): $W_{(AB)} \ne (W_{(AB)})_r$</li>
+                                <li>Spring force: $F = kx$</li>
+                                <li>Work done by variable force (integral): Total Area = $\lim_{\Delta d \to 0} \sum F \cos\theta \Delta d = \text{work done}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Power</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter4_power')">Show/Hide Formulas</span>
+                        <div id="chapter4_power" class="nested-content">
+                            <ul>
+                                <li>Definition: $P = \text{work/time}$</li>
+                                <li>Linear motion: $P = \frac{W}{t}$</li>
+                                <li>Linear motion (vector): $P = \vec{F} \cdot \vec{v}$</li>
+                                <li>Angular motion: $P = \tau \cdot \omega$</li>
+                                <li>Average power: $P = \frac{W}{t}$</li>
+                                <li>Instantaneous power: $P_{inst} = \frac{\Delta W}{\Delta t}$</li>
+                                <li>Unit conversion: $1~W = 1~J/s$</li>
+                                <li>Unit conversion: $1~h.p = 746~watt$</li>
+                                <li>Unit conversion: $1~h.p = 550~\text{foot pound/sec}$</li>
+                                <li>Unit conversion: $1~kW~h = 3.6 \times 10^6~J$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Energy</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter4_energy')">Show/Hide Formulas</span>
+                        <div id="chapter4_energy" class="nested-content">
+                            <ul>
+                                <li>Kinetic Energy: $K.E = \frac{1}{2}mv^2$</li>
+                                <li>Kinetic Energy (momentum): $K.E = \frac{p^2}{2m}$</li>
+                                <li>Gravitational Potential Energy: $P.E = mgh$</li>
+                                <li>Elastic Potential Energy: $P.E = \frac{1}{2}kx^2$</li>
+                                <li>Electric Potential Energy: $P.E = q\Delta V$</li>
+                                <li>Work-Energy Principle: Work = $(K.E)_f - (K.E)_i$</li>
+                                <li>Absolute Gravitational P.E: $U_m = -\frac{GMm}{R}$</li>
+                                <li>Escape Velocity: $V_{esc} = \sqrt{\frac{2GM}{R}}$</li>
+                                <li>Escape Velocity (g): $V_{esc} = \sqrt{2gR_e}$</li>
+                                <li>Escape Velocity (numerical values): $1.2 \times 10^4~m~s^{-1} = 6.96~\text{miles}~s^{-1} = 11.2~\text{kms}^{-1} = 25000~\text{miles}~h^{-1} = 40320~\text{kmh}^{-1}$</li>
+                                <li>Interconversion of K.E and P.E: $mgh + \frac{1}{2}mv^2 = \frac{1}{2}mv^2$</li>
+                                <li>Velocity from P.E conversion: $v = \sqrt{2gh}$</li>
+                                <li>Einstein's Mass Energy: $E = mc^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 5: Rotational and Circular Motion</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter5_main_content')">Show/Hide Details</span>
+            <div id="chapter5_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Angular Displacement</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_angular_displacement')">Show/Hide Formulas</span>
+                        <div id="chapter5_angular_displacement" class="nested-content">
+                            <ul>
+                                <li>Arc length: $s = r\theta$</li>
+                                <li>Degree to radian conversion: $1^\circ = \frac{\pi}{180}~\text{rad}$</li>
+                                <li>Numerical conversion: $1^\circ = 0.0174~\text{rad}$</li>
+                                <li>Numerical conversion: $1~\text{rad} = 57.3^\circ$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Angular Velocity & Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_angular_kinematics')">Show/Hide Formulas</span>
+                        <div id="chapter5_angular_kinematics" class="nested-content">
+                            <ul>
+                                <li>Average angular velocity: $\omega_{avg} = \frac{\Delta\theta}{\Delta t}$</li>
+                                <li>Instantaneous angular velocity: $\omega_{ins} = \lim_{\Delta t \to 0} \frac{\Delta\theta}{\Delta t}$</li>
+                                <li>Tangential velocity relation: $v = r\omega$</li>
+                                <li>Tangential velocity (vector): $\vec{v} = \vec{\omega} \times \vec{r}$</li>
+                                <li>Angular acceleration: $\alpha = \frac{\Delta\omega}{\Delta t}$</li>
+                                <li>Tangential acceleration (vector): $\vec{a} = \vec{\alpha} \times \vec{r}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Centripetal Force & Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_centripetal')">Show/Hide Formulas</span>
+                        <div id="chapter5_centripetal" class="nested-content">
+                            <ul>
+                                <li>Total acceleration: $\vec{a} = \vec{a}_c + \vec{a}_t$</li>
+                                <li>Centripetal force (vector, angular): $\vec{F}_c = -m\omega^2\vec{r}$</li>
+                                <li>Centripetal force (vector, linear): $\vec{F}_c = -\left(\frac{mv^2}{r}\right)\hat{r}$</li>
+                                <li>Centripetal acceleration (vector, angular): $\vec{a}_c = -\omega^2\vec{r}$</li>
+                                <li>Centripetal acceleration (vector, linear): $\vec{a}_c = -\left(\frac{v^2}{r}\right)\hat{r}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Comparison of Linear and Rotatory Motion</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_linear_rotatory_comparison')">Show/Hide Formulas</span>
+                        <div id="chapter5_linear_rotatory_comparison" class="nested-content">
+                            <ul>
+                                <li>Linear velocity: $\vec{v} = \frac{\Delta d}{\Delta t}$</li>
+                                <li>Angular velocity: $\vec{\omega} = \frac{\Delta\theta}{\Delta t}$</li>
+                                <li>Linear displacement: $\vec{d}$</li>
+                                <li>Angular displacement: $\Delta\theta$</li>
+                                <li>Linear acceleration: $\vec{a} = \frac{\Delta v}{\Delta t}$</li>
+                                <li>Angular acceleration: $\vec{\alpha} = \frac{\Delta\omega}{\Delta t}$</li>
+                                <li>Mass: $m$</li>
+                                <li>Moment of inertia: $I = mr^2$</li>
+                                <li>Linear momentum: $\vec{P} = m\vec{v}$</li>
+                                <li>Angular momentum: $\vec{L} = I\vec{\omega}$</li>
+                                <li>Linear impulse: $\vec{J} = \vec{F} \times \Delta t$</li>
+                                <li>Angular impulse: $\vec{\tau} \times \Delta t$</li>
+                                <li>Force: $\vec{F} = m\vec{a}$ or $\vec{F} = \frac{\Delta \vec{p}}{\Delta t}$</li>
+                                <li>Torque: $\vec{\tau} = I\vec{\alpha}$ or $\vec{\tau} = \frac{\Delta \vec{L}}{\Delta t}$</li>
+                                <li>Linear Work: $W = \vec{F} \cdot \vec{d}$</li>
+                                <li>Rotational Work: $W_{rot} = \frac{1}{2}I(\omega_f^2 - \omega_i^2)$</li>
+                                <li>Linear Kinetic Energy: $K.E = \frac{1}{2}mv^2$</li>
+                                <li>Rotational Kinetic Energy: $K.E_{rot} = \frac{1}{2}I\omega^2$</li>
+                                <li>Newton's First Law (Linear): If $F=0$ then $v=\text{constant}$</li>
+                                <li>Newton's Second Law (Linear): $F=ma$</li>
+                                <li>Newton's Third Law (Linear): $F_{12} = -F_{21}$</li>
+                                <li>Newton's First Law (Rotational): If $\tau=0$ then $\omega=\text{constant}$</li>
+                                <li>Newton's Second Law (Rotational): $\tau=I\alpha$</li>
+                                <li>Newton's Third Law (Rotational): $\tau_{12} = -\tau_{21}$</li>
+                                <li>Linear Equation of Motion (i): $v_f = v_i + at$</li>
+                                <li>Linear Equation of Motion (ii): $s = v_i t + \frac{1}{2}at^2$</li>
+                                <li>Linear Equation of Motion (iii): $v_f^2 = v_i^2 + 2as$</li>
+                                <li>Rotational Equation of Motion (i): $\omega_f = \omega_i + \alpha t$</li>
+                                <li>Rotational Equation of Motion (ii): $\theta = \omega_i t + \frac{1}{2}\alpha t^2$</li>
+                                <li>Rotational Equation of Motion (iii): $\omega_f^2 = \omega_i^2 + 2\alpha\theta$</li>
+                                <li>Distance in nth second: $s_n = v_i + \frac{a}{2}(2n-1)$</li>
+                                <li>Angle in nth second: $\theta_n = \omega_i + \frac{\alpha}{2}(2n-1)$</li>
+                                <li>Distance with constant velocity: $s = vt$</li>
+                                <li>Angle with constant angular velocity: $\theta = \omega t$</li>
+                                <li>Average linear velocity: $&ltv&gt = \frac{v_i+v_f}{2}$</li>
+                                <li>Average angular velocity: $&lt\omega> = \frac{\omega_i+\omega_f}{2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Moment of Inertia</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_moment_of_inertia')">Show/Hide Formulas</span>
+                        <div id="chapter5_moment_of_inertia" class="nested-content">
+                            <ul>
+                                <li>Definition: $I = mr^2$</li>
+                                <li>Rotational Analogue of Newton's Second Law: $\tau = I\alpha$</li>
+                                <li>Hoop or cylindrical shell: $I_c = MR^2$</li>
+                                <li>Hollow cylinder: $I_c = \frac{1}{2}M(R_1^2+R_2^2)$</li>
+                                <li>Solid cylinder or disk: $I_c = \frac{1}{2}MR^2$</li>
+                                <li>Rectangular plate: $I_c = \frac{1}{12}M(a^2+b^2)$</li>
+                                <li>Long thin rod: $I_c = \frac{1}{12}ML^2$</li>
+                                <li>Solid sphere: $I_c = \frac{2}{5}MR^2$</li>
+                                <li>Thin spherical shell: $I_c = \frac{2}{3}MR^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Angular Momentum</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_angular_momentum')">Show/Hide Formulas</span>
+                        <div id="chapter5_angular_momentum" class="nested-content">
+                            <ul>
+                                <li>Linear momentum relation: $mv = p$</li>
+                                <li>Definition (scalar): $L = mvr \sin\theta$</li>
+                                <li>Definition (vector): $L = \vec{r} \times \vec{p}$</li>
+                                <li>For circular orbit: $L = mvr$</li>
+                                <li>Definition (rotational): Angular Momentum $L = \text{Moment of Inertia} \times \text{Angular Velocity}$</li>
+                                <li>Conservation Law: $L_1 + L_2 + \sum \vec{\tau}_{ext} = 0$</li>
+                                <li>Conservation Law (simplified): $I_1 \omega_1 = I_2 \omega_2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Rotational Kinetic Energy</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_rotational_ke')">Show/Hide Formulas</span>
+                        <div id="chapter5_rotational_ke" class="nested-content">
+                            <ul>
+                                <li>General: $K.E_{rot} = \frac{1}{2}I\omega^2$</li>
+                                <li>Disc: $K.E_{rot} = \frac{1}{4}mv^2 = \frac{1}{2}(K.E_{lin})$</li>
+                                <li>Hoop: $K.E_{rot} = \frac{1}{2}mv^2 = (K.E_{lin})$</li>
+                                <li>Velocity of hoop (inclined plane): $v = \sqrt{gh}$</li>
+                                <li>Velocity of disc (inclined plane): $v = \sqrt{\frac{4}{3}gh}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Motion in a Vertical Circle</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_vertical_circle')">Show/Hide Formulas</span>
+                        <div id="chapter5_vertical_circle" class="nested-content">
+                            <ul>
+                                <li>Tension at highest point: $T_A + mg = \frac{mv^2}{r}$</li>
+                                <li>Minimum tension at highest point: $T_A = 0$</li>
+                                <li>Minimum velocity at highest point: $mg = \frac{mv^2}{r}$</li>
+                                <li>Minimum velocity at highest point: $v_A = \sqrt{gr}$</li>
+                                <li>Critical speed: $v_c = \sqrt{gr}$</li>
+                                <li>Tension at lowest point: $T_B - mg = \frac{mv_B^2}{r}$</li>
+                                <li>Tension at lowest point: $T_B = mg + \frac{mv_B^2}{r}$</li>
+                                <li>Velocity at lowest point: $v_B = \sqrt{5gr}$</li>
+                                <li>Velocity at horizontal points: $v_X = v_Y = \sqrt{3gr}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Banking of Curved Tracks</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_banking')">Show/Hide Formulas</span>
+                        <div id="chapter5_banking" class="nested-content">
+                            <ul>
+                                <li>Horizontal component of normal force: $R \sin\theta = \frac{mv^2}{r}$</li>
+                                <li>Vertical component of normal force: $R \cos\theta = mg$</li>
+                                <li>Angle of banking: $\tan\theta = \frac{v^2}{rg}$</li>
+                                <li>Angle of banking (inverse tan): $\theta = \tan^{-1}\left(\frac{v^2}{rg}\right)$</li>
+                                <li>Maximum speed without skidding: $V_{max} = \sqrt{\mu rg}$</li>
+                                <li>Maximum speed without skidding: $V_{max} = \sqrt{\frac{\mu rg}{2\pi}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Universal Gravitation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_gravitation')">Show/Hide Formulas</span>
+                        <div id="chapter5_gravitation" class="nested-content">
+                            <ul>
+                                <li>Newton's Law: $F = G\frac{m_1m_2}{r^2}$</li>
+                                <li>Acceleration due to gravity: $g = \frac{GM}{R^2}$</li>
+                                <li>Mass of Earth (density): $M = \frac{4}{3}\pi R^3 \rho$</li>
+                                <li>Acceleration due to gravity (density): $G = \frac{4}{3}\pi R^3 \rho$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Variations in g</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_variations_g')">Show/Hide Formulas</span>
+                        <div id="chapter5_variations_g" class="nested-content">
+                            <ul>
+                                <li>Above surface: $g' = GM/(R+h)^2$</li>
+                                <li>Above surface (approximate): $g' = g\left[1-\frac{2h}{R}\right]$</li>
+                                <li>With depth: $g' = g\left[1-\frac{d}{R}\right]$</li>
+                                <li>At equator: $g_e = \frac{GM}{R_e^2}$</li>
+                                <li>At poles: $g_p = \frac{GM}{R_p^2}$</li>
+                                <li>Equator vs Poles: $g_p = g_e + 0.018~\text{ms}^{-2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Real and Apparent Weight</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_apparent_weight')">Show/Hide Formulas</span>
+                        <div id="chapter5_apparent_weight" class="nested-content">
+                            <ul>
+                                <li>Stationary/Constant velocity lift: $w' = mg$</li>
+                                <li>Accelerating upward lift: $w' = (g+a)m$</li>
+                                <li>Accelerating downward lift: $w' = (g-a)m$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Artificial Satellites</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter5_artificial_satellites')">Show/Hide Formulas</span>
+                        <div id="chapter5_artificial_satellites" class="nested-content">
+                            <ul>
+                                <li>Critical velocity: $v_{crit} = \sqrt{gR} = 7.9~\text{km s}^{-1}$</li>
+                                <li>Orbital velocity: $v = \sqrt{\frac{GM}{r}}$</li>
+                                <li>Frequency for artificial gravity: $F = \frac{1}{2\pi}\sqrt{\frac{g}{R}}$</li>
+                                <li>Time period for artificial gravity: $T = 2\pi\sqrt{\frac{R}{g}}$</li>
+                                <li>Radius of geo-stationary orbit: $r = \left(\frac{GMT^2}{4\pi^2}\right)^{1/3}$</li>
+                                <li>Kepler's Third Law: $T^2 \propto r^3$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 7: Fluid Dynamics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter7_main_content')">Show/Hide Details</span>
+            <div id="chapter7_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Density and Pressure</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_density_pressure')">Show/Hide Formulas</span>
+                        <div id="chapter7_density_pressure" class="nested-content">
+                            <ul>
+                                <li>Density: $\rho = \frac{\text{Mass}(m)}{\text{Volume}(V)}$</li>
+                                <li>Pressure (definition): $P = \frac{\text{Force}(F)}{\text{Area}(A)}$</li>
+                                <li>Pressure (fluid depth): $P = \rho gh$</li>
+                                <li>Pascal's Law: $\frac{F_1}{A_1} = \frac{F_2}{A_2}$</li>
+                                <li>Unit conversion: $1~\text{atm} = 1.013 \times 10^5~\text{Pa}$</li>
+                                <li>Unit conversion: $1~\text{bar} = 10^5~\text{Pa}$</li>
+                                <li>Unit conversion: $1~\text{torr} = 133.3~N~m^{-2}$</li>
+                                <li>Unit conversion: $1~\text{torr} = 1~\text{mm of Hg}$</li>
+                                <li>Thrust: Thrust = Pressure $\times$ Area</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Buoyancy and Floatation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_buoyancy')">Show/Hide Formulas</span>
+                        <div id="chapter7_buoyancy" class="nested-content">
+                            <ul>
+                                <li>Buoyant Force (Archimedes' Principle): $B = V\rho g$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Viscous Drag and Stokes' Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_viscous_drag')">Show/Hide Formulas</span>
+                        <div id="chapter7_viscous_drag" class="nested-content">
+                            <ul>
+                                <li>Stokes' Law: $F_D = 6\pi\eta r v$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Terminal Velocity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_terminal_velocity')">Show/Hide Formulas</span>
+                        <div id="chapter7_terminal_velocity" class="nested-content">
+                            <ul>
+                                <li>Terminal velocity (general): $v_t = \sqrt{\frac{2\rho g}{6\pi r\eta}}$</li>
+                                <li>Terminal velocity (simplified): $v_t = \left(\frac{2\rho g}{9\eta}\right)r^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Fluid Flow and Equation of Continuity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_fluid_flow')">Show/Hide Formulas</span>
+                        <div id="chapter7_fluid_flow" class="nested-content">
+                            <ul>
+                                <li>Mass flow rate: $P_1A_1V_1 = P_2A_2V_2$</li>
+                                <li>Mass flow rate (simplified): $P~av = \text{mass/time}$</li>
+                                <li>Volume flow rate: $A_1V_1 = A_2V_2$</li>
+                                <li>Volume flow rate (simplified): $AV = \text{volume/time}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Bernoulli's Equation and Applications</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter7_bernoulli')">Show/Hide Formulas</span>
+                        <div id="chapter7_bernoulli" class="nested-content">
+                            <ul>
+                                <li>Bernoulli's Equation: $P + \frac{1}{2}\rho v^2 + \rho gh = \text{constant}$</li>
+                                <li>Potential energy per unit volume: $\rho gh$</li>
+                                <li>Kinetic energy per unit volume: $\frac{1}{2}\rho v^2$</li>
+                                <li>Kinetic energy: $\frac{1}{2}mv^2$</li>
+                                <li>Pressure energy: $PV$</li>
+                                <li>Pressure energy per unit volume: $P$</li>
+                                <li>Torricelli's Theorem (Efflux Velocity): $v = \sqrt{2g(h_1-h_2)}$</li>
+                                <li>Venturimeter relation: $P_1 - P_2 = \frac{1}{2}\rho v^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 8: Waves</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter8_main_content')">Show/Hide Details</span>
+            <div id="chapter8_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Wave Properties</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_wave_properties')">Show/Hide Formulas</span>
+                        <div id="chapter8_wave_properties" class="nested-content">
+                            <ul>
+                                <li>Wave speed: $v = f\lambda$</li>
+                                <li>Particles in phase (path difference): $n\lambda$</li>
+                                <li>Particles out of phase (path difference): $(n + 1/2)\lambda$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Velocity of Sound in Air</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_sound_velocity')">Show/Hide Formulas</span>
+                        <div id="chapter8_sound_velocity" class="nested-content">
+                            <ul>
+                                <li>General Mechanical Wave: $v = \sqrt{E/\rho}$</li>
+                                <li>Newton's Formula (Isothermal): $v = \sqrt{P/\rho}$</li>
+                                <li>Laplace's Formula (Adiabatic): $v = \sqrt{\gamma P/\rho}$</li>
+                                <li>Temperature Dependence: $v_t = v_o + 0.61t$</li>
+                                <li>Ratio of speeds with temperature: $\frac{v_1}{v_2} = \sqrt{\frac{T_1}{T_2}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Superposition and Interference</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_superposition_interference')">Show/Hide Formulas</span>
+                        <div id="chapter8_superposition_interference" class="nested-content">
+                            <ul>
+                                <li>Superposition Principle: $Y_{total} = Y_1 + Y_2 + \dots + Y_n$</li>
+                                <li>Beat frequency: $f_{beat} = |f_A - f_B|$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Waves on Stretched Strings</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_stretched_strings')">Show/Hide Formulas</span>
+                        <div id="chapter8_stretched_strings" class="nested-content">
+                            <ul>
+                                <li>Speed of wave: $v = \sqrt{T/m}$</li>
+                                <li>Fundamental frequency (fixed both ends): $f_1 = \frac{1}{2l}\sqrt{\frac{T}{m}}$</li>
+                                <li>Harmonics (fixed both ends): $f_n = n f_1$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Standing Waves in Air Columns</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_air_columns')">Show/Hide Formulas</span>
+                        <div id="chapter8_air_columns" class="nested-content">
+                            <ul>
+                                <li>Length of open pipe (harmonics): $L = n\frac{\lambda}{2}$</li>
+                                <li>Length of closed pipe (harmonics): $L = (2n-1)\frac{\lambda}{4}$</li>
+                                <li>Fundamental frequency (open pipe): $f = v/2L$</li>
+                                <li>Fundamental frequency (closed pipe): $f = v/4L$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Doppler's Effect</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter8_doppler_effect')">Show/Hide Formulas</span>
+                        <div id="chapter8_doppler_effect" class="nested-content">
+                            <ul>
+                                <li>Source towards listener: $f' = \left(\frac{v}{v-u_s}\right)f$</li>
+                                <li>Source away listener: $f' = \left(\frac{v}{v+u_s}\right)f$</li>
+                                <li>Listener towards source: $f' = \left(\frac{v+u_o}{v}\right)f$</li>
+                                <li>Listener away source: $f' = \left(\frac{v-u_o}{v}\right)f$</li>
+                                <li>General (towards each other): $f' = \left(\frac{v+u_o}{v-u_s}\right)f$</li>
+                                <li>General (away from each other): $f' = \left(\frac{v-u_o}{v+u_s}\right)f$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 9: Physical Optics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter9_main_content')">Show/Hide Details</span>
+            <div id="chapter9_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Interference of Light (Young's Double Slit)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter9_interference')">Show/Hide Formulas</span>
+                        <div id="chapter9_interference" class="nested-content">
+                            <ul>
+                                <li>Optical path: $nd$</li>
+                                <li>Bright fringes (constructive): $d \sin\theta = m\lambda$</li>
+                                <li>Dark fringes (destructive): $d \sin\theta = (2m+1)\frac{\lambda}{2}$</li>
+                                <li>Position of $m^{th}$ bright fringe: $y_m = \frac{m\lambda D}{d}$</li>
+                                <li>Position of $m^{th}$ dark fringe: $y_m = \frac{(2m+1)\lambda D}{2d}$</li>
+                                <li>Wavelength from bright fringe: $\lambda = \frac{y_m d}{mD}$</li>
+                                <li>Wavelength from dark fringe: $\lambda = \frac{2y_m d}{(2m+1)D}$</li>
+                                <li>Fringe width: $F.W = \frac{\lambda D}{d}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Diffraction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter9_diffraction')">Show/Hide Formulas</span>
+                        <div id="chapter9_diffraction" class="nested-content">
+                            <ul>
+                                <li>Minima for narrow slit: $d \sin\theta = m\lambda$</li>
+                                <li>Diffraction Grating (maxima): $d \sin\theta = m\lambda$</li>
+                                <li>Grating element: $d = 1/N$</li>
+                                <li>Resolving power (grating): $RP = \frac{\lambda}{\Delta\lambda}$</li>
+                                <li>Resolving power (grating): $RP = N \times m$</li>
+                                <li>Bragg's Law: $2d \sin\theta = m\lambda$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Polarization</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter9_polarization')">Show/Hide Formulas</span>
+                        <div id="chapter9_polarization" class="nested-content">
+                            <ul>
+                                <li>Malus' Law (Intensity): $I = I_o \cos^2\theta$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 10: Optical Instruments</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter10_main_content')">Show/Hide Details</span>
+            <div id="chapter10_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Lenses and Magnification</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter10_lenses')">Show/Hide Formulas</span>
+                        <div id="chapter10_lenses" class="nested-content">
+                            <ul>
+                                <li>Power of a Lens (meters): $P = \frac{1}{f}$</li>
+                                <li>Power of a Lens (cm): $P = \frac{100}{f}$</li>
+                                <li>Combination of Lenses (Power): $P = P_1 + P_2 + \dots + P_n$</li>
+                                <li>Combination of Lenses (Focal Length): $\frac{1}{f} = \frac{1}{f_1} + \frac{1}{f_2} + \dots + \frac{1}{f_n}$</li>
+                                <li>Lens Formula: $\frac{1}{p} + \frac{1}{q} = \frac{1}{f}$</li>
+                                <li>Linear magnification: $M = \frac{q}{p}$</li>
+                                <li>Linear magnification: $M = \frac{h_i}{h_o}$</li>
+                                <li>Angular magnification: $M_a = \frac{\text{Angle formed at aided eye}}{\text{Angle formed at naked eye}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Resolving Power</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter10_resolving_power')">Show/Hide Formulas</span>
+                        <div id="chapter10_resolving_power" class="nested-content">
+                            <ul>
+                                <li>Angle of Resolution: $\alpha_{min} = 1.22 \frac{\lambda}{D}$</li>
+                                <li>Resolving power (lens): $R = \frac{D}{1.22\lambda}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Microscopes</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter10_microscopes')">Show/Hide Formulas</span>
+                        <div id="chapter10_microscopes" class="nested-content">
+                            <ul>
+                                <li>Simple Microscope Magnifying Power: $M = 1 + \frac{d}{f}$</li>
+                                <li>Compound Microscope Magnification: $M = \frac{L}{f_o}\left(1+\frac{d}{f_e}\right)$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Refraction and Speed of Light</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter10_refraction')">Show/Hide Formulas</span>
+                        <div id="chapter10_refraction" class="nested-content">
+                            <ul>
+                                <li>Refractive index of prism: $n = \frac{\sin\left(\frac{A+D_m}{2}\right)}{\sin\left(\frac{A}{2}\right)}$</li>
+                                <li>Michelson's Speed of Light: $c = 16fd$</li>
+                                <li>Index of Refraction: $n = \frac{c}{v}$</li>
+                                <li>Snell's Law: $n_1 \sin\theta_1 = n_2 \sin\theta_2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 11: Heat & Thermodynamics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter11_main_content')">Show/Hide Details</span>
+            <div id="chapter11_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Temperature and Heat Capacity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter11_temperature_heat')">Show/Hide Formulas</span>
+                        <div id="chapter11_temperature_heat" class="nested-content">
+                            <ul>
+                                <li>Heat exchange: $Q = mc\Delta T$</li>
+                                <li>Specific Heat: $c = \frac{Q}{m\Delta T}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Temperature Conversions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter11_temp_conversions')">Show/Hide Formulas</span>
+                        <div id="chapter11_temp_conversions" class="nested-content">
+                            <ul>
+                                <li>Celsius to Fahrenheit: $T_F = \frac{9}{5}T_C + 32$</li>
+                                <li>Fahrenheit to Celsius: $T_C = \frac{5}{9}(T_F - 32)$</li>
+                                <li>Celsius to Kelvin: $T_K = T_C + 273$</li>
+                                <li>Kelvin to Celsius: $T_C = T_K - 273$</li>
+                                <li>Relation between scales: $\frac{T_C - 0}{100} = \frac{T_F - 32}{180} = \frac{T_K - 273}{100}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Kinetic Theory of Gases</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter11_kmt')">Show/Hide Formulas</span>
+                        <div id="chapter11_kmt" class="nested-content">
+                            <ul>
+                                <li>RMS speed of gas molecules: $v_{rms} = \sqrt{\frac{3KT}{m}}$</li>
+                                <li>Pressure from KMT: $P = \frac{2}{3} \frac{N}{V} (K.E)_{avg}$</li>
+                                <li>Combined Gas Law: $\frac{P_1V_1}{T_1} = \frac{P_2V_2}{T_2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Laws of Thermodynamics</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter11_thermodynamics_laws')">Show/Hide Formulas</span>
+                        <div id="chapter11_thermodynamics_laws" class="nested-content">
+                            <ul>
+                                <li>Thermodynamic work (constant pressure): $W = P\Delta V$</li>
+                                <li>First Law of Thermodynamics: $\Delta Q = \Delta U + \Delta W$</li>
+                                <li>Efficiency of Carnot Engine: $\eta_c = \left(1-\frac{T_L}{T_H}\right) \times 100$</li>
+                                <li>Change in entropy: $\Delta S = \frac{\Delta Q}{T}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Molar Specific Heats and Processes</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter11_molar_specific_heats')">Show/Hide Formulas</span>
+                        <div id="chapter11_molar_specific_heats" class="nested-content">
+                            <ul>
+                                <li>Heat supplied at constant volume: $\Delta Q_v = n C_v \Delta T$</li>
+                                <li>Heat supplied at constant pressure: $\Delta Q_p = n C_p \Delta T$</li>
+                                <li>Mayer's relation: $C_p - C_v = R$</li>
+                                <li>Adiabatic index: $\gamma = \frac{C_p}{C_v}$</li>
+                                <li>Isothermal process equation: $PV=\text{constant}$</li>
+                                <li>Adiabatic process equation: $PV^\gamma=\text{constant}$</li>
+                                <li>Isochoric process relation: $\frac{P}{T}=\text{constant}$</li>
+                                <li>Isobaric process relation: $\frac{V}{T}=\text{constant}$</li>
+                                <li>Slope of Isothermal P-V curve: $\frac{\Delta P}{\Delta V} = -\frac{P}{V}$</li>
+                                <li>Slope of Adiabatic P-V curve: $\frac{\Delta P}{\Delta V} = -\gamma\frac{P}{V}$</li>
+                                <li>Isothermal Elasticity: $E=P$</li>
+                                <li>Adiabatic Elasticity: $E=\gamma P$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 12: Electrostatics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter12_main_content')">Show/Hide Details</span>
+            <div id="chapter12_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Charge and Electric Field</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_charge_field')">Show/Hide Formulas</span>
+                        <div id="chapter12_charge_field" class="nested-content">
+                            <ul>
+                                <li>Charge per unit area: $\Delta Q/\Delta A$</li>
+                                <li>Acceleration of charged particle in electric field: $a = qE/m$</li>
+                                <li>Elementary charge: $e = 1.602 \times 10^{-19}~C$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Coulomb's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_coulombs_law')">Show/Hide Formulas</span>
+                        <div id="chapter12_coulombs_law" class="nested-content">
+                            <ul>
+                                <li>Electrical Force: $F = k \frac{q_1 q_2}{r^2}$</li>
+                                <li>Coulomb's constant in vacuum: $k = 9 \times 10^9 N-m^2/C^2$</li>
+                                <li>Permittivity of free space relation: $k = 1/(4\pi\epsilon_0)$</li>
+                                <li>Permittivity of free space value: $\epsilon_0 = 8.85 \times 10^{-12} C^2/N-m^2$</li>
+                                <li>Action-reaction pair: $\vec{F}_{12} = -\vec{F}_{21}$</li>
+                                <li>Force in medium: $F' = (1/\epsilon_r)F$</li>
+                                <li>Force in medium: $F' = F/\epsilon_r$</li>
+                                <li>Relative Permittivity: $\epsilon_r = F/F'$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Field Intensity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_electric_intensity')">Show/Hide Formulas</span>
+                        <div id="chapter12_electric_intensity" class="nested-content">
+                            <ul>
+                                <li>Definition: $E = \frac{F}{q_o}$</li>
+                                <li>Due to point charge: $E = k \frac{q}{r^2}$</li>
+                                <li>Due to infinite sheet: $E = \frac{\sigma}{2\epsilon_o}$</li>
+                                <li>Between parallel plates (vacuum): $E = \frac{\sigma}{\epsilon_o}$</li>
+                                <li>Between parallel plates (dielectric): $E = \frac{\sigma}{\epsilon_r \epsilon_o}$</li>
+                                <li>Between parallel plates (dielectric): $E = \frac{\sigma}{K \epsilon_o}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Flux and Gauss's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_electric_flux_gauss')">Show/Hide Formulas</span>
+                        <div id="chapter12_electric_flux_gauss" class="nested-content">
+                            <ul>
+                                <li>Definition (vector): $\Phi_E = \vec{E} \cdot \vec{A}$</li>
+                                <li>Definition (scalar): $\Phi_E = EA\cos\theta$</li>
+                                <li>Maximum flux: $\phi_{max} = EA$ (when $\theta = 0^{\circ}$)</li>
+                                <li>Minimum flux: $\phi_{min} = 0$ (when $\theta = 90^{\circ}$)</li>
+                                <li>Gauss's Law: $\Phi_E = \frac{Q_{enclosed}}{\epsilon_o}$</li>
+                                <li>Total flux: $\phi_{total} = (1/\epsilon_o)Q$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Electric Potential</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_electric_potential')">Show/Hide Formulas</span>
+                        <div id="chapter12_electric_potential" class="nested-content">
+                            <ul>
+                                <li>Definition: $V = \frac{W}{q_o}$</li>
+                                <li>Due to point charge: $V = k \frac{q}{r}$</li>
+                                <li>Relation between E and V: $E = -\frac{\Delta V}{\Delta r}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Capacitance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_capacitance')">Show/Hide Formulas</span>
+                        <div id="chapter12_capacitance" class="nested-content">
+                            <ul>
+                                <li>Definition: $C = \frac{Q}{V}$</li>
+                                <li>Parallel plate (vacuum): $C = \frac{\epsilon_o A}{d}$</li>
+                                <li>Parallel plate (dielectric): $C = \frac{\epsilon A}{d}$</li>
+                                <li>Parallel plate (dielectric): $C = \frac{K\epsilon_o A}{d}$</li>
+                                <li>Energy stored: $U = \frac{1}{2}QV$</li>
+                                <li>Energy stored: $U = \frac{1}{2}CV^2$</li>
+                                <li>Energy stored: $U = \frac{Q^2}{2C}$</li>
+                                <li>Series combination: $\frac{1}{C_{eq}} = \frac{1}{C_1} + \frac{1}{C_2} + \dots$</li>
+                                <li>Parallel combination: $C_{eq} = C_1 + C_2 + \dots$</li>
+                                <li>RC Time Constant: $\tau = RC$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Millikan's Oil Drop Experiment</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter12_millikan')">Show/Hide Formulas</span>
+                        <div id="chapter12_millikan" class="nested-content">
+                            <ul>
+                                <li>Balanced forces: $qE = mg$</li>
+                                <li>Charge on oil drop: $q = \frac{mg}{E}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 13: Current Electricity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter13_main_content')">Show/Hide Details</span>
+            <div id="chapter13_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Current and Resistance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter13_current_resistance')">Show/Hide Formulas</span>
+                        <div id="chapter13_current_resistance" class="nested-content">
+                            <ul>
+                                <li>Current: $I = \frac{\Delta Q}{\Delta t}$</li>
+                                <li>Ohm's Law: $V = IR$</li>
+                                <li>Resistance: $R = \rho \frac{L}{A}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Resistor Combinations</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter13_resistor_combinations')">Show/Hide Formulas</span>
+                        <div id="chapter13_resistor_combinations" class="nested-content">
+                            <ul>
+                                <li>Series: $R_{eq} = R_1 + R_2 + \dots$</li>
+                                <li>Parallel: $\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Power Dissipation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter13_power_dissipation')">Show/Hide Formulas</span>
+                        <div id="chapter13_power_dissipation" class="nested-content">
+                            <ul>
+                                <li>Power: $P = VI$</li>
+                                <li>Power: $P = I^2R$</li>
+                                <li>Power: $P = \frac{V^2}{R}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Kirchhoff's Rules</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter13_kirchhoffs_rules')">Show/Hide Formulas</span>
+                        <div id="chapter13_kirchhoffs_rules" class="nested-content">
+                            <ul>
+                                <li>First Rule (Junction Rule): $\sum I = 0$</li>
+                                <li>Second Rule (Loop Rule): $\sum V = 0$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Wheatstone Bridge and Potentiometer</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter13_bridge_potentiometer')">Show/Hide Formulas</span>
+                        <div id="chapter13_bridge_potentiometer" class="nested-content">
+                            <ul>
+                                <li>Wheatstone Bridge (balance condition): $\frac{R_1}{R_2} = \frac{R_3}{R_4}$</li>
+                                <li>Potentiometer (voltage measurement): $V = kL$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 14: Electromagnetism</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter14_main_content')">Show/Hide Details</span>
+            <div id="chapter14_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Magnetic Force</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter14_magnetic_force')">Show/Hide Formulas</span>
+                        <div id="chapter14_magnetic_force" class="nested-content">
+                            <ul>
+                                <li>On current-carrying conductor (vector): $\vec{F} = I (\vec{L} \times \vec{B})$</li>
+                                <li>On current-carrying conductor (magnitude): $F = ILB \sin\theta$</li>
+                                <li>On moving charge (Lorentz Force, vector): $\vec{F} = q (\vec{v} \times \vec{B})$</li>
+                                <li>On moving charge (Lorentz Force, magnitude): $F = qvB \sin\theta$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Motion of Charge in Magnetic Field</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter14_charge_motion_b_field')">Show/Hide Formulas</span>
+                        <div id="chapter14_charge_motion_b_field" class="nested-content">
+                            <ul>
+                                <li>Radius of circular path: $r = \frac{mv}{qB}$</li>
+                                <li>Frequency of revolution (cyclotron): $f = \frac{qB}{2\pi m}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Magnetic Field and Ampere's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter14_magnetic_field_ampere')">Show/Hide Formulas</span>
+                        <div id="chapter14_magnetic_field_ampere" class="nested-content">
+                            <ul>
+                                <li>Magnetic Flux (vector): $\Phi_B = \vec{B} \cdot \vec{A}$</li>
+                                <li>Magnetic Flux (scalar): $\Phi_B = BA \cos\theta$</li>
+                                <li>Ampere's Law: $\oint \vec{B} \cdot d\vec{l} = \mu_o I_{enclosed}$</li>
+                                <li>Magnetic field (long straight wire): $B = \frac{\mu_o I}{2\pi r}$</li>
+                                <li>Magnetic field (inside solenoid): $B = \mu_o n I$</li>
+                                <li>Magnetic field (inside toroid): $B = \frac{\mu_o N I}{2\pi r}$</li>
+                                <li>Force per unit length (parallel wires): $\frac{F}{L} = \frac{\mu_o I_1 I_2}{2\pi d}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Torque on Current Loop and Galvanometer</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter14_torque_galvanometer')">Show/Hide Formulas</span>
+                        <div id="chapter14_torque_galvanometer" class="nested-content">
+                            <ul>
+                                <li>Torque on current loop (vector): $\vec{\tau} = \vec{\mu} \times \vec{B}$</li>
+                                <li>Torque on current loop (magnitude): $\tau = NIAB \sin\alpha$</li>
+                                <li>Magnetic dipole moment: $\vec{\mu} = NI\vec{A}$</li>
+                                <li>Shunt resistance (ammeter): $R_s = \frac{I_g R_g}{I - I_g}$</li>
+                                <li>Multiplier resistance (voltmeter): $R_m = \frac{V}{I_g} - R_g$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 15: Electromagnetic Induction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter15_main_content')">Show/Hide Details</span>
+            <div id="chapter15_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Magnetic Flux and Faraday's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter15_flux_faraday')">Show/Hide Formulas</span>
+                        <div id="chapter15_flux_faraday" class="nested-content">
+                            <ul>
+                                <li>Magnetic Flux (vector): $\Phi_B = \vec{B} \cdot \vec{A}$</li>
+                                <li>Magnetic Flux (scalar): $\Phi_B = BA \cos\theta$</li>
+                                <li>Faraday's Law of Induction: $\mathcal{E} = -N \frac{\Delta\Phi_B}{\Delta t}$</li>
+                                <li>Motional EMF: $\mathcal{E} = vBL \sin\theta$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Inductance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter15_inductance')">Show/Hide Formulas</span>
+                        <div id="chapter15_inductance" class="nested-content">
+                            <ul>
+                                <li>Self-induced EMF: $\mathcal{E}_L = -L \frac{\Delta I}{\Delta t}$</li>
+                                <li>Self-inductance (solenoid): $L = \frac{\mu_o N^2 A}{l}$</li>
+                                <li>Energy stored in inductor: $U = \frac{1}{2}LI^2$</li>
+                                <li>Mutually induced EMF: $\mathcal{E}_s = -M \frac{\Delta I_p}{\Delta t}$</li>
+                                <li>Mutual inductance (coaxial solenoids): $M = \frac{\mu_o N_p N_s A}{l}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>AC Generators and Transformers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter15_generators_transformers')">Show/Hide Formulas</span>
+                        <div id="chapter15_generators_transformers" class="nested-content">
+                            <ul>
+                                <li>AC Generator EMF: $\mathcal{E} = N A B \omega \sin(\omega t)$</li>
+                                <li>Maximum AC Generator EMF: $\mathcal{E}_{max} = N A B \omega$</li>
+                                <li>Transformer voltage ratio: $\frac{V_s}{V_p} = \frac{N_s}{N_p}$</li>
+                                <li>Transformer current ratio: $\frac{N_s}{N_p} = \frac{I_p}{I_s}$</li>
+                                <li>Transformer efficiency: $\eta = \frac{\text{Output Power}}{\text{Input Power}} \times 100\%$</li>
+                                <li>Transformer efficiency (power): $\eta = \frac{V_s I_s}{V_p I_p} \times 100\%$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 16: Alternating Current</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter16_main_content')">Show/Hide Details</span>
+            <div id="chapter16_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>AC Quantities</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter16_ac_quantities')">Show/Hide Formulas</span>
+                        <div id="chapter16_ac_quantities" class="nested-content">
+                            <ul>
+                                <li>Instantaneous AC current: $I = I_o \sin(\omega t + \phi)$</li>
+                                <li>Instantaneous AC voltage: $V = V_o \sin(\omega t + \phi)$</li>
+                                <li>RMS current: $I_{rms} = \frac{I_o}{\sqrt{2}}$</li>
+                                <li>RMS voltage: $V_{rms} = \frac{V_o}{\sqrt{2}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Reactance and Impedance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter16_reactance_impedance')">Show/Hide Formulas</span>
+                        <div id="chapter16_reactance_impedance" class="nested-content">
+                            <ul>
+                                <li>Ohm's Law for Resistor: $V_R = I_R R$</li>
+                                <li>Inductive Reactance: $X_L = \omega L = 2\pi f L$</li>
+                                <li>Ohm's Law for Inductor: $V_L = I_L X_L$</li>
+                                <li>Capacitive Reactance: $X_C = \frac{1}{\omega C} = \frac{1}{2\pi f C}$</li>
+                                <li>Ohm's Law for Capacitor: $V_C = I_C X_C$</li>
+                                <li>Impedance (RC series): $Z = \sqrt{R^2 + X_C^2}$</li>
+                                <li>Phase angle (RC series): $\tan\phi = \frac{X_C}{R}$</li>
+                                <li>Impedance (RL series): $Z = \sqrt{R^2 + X_L^2}$</li>
+                                <li>Phase angle (RL series): $\tan\phi = \frac{X_L}{R}$</li>
+                                <li>Impedance (RLC series): $Z = \sqrt{R^2 + (X_L - X_C)^2}$</li>
+                                <li>Phase angle (RLC series): $\tan\phi = \frac{X_L - X_C}{R}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Resonance and Power</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter16_resonance_power')">Show/Hide Formulas</span>
+                        <div id="chapter16_resonance_power" class="nested-content">
+                            <ul>
+                                <li>Resonant frequency (RLC series): $f_r = \frac{1}{2\pi\sqrt{LC}}$</li>
+                                <li>Quality Factor (Q-factor): $Q = \frac{\omega_r L}{R}$</li>
+                                <li>Quality Factor (Q-factor): $Q = \frac{1}{\omega_r C R}$</li>
+                                <li>Quality Factor (Q-factor): $Q = \frac{1}{R}\sqrt{\frac{L}{C}}$</li>
+                                <li>Power (Resistor): $P = I_{rms}^2 R$</li>
+                                <li>Power (Resistor): $P = V_{rms} I_{rms}$</li>
+                                <li>Average Power (AC): $P_{avg} = V_{rms} I_{rms} \cos\phi$</li>
+                                <li>Power Factor: $\cos\phi = \frac{R}{Z}$</li>
+                                <li>Wattless Current: $I_w = I_{rms} \sin\phi$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 17: Physics of Solids</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter17_main_content')">Show/Hide Details</span>
+            <div id="chapter17_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Stress and Strain</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter17_stress_strain')">Show/Hide Formulas</span>
+                        <div id="chapter17_stress_strain" class="nested-content">
+                            <ul>
+                                <li>Stress: $\sigma = \frac{F}{A}$</li>
+                                <li>Longitudinal Strain: $\epsilon_L = \frac{\Delta L}{L_o}$</li>
+                                <li>Volumetric Strain: $\epsilon_V = \frac{\Delta V}{V_o}$</li>
+                                <li>Shear Strain: $\epsilon_S = \tan\theta$</li>
+                                <li>Shear Strain (approximate): $\epsilon_S \approx \theta$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Moduli of Elasticity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter17_moduli')">Show/Hide Formulas</span>
+                        <div id="chapter17_moduli" class="nested-content">
+                            <ul>
+                                <li>Hooke's Law: $\sigma = Y \epsilon$</li>
+                                <li>Young's Modulus (definition): $Y = \frac{\text{Tensile Stress}}{\text{Longitudinal Strain}}$</li>
+                                <li>Young's Modulus (formula): $Y = \frac{F/A}{\Delta L/L_o}$</li>
+                                <li>Young's Modulus (simplified): $Y = \frac{FL_o}{A\Delta L}$</li>
+                                <li>Bulk Modulus (definition): $B = \frac{\text{Volumetric Stress}}{\text{Volumetric Strain}}$</li>
+                                <li>Bulk Modulus (formula): $B = \frac{-\Delta P}{\Delta V/V_o}$</li>
+                                <li>Compressibility: $K = 1/B$</li>
+                                <li>Shear Modulus (definition): $G = \frac{\text{Shear Stress}}{\text{Shear Strain}}$</li>
+                                <li>Shear Modulus (formula): $G = \frac{F/A}{\theta}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 18: Electronics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter18_main_content')">Show/Hide Details</span>
+            <div id="chapter18_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Transistors and Amplifiers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter18_transistors_amplifiers')">Show/Hide Formulas</span>
+                        <div id="chapter18_transistors_amplifiers" class="nested-content">
+                            <ul>
+                                <li>Current gain ($\beta$ for common emitter): $\beta = \frac{\Delta I_C}{\Delta I_B}$</li>
+                                <li>Voltage gain (transistor): $A_V = \beta \frac{R_C}{R_{in}}$</li>
+                                <li>Inverting Amplifier Gain: $A_V = -\frac{R_f}{R_{in}}$</li>
+                                <li>Non-Inverting Amplifier Gain: $A_V = 1 + \frac{R_f}{R_{in}}$</li>
+                                <li>Adder/Summing Amplifier Output: $V_{out} = -R_f \left( \frac{V_1}{R_1} + \frac{V_2}{R_2} + \dots \right)$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Logic Gates (Boolean Algebra)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter18_logic_gates')">Show/Hide Formulas</span>
+                        <div id="chapter18_logic_gates" class="nested-content">
+                            <ul>
+                                <li>AND Gate: $Y = A \cdot B$</li>
+                                <li>OR Gate: $Y = A + B$</li>
+                                <li>NOT Gate: $Y = \bar{A}$</li>
+                                <li>NAND Gate: $Y = \overline{A \cdot B}$</li>
+                                <li>NOR Gate: $Y = \overline{A + B}$</li>
+                                <li>XOR Gate: $Y = A \oplus B$</li>
+                                <li>XOR Gate: $Y = A\bar{B} + \bar{A}B$</li>
+                                <li>XNOR Gate: $Y = \overline{A \oplus B}$</li>
+                                <li>XNOR Gate: $Y = A B + \bar{A}\bar{B}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 19: Dawn of Modern Physics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter19_main_content')">Show/Hide Details</span>
+            <div id="chapter19_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Relativity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_relativity')">Show/Hide Formulas</span>
+                        <div id="chapter19_relativity" class="nested-content">
+                            <ul>
+                                <li>Mass-Energy relation: $E=mc^2$</li>
+                                <li>Relativistic Mass: $m=\frac{m_o}{\sqrt{1-\frac{v^2}{c^2}}}$</li>
+                                <li>Lorentz Contraction (Length): $l=l_o\sqrt{1-\frac{v^2}{c^2}}$</li>
+                                <li>Time Dilation: $t=\frac{t_o}{\sqrt{1-\frac{v^2}{c^2}}}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Black Body Radiation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_black_body_radiation')">Show/Hide Formulas</span>
+                        <div id="chapter19_black_body_radiation" class="nested-content">
+                            <ul>
+                                <li>Wien's Displacement Law: $\lambda_{max} T = 2.9 \times 10^{-3}~m K$</li>
+                                <li>Stefan-Boltzmann Law: $E = \sigma T^4$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Photoelectric Effect</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_photoelectric_effect')">Show/Hide Formulas</span>
+                        <div id="chapter19_photoelectric_effect" class="nested-content">
+                            <ul>
+                                <li>Photon energy: $E=hf$</li>
+                                <li>Photon energy: $E=\frac{hc}{\lambda}$</li>
+                                <li>Photon momentum: $p=\frac{h}{\lambda}$</li>
+                                <li>Photon momentum: $p=mc$</li>
+                                <li>Photon momentum: $p=\frac{hf}{c}$</li>
+                                <li>Einstein's Photoelectric Equation: $K.E_{max} = hf - \phi_o$</li>
+                                <li>Einstein's Photoelectric Equation: $K.E_{max} = hf - hf_o$</li>
+                                <li>Einstein's Photoelectric Equation: $K.E_{max} = h(f-f_o)$</li>
+                                <li>Stopping potential relation: $eV_o = K.E_{max}$</li>
+                                <li>Stopping potential relation: $eV_o = \frac{1}{2}mv_{max}^2$</li>
+                                <li>Work function: $\phi_o = hf_o$</li>
+                                <li>Work function: $\phi_o = \frac{hc}{\lambda_o}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Compton Effect</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_compton_effect')">Show/Hide Formulas</span>
+                        <div id="chapter19_compton_effect" class="nested-content">
+                            <ul>
+                                <li>Compton shift: $\Delta\lambda = \lambda_f - \lambda_i$</li>
+                                <li>Compton shift: $\Delta\lambda = \frac{h}{m_o c}(1-\cos\theta)$</li>
+                                <li>Compton wavelength: $\frac{h}{m_o c} = 2.43 \times 10^{-12}~m$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Pair Production and Annihilation</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_pair_production')">Show/Hide Formulas</span>
+                        <div id="chapter19_pair_production" class="nested-content">
+                            <ul>
+                                <li>Pair production energy: $hf = 2m_o c^2 + K.E_{e^-} + K.E_{e^+}$</li>
+                                <li>Rest mass energy of electron/positron: $m_o c^2 = 0.51~MeV$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>De-Broglie Wavelength and Uncertainty Principle</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter19_debroglie_uncertainty')">Show/Hide Formulas</span>
+                        <div id="chapter19_debroglie_uncertainty" class="nested-content">
+                            <ul>
+                                <li>De-Broglie wavelength: $\lambda = \frac{h}{mv}$</li>
+                                <li>De-Broglie wavelength: $\lambda = \frac{h}{p}$</li>
+                                <li>Davisson and Germer wavelength: $\lambda = \frac{h}{\sqrt{2mVe}}$</li>
+                                <li>Heisenberg's Uncertainty Principle (Position-Momentum): $\Delta p \cdot \Delta x \approx h$</li>
+                                <li>Heisenberg's Uncertainty Principle (Energy-Time): $\Delta E \cdot \Delta t \approx h$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 20: Atomic Spectra</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter20_main_content')">Show/Hide Details</span>
+            <div id="chapter20_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Hydrogen Spectrum</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter20_hydrogen_spectrum')">Show/Hide Formulas</span>
+                        <div id="chapter20_hydrogen_spectrum" class="nested-content">
+                            <ul>
+                                <li>General formula: $\frac{1}{\lambda} = R \left(\frac{1}{p^2} - \frac{1}{n^2}\right)$</li>
+                                <li>Rydberg's constant: $R = 1.0974 \times 10^7~m^{-1}$</li>
+                                <li>Lyman Series ($n=2$ longest wavelength): $\lambda = \frac{4}{3R} = 1216~\text{Å}$</li>
+                                <li>Lyman Series ($n=\infty$ shortest wavelength): $\lambda = \frac{1}{R} = 912~\text{Å}$</li>
+                                <li>Balmer Series ($n=3$ longest wavelength): $\lambda = \frac{36}{5R} = 6563~\text{Å}$</li>
+                                <li>Balmer Series ($n=\infty$ shortest wavelength): $\lambda = \frac{4}{R} = 3648~\text{Å}$</li>
+                                <li>Paschen Series ($n=4$ longest wavelength): $\lambda = \frac{144}{7R} = 18761.1~\text{Å}$</li>
+                                <li>Paschen Series ($n=\infty$ shortest wavelength): $\lambda = \frac{9}{R} = 8208~\text{Å}$</li>
+                                <li>Bracket Series ($n=5$ longest wavelength): $\lambda = \frac{400}{9R} = 40533.3~\text{Å}$</li>
+                                <li>Bracket Series ($n=\infty$ shortest wavelength): $\lambda = \frac{16}{R} = 14592~\text{Å}$</li>
+                                <li>Pfund Series ($n=6$ longest wavelength): $\lambda = \frac{900}{11R} = 74618.18~\text{Å}$</li>
+                                <li>Pfund Series ($n=\infty$ shortest wavelength): $\lambda = \frac{25}{R} = 22800~\text{Å}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Bohr's Model</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter20_bohr_model')">Show/Hide Formulas</span>
+                        <div id="chapter20_bohr_model" class="nested-content">
+                            <ul>
+                                <li>Angular momentum quantization: $mvr_n = \frac{nh}{2\pi}$</li>
+                                <li>Radius of $n^{th}$ orbit: $r_n = \frac{n^2 h^2}{4\pi^2 m e^2 k}$</li>
+                                <li>Radius of $n^{th}$ orbit: $r_n = r_o n^2$</li>
+                                <li>Bohr's Radius ($n=1$): $r_o = 0.53~\text{Å}$</li>
+                                <li>Energy of electron in $n^{th}$ orbit: $E_n = KE + PE$</li>
+                                <li>Energy of electron in $n^{th}$ orbit: $E_n = -\frac{ke^2}{2r_n}$</li>
+                                <li>Energy of electron in $n^{th}$ orbit: $E_n = -\frac{E_o}{n^2}$</li>
+                                <li>Ground state energy: $E_o = \frac{2\pi^2 m k^2 e^4}{h^2}$</li>
+                                <li>Ground state energy: $E_o = 13.6~eV$</li>
+                                <li>Energy transition: $\Delta E = E_p - E_q$</li>
+                                <li>Energy transition: $\Delta E = hf$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>X-Rays</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter20_xrays')">Show/Hide Formulas</span>
+                        <div id="chapter20_xrays" class="nested-content">
+                            <ul>
+                                <li>Characteristic X-ray energy ($K_\alpha$): $hf_{K\alpha} = E_L - E_K$</li>
+                                <li>Characteristic X-ray energy ($M_\alpha$): $hf_{M\alpha} = E_M - E_K$</li>
+                                <li>Continuous X-ray maximum frequency: $V_e = hf_{max}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Chapter 21: Nuclear Physics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('chapter21_main_content')">Show/Hide Details</span>
+            <div id="chapter21_main_content" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Nuclear Composition and Properties</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_nuclear_composition')">Show/Hide Formulas</span>
+                        <div id="chapter21_nuclear_composition" class="nested-content">
+                            <ul>
+                                <li>Number of neutrons: $N = A - Z$</li>
+                                <li>Mass of electron: $0.00055~\text{a.m.u}$</li>
+                                <li>Mass of proton: $1.007276~\text{a.m.u}$</li>
+                                <li>Mass of neutron: $1.008665~\text{a.m.u}$</li>
+                                <li>Mass of deuteron: $2.014102~\text{a.m.u}$</li>
+                                <li>Mass of helium nucleus: $4.002603~\text{a.m.u}$</li>
+                                <li>Atomic mass unit to MeV: $1~\text{a.m.u} = 931~MeV$</li>
+                                <li>Mass defect: $\Delta m = \sum \text{masses of nucleons} - \text{mass of nucleus}$</li>
+                                <li>Mass defect for deuterium: $\Delta m = 0.002388~\text{a.m.u}$</li>
+                                <li>Binding Energy: $E = \Delta m \times 931~MeV$</li>
+                                <li>Binding Energy (expanded): $E = [Z m_p + (A-Z)m_n - m_{nucleus}] \times 931~MeV$</li>
+                                <li>Binding Energy for deuterium: $2.24~MeV$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Nuclear Forces</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_nuclear_forces')">Show/Hide Formulas</span>
+                        <div id="chapter21_nuclear_forces" class="nested-content">
+                            <ul>
+                                <li>Coulomb's repulsive force: $F_c = k \frac{e^2}{r^2}$</li>
+                                <li>Newton's attraction force: $F_g = G \frac{m^2}{r^2}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Radioactive Decay</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_radioactive_decay')">Show/Hide Formulas</span>
+                        <div id="chapter21_radioactive_decay" class="nested-content">
+                            <ul>
+                                <li>$\alpha$-decay: $^A_Z X \to ^{A-4}_{Z-2} Y + ^4_2He$</li>
+                                <li>$\beta^-$-decay: $^A_Z X \to ^A_{Z+1} Y + ^0_{-1}e + \bar{\nu}$</li>
+                                <li>$\beta^+$-decay: $^A_Z X \to ^A_{Z-1} Y + ^0_{+1}e + \nu$</li>
+                                <li>$\gamma$-decay: $^A_Z X^* \to ^A_Z X + \gamma$</li>
+                                <li>Radioactive decay law: $\Delta N/\Delta t = -\lambda N$</li>
+                                <li>Radioactive decay (activity): $N_t = N_o e^{-\lambda t}$</li>
+                                <li>Half-life: $T_{1/2} = 0.693/\lambda$</li>
+                                <li>Mean life: $T = 1/\lambda$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Radiation Exposure and Units</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_radiation_exposure')">Show/Hide Formulas</span>
+                        <div id="chapter21_radiation_exposure" class="nested-content">
+                            <ul>
+                                <li>Absorbed Dose: $D = \frac{E}{m}$</li>
+                                <li>Equivalent Dose: $H = D \times \text{RBE}$</li>
+                                <li>Becquerel (unit of activity): $1~Bq = 1~\text{disintegration per second}$</li>
+                                <li>Curie (unit of activity): $1~Ci = 3.7 \times 10^{10}~Bq$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Nuclear Fission and Fusion</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_fission_fusion')">Show/Hide Formulas</span>
+                        <div id="chapter21_fission_fusion" class="nested-content">
+                            <ul>
+                                <li>D-D Reaction: $^2_1H + ^2_1H \to ^3_2He + ^1_0n + 3.3~MeV$</li>
+                                <li>D-T Reaction: $^2_1H + ^3_1H \to ^4_2He + ^1_0n + 17.6~MeV$</li>
+                                <li>Energy from 1 atom of U-235: $200~MeV$</li>
+                                <li>Energy from 1 kg of U-235: $5.12 \times 10^{26}~MeV$</li>
+                                <li>Time for one fission: $\sim 10^{-8}~s$</li>
+                                <li>Time for 60 fissions: $\sim 0.6~\mu s$</li>
+                                <li>Efficiency of petrol engine: $\eta \approx 25\% \text{ to } 30\%$</li>
+                                <li>Efficiency of diesel engine: $\eta \approx 35\% \text{ to } 40\%$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Mass Spectrograph</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('chapter21_mass_spectrograph')">Show/Hide Formulas</span>
+                        <div id="chapter21_mass_spectrograph" class="nested-content">
+                            <ul>
+                                <li>Radius of path: $r = \frac{\sqrt{2Vm}}{B^2e}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+</body>
+</html>

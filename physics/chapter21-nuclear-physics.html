@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 21: Nuclear Physics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 21: Nuclear Physics</h1>
+
+    <ul>
+        <li>
+            <h2>Atomic Models</h2>
+            <span class="toggle-button" onclick="toggleVisibility('atomicModelsMainContent')">Show/Hide Details</span>
+            <div id="atomicModelsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>J.J. Thomson's Model of Atom</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('thomsonModelSubContent')">Show/Hide Details</span>
+                        <div id="thomsonModelSubContent" class="content">
+                            <ul>
+                                <li>Atom is a neutral whole, negative electrons embedded in positive nucleus.</li>
+                                <li>Most of atom is empty.</li>
+                                <li>No static equilibrium between electron and positive charge.</li>
+                                <li>Density of atom is not uniform.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Rutherford's Atomic Model</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('rutherfordModelSubContent')">Show/Hide Details</span>
+                        <div id="rutherfordModelSubContent" class="content">
+                            <ul>
+                                <li>Most of atom is empty.</li>
+                                <li>Neutral part is tiny and positively charged (nucleus).</li>
+                                <li>Electrons revolve about nucleus in circular orbits.</li>
+                                <li>Almost whole mass concentrated in nucleus (non-uniform density).</li>
+                                <li>Objections:
+                                    <ul>
+                                        <li>Revolving electrons should continuously emit energy, leading to continuous spectrum (instead of line spectrum).</li>
+                                        <li>Atom should collapse.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Bohr's Atomic Model</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bohrModelAtomicSubContent')">Show/Hide Details</span>
+                        <div id="bohrModelAtomicSubContent" class="content">
+                            <ul>
+                                <li>Electron can revolve only in orbits where angular momentum is integral multiple of $\frac{h}{2\pi}$.</li>
+                                <li>Such orbits are called allowed orbits or stationary states.</li>
+                                <li>As long as electron remains revolving in its allowed orbit, energy remains constant.</li>
+                                <li>When electron jumps between two allowed orbits, it radiates energy in form of photon: $\Delta E = E_2 - E_1 = hf$.</li>
+                                <li>Objections:
+                                    <ul>
+                                        <li>Electronic orbits are not circular.</li>
+                                        <li>Fine structure of atomic spectra could not be explained.</li>
+                                        <li>Effect of nuclear motion on atomic spectra is not made clear.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Nucleus & Its Composition</h2>
+            <span class="toggle-button" onclick="toggleVisibility('nucleusCompositionContent')">Show/Hide Details</span>
+            <div id="nucleusCompositionContent" class="content">
+                <ul>
+                    <li>Nucleus is a tiny region where almost all mass of atom is confined.</li>
+                    <li>Nucleus is a lump of mass or an aggregate of particles.</li>
+                    <li>Size of atom is $10^{-10}~m$, nucleus is $10^{-14}~m$.</li>
+                    <li>Nucleus composed of neutron and proton (nucleons).</li>
+                    <li>$Z$: number of electrons or protons (charge number).</li>
+                    <li>$A$: sum of proton and neutron (mass number).</li>
+                    <li>Number of neutrons $N = A - Z$.</li>
+                    <li>Small atom $N=Z$, heavy atom $N>Z$.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Discovery of Nucleons</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nucleonDiscoverySubContent')">Show/Hide Details</span>
+                        <div id="nucleonDiscoverySubContent" class="content">
+                            <ul>
+                                <li>Proton: By Rutherford ($^4_2He + ^{14}_7N \to ^{17}_8O + ^1_1H$).</li>
+                                <li>Neutron: By Chadwick ($^4_2He + ^9_4Be \to ^{12}_6C + ^1_0n$).</li>
+                                <li>Hydrogen (simple hydrogen) is the only atom whose nucleus contains no neutron.</li>
+                                <li>Most common nucleus, number of particle existing in nucleus is 37.</li>
+                                <li>Mass of nucleus is roughly equal to sum of masses of nucleons.</li>
+                                <li>Unit of mass at atomic level is a.m.u. ($1~\text{a.m.u} = 1.66 \times 10^{-27}~kg$).</li>
+                                <li>According to $E=mc^2$: $1~\text{a.m.u} = 931~MeV$.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Particle</th>
+                                        <th>Symbol</th>
+                                        <th>Mass (in a.m.u)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Electron</td>
+                                        <td>$-e^0$</td>
+                                        <td>$0.00055~\text{a.m.u}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Proton</td>
+                                        <td>$^1_1H$</td>
+                                        <td>$1.007276~\text{a.m.u}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Neutron</td>
+                                        <td>$^1_0n$</td>
+                                        <td>$1.008665~\text{a.m.u}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Deuteron</td>
+                                        <td>$^2_1H$</td>
+                                        <td>$2.014102~\text{a.m.u}$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Helium nucleus</td>
+                                        <td>$^4_2He$</td>
+                                        <td>$4.002603~\text{a.m.u}$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Isotopes</h2>
+            <span class="toggle-button" onclick="toggleVisibility('isotopesContent')">Show/Hide Details</span>
+            <div id="isotopesContent" class="content">
+                <ul>
+                    <li>Nuclei of an element having same atomic number but different mass number.</li>
+                    <li>Same number of protons.</li>
+                    <li>Different number of neutrons.</li>
+                    <li>Different chemical but same physical properties.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mass Spectrograph</h2>
+            <span class="toggle-button" onclick="toggleVisibility('massSpectrographContent')">Show/Hide Details</span>
+            <div id="massSpectrographContent" class="content">
+                <ul>
+                    <li>Electromagnetic instrument for measurement of masses of isotopes.</li>
+                    <li>Principle: Radius of path described by charged ion in mass-spectrometer is $r = \frac{\sqrt{2Vm}}{B^2e}$.</li>
+                    <li>$V$: potential difference, $m$: mass, $B$: magnetic field, $e$: charge.</li>
+                    <li>Mass spectrograph sorts out positive ions.</li>
+                    <li>Centripetal forces of magnetic field provide isotopes a suitable radius to bend about.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Nuclear Forces</h2>
+            <span class="toggle-button" onclick="toggleVisibility('nuclearForcesMainContent')">Show/Hide Details</span>
+            <div id="nuclearForcesMainContent" class="content">
+                <ul>
+                    <li>Nucleus contains protons that repel each other, may cause destruction of nucleus.</li>
+                    <li>Two classical forces operating in nucleus:
+                        <ul>
+                            <li>Coulomb's repulsive force: $F_c = k \frac{e^2}{r^2}$.</li>
+                            <li>Newton's attraction force: $F_g = G \frac{m^2}{r^2}$.</li>
+                        </ul>
+                    </li>
+                    <li>Classical forces are unable to give stability to the nucleus.</li>
+                    <li>Strong nuclear force (binding force): Force which has binding effect on nucleons to give stability of nucleus.</li>
+                    <li>$7.2~MeV$ energy is required to add 1 proton into a nucleus of 50 protons.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Properties of Strong Nuclear Force</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('strongNuclearForcePropertiesSubContent')">Show/Hide Details</span>
+                        <div id="strongNuclearForcePropertiesSubContent" class="content">
+                            <ul>
+                                <li>Does not obey inverse square law.</li>
+                                <li>Strongest force, range equal to nuclear diameter ($10^{-14}~m$).</li>
+                                <li>Always attractive force, has binding effect inside nucleus.</li>
+                                <li>Attractive only within nucleus while strong force of repulsion is outside nucleus (because of Coulomb's repulsive force).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mass Defect & Binding Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('massDefectBindingEnergyContent')">Show/Hide Details</span>
+            <div id="massDefectBindingEnergyContent" class="content">
+                <ul>
+                    <li><strong>Mass Defect ($\Delta m$):</strong> Difference between mass of nucleus and sum of masses of its nucleons.</li>
+                    <li>$\Delta m = \sum \text{masses of nucleons} - \text{mass of nucleus}$.</li>
+                    <li>For deuterium ($^2_1H$), $\Delta m = 0.002388~\text{a.m.u}$.</li>
+                    <li><strong>Binding Energy (B.E.):</strong> Mass defect converted into energy. It is liberated in form of photon.</li>
+                    <li>$E = \Delta m \times 931~MeV = [Z m_p + (A-Z)m_n - m_{nucleus}] \times 931~MeV$.</li>
+                    <li>After liberation of binding energy, nucleus becomes stable. E.g., B.E. for deuterium is $2.24~MeV$.</li>
+                    <li>When energy equal to binding energy is provided to nucleus, it dissociates into nucleons.</li>
+                    <li>Binding energy per nucleon (B.E./A) is maximum for Iron (Fe) at $A=56$.</li>
+                    <li>$\Delta m / A$ is called packing fraction.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Radioactivity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radioactivityMainContent')">Show/Hide Details</span>
+            <div id="radioactivityMainContent" class="content">
+                <ul>
+                    <li>Discovered by Becquerel.</li>
+                    <li>Nuclei having $Z > 82$ are unstable and emit $\alpha, \beta, \gamma$ rays.</li>
+                    <li>Some radioactive elements: Po ($Z=84$), Rd ($Z=88$), U ($Z=92$).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Types of Decay</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('decayTypesSubContent')">Show/Hide Details</span>
+                        <div id="decayTypesSubContent" class="content">
+                            <h4>$\alpha$-decay:</h4>
+                            <ul>
+                                <li>Charge number (Z) decreases by 2, mass number (A) by 4.</li>
+                                <li>$^A_Z X \to ^{A-4}_{Z-2} Y + ^4_2He$.</li>
+                                <li>Example: $^{238}_{92}U \to ^{234}_{90}Th + ^4_2He + 4.3~MeV$.</li>
+                                <li>Interaction of $\alpha$-Rays:
+                                    <ul>
+                                        <li>Mechanical collision ($\alpha$-particle directly hits electron).</li>
+                                        <li>Coulomb's interaction (electrostatic interaction).</li>
+                                        <li>Mode of ionization by Coulomb's interaction dominates over direct collision.</li>
+                                        <li>Path of ionization followed by $\alpha$-rays is straight and continuous because of its high ionization power and large mass.</li>
+                                        <li>During ionization, $\alpha$-particle continuously loses its energy, and velocity decreases.</li>
+                                        <li>$7.7~MeV~\alpha$-particle produces $2 \times 10^5$ ion pairs before stopping.</li>
+                                        <li>When $\alpha$-particle has spent all its energy, it absorbs two electrons from surroundings and becomes a neutral He atom.</li>
+                                        <li>Range of $\alpha$-particle in air is small due to intense ionization.</li>
+                                        <li>$7.7~MeV~\alpha$-particle has $7~cm$ range in air at S.T.P.</li>
+                                        <li>Range of $7.7~MeV~\alpha$-particle in aluminum is only $0.04~mm$.</li>
+                                        <li>$\alpha$-particle produces disintegration in nuclei of some atoms if they have high energy.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h4>$\beta$-particle decay:</h4>
+                            <ul>
+                                <li>Electron or positron coming from nucleus.</li>
+                                <li><strong>$\beta^-$-decay:</strong> Only charge number (Z) increases by 1.
+                                    <ul>
+                                        <li>$^A_Z X \to ^A_{Z+1} Y + ^0_{-1}e + \bar{\nu}$.</li>
+                                        <li>Prototype is decay of neutron itself: $^1_0n \to ^1_1p + ^0_{-1}e + \bar{\nu}$.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>$\beta^+$-decay:</strong> Only charge number (Z) decreases by 1.
+                                    <ul>
+                                        <li>$^A_Z X \to ^A_{Z-1} Y + ^0_{+1}e + \nu$.</li>
+                                        <li>Prototype is decay of proton itself: $^1_1p \to ^1_0n + ^0_{+1}e + \nu$.</li>
+                                    </ul>
+                                </li>
+                                <li>Weak interaction only appears in $\beta$-decay.</li>
+                                <li>Interaction of $\beta$-Rays:
+                                    <ul>
+                                        <li>Fast electrons or positrons coming from nucleus.</li>
+                                        <li>Range of $\beta$-particle is larger than that of $\alpha$-particle by a factor of 100.</li>
+                                        <li>Ionization of $\beta$-particle is smaller than that of $\alpha$ (100 times less).</li>
+                                        <li>Mass of $\beta$-particle is equal to that of an electron.</li>
+                                        <li>Charge of $\beta$-particle is $1.6 \times 10^{-19}~C$ (positive for $\beta^+$, negative for $\beta^-$).</li>
+                                        <li>$\beta$-particle does ionization due to electrostatic repulsion (in case of $\beta^-$) and attraction (in case of $\beta^+$).</li>
+                                        <li>Ionization path of $\beta$ is broken and zigzag due to its smaller mass.</li>
+                                        <li>Ionization by head-on-collision is very rare.</li>
+                                        <li>$\beta$-particle loses almost all its energy in a single encounter.</li>
+                                        <li>Because of lesser ionization encounters, penetration of $\beta$ is 100 times larger than that of $\alpha$-particle of same energy.</li>
+                                        <li>$3~MeV~\beta$-particle can pass through $6.5~mm$ aluminum foil.</li>
+                                        <li>$\beta$-particle can produce fluorescence.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h4>$\gamma$-decay:</h4>
+                            <ul>
+                                <li>Due to de-excitation of nucleus.</li>
+                                <li>$^A_Z X^* \to ^A_Z X + \gamma$. (* indicates excited state).</li>
+                                <li>Interaction of $\gamma$-Rays:
+                                    <ul>
+                                        <li>$\gamma$-rays being photons can't be stopped by matter (lead can be used as a shield because of its high electron density).</li>
+                                        <li>$\gamma$-rays have shorter wavelength than X-rays.</li>
+                                        <li>$\gamma$-particles lose their energy by: Compton effect, Photoelectric effect, Pair production.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Type of Radiation</th>
+                                        <th>Alpha particle</th>
+                                        <th>Beta particle</th>
+                                        <th>Gamma ray</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Symbol</td>
+                                        <td>$\alpha$ or $^4_2He$</td>
+                                        <td>$\beta$ or $^0_{-1}e$</td>
+                                        <td>$\gamma$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mass (atomic mass units)</td>
+                                        <td>4</td>
+                                        <td>1/2000</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Charge</td>
+                                        <td>+2</td>
+                                        <td>-1</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Speed</td>
+                                        <td>slow</td>
+                                        <td>fast</td>
+                                        <td>very fast (speed of light)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ionizing ability</td>
+                                        <td>high</td>
+                                        <td>medium</td>
+                                        <td>low</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penetrating power</td>
+                                        <td>low</td>
+                                        <td>medium</td>
+                                        <td>high</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Stopped by:</td>
+                                        <td>paper</td>
+                                        <td>aluminium</td>
+                                        <td>lead</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Half-Life of Elements ($T_{1/2}$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('halfLifeContent')">Show/Hide Details</span>
+                        <div id="halfLifeContent" class="content">
+                            <ul>
+                                <li>Time period in which half of the radioactive atoms decay.</li>
+                                <li>Random process, depends on element, not affected by physical/chemical change or temperature.</li>
+                                <li>Extremely Short Half-Life: micro or nano seconds.</li>
+                                <li>Moderate Half-Life: minutes.</li>
+                                <li>Long Half-Life: years.</li>
+                                <li>$T_{1/2} = 0.693/\lambda$. ($\lambda$: decay constant).</li>
+                                <li>Decay constant depends upon nature of material.</li>
+                                <li>Decay curve shows radioactive element decay exponentially.</li>
+                                <li>Half-life is used to identify an atom.</li>
+                                <li>Laws of Radioactivity:
+                                    <ul>
+                                        <li>$\Delta N/\Delta t \propto N$.</li>
+                                        <li>$\Delta N/\Delta t = -\lambda N$.</li>
+                                        <li>$N_t = N_o e^{-\lambda t}$.</li>
+                                        <li>$T_{1/2} = \frac{1}{\lambda} \ln 2$.</li>
+                                    </ul>
+                                </li>
+                                <li>Mean life = $T = 1/\lambda$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Interaction of Radiation with Matter</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('radiationInteractionContent')">Show/Hide Details</span>
+                        <div id="radiationInteractionContent" class="content">
+                            <ul>
+                                <li>$\alpha, \beta, \gamma$ rays are nuclear radiations.</li>
+                                <li>Interaction depends on: mass of particle, charge of particle, energy of particle, density of medium, ionization potentials of atoms of medium.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Radiation Detectors</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radiationDetectorsMainContent')">Show/Hide Details</span>
+            <div id="radiationDetectorsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Wilson Cloud Chamber</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('wilsonCloudChamberSubContent')">Show/Hide Details</span>
+                        <div id="wilsonCloudChamberSubContent" class="content">
+                            <ul>
+                                <li>Invented by C.T.R Wilson in 1911.</li>
+                                <li>Principle: Super saturated droplets prefer to condense on ions or dust particles (formation of clouds).</li>
+                                <li>Construction: Circular base metal plate with hole in center, another metal plate with black felt pad, Perspex or glass dome.</li>
+                                <li>Procedure: Adiabatic expansion produces super-saturated droplets. Nuclear radiation ionizes gas, water vapors condense on ions, reflecting light to make path of ionizing particle visible. High-speed camera photographs track.</li>
+                                <li>Track of Ionizing Particle:
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Name of Particle</th>
+                                                <th>Shape of Track</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>$\alpha$-particle</td>
+                                                <td>Solid and continuous</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\beta$-particle</td>
+                                                <td>Zigzag and discontinuous</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\gamma$-particle</td>
+                                                <td>No definite track</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li>By applying magnetic field, $\alpha, \beta$ particles deviate from original path.</li>
+                                <li>By measuring radius of curvature, can measure e/m ratio of $\alpha, \beta$ particles.</li>
+                                <li>Length of cloud tracks is proportional to energy.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Geiger-Muller Counter (GM Counter)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('gmCounterSubContent')">Show/Hide Details</span>
+                        <div id="gmCounterSubContent" class="content">
+                            <ul>
+                                <li>Invented by Geiger and Muller.</li>
+                                <li>Detects and measures $\alpha, \beta, \gamma$ radiation. Cannot detect $\alpha$-particles (due to short range).</li>
+                                <li>Construction: Metal tube (cathode) containing inert gas (argon or alcohol or bromine and neon) at 0.1 atmospheric pressure. Thin wire (anode) co-axial with metallic tube.</li>
+                                <li>Procedure: Nuclear radiation ionizes halogen gas. Positive ions move towards negative metallic plate, negative ions towards positive wire. Electrons released by nuclear radiation rush towards positive wire, knocking out electrons from atoms. Avalanche of electrons, hence current pulse. Current pulse detected across $10^9~\Omega$ resistor.</li>
+                                <li>Quenching of Discharge: Positive ions on metal tube pull out electrons. These electrons can excite atoms, which on returning to ground state emit photons, which eject photoelectrons under photoelectric effect. To avoid photoelectrons, use quenching.</li>
+                                <li>Quenching achieved by:
+                                    <ol>
+                                        <li>Lowering voltage below critical value.</li>
+                                        <li>Adding bromine gas into principal gas (neon). Bromine is lower than neon, ions of quenching gas reach cathode before principal gas ions. When they reach cathode, they capture electron and become neutral molecules. Following neutralization, excess energy of quenching molecules is dissipated in dissociation of molecules rather than in release of electrons.</li>
+                                    </ol>
+                                </li>
+                                <li>GM counter can be used to study $\beta, \gamma$ effectively.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Solid State Detector</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('solidStateDetectorSubContent')">Show/Hide Details</span>
+                        <div id="solidStateDetectorSubContent" class="content">
+                            <ul>
+                                <li>Most sensitive detector capable of detecting three $\alpha, \beta, \gamma$-rays.</li>
+                                <li>Construction: Mainly consists of reverse biased diode.</li>
+                                <li>Procedure: When radiation falls on diode, it causes release of electrons, creating some sort of conduction path. Voltage caused due to flow of electrons is measured.</li>
+                                <li>Advantages: Compact size, very fast, no need of quenching, portable, low energy utilization (3 eV $\to$ 4 eV of energy).</li>
+                                <li>Can detect $\alpha, \beta, \gamma$ rays.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Nuclear Fission</h2>
+            <span class="toggle-button" onclick="toggleVisibility('nuclearFissionMainContent')">Show/Hide Details</span>
+            <div id="nuclearFissionMainContent" class="content">
+                <ul>
+                    <li>Otto Hahn and his co-workers discovered nuclear fission accidentally.</li>
+                    <li>Transuranic elements are those elements that have atomic no. greater than that of uranium ($Z=92$). Np ($Z=93$), Pu ($Z=94$).</li>
+                    <li>30 different ways by which nucleus can undergo fission (50 different products).</li>
+                    <li>Fission neutrons are ejected by daughter or fission fragment, not by parent nucleus.</li>
+                    <li>During fission, 99% neutrons are ejected in extremely short time, called prompt neutrons. Remaining 1% are emitted later, called delayed neutrons.</li>
+                    <li>Unstable fission fragments to become stable, eject delayed neutrons.</li>
+                    <li>Isotopes of Uranium:
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ore</th>
+                                    <th>Percentage</th>
+                                    <th>Half-life</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$^{238}_{92}U$</td>
+                                    <td>99.38%</td>
+                                    <td>$4.51 \times 10^9$ years</td>
+                                </tr>
+                                <tr>
+                                    <td>$^{235}_{92}U$</td>
+                                    <td>0.714%</td>
+                                    <td>$7.1 \times 10^8$ years</td>
+                                </tr>
+                                <tr>
+                                    <td>$^{234}_{92}U$</td>
+                                    <td>0.006%</td>
+                                    <td>$2.48 \times 10^5$ years</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li>For fission of $^{235}_{92}U$, energy of $1~MeV$ is required, while energy of $0.04~eV$ is required for $^{235}_{92}U$.</li>
+                    <li>Common fission reactions for uranium:
+                        <ul>
+                            <li>$^1_0n + ^{235}_{92}U \to ^{141}_{56}Ba + ^{92}_{36}Kr + 3^1_0n + 200~MeV~(Q)$.</li>
+                            <li>$^1_0n + ^{235}_{92}U \to ^{139}_{54}Xe + ^{94}_{38}Sr + 2^1_0n + 200~MeV$.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Types of Fission</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('fissionTypesSubContent')">Show/Hide Details</span>
+                        <div id="fissionTypesSubContent" class="content">
+                            <ul>
+                                <li><strong>Controlled Fission Chain Reaction:</strong> In this, only one neutron out of all neutrons created in one fission reaction becomes the cause of further fission reaction. Underlying principle of nuclear reactor.</li>
+                                <li><strong>Critical Mass:</strong> Such a mass of uranium in which one neutron, out of all the neutrons produced in one fission reaction, produces further fission is called critical mass.</li>
+                                <li><strong>Uncontrolled Fission Chain Reaction:</strong> If the mass of uranium is much greater than the critical mass, chain reaction proceeds at a rapid speed, and a huge explosion is produced. Atom bomb works on this principle.</li>
+                                <li>Fermi carried out first controlled fission in 1942.</li>
+                                <li>Fission of $^{235}_{92}U$ atom releases $10^8$ times as much energy as is released by $C^{12}$ atom in ordinary furnace.</li>
+                                <li>$1~kg$ of $^{235}_{92}U$ contains $(1000~g/235) \times 6.023 \times 10^{23} = 25.6 \times 10^{23}$ atoms.</li>
+                                <li>$1~atom$ of $^{235}_{92}U$ gives $200~MeV$.</li>
+                                <li>$1~kg$ of $^{235}_{92}U$ gives $5.12 \times 10^{26}~MeV$.</li>
+                                <li>Time for one fission $\sim 10^{-8}~s$.</li>
+                                <li>Time for 60 fissions $\sim 0.6~\mu s$.</li>
+                                <li>Thus $5 \times 10^{26}~MeV$ energy is liberated in $0.6~\mu s$ when $1~kg$ of $^{235}_{92}U$ undergoes complete fission.</li>
+                                <li>Plutonium-239 and uranium-233 are also used as fuel.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Nuclear Reactor</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nuclearReactorSubContent')">Show/Hide Details</span>
+                        <div id="nuclearReactorSubContent" class="content">
+                            <ul>
+                                <li>Fission chain reaction can be controlled in a device called nuclear reactor.</li>
+                                <li>Nuclear reactor works on principle that environment of nuclear reactor is controlled such that only one slow neutron takes part in fission process.</li>
+                                <li>Parts:
+                                    <ul>
+                                        <li>Fuel Rods: $^{235}_{92}U$ is used as fuel. In this, fuel quantity is increased from 2 to 4 percent.</li>
+                                        <li>Control Rods: Ba or Cd rods absorb neutrons efficiently.</li>
+                                        <li>Moderator: Slow down neutrons (e.g., graphite, heavy water).</li>
+                                        <li>Heat Exchanger: Converts energy to steam for turbine.</li>
+                                        <li>Cooling System: Avoid overheating.</li>
+                                        <li>Biological Shield: Prevents scattering of harmful radiations.</li>
+                                        <li>Breeding: Breeder nuclear reactor prepares its fuel by itself.</li>
+                                    </ul>
+                                </li>
+                                <li>Types of Nuclear Reactors:
+                                    <ul>
+                                        <li>Thermal reactor (fast neutrons slowed down to thermal energies to produce fission). In this reactor, $^{235}_{92}U$ is used as fuel.</li>
+                                        <li>Fast reactors (fast neutrons used to strike $^{238}_{92}U$ producing $^{239}_{93}Np$ and then $^{239}_{94}Pu$). This type of reactor is liquid metal fast breeder reactor (LMFBR).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Conventional Reactor</th>
+                                        <th>LMFBR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Moderator</td>
+                                        <td>No moderator</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coolant is ordinary water or gas</td>
+                                        <td>Na is coolant</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Run continuously</td>
+                                        <td>Requires maintenance after 15 days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uses $^{235}_{92}U$ as fuel</td>
+                                        <td>Uses $^{238}_{92}U$ as fuel</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Nuclear Reactions & Nuclear Fusion in the Sun</h2>
+            <span class="toggle-button" onclick="toggleVisibility('nuclearFusionContent')">Show/Hide Details</span>
+            <div id="nuclearFusionContent" class="content">
+                <ul>
+                    <li>Fusion reaction: Production of heavy nucleus by nuclear reaction of light nuclei.</li>
+                    <li>Two types:
+                        <ul>
+                            <li><strong>D-D Reaction:</strong> $^2_1H + ^2_1H \to ^3_2He + ^1_0n + 3.3~MeV$.</li>
+                            <li><strong>D-T Reaction:</strong> $^2_1H + ^3_1H \to ^4_2He + ^1_0n + 17.6~MeV$.</li>
+                        </ul>
+                    </li>
+                    <li>Fusion is more energetic than fission.</li>
+                    <li>Nuclear reaction in the Sun is nuclear fusion.</li>
+                    <li>Core temperature of Sun is about 20 million degrees Celsius.</li>
+                    <li>Sun's energy is due to fusion reaction called p-p reaction (Proton-Proton Cycle).</li>
+                    <li>Stars like Sun maintain their shape and pressure due to radiation pressure.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Comparison of Isotopes, Isobars & Isotones</h2>
+            <span class="toggle-button" onclick="toggleVisibility('isotopeComparisonContent')">Show/Hide Details</span>
+            <div id="isotopeComparisonContent" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Isotopes</th>
+                            <th>Isobars</th>
+                            <th>Isotones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Atomic Number</td>
+                            <td>Same</td>
+                            <td>Different</td>
+                            <td>May or may not be the same</td>
+                        </tr>
+                        <tr>
+                            <td>Mass Number</td>
+                            <td>Different</td>
+                            <td>Same</td>
+                            <td>May or may not be the same</td>
+                        </tr>
+                        <tr>
+                            <td>No. of Neutrons</td>
+                            <td>Different</td>
+                            <td>May or may not be the same</td>
+                            <td>Always same</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Radiation Exposure & Effects</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radiationExposureMainContent')">Show/Hide Details</span>
+            <div id="radiationExposureMainContent" class="content">
+                <ul>
+                    <li>Radiations can damage living tissues. Degree of damage depends on type, energy and dose of radiation.</li>
+                    <li>Incident radiations ionize the body cell, then change biochemistry of cell. Damaged cell may die or begin to work in wrong way. Sometimes radiation changes chemistry of cells, leading to a condition called cancer.</li>
+                    <li>Damage to ozone layer through: Chemical industry, Nuclear tests, CFCs, Aerosol sprays and plastic foam industry.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Effects of Radiations</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('radiationEffectsSubContent')">Show/Hide Details</span>
+                        <div id="radiationEffectsSubContent" class="content">
+                            <ul>
+                                <li><strong>Somatic Effect:</strong> Direct effects on body (skin burns, hair loss, ulceration, stiffening of lungs, drop in white blood cells, contraction in eyes). Can be cured if dose is small.</li>
+                                <li><strong>Genetic Effects:</strong> Affect (alter) chemistry of genes and cause mutation (cancer, different syndromes). Incurable and pass on to future generation.</li>
+                                <li><strong>Biological Effects:</strong></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Absorbed Dose (D)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('absorbedDoseSubContent')">Show/Hide Details</span>
+                        <div id="absorbedDoseSubContent" class="content">
+                            <ul>
+                                <li>Energy absorbed from ionizing radiation per unit mass of absorbing body.</li>
+                                <li>$D = \frac{E}{m}$.</li>
+                                <li>SI unit is gray (Gy). $1~Gy = 1~J~kg^{-1}$.</li>
+                                <li>Old unit is rad, an acronym for radiation absorbed dose. $1~rad = 0.01~Gy$.</li>
+                                <li>Equal doses of different radiations do not produce same biological effect.</li>
+                                <li>For same absorbed dose, $\alpha$-particles are 20 times more damaging than X-rays.</li>
+                                <li>Neutrons are particularly more damaging to eyes than other parts of body.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Equivalent Dose (H)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('equivalentDoseSubContent')">Show/Hide Details</span>
+                        <div id="equivalentDoseSubContent" class="content">
+                            <ul>
+                                <li>Product of absorbed dose and RBE (Relative biological effectiveness).</li>
+                                <li>$1~Sv = 1~Gy \times \text{RBE}$ (SI Unit).</li>
+                                <li>Old Unit: $1~rem = 0.01~Sv$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Unit of Radioactivity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radioactivityUnitContent')">Show/Hide Details</span>
+            <div id="radioactivityUnitContent" class="content">
+                <ul>
+                    <li>Becquerel (Bq): $1~Bq = 1~\text{disintegration per second}$.</li>
+                    <li>Curie (Ci): $1~Ci = 3.7 \times 10^{10}~Bq$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Biological and Medical Uses of Radiations</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radiationUsesContent')">Show/Hide Details</span>
+            <div id="radiationUsesContent" class="content">
+                <ul>
+                    <li>C-14 is useful tracer for photosynthesis.</li>
+                    <li>I-131 and Na-24 are used to check cracks in pipes.</li>
+                    <li>Radiation therapy: destruction of cancerous cells (Co-60 and I-131).</li>
+                    <li>Tumors treated by $\gamma$-rays.</li>
+                    <li>Radio processes in space give information about structure of stars.</li>
+                    <li>When ethylene is radiated with $\gamma$-rays, it is polymerized into polyethylene (plastic).</li>
+                    <li>Sterilization: killing of germs with $\beta$-particles and $\gamma$-rays.</li>
+                    <li>Radiation treatment can preserve food.</li>
+                    <li>$\gamma$-gauges are used for preparing or measuring thickness of high density and thicker materials (steel, Al, rubber). Co-60 is used as $\gamma$-rays source.</li>
+                    <li>$\beta$-gauges are used for measuring thickness of thin sheets of low density materials (paper). Sr-90 is used as $\beta$-rays source.</li>
+                    <li>Radiography: check cracks in metal casting, faults in welding, heavy machinery.</li>
+                    <li>Ratio of C-14 to C-12 in dead matter is measure of time span since death.</li>
+                    <li>$\beta$-particle is used for superficial skin therapy.</li>
+                    <li>$\alpha$-particle is used for deep skin therapy.</li>
+                    <li>Activation analysis (X-ray energy measurement) to determine concentration of elements.</li>
+                    <li>Technetium-99: positron emission tomography.</li>
+                    <li>Ratio of $^{206}_{82}Pb$ to $^{238}_{92}U$ to determine age of rocks.</li>
+                    <li>Age of pyramids is 4500 years.</li>
+                    <li>By Ar-40, can measure dates as back as one million years ago.</li>
+                    <li>Amino acids discovered on meteorites.</li>
+                    <li>To destroy a tumor, place small pellets of radionuclide near it (e.g., radon seed). After destruction of tumor, remove them.</li>
+                    <li>Different radioisotopes accumulate in specific parts of body.
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Radioisotopes</th>
+                                    <th>Site of Accumulation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Iodine</td>
+                                    <td>Thyroid gland</td>
+                                <tr>
+                                    <td>Cobalt</td>
+                                    <td>Liver</td>
+                                </tr>
+                                <tr>
+                                    <td>Phosphorus & Calcium</td>
+                                    <td>Bones</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Radiography</h2>
+            <span class="toggle-button" onclick="toggleVisibility('radiographyContent')">Show/Hide Details</span>
+            <div id="radiographyContent" class="content">
+                <ul>
+                    <li>$\gamma$-rays radiographs are used in medical diagnosis.</li>
+                    <li>Cracks and cavities in castings or pipes are detected by $\gamma$ ray scanning.</li>
+                    <li>Gamma camera: used to detect $\gamma$ radiations from sites in body where a $\gamma$-emitting isotope is located.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Basic Forces of Nature</h2>
+            <span class="toggle-button" onclick="toggleVisibility('basicForcesContent')">Show/Hide Details</span>
+            <div id="basicForcesContent" class="content">
+                <ul>
+                    <li>Four basic forces:
+                        <ol>
+                            <li>Gravitational force (long range).</li>
+                            <li>Electromagnetic force (long range).</li>
+                            <li>Strong nuclear force (short range, $10^{-15}~m$ attractive).</li>
+                            <li>Weak nuclear force (short range, $10^{-17}~m$ repulsive).</li>
+                        </ol>
+                    </li>
+                    <li>In 1979, physics noble prize for unification of electromagnetic and weak forces was given to Glashow, Weinberg and Abdus Salam.</li>
+                </ul>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Strength</th>
+                            <th>Range (m)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Strong</td>
+                            <td>1</td>
+                            <td>$10^{-15}$ (diameter of a medium sized nucleus)</td>
+                        </tr>
+                        <tr>
+                            <td>Electromagnetic</td>
+                            <td>$\frac{1}{137}$</td>
+                            <td>Infinite</td>
+                        </tr>
+                        <tr>
+                            <td>Weak</td>
+                            <td>$10^{-6}$</td>
+                            <td>$10^{-18}$ (0.1% of diameter of a proton)</td>
+                        </tr>
+                        <tr>
+                            <td>Gravity</td>
+                            <td>$6 \times 10^{-39}$</td>
+                            <td>Infinite</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Building Blocks of Matter</h2>
+            <span class="toggle-button" onclick="toggleVisibility('buildingBlocksContent')">Show/Hide Details</span>
+            <div id="buildingBlocksContent" class="content">
+                <ul>
+                    <li>Subatomic particles divided into three groups:
+                        <ol>
+                            <li>Photons.</li>
+                            <li>Leptons (electron, muon, and neutrinos).</li>
+                            <li>Hadrons.</li>
+                        </ol>
+                    </li>
+                    <li>Two types of hadrons:
+                        <ul>
+                            <li>Baryons (particles equal in mass or greater than protons), e.g., protons and neutrons.</li>
+                            <li>Mesons (particles lighter than proton), e.g., $\pi$ mesons.</li>
+                        </ul>
+                    </li>
+                    <li>Pair of quark and anti-quark makes a meson, 3 quarks make a baryon.</li>
+                    <li>Elementary particles are the basic building blocks.</li>
+                    <li>All photons and Leptons are elementary particles.</li>
+                    <li>Hadrons are not elementary particles.</li>
+                    <li>Hadrons are composed of elementary particles called quarks.</li>
+                    <li>Matter belongs to either lepton group or quark groups.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

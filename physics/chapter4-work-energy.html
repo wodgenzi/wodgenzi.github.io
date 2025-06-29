@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Work and Energy</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 4: Work and Energy</h1>
+
+    <ul>
+        <li>
+            <h2>Work Done by a Constant Force</h2>
+            <span class="toggle-button" onclick="toggleVisibility('workDoneConstantForceContent')">Show/Hide Details</span>
+            <div id="workDoneConstantForceContent" class="content">
+                <ul>
+                    <li>Work: Scalar product of force and displacement.</li>
+                    <li>$W = \vec{F} \cdot \vec{d} = Fd \cos\theta$.</li>
+                    <li>Unit: Joule (J) = N m.</li>
+                    <li>Dimensions: $[ML^2T^{-2}]$.</li>
+                    <li>Work is a scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Conditions for Work Done</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('workConditionsSubContent')">Show/Hide Details</span>
+                        <div id="workConditionsSubContent" class="content">
+                            <ul>
+                                <li>Force applied.</li>
+                                <li>Displacement occurs.</li>
+                                <li>Force component along displacement.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Cases of Work Done</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('workCasesSubContent')">Show/Hide Details</span>
+                        <div id="workCasesSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Angle ($\theta$)</th>
+                                        <th>$\cos\theta$</th>
+                                        <th>Work Done (W)</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>$0^\circ$</td>
+                                        <td>1</td>
+                                        <td>$Fd$ (Maximum positive)</td>
+                                        <td>Force and displacement parallel.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$90^\circ$</td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                        <td>Force and displacement perpendicular.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>$180^\circ$</td>
+                                        <td>-1</td>
+                                        <td>$-Fd$ (Maximum negative)</td>
+                                        <td>Force and displacement anti-parallel.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="point-to-ponder">
+                                Work done by centripetal force is always zero.
+                                Work done by gravitational force on satellite is zero.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Work Done by a Variable Force</h2>
+            <span class="toggle-button" onclick="toggleVisibility('workDoneVariableForceContent')">Show/Hide Details</span>
+            <div id="workDoneVariableForceContent" class="content">
+                <ul>
+                    <li>If force changes, work is calculated by dividing displacement into small elements.</li>
+                    <li>Total work = sum of work done over each element.</li>
+                    <li>Graphically: Area under Force-Displacement graph.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Work Done by Gravitational Field</h2>
+            <span class="toggle-button" onclick="toggleVisibility('workDoneGravitationalContent')">Show/Hide Details</span>
+            <div id="workDoneGravitationalContent" class="content">
+                <ul>
+                    <li>Work done by gravitational field is independent of path.</li>
+                    <li>$W_{gravity} = mgh$.</li>
+                    <li>Work done by gravitational field in a closed path is zero.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Power</h2>
+            <span class="toggle-button" onclick="toggleVisibility('powerContent')">Show/Hide Details</span>
+            <div id="powerContent" class="content">
+                <ul>
+                    <li>Rate of doing work.</li>
+                    <li>$P = \frac{W}{t}$.</li>
+                    <li>Unit: Watt (W) = J/s.</li>
+                    <li>Dimensions: $[ML^2T^{-3}]$.</li>
+                    <li>Scalar quantity.</li>
+                    <li>Instantaneous Power (linear): $P = \vec{F} \cdot \vec{v} = Fv \cos\theta$.</li>
+                    <li>Instantaneous Power (angular): $P = \vec{\tau} \cdot \vec{\omega} = \tau\omega \cos\theta$.</li>
+                    <li>1 Horsepower (hp) = 746 W.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('energyContent')">Show/Hide Details</span>
+            <div id="energyContent" class="content">
+                <ul>
+                    <li>Capacity to do work.</li>
+                    <li>Unit: Joule (J).</li>
+                    <li>Dimensions: $[ML^2T^{-2}]$ (same as work).</li>
+                    <li>Scalar quantity.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Kinetic Energy (KE)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('kineticEnergySubContent')">Show/Hide Details</span>
+                        <div id="kineticEnergySubContent" class="content">
+                            <ul>
+                                <li>Energy due to motion.</li>
+                                <li>$KE = \frac{1}{2}mv^2$.</li>
+                                <li>KE is always positive.</li>
+                                <li>Relation with momentum: $KE = \frac{p^2}{2m}$.</li>
+                                <li>Percentage change in KE if momentum changes: $\%\Delta KE = (2 + \%\Delta p)\%\Delta p$. (Approximation for small changes)</li>
+                                <li>Percentage change in momentum if KE changes: $\%\Delta p = \frac{1}{2}\%\Delta KE$. (Approximation for small changes)</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Potential Energy (PE)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('potentialEnergySubContent')">Show/Hide Details</span>
+                        <div id="potentialEnergySubContent" class="content">
+                            <ul>
+                                <li>Energy due to position or configuration.</li>
+                            </ul>
+                            <h4>Gravitational Potential Energy (GPE)</h4>
+                            <ul>
+                                <li>$GPE = mgh$.</li>
+                                <li>Depends on reference level.</li>
+                                <li>Can be positive, negative, or zero.</li>
+                            </ul>
+                            <h4>Elastic Potential Energy (EPE)</h4>
+                            <ul>
+                                <li>Energy stored in a stretched/compressed spring.</li>
+                                <li>$EPE = \frac{1}{2}kx^2$.</li>
+                                <li>$k$: spring constant (N/m).</li>
+                                <li>$x$: displacement from equilibrium.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Work-Energy Theorem</h2>
+            <span class="toggle-button" onclick="toggleVisibility('workEnergyTheoremContent')">Show/Hide Details</span>
+            <div id="workEnergyTheoremContent" class="content">
+                <ul>
+                    <li>Net work done on a body = Change in its kinetic energy.</li>
+                    <li>$W_{net} = \Delta KE = KE_f - KE_i = \frac{1}{2}mv_f^2 - \frac{1}{2}mv_i^2$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Conservation of Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('conservationOfEnergyContent')">Show/Hide Details</span>
+            <div id="conservationOfEnergyContent" class="content">
+                <ul>
+                    <li>Total energy of an isolated system remains constant.</li>
+                    <li>Energy cannot be created or destroyed, only transformed.</li>
+                    <li>$KE_i + PE_i = KE_f + PE_f$.</li>
+                    <li>Total Mechanical Energy ($TME$) = $KE + PE$.</li>
+                    <li>$TME$ is conserved in conservative fields (e.g., gravity, elastic).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Conservative and Non-Conservative Forces</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('conservativeNonConservativeSubContent')">Show/Hide Details</span>
+                        <div id="conservativeNonConservativeSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Conservative Force</th>
+                                        <th>Non-Conservative Force</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Work done independent of path.</td>
+                                        <td>Work done depends on path.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Work done in closed path is zero.</td>
+                                        <td>Work done in closed path is non-zero.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Associated with potential energy.</td>
+                                        <td>Not associated with potential energy.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>e.g., Gravitational, Elastic, Electrostatic.</td>
+                                        <td>e.g., Friction, Air drag.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Efficiency</h2>
+            <span class="toggle-button" onclick="toggleVisibility('efficiencyContent')">Show/Hide Details</span>
+            <div id="efficiencyContent" class="content">
+                <ul>
+                    <li>Ratio of useful output to total input.</li>
+                    <li>Efficiency ($\eta$) = $\frac{\text{Output}}{\text{Input}} \times 100\%$.</li>
+                    <li>Always less than 100% for real machines.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Interconversion of Mass and Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('massEnergyInterconversionContent')">Show/Hide Details</span>
+            <div id="massEnergyInterconversionContent" class="content">
+                <ul>
+                    <li>Einstein's mass-energy equivalence: $E = mc^2$.</li>
+                    <li>$c$: speed of light ($3 \times 10^8$ m/s).</li>
+                    <li>Small mass conversion yields huge energy.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Absolute Gravitational Potential Energy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('absoluteGPEContent')">Show/Hide Details</span>
+            <div id="absoluteGPEContent" class="content">
+                <ul>
+                    <li>Definition: Work done by gravitational force in moving a body from infinity to a point in the gravitational field.</li>
+                    <li>Formula: $U = -\frac{GMm}{r}$.</li>
+                    <li>$G$: Universal gravitational constant ($6.67 \times 10^{-11} N m^2 kg^{-2}$).</li>
+                    <li>$M$: Mass of the Earth.</li>
+                    <li>$m$: Mass of the object.</li>
+                    <li>$r$: Distance from the center of the Earth.</li>
+                    <li>Always negative (attractive force, zero at infinity).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Escape Velocity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('escapeVelocityContent')">Show/Hide Details</span>
+            <div id="escapeVelocityContent" class="content">
+                <ul>
+                    <li>Definition: Minimum velocity required for an object to escape Earth's gravitational field (or any celestial body's) and never return.</li>
+                    <li>Formula: $v_e = \sqrt{\frac{2GM}{R}}$ or $v_e = \sqrt{2gR}$.</li>
+                    <li>$G$: Universal gravitational constant.</li>
+                    <li>$M$: Mass of the Earth.</li>
+                    <li>$R$: Radius of the Earth.</li>
+                    <li>$g$: Acceleration due to gravity on Earth's surface.</li>
+                    <li>For Earth: $v_e \approx 11.2~km/s$.</li>
+                    <li>Independent of the mass or direction of projection of the escaping object.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

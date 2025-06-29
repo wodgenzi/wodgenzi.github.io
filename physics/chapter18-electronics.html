@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 18: Electronics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 18: Electronics</h1>
+
+    <ul>
+        <li>
+            <h2>Semiconductors</h2>
+            <span class="toggle-button" onclick="toggleVisibility('semiconductorsMainContent')">Show/Hide Details</span>
+            <div id="semiconductorsMainContent" class="content">
+                <ul>
+                    <li>Materials with electrical conductivity between conductors and insulators.</li>
+                    <li>Conductivity increases with temperature.</li>
+                    <li>Examples: Silicon (Si), Germanium (Ge).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Intrinsic Semiconductors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('intrinsicSemiconductorsSubContent')">Show/Hide Details</span>
+                        <div id="intrinsicSemiconductorsSubContent" class="content">
+                            <ul>
+                                <li>Pure semiconductors (e.g., pure Si, Ge).</li>
+                                <li>Number of free electrons equals number of holes ($n_e = n_h$).</li>
+                                <li>Conductivity is low at room temperature.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Extrinsic Semiconductors (Doped Semiconductors)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('extrinsicSemiconductorsSubContent')">Show/Hide Details</span>
+                        <div id="extrinsicSemiconductorsSubContent" class="content">
+                            <ul>
+                                <li>Intrinsic semiconductors with impurities added (doping) to enhance conductivity.</li>
+                            </ul>
+                            <h4>N-type Semiconductor:</h4>
+                            <ul>
+                                <li>Doped with pentavalent impurities (e.g., Arsenic, Antimony).</li>
+                                <li>Majority carriers: electrons. Minority carriers: holes.</li>
+                                <li>Donor impurity atoms provide extra electrons.</li>
+                            </ul>
+                            <h4>P-type Semiconductor:</h4>
+                            <ul>
+                                <li>Doped with trivalent impurities (e.g., Boron, Aluminum, Indium).</li>
+                                <li>Majority carriers: holes. Minority carriers: electrons.</li>
+                                <li>Acceptor impurity atoms create holes.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>P-N Junction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('pnJunctionMainContent')">Show/Hide Details</span>
+            <div id="pnJunctionMainContent" class="content">
+                <ul>
+                    <li>Formed by joining a P-type semiconductor with an N-type semiconductor.</li>
+                    <li>Depletion region: region near the junction depleted of mobile charge carriers.</li>
+                    <li>Barrier potential: voltage developed across the depletion region due to immobile ions.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Biasing of P-N Junction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pnJunctionBiasingSubContent')">Show/Hide Details</span>
+                        <div id="pnJunctionBiasingSubContent" class="content">
+                            <h4>Forward Biasing:</h4>
+                            <ul>
+                                <li>P-side connected to positive terminal, N-side to negative terminal of battery.</li>
+                                <li>Barrier potential decreases, depletion region narrows.</li>
+                                <li>Current flows easily.</li>
+                            </ul>
+                            <h4>Reverse Biasing:</h4>
+                            <ul>
+                                <li>P-side connected to negative terminal, N-side to positive terminal of battery.</li>
+                                <li>Barrier potential increases, depletion region widens.</li>
+                                <li>Very small current (leakage current) flows.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Rectification</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('rectificationSubContent')">Show/Hide Details</span>
+                        <div id="rectificationSubContent" class="content">
+                            <ul>
+                                <li>Process of converting AC to DC.</li>
+                                <li>P-N junction diode acts as a rectifier.</li>
+                            </ul>
+                            <h4>Half-Wave Rectifier:</h4>
+                            <ul>
+                                <li>Uses one diode.</li>
+                                <li>Rectifies only half of the AC input cycle.</li>
+                                <li>Output is pulsating DC.</li>
+                            </ul>
+                            <h4>Full-Wave Rectifier:</h4>
+                            <ul>
+                                <li>Uses two or four diodes (bridge rectifier).</li>
+                                <li>Rectifies both halves of the AC input cycle.</li>
+                                <li>Output is more stable pulsating DC.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Transistor</h2>
+            <span class="toggle-button" onclick="toggleVisibility('transistorMainContent')">Show/Hide Details</span>
+            <div id="transistorMainContent" class="content">
+                <ul>
+                    <li>Semiconductor device used for amplification and switching.</li>
+                    <li>Consists of three layers: Emitter (E), Base (B), Collector (C).</li>
+                    <li>Types: NPN and PNP.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Transistor as an Amplifier</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('transistorAmplifierSubContent')">Show/Hide Details</span>
+                        <div id="transistorAmplifierSubContent" class="content">
+                            <ul>
+                                <li>Small change in base current produces large change in collector current.</li>
+                                <li>Current gain ($\beta$ for common emitter): $\beta = \frac{\Delta I_C}{\Delta I_B}$.</li>
+                                <li>Voltage gain: $A_V = \beta \frac{R_C}{R_{in}}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Transistor as a Switch</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('transistorSwitchSubContent')">Show/Hide Details</span>
+                        <div id="transistorSwitchSubContent" class="content">
+                            <ul>
+                                <li>Operates in saturation (ON) and cut-off (OFF) regions.</li>
+                                <li>Used in digital circuits.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Operational Amplifier (Op-Amp)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('opAmpMainContent')">Show/Hide Details</span>
+            <div id="opAmpMainContent" class="content">
+                <ul>
+                    <li>High-gain, direct-coupled, differential amplifier.</li>
+                    <li>Ideal characteristics: infinite input impedance, zero output impedance, infinite open-loop gain.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Inverting Amplifier</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('invertingAmpSubContent')">Show/Hide Details</span>
+                        <div id="invertingAmpSubContent" class="content">
+                            <ul>
+                                <li>Output is $180^\circ$ out of phase with input.</li>
+                                <li>Gain: $A_V = -\frac{R_f}{R_{in}}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Non-Inverting Amplifier</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nonInvertingAmpSubContent')">Show/Hide Details</span>
+                        <div id="nonInvertingAmpSubContent" class="content">
+                            <ul>
+                                <li>Output is in phase with input.</li>
+                                <li>Gain: $A_V = 1 + \frac{R_f}{R_{in}}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Adder/Summing Amplifier</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('adderAmpSubContent')">Show/Hide Details</span>
+                        <div id="adderAmpSubContent" class="content">
+                            <ul>
+                                <li>Sums multiple input voltages.</li>
+                                <li>Output: $V_{out} = -R_f \left( \frac{V_1}{R_1} + \frac{V_2}{R_2} + ... \right)$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Comparator</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('comparatorSubContent')">Show/Hide Details</span>
+                        <div id="comparatorSubContent" class="content">
+                            <ul>
+                                <li>Compares two input voltages and outputs a high or low voltage depending on which input is greater.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Digital Electronics (Logic Gates)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('digitalElectronicsMainContent')">Show/Hide Details</span>
+            <div id="digitalElectronicsMainContent" class="content">
+                <ul>
+                    <li>Deals with discrete voltage levels (binary 0 and 1).</li>
+                    <li>Logic gates: Basic building blocks of digital circuits.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Basic Logic Gates</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('basicLogicGatesSubContent')">Show/Hide Details</span>
+                        <div id="basicLogicGatesSubContent" class="content">
+                            <h4>AND Gate:</h4>
+                            <ul>
+                                <li>Output is HIGH only if ALL inputs are HIGH.</li>
+                                <li>Boolean: $Y = A \cdot B$.</li>
+                            </ul>
+                            <h4>OR Gate:</h4>
+                            <ul>
+                                <li>Output is HIGH if ANY input is HIGH.</li>
+                                <li>Boolean: $Y = A + B$.</li>
+                            </ul>
+                            <h4>NOT Gate (Inverter):</h4>
+                            <ul>
+                                <li>Output is opposite of input.</li>
+                                <li>Boolean: $Y = \bar{A}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Universal Logic Gates</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('universalLogicGatesSubContent')">Show/Hide Details</span>
+                        <div id="universalLogicGatesSubContent" class="content">
+                            <h4>NAND Gate:</h4>
+                            <ul>
+                                <li>NOT AND. Output is LOW only if ALL inputs are HIGH.</li>
+                                <li>Boolean: $Y = \overline{A \cdot B}$.</li>
+                                <li>Can be used to construct all other logic gates.</li>
+                            </ul>
+                            <h4>NOR Gate:</h4>
+                            <ul>
+                                <li>NOT OR. Output is LOW if ANY input is HIGH.</li>
+                                <li>Boolean: $Y = \overline{A + B}$.</li>
+                                <li>Can be used to construct all other logic gates.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Other Logic Gates</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('otherLogicGatesSubContent')">Show/Hide Details</span>
+                        <div id="otherLogicGatesSubContent" class="content">
+                            <h4>XOR Gate (Exclusive OR):</h4>
+                            <ul>
+                                <li>Output is HIGH if inputs are different.</li>
+                                <li>Boolean: $Y = A \oplus B = A\bar{B} + \bar{A}B$.</li>
+                            </ul>
+                            <h4>XNOR Gate (Exclusive NOR):</h4>
+                            <ul>
+                                <li>Output is HIGH if inputs are same.</li>
+                                <li>Boolean: $Y = \overline{A \oplus B} = A B + \bar{A}\bar{B}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

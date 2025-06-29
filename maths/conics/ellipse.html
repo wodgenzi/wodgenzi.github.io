@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ellipse Elements</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the canvas to ensure it's responsive */
+        canvas {
+            display: block;
+            background-color: #f8fafc; /* Light blue-gray background */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0; /* bg-slate-200 */
+        }
+    </style>
+    <!-- MathJax CDN for LaTeX rendering -->
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+        // MathJax configuration to process dollar signs
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<nav class="w-full flex justify-start p-4">
+    <a href="../conics.html" class="text-blue-600 hover:underline font-semibold text-lg flex items-center">
+        &larr; Back to Conics
+    </a>
+</nav>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-4xl w-full">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Elements of an Ellipse</h1>
+
+        <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
+            <div class="md:w-1/2 w-full mb-6 md:mb-0">
+                <canvas id="ellipseCanvas" class="w-full h-auto"></canvas>
+                <div class="mt-4 flex flex-col space-y-3">
+                    <div class="flex items-center space-x-2">
+                        <label for="aSlider" class="text-gray-700 font-medium">Semi-axis 'a':</label>
+                        <input type="range" id="aSlider" min="0.5" max="5" value="3" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="aValue" class="text-gray-800 font-bold">3.0</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="bSlider" class="text-gray-700 font-medium">Semi-axis 'b':</label>
+                        <input type="range" id="bSlider" min="0.5" max="5" value="2" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="bValue" class="text-gray-800 font-bold">2.0</span>
+                    </div>
+                    <div class="mt-4 text-gray-800 font-semibold text-lg">
+                        <p>Major Axis Length: <span id="majorAxisLength"></span></p>
+                        <p>Minor Axis Length: <span id="minorAxisLength"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 w-full text-gray-700 space-y-4">
+                <p>This interactive graph illustrates the key components of an ellipse based on the standard equation $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$. You can adjust the semi-major/minor axes 'a' and 'b' using the sliders below the graph.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong class="text-green-600">Center:</strong> The midpoint of the ellipse, located at $(0,0)$.</li>
+                    <li><strong class="text-red-600">Foci:</strong> Two fixed points inside the ellipse. The sum of the distances from any point on the ellipse to the two foci is constant.</li>
+                    <li><strong class="text-purple-600">Vertices:</strong> The points on the ellipse that intersect the major axis.</li>
+                    <li><strong class="text-gray-600">Covertices:</strong> The points on the ellipse that intersect the minor axis.</li>
+                    <li><strong class="text-orange-600">Major Axis:</strong> The longest diameter of the ellipse, passing through the foci and vertices. Its length is $2 \times \max(a, b)$.</li>
+                    <li><strong class="text-brown-600">Minor Axis:</strong> The shortest diameter of the ellipse, perpendicular to the major axis and passing through the center. Its length is $2 \times \min(a, b)$.</li>
+                    <li><strong class="text-blue-600">Latera Recta:</strong> Chords perpendicular to the major axis passing through the foci.</li>
+                    <li><strong class="text-pink-600">Directrices:</strong> Two lines perpendicular to the major axis, related to the foci and eccentricity of the ellipse.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('ellipseCanvas');
+        const ctx = canvas.getContext('2d');
+        const aSlider = document.getElementById('aSlider');
+        const bSlider = document.getElementById('bSlider');
+        const aValueSpan = document.getElementById('aValue');
+        const bValueSpan = document.getElementById('bValue');
+        const majorAxisLengthSpan = document.getElementById('majorAxisLength');
+        const minorAxisLengthSpan = document.getElementById('minorAxisLength');
+
+        // Initial ellipse parameters
+        let a = parseFloat(aSlider.value);
+        let b = parseFloat(bSlider.value);
+
+        // Function to convert Cartesian coordinates to canvas coordinates
+        function toCanvasCoords(x, y, scaleX, scaleY, centerX, centerY) {
+            return {
+                x: centerX + x * scaleX,
+                y: centerY - y * scaleY // Y-axis is inverted in canvas
+            };
+        }
+
+        // Function to draw everything on the canvas
+        function drawEllipseElements() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Determine scale and center based on canvas size
+            const padding = 50; // Padding from canvas edges
+            const effectiveWidth = canvas.width - 2 * padding;
+            const effectiveHeight = canvas.height - 2 * padding;
+
+            // Determine max dimension for scaling
+            const maxDim = Math.max(a, b);
+            const cartesianRange = maxDim * 1.5; // Extend range slightly beyond max dimension
+
+            const cartesianXMin = -cartesianRange;
+            const cartesianXMax = cartesianRange;
+            const cartesianYMin = -cartesianRange;
+            const cartesianYMax = cartesianRange;
+
+            const cartesianWidth = cartesianXMax - cartesianXMin;
+            const cartesianHeight = cartesianYMax - cartesianYMin;
+
+            const scaleX = effectiveWidth / cartesianWidth;
+            const scaleY = effectiveHeight / cartesianHeight;
+
+            const centerX = padding + (-cartesianXMin) * scaleX;
+            const centerY = padding + (cartesianYMax) * scaleY;
+
+            // --- Draw Grid and Axes ---
+            ctx.strokeStyle = '#cbd5e1'; // slate-300
+            ctx.lineWidth = 0.5;
+
+            // Draw horizontal grid lines
+            for (let i = Math.floor(cartesianYMin); i <= Math.ceil(cartesianYMax); i++) {
+                if (i === 0) continue;
+                const p = toCanvasCoords(0, i, scaleX, scaleY, centerX, centerY);
+                ctx.beginPath();
+                ctx.moveTo(0, p.y);
+                ctx.lineTo(canvas.width, p.y);
+                ctx.stroke();
+            }
+            // Draw vertical grid lines
+            for (let i = Math.floor(cartesianXMin); i <= Math.ceil(cartesianXMax); i++) {
+                if (i === 0) continue;
+                const p = toCanvasCoords(i, 0, scaleX, scaleY, centerX, centerY);
+                ctx.beginPath();
+                ctx.moveTo(p.x, 0);
+                ctx.lineTo(p.x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Draw X and Y axes
+            ctx.strokeStyle = '#475569'; // slate-600
+            ctx.lineWidth = 1;
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+
+            // --- Draw Ellipse ---
+            ctx.beginPath();
+            ctx.strokeStyle = '#3b82f6'; // blue-500
+            ctx.lineWidth = 3;
+            // Draw ellipse using arc method (scaled)
+            ctx.ellipse(centerX, centerY, a * scaleX, b * scaleY, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // --- Calculate Foci and Major/Minor Axis orientation ---
+            let c, foci1, foci2;
+            let majorAxisHorizontal = true; // Assume horizontal initially
+
+            if (a >= b) {
+                c = Math.sqrt(a * a - b * b);
+                foci1 = { x: -c, y: 0 };
+                foci2 = { x: c, y: 0 };
+                majorAxisHorizontal = true;
+            } else { // b > a
+                c = Math.sqrt(b * b - a * a);
+                foci1 = { x: 0, y: -c };
+                foci2 = { x: 0, y: c };
+                majorAxisHorizontal = false;
+            }
+
+            // --- Draw Center ---
+            const center = { x: 0, y: 0 };
+            const pCenter = toCanvasCoords(center.x, center.y, scaleX, scaleY, centerX, centerY);
+            ctx.fillStyle = '#16a34a'; // green-600
+            ctx.beginPath();
+            ctx.arc(pCenter.x, pCenter.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Center (0,0)', pCenter.x + 15, pCenter.y - 15); // Adjusted position
+
+            // --- Draw Foci ---
+            const pFoci1 = toCanvasCoords(foci1.x, foci1.y, scaleX, scaleY, centerX, centerY);
+            const pFoci2 = toCanvasCoords(foci2.x, foci2.y, scaleX, scaleY, centerX, centerY);
+            ctx.fillStyle = '#dc2626'; // red-600
+            ctx.beginPath();
+            ctx.arc(pFoci1.x, pFoci1.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(pFoci2.x, pFoci2.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            if (majorAxisHorizontal) {
+                ctx.fillText(`Foci (±${c.toFixed(2)}, 0)`, pFoci2.x + 10, pFoci2.y - 5);
+            } else {
+                ctx.fillText(`Foci (0, ±${c.toFixed(2)})`, pFoci2.x + 10, pFoci2.y - 5);
+            }
+
+
+            // --- Draw Vertices and Covertices ---
+            let vertex1, vertex2, covertex1, covertex2;
+            if (majorAxisHorizontal) {
+                vertex1 = { x: -a, y: 0 };
+                vertex2 = { x: a, y: 0 };
+                covertex1 = { x: 0, y: -b };
+                covertex2 = { x: 0, y: b };
+            } else {
+                vertex1 = { x: 0, y: -b };
+                vertex2 = { x: 0, y: b };
+                covertex1 = { x: -a, y: 0 };
+                covertex2 = { x: a, y: 0 };
+            }
+
+            const pV1 = toCanvasCoords(vertex1.x, vertex1.y, scaleX, scaleY, centerX, centerY);
+            const pV2 = toCanvasCoords(vertex2.x, vertex2.y, scaleX, scaleY, centerX, centerY);
+            const pCV1 = toCanvasCoords(covertex1.x, covertex1.y, scaleX, scaleY, centerX, centerY);
+            const pCV2 = toCanvasCoords(covertex2.x, covertex2.y, scaleX, scaleY, centerX, centerY);
+
+            ctx.fillStyle = '#9333ea'; // purple-600
+            ctx.beginPath();
+            ctx.arc(pV1.x, pV1.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(pV2.x, pV2.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Vertices', pV2.x + 10, pV2.y - 5);
+
+            ctx.fillStyle = '#64748b'; // slate-500
+            ctx.beginPath();
+            ctx.arc(pCV1.x, pCV1.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(pCV2.x, pCV2.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Covertices', pCV2.x + 10, pCV2.y - 5);
+
+
+            // --- Draw Major Axis Line ---
+            ctx.strokeStyle = '#ea580c'; // orange-600
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pV1.x, pV1.y);
+            ctx.lineTo(pV2.x, pV2.y);
+            ctx.stroke();
+
+            // --- Draw Minor Axis Line ---
+            ctx.strokeStyle = '#a16207'; // brown-600
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pCV1.x, pCV1.y);
+            ctx.lineTo(pCV2.x, pCV2.y);
+            ctx.stroke();
+
+            // --- Draw Latera Recta ---
+            ctx.strokeStyle = '#2563eb'; // blue-700
+            ctx.setLineDash([3, 3]); // Dashed line
+            ctx.lineWidth = 1.5;
+
+            if (majorAxisHorizontal && b !== 0) {
+                const lr_y = (b * b) / a;
+                const pLR1_top = toCanvasCoords(foci1.x, lr_y, scaleX, scaleY, centerX, centerY);
+                const pLR1_bottom = toCanvasCoords(foci1.x, -lr_y, scaleX, scaleY, centerX, centerY);
+                const pLR2_top = toCanvasCoords(foci2.x, lr_y, scaleX, scaleY, centerX, centerY);
+                const pLR2_bottom = toCanvasCoords(foci2.x, -lr_y, scaleX, scaleY, centerX, centerY);
+
+                ctx.beginPath();
+                ctx.moveTo(pLR1_top.x, pLR1_top.y);
+                ctx.lineTo(pLR1_bottom.x, pLR1_bottom.y);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(pLR2_top.x, pLR2_top.y);
+                ctx.lineTo(pLR2_bottom.x, pLR2_bottom.y);
+                ctx.stroke();
+                ctx.fillText('Latera Recta', pLR2_top.x + 10, pLR2_top.y - 10);
+
+            } else if (!majorAxisHorizontal && a !== 0) {
+                const lr_x = (a * a) / b;
+                const pLR1_left = toCanvasCoords(-lr_x, foci1.y, scaleX, scaleY, centerX, centerY);
+                const pLR1_right = toCanvasCoords(lr_x, foci1.y, scaleX, scaleY, centerX, centerY);
+                const pLR2_left = toCanvasCoords(-lr_x, foci2.y, scaleX, scaleY, centerX, centerY);
+                const pLR2_right = toCanvasCoords(lr_x, foci2.y, scaleX, scaleY, centerX, centerY);
+
+                ctx.beginPath();
+                ctx.moveTo(pLR1_left.x, pLR1_left.y);
+                ctx.lineTo(pLR1_right.x, pLR1_right.y);
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.moveTo(pLR2_left.x, pLR2_left.y);
+                ctx.lineTo(pLR2_right.x, pLR2_right.y);
+                ctx.stroke();
+                ctx.fillText('Latera Recta', pLR2_right.x + 10, pLR2_right.y - 10);
+            }
+            ctx.setLineDash([]); // Reset line dash
+
+            // --- Draw Directrices ---
+            ctx.strokeStyle = '#db2777'; // pink-600
+            ctx.setLineDash([5, 2]); // Denser dashed line
+            ctx.lineWidth = 1.5;
+
+            if (c > 0) { // Only draw directrices if c is not zero (not a circle)
+                let directrixDist;
+                if (majorAxisHorizontal) {
+                    directrixDist = (a * a) / c;
+                    const pD1_start = toCanvasCoords(-directrixDist, cartesianYMin, scaleX, scaleY, centerX, centerY);
+                    const pD1_end = toCanvasCoords(-directrixDist, cartesianYMax, scaleX, scaleY, centerX, centerY);
+                    const pD2_start = toCanvasCoords(directrixDist, cartesianYMin, scaleX, scaleY, centerX, centerY);
+                    const pD2_end = toCanvasCoords(directrixDist, cartesianYMax, scaleX, scaleY, centerX, centerY);
+
+                    ctx.beginPath();
+                    ctx.moveTo(pD1_start.x, pD1_start.y);
+                    ctx.lineTo(pD1_end.x, pD1_end.y);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(pD2_start.x, pD2_start.y);
+                    ctx.lineTo(pD2_end.x, pD2_end.y);
+                    ctx.stroke();
+                    ctx.fillText(`Directrices (x=±${directrixDist.toFixed(2)})`, pD2_end.x + 10, pD2_end.y + 20);
+
+                } else { // majorAxisVertical
+                    directrixDist = (b * b) / c;
+                    const pD1_start = toCanvasCoords(cartesianXMin, -directrixDist, scaleX, scaleY, centerX, centerY);
+                    const pD1_end = toCanvasCoords(cartesianXMax, -directrixDist, scaleX, scaleY, centerX, centerY);
+                    const pD2_start = toCanvasCoords(cartesianXMin, directrixDist, scaleX, scaleY, centerX, centerY);
+                    const pD2_end = toCanvasCoords(cartesianXMax, directrixDist, scaleX, scaleY, centerX, centerY);
+
+                    ctx.beginPath();
+                    ctx.moveTo(pD1_start.x, pD1_start.y);
+                    ctx.lineTo(pD1_end.x, pD1_end.y);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(pD2_start.x, pD2_start.y);
+                    ctx.lineTo(pD2_end.x, pD2_end.y);
+                    ctx.stroke();
+                    ctx.fillText(`Directrices (y=±${directrixDist.toFixed(2)})`, pD2_end.x - 100, pD2_end.y - 10);
+                }
+            }
+            ctx.setLineDash([]); // Reset line dash
+
+
+            // --- Labels for Axes ---
+            ctx.fillStyle = '#475569'; // slate-600
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText('X-axis', canvas.width - padding, centerY + 5);
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Y-axis', centerX + 5, padding);
+
+            // --- Update dynamic text labels for axis lengths ---
+            const majorAxisLength = 2 * Math.max(a, b);
+            const minorAxisLength = 2 * Math.min(a, b);
+
+            let majorAxisOrientation = majorAxisHorizontal ? ' (along X-axis)' : ' (along Y-axis)';
+            let minorAxisOrientation = majorAxisHorizontal ? ' (along Y-axis)' : ' (along X-axis)';
+
+            majorAxisLengthSpan.textContent = majorAxisLength.toFixed(2) + majorAxisOrientation;
+            minorAxisLengthSpan.textContent = minorAxisLength.toFixed(2) + minorAxisOrientation;
+        }
+
+        // Set canvas dimensions and draw
+        function setupCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = Math.min(container.clientWidth * 0.9, 600);
+
+            drawEllipseElements();
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Event listeners for the sliders
+        aSlider.addEventListener('input', () => {
+            a = parseFloat(aSlider.value);
+            aValueSpan.textContent = a.toFixed(1);
+            drawEllipseElements();
+        });
+
+        bSlider.addEventListener('input', () => {
+            b = parseFloat(bSlider.value);
+            bValueSpan.textContent = b.toFixed(1);
+            drawEllipseElements();
+        });
+
+        // Initial setup
+        window.onload = setupCanvas;
+        // Redraw on window resize
+        window.addEventListener('resize', setupCanvas);
+
+    </script>
+</body>
+</html>

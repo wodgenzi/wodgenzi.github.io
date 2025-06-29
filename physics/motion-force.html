@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Motion and Force</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 3: Motion and Force</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introMotionForceContent')">Show/Hide Details</span>
+            <div id="introMotionForceContent" class="content">
+                <ul>
+                    <li>Motion/rest: relative to observer.</li>
+                    <li>Rest: position unchanged w.r.t. surroundings.</li>
+                    <li>Motion: position changes w.r.t. surroundings.</li>
+                </ul>
+                <div class="point-to-ponder">
+                    A moving body can be both at rest and in motion, depending on the observer.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Displacement</h2>
+            <span class="toggle-button" onclick="toggleVisibility('displacementMainContent')">Show/Hide Details</span>
+            <div id="displacementMainContent" class="content">
+                <ul>
+                    <li>Vector: change in position (initial to final).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Distance</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('distanceSubContent')">Show/Hide Details</span>
+                        <div id="distanceSubContent" class="content">
+                            <ul>
+                                <li>Length of path between two points.</li>
+                            </ul>
+                            <div class="point-to-ponder">
+                                For straight-line motion, displacement equals distance.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Speed & Velocity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('speedVelocityMainContent')">Show/Hide Details</span>
+            <div id="speedVelocityMainContent" class="content">
+                <ul>
+                    <li>Velocity: Time rate of change of displacement (Vector).</li>
+                    <li>Speed: Magnitude of velocity (Scalar).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Speed</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('speedSubContent')">Show/Hide Details</span>
+                        <div id="speedSubContent" class="content">
+                            <ul>
+                                <li>Ratio: distance / time.</li>
+                                <li>Scalar.</li>
+                                <li>Dimensions: $[LT^{-1}]$.</li>
+                                <li>Unit: $m~s^{-1}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Velocity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('velocitySubContent')">Show/Hide Details</span>
+                        <div id="velocitySubContent" class="content">
+                            <ul>
+                                <li>Time rate of change of displacement.</li>
+                                <li>Vector.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="point-to-ponder">
+                    For uniform speed, instantaneous and average speeds are equal.
+                    Relative velocity: e.g., boat in current.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Acceleration</h2>
+            <span class="toggle-button" onclick="toggleVisibility('accelerationMainContent')">Show/Hide Details</span>
+            <div id="accelerationMainContent" class="content">
+                <ul>
+                    <li>Rate of change of velocity: $\vec{a} = \frac{\Delta \vec{v}}{\Delta t}$.</li>
+                    <li>Produced by change in:
+                        <ul>
+                            <li>Magnitude of velocity (speed).</li>
+                            <li>Direction of velocity.</li>
+                            <li>Both magnitude and direction.</li>
+                        </ul>
+                    </li>
+                    <li>Vector.</li>
+                    <li>Unit: $m/s^2$.</li>
+                    <li>Dimensions: $[LT^{-2}]$.</li>
+                    <li>Deceleration: velocity reduces (not zero).</li>
+                    <li>Retardation: velocity reduces to zero.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Types of Acceleration</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('typesAccelerationSubContent')">Show/Hide Details</span>
+                        <div id="typesAccelerationSubContent" class="content">
+                            <ul>
+                                <li>Uniform</li>
+                                <li>Variable</li>
+                                <li>Average</li>
+                                <li>Instantaneous</li>
+                                <li>Positive</li>
+                                <li>Due to gravity</li>
+                                <li>Negative (retardation)</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Graphs (Motion)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('motionGraphsMainContent')">Show/Hide Details</span>
+            <div id="motionGraphsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Displacement-Time Graph</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('dispTimeGraphSubContent')">Show/Hide Details</span>
+                        <div id="dispTimeGraphSubContent" class="content">
+                            <ul>
+                                <li>Slope = Velocity.</li>
+                                <li>Parallel to x-axis: rest, zero velocity.</li>
+                                <li>Inclined straight line: constant velocity.</li>
+                                <li>Parallel to y-axis: infinite velocity (not possible).</li>
+                                <li>Increasing slope: increasing velocity, accelerated motion.</li>
+                                <li>Decreasing slope: decreasing velocity, decelerated motion.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Velocity-Time Graph</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('velTimeGraphSubContent')">Show/Hide Details</span>
+                        <div id="velTimeGraphSubContent" class="content">
+                            <ul>
+                                <li>Slope = Acceleration: $a = \frac{\Delta v}{\Delta t} = \tan\theta$.</li>
+                                <li>Horizontal line: constant velocity, zero acceleration.</li>
+                                <li>Inclined line: constant acceleration.</li>
+                                <li>Curved line: variable acceleration.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Important Points (Velocity-Time Graph)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('impPointsVelTimeGraphSubContent')">Show/Hide Details</span>
+                        <div id="impPointsVelTimeGraphSubContent" class="content">
+                            <ul>
+                                <li>Constant velocity $\implies$ zero acceleration/force.</li>
+                                <li>Body falls freely/starts from rest: $v_i = 0$.</li>
+                                <li>Velocity and acceleration not necessarily in same direction.</li>
+                                <li>Velocity and acceleration not necessarily zero simultaneously.</li>
+                                <li>Average speed (equal distance, $v_1, v_2$): $v_{av} = \frac{2v_1v_2}{v_1+v_2}$.</li>
+                                <li>Average speed (equal time, $v_1, v_2$): $speed = \frac{v_1+v_2}{2}$.</li>
+                                <li>Body thrown upward, $v_f=0$ at height $h$: $h = \frac{v^2}{2g}$.</li>
+                                <li>Average acceleration ($a_1$ for $t_1$, $a_2$ for $t_2$): $a_{av} = \frac{a_1t_1+a_2t_2}{t_1+t_2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Equations of Motion (by Galileo)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('equationsOfMotionContent')">Show/Hide Details</span>
+            <div id="equationsOfMotionContent" class="content">
+                <ul>
+                    <li>$v_f = v_i + at$ (General) or $v_f = v_i + gt$ (Vertical)</li>
+                    <li>$s = v_i t + \frac{1}{2}at^2$ (General) or $s = v_i t + \frac{1}{2}gt^2$ (Vertical)</li>
+                    <li>$v_f^2 = v_i^2 + 2as$ (General) or $v_f^2 = v_i^2 + 2gs$ (Vertical)</li>
+                    <li>Distance in $n^{th}$ second: $s_n = v_i + \frac{1}{2}a(2n-1)$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Newton's Laws of Motion</h2>
+            <span class="toggle-button" onclick="toggleVisibility('newtonsLawsMainContent')">Show/Hide Details</span>
+            <div id="newtonsLawsMainContent" class="content">
+                <ul>
+                    <li>From Newton's PRINCIPIA.</li>
+                    <li>Applicable for speeds not comparable to light speed.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>1<sup>st</sup> Law (Law of Inertia)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('newton1stLawSubContent')">Show/Hide Details</span>
+                        <div id="newton1stLawSubContent" class="content">
+                            <ul>
+                                <li>Body maintains rest/uniform motion unless external force acts.</li>
+                                <li>Qualitatively defines force.</li>
+                                <li>Inertia: inability to change state of motion.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>2<sup>nd</sup> Law (Force and Acceleration)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('newton2ndLawSubContent')">Show/Hide Details</span>
+                        <div id="newton2ndLawSubContent" class="content">
+                            <ul>
+                                <li>Force causes acceleration in its direction.</li>
+                                <li>$F \propto ma \implies F = ma$ (if $k=1$).</li>
+                                <li>$F = \frac{\Delta p}{\Delta t}$ (change in momentum per second).</li>
+                                <li>Weight: Earth's gravitational force on a body.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>3<sup>rd</sup> Law (Action and Reaction)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('newton3rdLawSubContent')">Show/Hide Details</span>
+                        <div id="newton3rdLawSubContent" class="content">
+                            <ul>
+                                <li>Every action has equal and opposite reaction.</li>
+                                <li>$\vec{F}_{AB} = -\vec{F}_{BA}$ or $\vec{F}_{action} = -\vec{F}_{reaction}$.</li>
+                                <li>Action/reaction forces act on *different* bodies.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Inertial and Non-Inertial Frame</h2>
+            <span class="toggle-button" onclick="toggleVisibility('inertialNonInertialMainContent')">Show/Hide Details</span>
+            <div id="inertialNonInertialMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Inertial Frame</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('inertialFrameSubContent')">Show/Hide Details</span>
+                        <div id="inertialFrameSubContent" class="content">
+                            <ul>
+                                <li>Body at rest or uniform velocity ($\vec{a}=\vec{0}$).</li>
+                                <li>Law of inertia holds.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Non-Inertial Frame</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nonInertialFrameSubContent')">Show/Hide Details</span>
+                        <div id="nonInertialFrameSubContent" class="content">
+                            <ul>
+                                <li>Not uniform velocity ($\vec{a}\ne\vec{0}$).</li>
+                                <li>Law of inertia does not hold.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Momentum</h2>
+            <span class="toggle-button" onclick="toggleVisibility('momentumMainContent')">Show/Hide Details</span>
+            <div id="momentumMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Linear Momentum</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('linearMomentumSubContent')">Show/Hide Details</span>
+                        <div id="linearMomentumSubContent" class="content">
+                            <ul>
+                                <li>Product of mass and velocity: $\vec{p} = m\vec{v}$.</li>
+                                <li>Vector, points along velocity.</li>
+                                <li>$\vec{p} = \vec{0}$ if $\vec{v}=\vec{0}$.</li>
+                                <li>SI unit: $kg~m~s^{-1}$ or $Ns$.</li>
+                                <li>Dimension: $[MLT^{-1}]$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Impulse</h2>
+            <span class="toggle-button" onclick="toggleVisibility('impulseContent')">Show/Hide Details</span>
+            <div id="impulseContent" class="content">
+                <ul>
+                    <li>Product of force and duration: $\vec{I} = \Delta \vec{p} = \vec{F}\Delta t$.</li>
+                    <li>Same dimensions as linear momentum.</li>
+                    <li>Change in momentum = Impulse.</li>
+                </ul>
+                <div class="point-to-ponder">
+                    Thermore pieces protect dinnerware by increasing impact time (reducing force).
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Law of Conservation of Linear Momentum</h2>
+            <span class="toggle-button" onclick="toggleVisibility('conservationOfMomentumMainContent')">Show/Hide Details</span>
+            <div id="conservationOfMomentumMainContent" class="content">
+                <ul>
+                    <li>In isolated system, total linear momentum is constant: $m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2'$.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Collisions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('collisionsSubContent')">Show/Hide Details</span>
+                        <div id="collisionsSubContent" class="content">
+                            <ul>
+                                <li>Interaction due to closeness.</li>
+                            </ul>
+                            <h4>Elastic Collision in One Dimension</h4>
+                            <ul>
+                                <li>Bodies remain on line of motion.</li>
+                                <li>Speed of approach = Speed of recession: $v_1 - v_2 = -(v_1' - v_2')$.</li>
+                                <li>After collision velocities:
+                                    <ul>
+                                        <li>$v_1' = \frac{(m_1 - m_2)v_1 + 2m_2v_2}{(m_1 + m_2)}$</li>
+                                        <li>$v_2' = \frac{(m_2 - m_1)v_2 + 2m_1v_1}{(m_1 + m_2)}$</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <h4>Cases of Elastic Collision:</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Case</th>
+                                        <th>Condition</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>I</td>
+                                        <td>$m_1=m_2$</td>
+                                        <td>$v_1'=v_2$ & $v_2'=v_1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>II</td>
+                                        <td>$m_1=m_2$ & $v_2=0$</td>
+                                        <td>$v_1'=0$ & $v_2'=v_1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Velocities interchange in cases I & II.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>III</td>
+                                        <td>$m_1 \gg m_2$ & $v_2=0$</td>
+                                        <td>$v_1'=v_1$ & $v_2'=2v_1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>IV</td>
+                                        <td>$m_1 \ll m_2$ & $v_2=0$</td>
+                                        <td>$v_1'=-v$ & $v_2'=0$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Force Due to Water Flow</h2>
+            <span class="toggle-button" onclick="toggleVisibility('waterFlowForceContent')">Show/Hide Details</span>
+            <div id="waterFlowForceContent" class="content">
+                <ul>
+                    <li>Force exerted by water on wall: $F = \frac{m}{t}v$.</li>
+                    <li>Basis for turbines (hydral energy).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Momentum & Explosive Forces</h2>
+            <span class="toggle-button" onclick="toggleVisibility('explosiveForcesContent')">Show/Hide Details</span>
+            <div id="explosiveForcesContent" class="content">
+                <ul>
+                    <li>Conservation of momentum governs explosion fragments.</li>
+                    <li>Recoil velocity of rifle: $v' = -\frac{m}{M}v$.</li>
+                    <li>Recoil velocity is small fraction of bullet velocity ($M \gg m$).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Propulsion of Rocket</h2>
+            <span class="toggle-button" onclick="toggleVisibility('rocketPropulsionContent')">Show/Hide Details</span>
+            <div id="rocketPropulsionContent" class="content">
+                <ul>
+                    <li>Based on conservation of linear momentum.</li>
+                    <li>Fuel: ~80% of launch mass.</li>
+                    <li>Fuel consumption: ~10,000 Kg/s.</li>
+                    <li>Exhaust gas speed: >4000 m/s.</li>
+                    <li>Instantaneous acceleration: $a = mv/M$.</li>
+                </ul>
+                <div class="point-to-ponder">
+                    Multi-compartment rockets drop empty sections to reduce mass and increase acceleration.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Friction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('frictionMainContent')">Show/Hide Details</span>
+            <div id="frictionMainContent" class="content">
+                <ul>
+                    <li>Resisting force between rough bodies, opposes sliding.</li>
+                    <li>Acts opposite to tendency of motion.</li>
+                    <li>Max friction depends on: nature of surfaces, normal force.</li>
+                    <li>Independent of contact area (within limits).</li>
+                    <li>Decreases once motion starts.</li>
+                    <li>Never zero in practice.</li>
+                    <li>Walking: friction acts forward (opposes backward slip).</li>
+                    <li>Caused by molecular interlocking/irregularities.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Coefficient of friction ($\mu$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('coeffFrictionSubContent')">Show/Hide Details</span>
+                        <div id="coeffFrictionSubContent" class="content">
+                            <ul>
+                                <li>$\mu = \frac{\text{Limiting friction (f)}}{\text{Normal reaction (R)}}$ or $f = \mu R$.</li>
+                                <li>Depends on material, surface finish, film, temperature.</li>
+                                <li>Horizontal surface: $R = mg \implies f = \mu mg$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Static Friction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('staticFrictionSubContent')">Show/Hide Details</span>
+                        <div id="staticFrictionSubContent" class="content">
+                            <ul>
+                                <li>Force before actual motion starts.</li>
+                                <li>$F_s = \mu_s R_s$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Kinetic Friction</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('kineticFrictionSubContent')">Show/Hide Details</span>
+                        <div id="kineticFrictionSubContent" class="content">
+                            <ul>
+                                <li>Force during motion.</li>
+                                <li>$F_k = \mu_k R_k$.</li>
+                                <li>Limiting friction: max force before sliding.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Angle of Friction ($\theta$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('angleFrictionSubContent')">Show/Hide Details</span>
+                        <div id="angleFrictionSubContent" class="content">
+                            <ul>
+                                <li>Angle of resultant of normal reaction (R) and limiting friction (f) with R.</li>
+                                <li>$\tan\theta = \frac{f}{R}$ or $\mu = \tan\theta$.</li>
+                                <li>Static: $\tan\theta_s = \mu_s$.</li>
+                                <li>Kinetic: $\tan\theta_k = \mu_k$.</li>
+                                <li>Note: $\mu_s > \mu_k$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Graph for frictions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('frictionGraphSubContent')">Show/Hide Details</span>
+                        <div id="frictionGraphSubContent" class="content">
+                            <!-- Image placeholder removed as per previous instruction -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Normal Contact Force</h2>
+            <span class="toggle-button" onclick="toggleVisibility('normalContactForceMainContent')">Show/Hide Details</span>
+            <div id="normalContactForceMainContent" class="content">
+                <ul>
+                    <li>Perpendicular/parallel force between contacting bodies.</li>
+                    <li>Number of forces = number of contact surfaces/points.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Few contact forces are here:</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('fewContactForcesSubContent')">Show/Hide Details</span>
+                        <div id="fewContactForcesSubContent" class="content">
+                            <ul>
+                                <li>Normal contact force</li>
+                                <li>Frictional force</li>
+                                <li>Tension in strings</li>
+                                <li>Spring force</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Scenario</th>
+                                        <th>Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Single surface contact.</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Two surfaces contact on A.</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Three surfaces contact on A.</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Two points contact on rod.</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Three points contact on ring.</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                    <tr>
+                                        <td>No contact force (block in air).</td>
+                                        <td><!-- Image placeholder removed --></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Masses in Contact/Connected by Strings</h2>
+            <span class="toggle-button" onclick="toggleVisibility('massesContactStringsMainContent')">Show/Hide Details</span>
+            <div id="massesContactStringsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>1) Masses in Contact</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('massesInContactSubContent')">Show/Hide Details</span>
+                        <div id="massesInContactSubContent" class="content">
+                            <ul>
+                                <li>$F=$ Horizontal force on $m_1$. $F_c=$ Contact force. $a=$ Acceleration.</li>
+                                <li>$F - F_c = m_1a$</li>
+                                <li>$F_c = m_2a$</li>
+                                <li>Result: $F_c = \frac{m_2F}{m_1+m_2}$, $a = \frac{F}{m_1+m_2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>2) Masses Connected by Strings</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('massesConnectedStringsSubContent')">Show/Hide Details</span>
+                        <div id="massesConnectedStringsSubContent" class="content">
+                            <ul>
+                                <li>$F=$ Force on $m_1$. $T=$ Tension. $a=$ Acceleration.</li>
+                                <li>$F - T = m_1a$</li>
+                                <li>$T = m_2a$</li>
+                                <li>Result: $T = \frac{m_2F}{m_1+m_2}$, $a = \frac{F}{m_1+m_2}$.</li>
+                            </ul>
+                            <ul>
+                                <li>For three masses ($m_1, m_2, m_3$):</li>
+                                <li>$F - T_1 = m_1a$</li>
+                                <li>$T_1 - T_2 = m_2a$</li>
+                                <li>$T_2 = m_3a$</li>
+                                <li>Result: $a = \frac{F}{m_1+m_2+m_3}$, $T_2 = \frac{m_3F}{m_1+m_2+m_3}$, $T_1 = \frac{(m_2+m_3)F}{m_1+m_2+m_3}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Tension and Acceleration in a String (Pulley Systems)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('pulleySystemsMainContent')">Show/Hide Details</span>
+            <div id="pulleySystemsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Case 1: Vertical motion (two bodies, frictionless pulley)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pulleyCase1SubContent')">Show/Hide Details</span>
+                        <div id="pulleyCase1SubContent" class="content">
+                            <ul>
+                                <li>If $m_1 > m_2$, $m_1$ moves down, $m_2$ moves up with same acceleration.</li>
+                                <li>Equations: $m_1g - T = m_1a$, $T - m_2g = m_2a$.</li>
+                                <li>Result: $a = \frac{m_1 - m_2}{m_1 + m_2}g$, $T = \frac{2m_1m_2}{m_1 + m_2}g$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Case 2: One vertical, other horizontal</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pulleyCase2SubContent')">Show/Hide Details</span>
+                        <div id="pulleyCase2SubContent" class="content">
+                            <ul>
+                                <li>Acceleration: $a = \frac{m_1g}{m_1+m_2}$.</li>
+                                <li>Tension: $T = \frac{m_1m_2g}{m_1+m_2}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mechanical Advantage</h2>
+            <span class="toggle-button" onclick="toggleVisibility('mechanicalAdvantageContent')">Show/Hide Details</span>
+            <div id="mechanicalAdvantageContent" class="content">
+                <ul>
+                    <li>Ratio of load to effort.</li>
+                    <li>Mechanical Advantage = $\frac{\text{LOAD}}{\text{EFFORT}}$</li>
+                    <li>LOAD = MECHANICAL ADVANTAGE $\times$ EFFORT</li>
+                    <li>EFFORT = $\frac{\text{LOAD}}{\text{MECHANICAL ADVANTAGE}}$</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Projectile Motion</h2>
+            <span class="toggle-button" onclick="toggleVisibility('projectileMotionMainContent')">Show/Hide Details</span>
+            <div id="projectileMotionMainContent" class="content">
+                <ul>
+                    <li>Instantaneous velocity: max at projection/landing, min at max height ($v_y=0$).</li>
+                    <li>Horizontal velocity component: constant.</li>
+                    <li>Vertical velocity component: decreases to zero (max height), then increases.</li>
+                    <li>Trajectory: Parabola (no air friction).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Assumptions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileAssumptionsSubContent')">Show/Hide Details</span>
+                        <div id="projectileAssumptionsSubContent" class="content">
+                            <ul>
+                                <li>Earth is flat.</li>
+                                <li>Gravity (g) constant.</li>
+                                <li>Negligible aerodynamic effects.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Coordinates at time 't'</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileCoordinatesSubContent')">Show/Hide Details</span>
+                        <div id="projectileCoordinatesSubContent" class="content">
+                            <ul>
+                                <li>$x = v_o \cos\theta_o~t$</li>
+                                <li>$y = v_o \sin\theta_o~t - \frac{1}{2}gt^2$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Time to reach Maximum Height</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileTimeMaxHeightSubContent')">Show/Hide Details</span>
+                        <div id="projectileTimeMaxHeightSubContent" class="content">
+                            <ul>
+                                <li>$t = \frac{v_o \sin\theta_o}{g}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Total Time of Flight</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileTimeFlightSubContent')">Show/Hide Details</span>
+                        <div id="projectileTimeFlightSubContent" class="content">
+                            <ul>
+                                <li>$T = \frac{2v_o \sin\theta_o}{g}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Vertical Range (Maximum Height)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileVerticalRangeSubContent')">Show/Hide Details</span>
+                        <div id="projectileVerticalRangeSubContent" class="content">
+                            <ul>
+                                <li>$H = \frac{v_o^2 \sin^2\theta_o}{2g}$</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Horizontal Range</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('projectileHorizontalRangeSubContent')">Show/Hide Details</span>
+                        <div id="projectileHorizontalRangeSubContent" class="content">
+                            <ul>
+                                <li>$R = \frac{v_o^2 \sin2\theta_o}{g}$ or $R = \frac{v_o^2 (2\sin\theta_o \cos\theta_o)}{g}$</li>
+                                <li>Maximum range at $\theta = 45^\circ$: $R_{max} = \frac{v_o^2}{g}$.</li>
+                                <li>Relation between range and height: $R \tan\theta = 4H$.</li>
+                                <li>Equal ranges for $\theta_1 + \theta_2 = 90^\circ$.</li>
+                            </ul>
+                            <div class="point-to-ponder">
+                                Range = Max Height when angle of projection is $76^\circ$.
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Ballistic Missile Application</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('ballisticMissileSubContent')">Show/Hide Details</span>
+                        <div id="ballisticMissileSubContent" class="content">
+                            <ul>
+                                <li>Un-powered, un-guided.</li>
+                                <li>Air friction affects motion.</li>
+                                <li>Short range only.</li>
+                                <li>Long range/precision: powered, remote-controlled guided missiles.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

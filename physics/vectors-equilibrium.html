@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Vectors and Equilibrium</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        ul ul li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 2: Vectors and Equilibrium</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introContent')">Show/Hide Details</span>
+            <div id="introContent" class="content">
+                <h3>Physical Quantities</h3>
+                <p>A property of matter associated with measurement.</p>
+                <ul>
+                    <li><strong>Scalar Quantity:</strong> Has magnitude but no direction (e.g., time, volume, work, flux).</li>
+                    <li><strong>Vector Quantity:</strong> Has magnitude as well as direction (e.g., displacement, velocity, torque).</li>
+                </ul>
+                <h3>Comparison of Scalar and Vector</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Particulars</th>
+                            <th>Scalars</th>
+                            <th>Vectors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Definition</td>
+                            <td>Non-directional physical quantity</td>
+                            <td>Directional physical quantity</td>
+                        </tr>
+                        <tr>
+                            <td>Examples</td>
+                            <td>time, volume, work & flux</td>
+                            <td>Displacement, velocity & torque</td>
+                        </tr>
+                        <tr>
+                            <td>Representation requirements</td>
+                            <td>Numerical value, Proper unit</td>
+                            <td>Numerical value, Proper unit, Direction</td>
+                        </tr>
+                        <tr>
+                            <td>Subtraction</td>
+                            <td>By simple arithmetic rules</td>
+                            <td>By special rules</td>
+                        </tr>
+                        <tr>
+                            <td>Addition</td>
+                            <td>By simple arithmetic rules</td>
+                            <td>By special rules</td>
+                        </tr>
+                        <tr>
+                            <td>Multiplication</td>
+                            <td>By simple arithmetic rules</td>
+                            <td>By special rules</td>
+                        </tr>
+                        <tr>
+                            <td>Division</td>
+                            <td>By simple arithmetic rules</td>
+                            <td>Not possible (for a vector by a vector)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>Modulus of a Vector</h3>
+                <p>Represents only the magnitude (absolute numerical value) of a vector, giving no information about its direction.</p>
+                <p>If $\vec{a}=(5N)(\text{East})$, $\vec{b}=(5N)(\text{West})$ then $\vec{a}\ne\vec{b}$ but $|\vec{a}|=|\vec{b}|=5N$.</p>
+                <h3>Vector Change Conditions</h3>
+                <ul>
+                    <li><strong>A vector does not change:</strong>
+                        <ul>
+                            <li>When displaced parallel to itself anywhere in space.</li>
+                            <li>When rotated through an angle $\theta=2n\pi$ (where $n=1,2,3,...$).</li>
+                        </ul>
+                    </li>
+                    <li><strong>A vector changes when:</strong>
+                        <ul>
+                            <li>Its magnitude changes only.</li>
+                            <li>Its direction changes only (angle of rotation is not an integral multiple of $2\pi$).</li>
+                            <li>Both magnitude and direction change.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>Angle Between Two Vectors</h3>
+                <p>It is measured only when their tails or heads are at the same point.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/400x150/f0f4f8/333?text=Vector+Angle+Diagram" alt="Vector Angle Diagram">
+                    <p>Correct vs. Incorrect Angle Measurement</p>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Vector Representation</h2>
+            <span class="toggle-button" onclick="toggleVisibility('vectorRepresentationContent')">Show/Hide Details</span>
+            <div id="vectorRepresentationContent" class="content">
+                <p>Vectors can be represented symbolically or graphically.</p>
+                <h3>Symbolic Representation</h3>
+                <ul>
+                    <li>Arrowhead representation (e.g., $\vec{A}$)</li>
+                    <li>Bold face representation (e.g., **A**)</li>
+                </ul>
+                <div class="point-to-ponder">
+                    Angular representation of vectors involves measurement of angle with positive x-axis in anticlockwise sense.
+                </div>
+                <h3>Graphical Representation</h3>
+                <p>Steps to represent vectors graphically:</p>
+                <ol>
+                    <li>Select suitable scale.</li>
+                    <li>Draw a line of selected magnitude according to scale.</li>
+                    <li>Put an arrowhead in the direction of the vector.</li>
+                </ol>
+                <h3>Rectangular Coordinate System</h3>
+                <ul>
+                    <li><strong>Two-dimensional:</strong> Consists of two mutually perpendicular intersecting lines (x-axis and y-axis). One angle is enough to specify direction.</li>
+                    <li><strong>Three-dimensional:</strong> Consists of three mutually perpendicular lines (x-axis, y-axis, and z-axis). Direction is specified by three angles with x, y, and z axes respectively.</li>
+                </ul>
+                <p><strong>Origin:</strong> The point of intersection of mutually perpendicular lines in a rectangular coordinate system.</p>
+            </div>
+        </li>
+
+        <li>
+            <h2>Graphical Vector Addition and Subtraction</h2>
+            <span class="toggle-button" onclick="toggleVisibility('graphicalVectorAdditionContent')">Show/Hide Details</span>
+            <div id="graphicalVectorAdditionContent" class="content">
+                <p>We can add and subtract vectors by the head-to-tail rule.</p>
+                <h3>Head-to-Tail Rule:</h3>
+                <p>"If vectors are arranged in such a way that tail of each next vector join with the head of its preceding vector, then the resultant is obtained by a line joining the tail of first vector to the head of last one."</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/400x200/f0f4f8/333?text=Head-to-Tail+Rule+Diagram" alt="Head-to-Tail Rule Diagram">
+                    <p>Vector addition using Head-to-Tail Rule</p>
+                </div>
+                <p>The process can be done mathematically by finding the components of vectors and combining them to form the polar form $(R, \theta)$.</p>
+            </div>
+        </li>
+
+        <li>
+            <h2>Types of Vectors</h2>
+            <span class="toggle-button" onclick="toggleVisibility('typesOfVectorsContent')">Show/Hide Details</span>
+            <div id="typesOfVectorsContent" class="content">
+                <h3>Resultant Vector</h3>
+                <p>A single vector that has the same effect as all the vectors to be added.</p>
+                <h3>Unit Vector</h3>
+                <p>It has magnitude 1 and direction along the given vector. Obtained by dividing the vector by its magnitude: $\hat{A} = \frac{\vec{A}}{|\vec{A}|}$.</p>
+                <ul>
+                    <li>A unit vector has no dimensions and is unitless.</li>
+                    <li>Commonly used unit vectors:
+                        <ul>
+                            <li>$\hat{i}$ - unit vector along x-axis</li>
+                            <li>$\hat{j}$ - unit vector along y-axis</li>
+                            <li>$\hat{k}$ - unit vector along z-axis</li>
+                            <li>$\hat{r}$ - unit vector along position vector</li>
+                            <li>$\hat{n}$ - unit vector along normal (perpendicular)</li>
+                        </ul>
+                    </li>
+                </ul>
+                <h3>Zero Vector or Null Vector</h3>
+                <p>It has magnitude zero and arbitrary direction. Its symbol is $\vec{0}$ and is used as vector identity for addition: $\vec{A} + (-\vec{A}) = \vec{0}$.</p>
+                <div class="point-to-ponder">
+                    We cannot add zero to null vector.
+                </div>
+                <h3>Negative of a Vector</h3>
+                <p>A vector of same magnitude but opposite direction (e.g., $\vec{A}$ and $-\vec{A}$).</p>
+                <h3>Equal Vectors</h3>
+                <p>Vectors having same magnitude and same direction.</p>
+                <h3>Parallel Vectors</h3>
+                <p>Vectors that have only same direction.</p>
+                <h3>Anti Parallel Vectors</h3>
+                <p>Vectors that have opposite direction.</p>
+                <h3>Position Vector</h3>
+                <p>Represents the position of a point with respect to an origin in a coordinate system.</p>
+                <ul>
+                    <li>In two dimensions: $\vec{r} = x\hat{i} + y\hat{j}$</li>
+                    <li>In three dimensions: $\vec{r} = x\hat{i} + y\hat{j} + z\hat{k}$</li>
+                </ul>
+                <h3>Multiplication of a Vector with a Scalar (Number)</h3>
+                <ul>
+                    <li>Resultant remains a vector.</li>
+                    <li>Magnitude may or may not be changed (can be $>1$ or $<1$).</li>
+                    <li>Direction may or may not be changed, as number can be positive or negative.</li>
+                    <li>If $n$ is a number and $\vec{A}$ is a vector, then new vector is $n\vec{A}$.</li>
+                    <li>$|n\vec{A}| = n|\vec{A}|$.</li>
+                    <li>Dimensions of scalar and vector are also multiplied to give the dimension of new vector.</li>
+                </ul>
+                <h3>Resolution of a Vector</h3>
+                <ul>
+                    <li>Reverse process of addition of vectors.</li>
+                    <li>Replacing single vector by two or more than two vectors.</li>
+                    <li>Vectors obtained by resolving a vector are called components.</li>
+                    <li>Component of a vector is its effective value in the stated direction.</li>
+                    <li>Minimum possible components of a vector are two.</li>
+                    <li>Maximum possible components of a vector are infinite.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Rectangular Components of a Vector</h2>
+            <span class="toggle-button" onclick="toggleVisibility('rectangularComponentsContent')">Show/Hide Details</span>
+            <div id="rectangularComponentsContent" class="content">
+                <p>Components of a vector that are mutually perpendicular.</p>
+                <p>To apply simple trigonometric formulae, we resolve a vector in a plane into two mutually perpendicular components.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/300x200/f0f4f8/333?text=Vector+Components+Diagram" alt="Vector Components Diagram">
+                    <p>Resolution of a vector into components</p>
+                </div>
+                <ul>
+                    <li>$A_x = A \cos\theta$</li>
+                    <li>$A_y = A \sin\theta$</li>
+                </ul>
+                <h3>Determination of a Vector from Rectangular Components</h3>
+                <p>Squaring and adding $A_x$ and $A_y$ yields:</p>
+                <ul>
+                    <li>$|\vec{A}| = \sqrt{A_x^2 + A_y^2}$ (since $\cos^2\theta + \sin^2\theta = 1$)</li>
+                </ul>
+                <p>For direction (dividing $A_y$ by $A_x$):</p>
+                <ul>
+                    <li>$\theta = \tan^{-1}\left(\frac{A_y}{A_x}\right)$</li>
+                </ul>
+                <p>When vector $\vec{A}$ makes angle $\phi$ with y-axis:</p>
+                <ul>
+                    <li>$A_y = A \cos\phi$</li>
+                    <li>$A_x = A \sin\phi$</li>
+                    <li>$\phi = \tan^{-1}\left(\frac{A_x}{A_y}\right)$</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Addition of Vectors by Rectangular Components</h2>
+            <span class="toggle-button" onclick="toggleVisibility('additionByComponentsContent')">Show/Hide Details</span>
+            <div id="additionByComponentsContent" class="content">
+                <p>Let resultant of two vectors $\vec{A}$ and $\vec{B}$ be $\vec{R}$. Its magnitude is given as:</p>
+                <ul>
+                    <li>$R = \sqrt{(R_x)^2 + (R_y)^2}$</li>
+                    <li>Where $R_x = A_x + B_x$ and $R_y = A_y + B_y$.</li>
+                </ul>
+                <p>Direction of the resultant vector is determined by:</p>
+                <ul>
+                    <li>$\theta = \tan^{-1}\left(\frac{R_y}{R_x}\right)$</li>
+                </ul>
+                <p>For any number of vectors, the magnitude of the resultant:</p>
+                <ul>
+                    <li>$R = \sqrt{(A_x + B_x + C_x + ...)^2 + (A_y + B_y + C_y + ...)^2}$</li>
+                </ul>
+                <p>And direction:</p>
+                <ul>
+                    <li>$\theta = \tan^{-1}\left(\frac{A_y + B_y + C_y + ...}{A_x + B_x + C_x + ...}\right)$</li>
+                </ul>
+                <p>Here $\theta$ is the angle which the resultant vector makes with positive x-axis.</p>
+                <h3>Angle Calculation According to Conventions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Situation</th>
+                            <th>Quadrant</th>
+                            <th>Angle calculated ($\phi$)</th>
+                            <th>Angle calculated according to conventions ($\theta$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>$R_x \rightarrow$ Positive<br>$R_y \rightarrow$ Positive</td>
+                            <td>1<sup>st</sup></td>
+                            <td>$\phi = \tan^{-1}\left|\frac{R_y}{R_x}\right|$</td>
+                            <td>$\theta = \phi$</td>
+                        </tr>
+                        <tr>
+                            <td>$R_x \rightarrow$ Negative<br>$R_y \rightarrow$ Positive</td>
+                            <td>2<sup>nd</sup></td>
+                            <td>$\phi = \tan^{-1}\left|\frac{R_y}{R_x}\right|$</td>
+                            <td>$\theta = 180^\circ - \phi$</td>
+                        </tr>
+                        <tr>
+                            <td>$R_x \rightarrow$ Negative<br>$R_y \rightarrow$ Negative</td>
+                            <td>3<sup>rd</sup></td>
+                            <td>$\phi = \tan^{-1}\left|\frac{R_y}{R_x}\right|$</td>
+                            <td>$\theta = 180^\circ + \phi$</td>
+                        </tr>
+                        <tr>
+                            <td>$R_x \rightarrow$ Positive<br>$R_y \rightarrow$ Negative</td>
+                            <td>4<sup>th</sup></td>
+                            <td>$\phi = \tan^{-1}\left|\frac{R_y}{R_x}\right|$</td>
+                            <td>$\theta = 360^\circ - \phi$</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Parallelogram Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('parallelogramLawContent')">Show/Hide Details</span>
+            <div id="parallelogramLawContent" class="content">
+                <p>This law is applicable only when tails of two vectors are at the same point.</p>
+                <p>In case of parallelogram law from two co-initial vectors, we make a parallelogram whose diagonal represents the resultant of these two vectors.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/400x200/f0f4f8/333?text=Parallelogram+Law+Diagram" alt="Parallelogram Law Diagram">
+                    <p>Vector addition using Parallelogram Law</p>
+                </div>
+                <p>Using Pythagoras theorem in right angled triangle DOE, we get:</p>
+                <ul>
+                    <li>$c^2 = (a+b\cos\theta)^2 + (b\sin\theta)^2$</li>
+                    <li>$c^2 = a^2 + b^2\cos^2\theta + 2ab\cos\theta + b^2\sin^2\theta = a^2 + b^2(\cos^2\theta + \sin^2\theta) + 2ab\cos\theta$</li>
+                    <li>$c^2 = a^2 + b^2 + 2ab\cos\theta$</li>
+                    <li>$|\vec{c}| = \sqrt{a^2 + b^2 + 2ab\cos\theta}$</li>
+                </ul>
+                <p>If magnitude of $\vec{a}$ and $\vec{b}$ are constant, $c$ varies with $\cos\theta$.</p>
+                <ul>
+                    <li>$c$ will be maximum when $\cos\theta = +1$ (i.e., $\theta = 0^\circ$).</li>
+                    <li>Thus $c_{max} = \sqrt{(a+b)^2}$ or $c_{max} = |a+b|$.</li>
+                    <li>$c$ will be minimum when $\cos\theta = -1$ (i.e., $\theta = 180^\circ$).</li>
+                    <li>Thus $c_{min} = \sqrt{(a-b)^2}$ or $c_{min} = |a-b|$.</li>
+                </ul>
+                <p>Hence, resultant of two vectors $\vec{a}$ and $\vec{b}$ can vary between $c_{max}$ and $c_{min}$.</p>
+                <p>For subtraction: $|\vec{c}| = \sqrt{a^2 + b^2 - 2ab\cos\theta}$, where $\theta$ is the angle between $\vec{a}$ and $\vec{b}$.</p>
+            </div>
+        </li>
+
+        <li>
+            <h2>Scalar or Dot Product</h2>
+            <span class="toggle-button" onclick="toggleVisibility('dotProductContent')">Show/Hide Details</span>
+            <div id="dotProductContent" class="content">
+                <p>If product of two vectors is a scalar, then it is called scalar product or dot product.</p>
+                <ul>
+                    <li>$\vec{A} \cdot \vec{B} = AB \cos\theta$.</li>
+                </ul>
+                <p>Example of dot product: Work (scalar quantity) is dot product of force and displacement vector.</p>
+                <div class="point-to-ponder">
+                    Impulse is an example of dot product or cross product? (This is a question to ponder, the answer is cross product for angular impulse, but linear impulse is a vector).
+                </div>
+                <h3>Characteristics of Scalar Product</h3>
+                <ul>
+                    <li>Commutative law: $\vec{A} \cdot \vec{B} = \vec{B} \cdot \vec{A}$.</li>
+                    <li>Associative law: $\vec{A} \cdot (\vec{B} \cdot \vec{C}) = (\vec{A} \cdot \vec{B}) \cdot \vec{C}$.</li>
+                    <li>Distributive law: $\vec{A} \cdot (\vec{B} + \vec{C}) = \vec{A} \cdot \vec{B} + \vec{A} \cdot \vec{C}$.</li>
+                    <li>If $\theta = 90^\circ$, then $\vec{A} \cdot \vec{B} = 0$.</li>
+                    <li>If $\theta = 0^\circ$, then $\vec{A} \cdot \vec{B} = AB$.</li>
+                    <li>If $\theta = 180^\circ$, then $\vec{A} \cdot \vec{B} = -AB$.</li>
+                    <li>For unit vectors: $\hat{i} \cdot \hat{i} = \hat{j} \cdot \hat{j} = \hat{k} \cdot \hat{k} = 1$.</li>
+                    <li>$\hat{i} \cdot \hat{j} = \hat{j} \cdot \hat{k} = \hat{k} \cdot \hat{i} = 0$.</li>
+                </ul>
+                <p>To find angle between two vectors:</p>
+                <ul>
+                    <li>$\theta = \cos^{-1}\left(\frac{A_x B_x + A_y B_y + A_z B_z}{AB}\right)$.</li>
+                </ul>
+                <p>The result of product of two equal vectors is equal to the square of their magnitude (Self scalar product): $\vec{A} \cdot \vec{A} = A^2$.</p>
+                <div class="point-to-ponder">
+                    Scalar product of two parallel vectors is equal to the product of their magnitudes only.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Vector or Cross Product</h2>
+            <span class="toggle-button" onclick="toggleVisibility('crossProductContent')">Show/Hide Details</span>
+            <div id="crossProductContent" class="content">
+                <p>If product of two vectors is a vector, then it is called vector product or cross product.</p>
+                <ul>
+                    <li>$\vec{A} \times \vec{B} = AB \sin\theta \hat{n}$, where $\hat{n}$ is normal to the plane containing vectors $\vec{A}$ and $\vec{B}$.</li>
+                </ul>
+                <h3>Characteristics of Vector Product</h3>
+                <ul>
+                    <li>Cross product does not obey commutative law: $\vec{A} \times \vec{B} \ne \vec{B} \times \vec{A}$.</li>
+                    <li>$\vec{A} \times \vec{A} = \vec{0}$, therefore $\hat{i} \times \hat{i} = \hat{j} \times \hat{j} = \hat{k} \times \hat{k} = \vec{0}$.</li>
+                    <li>If $\theta = 90^\circ$, then $\vec{A} \times \vec{B} = AB\hat{n}$.</li>
+                    <li>For unit vectors: $\hat{i} \times \hat{j} = \hat{k}$, $\hat{j} \times \hat{k} = \hat{i}$, $\hat{k} \times \hat{i} = \hat{j}$.</li>
+                    <li>$(m\vec{A}) \times \vec{B} = m(\vec{A} \times \vec{B}) = \vec{A} \times (m\vec{B})$.</li>
+                    <li>$\vec{A} \times \vec{B} = \vec{0}$ if $\vec{A}$ and $\vec{B}$ are parallel or anti-parallel vectors.</li>
+                    <li>If the direction of any vector is reversed, cross product becomes negative.</li>
+                    <li>If both vectors are reversed, no change in cross product occurs.</li>
+                    <li>$\vec{A} \times \vec{B} = (A_y B_z - A_z B_y)\hat{i} + (A_z B_x - A_x B_z)\hat{j} + (A_x B_y - A_y B_x)\hat{k}$.</li>
+                    <li>Or in determinant form: $\vec{A} \times \vec{B} = \begin{vmatrix} \hat{i} & \hat{j} & \hat{k} \\ A_x & A_y & A_z \\ B_x & B_y & B_z \end{vmatrix}$.</li>
+                </ul>
+                <div class="point-to-ponder">
+                    The magnitude of product of two vectors gives the area of parallelogram.
+                </div>
+                <ul>
+                    <li>The magnitude of $\vec{A} \times \vec{B}$ is equal to the area of the parallelogram formed with $\vec{A}$ and $\vec{B}$ as two adjacent sides.</li>
+                    <li>Scalar triple product gives volume of parallelepiped: $\vec{A} \cdot (\vec{B} \times \vec{C}) = A_x(B_y C_z - B_z C_y) - A_y(B_x C_z - B_z C_x) + A_z(B_x C_y - B_y C_x)$.</li>
+                    <li>Or in determinant form: $\vec{A} \cdot (\vec{B} \times \vec{C}) = \begin{vmatrix} A_x & A_y & A_z \\ B_x & B_y & B_z \\ C_x & C_y & C_z \end{vmatrix}$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Torque</h2>
+            <span class="toggle-button" onclick="toggleVisibility('torqueContent')">Show/Hide Details</span>
+            <div id="torqueContent" class="content">
+                <p>A physical quantity which produces angular acceleration, also called moment of force.</p>
+                <p>Dimensionally, torque resembles work.</p>
+                <div class="point-to-ponder">
+                    An inclined door automatically closes due to the torque produced by horizontal component of its weight.
+                </div>
+                <ul>
+                    <li>Torque is a vector quantity: $\vec{\tau} = \vec{r} \times \vec{F} = rF \sin\phi \hat{n}$.</li>
+                    <li>Magnitude of torque: $\tau = rF \sin\phi$.</li>
+                    <li>If $\phi = 90^\circ$, then $\tau = rF$.</li>
+                    <li>SI unit of torque is N m.</li>
+                    <li>Torque is rotational analogue of force.</li>
+                </ul>
+                <h3>Factors Affecting Torque:</h3>
+                <ul>
+                    <li>Magnitude of force.</li>
+                    <li>Magnitude of position vector or distance between the line of action of force and pivot point.</li>
+                    <li>Value of angle $\theta$ between $\vec{F}$ and $\vec{r}$.</li>
+                </ul>
+                <p>If line of action of force $\vec{F}$ passes through axis of rotation, then no torque is produced.</p>
+                <ul>
+                    <li>$\tau = rF \sin\theta$</li>
+                    <li>OR $\tau = (r \sin\theta) F$.</li>
+                    <li>Where $r_\perp$ is component of position vector perpendicular to force: $r_\perp = r \sin\theta$ is called moment arm of torque.</li>
+                    <li>OR $\tau = r (F \sin\theta)$.</li>
+                </ul>
+                <p>If $\theta = 0^\circ$ or $\pi$, then $r_\perp = 0$ and $F_\perp = 0N$ so that $\tau = 0$ Nm.</p>
+                <h3>Direction Alterations:</h3>
+                <ul>
+                    <li>If $\vec{r}$ is reversed, then direction of torque is also reversed.</li>
+                    <li>If $\vec{F}$ is reversed, then direction of torque is also reversed.</li>
+                    <li>If both $\vec{r}$ and $\vec{F}$ are reversed, then the direction of torque remains unchanged.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Couple</h2>
+            <span class="toggle-button" onclick="toggleVisibility('coupleContent')">Show/Hide Details</span>
+            <div id="coupleContent" class="content">
+                <p>Two equal, opposite and non-collinear forces acting on a body constitute a couple.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/300x150/f0f4f8/333?text=Couple+Diagram" alt="Couple Diagram">
+                    <p>Forces forming a couple</p>
+                </div>
+                <ul>
+                    <li>Torque of a couple is never zero and $\tau = Fd$ where $d$ is the moment arm of the couple.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Equilibrium</h2>
+            <span class="toggle-button" onclick="toggleVisibility('equilibriumContent')">Show/Hide Details</span>
+            <div id="equilibriumContent" class="content">
+                <p>If a body keeps its state of rest or uniform motion invariant under many forces, it is said to be in perfect equilibrium.</p>
+                <h3>Kinds of Equilibrium</h3>
+                <ul>
+                    <li><strong>Static equilibrium:</strong> ($\vec{a}=\vec{0}, \vec{v}=\vec{0}$) - Body is at rest.</li>
+                    <li><strong>Dynamic equilibrium:</strong> ($\vec{a}=\vec{0}$ but $\vec{v}\ne\vec{0}$) - Body is moving with constant velocity.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Conditions of Equilibrium</h2>
+            <span class="toggle-button" onclick="toggleVisibility('conditionsEquilibriumContent')">Show/Hide Details</span>
+            <div id="conditionsEquilibriumContent" class="content">
+                <p>The conditions of equilibrium can be stated in terms of coplanar forces as follows:</p>
+                <h3>1<sup>st</sup> Condition of Equilibrium</h3>
+                <p>The sum of forces acting on a body is equal to zero: $\sum \vec{F} = 0$.</p>
+                <p>For coplanar forces: $\sum F_x = 0$ and $\sum F_y = 0$.</p>
+                <p>The 1<sup>st</sup> condition of equilibrium controls the translational equilibrium of the body.</p>
+                <p>Example: Consider a body under the action of external forces as shown in the diagram.</p>
+                <div class="image-container">
+                    <img src="https://placehold.co/300x200/f0f4f8/333?text=Forces+Diagram" alt="Forces Diagram">
+                    <p>Example of forces in equilibrium</p>
+                </div>
+                <p>Sum of all the external forces on the body (i.e. $\sum \vec{F}$) is zero, hence the body is in the first condition of equilibrium.</p>
+                <h3>2<sup>nd</sup> Condition of Equilibrium</h3>
+                <p>The sum of torques acting on a body about the same axes of rotation is equal to zero: $\sum \vec{\tau} = 0$.</p>
+                <p>Or, Sum of anticlockwise torques = Sum of clockwise torques.</p>
+                <p>The 2<sup>nd</sup> condition of equilibrium controls the rotational equilibrium of the body.</p>
+                <p>Example: Consider a body with axis of rotation O under the action of external torques.</p>
+                <ul>
+                    <li>Clockwise torque = $-10N \times 2m = -20 Nm$</li>
+                    <li>Anticlockwise torque = $10N \times 2m = 20 Nm$</li>
+                </ul>
+                <p>Sum of all external torques: $\sum \tau = 20 Nm - (20 Nm) = 0$.</p>
+                <p>Hence the body is in the second condition of equilibrium.</p>
+                <div class="point-to-ponder">
+                    Both conditions of equilibrium must be fulfilled for a body to be in complete equilibrium.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Center of Gravity</h2>
+            <span class="toggle-button" onclick="toggleVisibility('centerOfGravityContent')">Show/Hide Details</span>
+            <div id="centerOfGravityContent" class="content">
+                <p>Center of gravity of a body is a point where total weight of the body is concentrated. Everybody possesses a center of gravity and this is irrespective of shape of the body. It may be within or outside the body.</p>
+                <p>Example: Center of gravity of a ring is at the center, which is in the space outside the body.</p>
+                <h3>Center of Gravity of Different Objects:</h3>
+                <ul>
+                    <li>Rectangle: Center of gravity of a rectangle is at the point of intersection of its diagonals.</li>
+                    <li>Circle: Center of gravity of a circle is at its center.</li>
+                    <li>Square: Center of gravity of a square is at the point of intersection of its diagonals.</li>
+                    <li>Regular Bar: The center of gravity of a regular bar is at its geometrical center.</li>
+                    <li>Triangle: The center of gravity of a triangle is at the point of intersection of its medians.</li>
+                    <li>Cylinder: The center of gravity of a cylinder is at the axis of cylinder.</li>
+                </ul>
+                <div class="image-container">
+                    <img src="https://placehold.co/500x100/f0f4f8/333?text=Center+of+Gravity+Shapes" alt="Center of Gravity Shapes">
+                    <p>Center of gravity for various shapes</p>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>States of Equilibrium</h2>
+            <span class="toggle-button" onclick="toggleVisibility('statesOfEquilibriumContent')">Show/Hide Details</span>
+            <div id="statesOfEquilibriumContent" class="content">
+                <p>There are three states of equilibrium:</p>
+                <ul>
+                    <li><strong>Stable equilibrium:</strong> Its original condition when set free after slightly lifting from one side. On lifting, the centre of gravity of the body is raised up as compared to the initial position.
+                        <p>Explanation: A book lying on a horizontal surface is an example of stable equilibrium. If the book is lifted from one edge and then allowed to fall, it will come back to its original position.</p>
+                        <p>Reason of Stability: When the book is lifted, its center of gravity is raised up. The line of action of weight passes through the base of the book. A torque due to weight of the book brings it back to the original position.</p>
+                    </li>
+                    <li><strong>Unstable equilibrium:</strong> That condition of a body in which, if the position of the body is disturbed, it does not come back to its original position. In such a case, the centre of gravity is lowered than its original position.
+                        <p>Example: Pencil standing on its point or a stick in vertically standing position.</p>
+                        <p>Explanation: If thin rod standing vertically is slightly disturbed from its position it will not come back to its original position. This type of equilibrium is called unstable equilibrium, other example of unstable equilibrium are vertically standing cylinder and funnel etc.</p>
+                        <p>Reason of Instability: When the rod is slightly disturbed its center of gravity is lowered. The line of action of its weight lies outside the base of rod. The torque due to weight of the rod toppled it down.</p>
+                        <div class="image-container">
+                            <img src="https://placehold.co/200x150/f0f4f8/333?text=Unstable+Equilibrium+Pencil" alt="Unstable Equilibrium Pencil">
+                            <p>Pencil in unstable equilibrium</p>
+                        </div>
+                    </li>
+                    <li><strong>Neutral equilibrium:</strong> The type of equilibrium in which after disturbance, the body again comes to rest position and the position of its centre of gravity does not change, is called neutral equilibrium.
+                        <p>Explanation: If the rest position of the ball is disturbed, the ball comes to rest after moving through a small distance. The centre of gravity G of the ball is again at the centre of the ball, i.e., the position of G neither rises nor becomes lower due to motion.</p>
+                        <div class="image-container">
+                            <img src="https://placehold.co/200x100/f0f4f8/333?text=Neutral+Equilibrium+Ball" alt="Neutral Equilibrium Ball">
+                            <p>Ball in neutral equilibrium</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

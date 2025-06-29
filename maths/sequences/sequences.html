@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Sequence and Series</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 6: Sequence and Series</h1>
+
+    <ul>
+        <li>
+            <h2>Sequence</h2>
+            <span class="toggle-button" onclick="toggleVisibility('sequenceContent')">Show/Hide Details</span>
+            <div id="sequenceContent" class="content">
+                <ul>
+                    <li>Arrangement of numbers subject to some definite rule.</li>
+                    <li>A function whose domain is a subset of Natural Numbers and range is Real or Complex Numbers ($f:N \to \mathbb{R}/C$).</li>
+                    <li>Notation: $\{a_n\}$.</li>
+                    <li>Each number in sequence is called a Term.</li>
+                    <li>The $n^{th}$ term or general term of a sequence is denoted by $a_n$.</li>
+                    <li>$a_1, a_2, a_3, a_4$ be the first, second, third and, fourth terms of a sequence respectively.</li>
+                    <li>Real Sequence: If all members of a sequence are real numbers.</li>
+                    <li>Finite Sequence: If the domain of a sequence is a finite set.</li>
+                    <li>Infinite Sequence: If the domain of a sequence is an infinite set (has no last term).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Arithmetic Sequence or Arithmetic Progression (A.P.)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('apMainContent')">Show/Hide Details</span>
+            <div id="apMainContent" class="content">
+                <ul>
+                    <li>A sequence in which every term after the first is obtained from the preceding term by adding a fixed number in it.</li>
+                    <li>Common Difference (d): The difference of two consecutive terms ($a_n - a_{n-1} = d$, where $n>1$). $d$ can be any number.</li>
+                    <li>General form of an A.P.: $a_1, a_1+d, a_1+2d, \dots, a_1+(n-1)d$.</li>
+                    <li>General Term or $n^{th}$ Term: $a_n = a_1 + (n-1)d$.
+                        <ul>
+                            <li>$a_1$: First term.</li>
+                            <li>$n$: Number of terms (always a positive integer).</li>
+                            <li>$d$: Common Difference.</li>
+                            <li>$a_n$: $n^{th}$ term or general term.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Arithmetic Mean (A.M.)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('amSubContent')">Show/Hide Details</span>
+                        <div id="amSubContent" class="content">
+                            <ul>
+                                <li>If three terms are in A.P., then the middle term is known as Arithmetic Mean (A.M.) of the other two terms.</li>
+                                <li>If $a, A, b$ are in A.P., then $A = \frac{a+b}{2}$.</li>
+                                <li>If $\alpha, \beta, \gamma$ are in A.P., then their A.M. is $\beta$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>n Arithmetic Means Between Two Numbers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nAmSubContent')">Show/Hide Details</span>
+                        <div id="nAmSubContent" class="content">
+                            <ul>
+                                <li>If $a, A_1, A_2, A_3, \dots, A_n, b$ are in A.P., then the numbers $A_1, A_2, A_3, \dots, A_n$ are called n Arithmetic Means between 'a' and 'b'.</li>
+                                <li>$n^{th}$ arithmetic mean between $a$ and $b$: $A_m = a + \frac{m(b-a)}{n+1}$.</li>
+                                <li>The sum of n A.M.'s between any two numbers $a$ and $b$ is equal to n-times their A.M.: $A_1 + A_2 + A_3 + \dots + A_n = n\left(\frac{a+b}{2}\right)$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Arithmetic Series</h2>
+            <span class="toggle-button" onclick="toggleVisibility('arithmeticSeriesMainContent')">Show/Hide Details</span>
+            <div id="arithmeticSeriesMainContent" class="content">
+                <ul>
+                    <li>The sum of an indicated number of terms of a sequence is called a Series.</li>
+                    <li>If $a_1, a_1+d, a_1+2d, a_1+3d, \dots, a_1+(n-1)d$ are in A.P., then the series $a_1+(a_1+d)+(a_1+2d)+\dots+[a_1+(n-1)d]$ is called an Arithmetic Series.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Sum of First 'n' Terms of an Arithmetic Series</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('sumApSubContent')">Show/Hide Details</span>
+                        <div id="sumApSubContent" class="content">
+                            <ul>
+                                <li>If $a_1$ is first term, and $a_n=l$ is general term: $S_n = \frac{n}{2}(a_1+a_n)$ or $S_n = \frac{n}{2}(a_1+l)$.</li>
+                                <li>The sum of first n terms of arithmetic series can be calculated by using the formula: $S_n = \frac{n}{2}\{2a_1+(n-1)d\}$.</li>
+                                <li>If $d=0$ then the above Series becomes $a_1+a_1+a_1+\dots+n$ terms and $S_n = na_1$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Summary of Formulae in A.P.</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('summaryApTableSubContent')">Show/Hide Details</span>
+                        <div id="summaryApTableSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ARITHMETIC PROGRESSION</th>
+                                        <th>ARITHMETIC MEAN</th>
+                                        <th>ARITHMETIC SERIES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1. $a_n = a_1 + (n-1)d$</td>
+                                        <td>1. $A = \frac{a+b}{2}$</td>
+                                        <td>1. $S_n = \frac{n}{2}[2a_1+(n-1)d]$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. $d = a_n - a_{n-1}$, $n>1$</td>
+                                        <td>2. $A_m = a + \frac{m(b-a)}{n+1}$</td>
+                                        <td>2. $S_n = \frac{n}{2}(a_1+a_n)$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. $n = \frac{a_n-a_1}{d}+1$</td>
+                                        <td>3. $A_1+A_2+A_3+\dots+A_n = n(\frac{a+b}{2})$</td>
+                                        <td>3. $S_n = \frac{n}{2}(a_1+l)$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Geometric Sequence or Geometric Progression (G.P.)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('gpMainContent')">Show/Hide Details</span>
+            <div id="gpMainContent" class="content">
+                <ul>
+                    <li>A sequence in which every term after the first is obtained from the preceding term by multiplying it with a non-zero constant number.</li>
+                    <li>Common Ratio (r): The constant ratio of any two consecutive terms ($r = \frac{a_n}{a_{n-1}}$, where $n>1$).</li>
+                    <li>No term of a G.P. can be zero.</li>
+                    <li>General form of a G.P.: $a_1, a_1r, a_1r^2, a_1r^3, \dots, a_1r^{n-1}$.</li>
+                    <li>General Term or $n^{th}$ Term of G.P.: $a_n = a_1r^{n-1}$ ($a_n \ne 0$).
+                        <ul>
+                            <li>$a_1$: First term.</li>
+                            <li>$r$: Common Ratio.</li>
+                            <li>$a_n$: General or $n^{th}$ term.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Geometric Mean (G.M.)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('gmSubContent')">Show/Hide Details</span>
+                        <div id="gmSubContent" class="content">
+                            <ul>
+                                <li>If three terms are in G.P., then the middle term is known as Geometric Mean (G.M.) of the other two terms.</li>
+                                <li>If $a, G, b$ are in G.P., then $G = \pm\sqrt{ab}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>n Geometric Means Between Two Numbers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nGmSubContent')">Show/Hide Details</span>
+                        <div id="nGmSubContent" class="content">
+                            <ul>
+                                <li>If $a, G_1, G_2, G_3, \dots, G_n, b$ are in G.P., then the numbers $G_1, G_2, G_3, \dots, G_n$ are called n geometric means between 'a' and 'b'.</li>
+                                <li>$n^{th}$ G.M. between $a$ and $b$: $G_n = a\left(\frac{b}{a}\right)^{\frac{n}{n+1}}$.</li>
+                                <li>The product of n G.M.'s between $a$ and $b$ is $n^{th}$ power of single G.M between $a$ and $b$: $G_1 \cdot G_2 \cdot G_3 \dots G_n = (\sqrt{ab})^n$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Geometric Series</h2>
+            <span class="toggle-button" onclick="toggleVisibility('geometricSeriesMainContent')">Show/Hide Details</span>
+            <div id="geometricSeriesMainContent" class="content">
+                <ul>
+                    <li>If $a_1, a_1r, a_1r^2, a_1r^3, \dots, a_1r^{n-1}$ are in G.P., then the series $a_1+a_1r+a_1r^2+a_1r^3+\dots+a_1r^{n-1}$ is called Geometric series.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Sum of First 'n' Terms of a Geometric Series (Finite Series)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('sumGpFiniteSubContent')">Show/Hide Details</span>
+                        <div id="sumGpFiniteSubContent" class="content">
+                            <ul>
+                                <li>If $|r|<1$: $S_n = \frac{a_1(1-r^n)}{1-r}$ or $S_n = \frac{a_1-lr}{1-r}$.</li>
+                                <li>If $|r|>1$: $S_n = \frac{a_1(r^n-1)}{r-1}$ or $S_n = \frac{lr-a_1}{r-1}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>The Infinite Geometric Series</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('infiniteGpSubContent')">Show/Hide Details</span>
+                        <div id="infiniteGpSubContent" class="content">
+                            <ul>
+                                <li>The series $a_1+a_1r+a_1r^2+a_1r^3+\dots+a_1r^{n-1}+\dots\infty$ is called Infinite Geometric Series.</li>
+                                <li>Sum of an Infinite Geometric Series: $S_{\infty} = \frac{a_1}{1-r}$, provided $|r|<1$.</li>
+                                <li><strong>Convergent Series:</strong> An infinite series is said to be convergent if $n^{th}$ term of series tends to a definite number L as $n\rightarrow\infty$ (i.e., $lim_{n\rightarrow\infty}a_n=L$).</li>
+                                <li><strong>Divergent Series:</strong> An infinite series is said to be divergent if $n^{th}$ term of series tends to $\pm\infty$ as $n\rightarrow\infty$ (i.e., $lim_{n\rightarrow\infty}a_n=\pm\infty$).</li>
+                                <li>If $r=1$, then the series becomes $a_1+a_1+a_1+a_1+\dots$. In this case $S_n$ does not tend to a limit when $n\rightarrow\infty$ and the series does not converge.</li>
+                                <li>If $r=-1$, then the series becomes $a_1-a_1+a_1-a_1+a_1-a_1+\dots$.
+                                    <ul>
+                                        <li>$S_n = a_1$ if $n$ is positive odd integer.</li>
+                                        <li>$S_n = 0$ if $n$ is positive even integer.</li>
+                                    </ul>
+                                    Thus $S_n$ does not tend to a definite number when $n\rightarrow\infty$. In such a case we say that series is Oscillatory.
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Summary of Formulae in G.P.</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('summaryGpTableSubContent')">Show/Hide Details</span>
+                        <div id="summaryGpTableSubContent" class="content">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>GEOMETRIC PROGRESSION</th>
+                                        <th>GEOMETRIC MEAN</th>
+                                        <th>GEOMETRIC SERIES</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1. $a_n = a_1r^{n-1}$</td>
+                                        <td>1. $G = \pm\sqrt{ab}$</td>
+                                        <td>For Finite Series:</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. $r = \frac{a_n}{a_{n-1}}$, $r>1$</td>
+                                        <td>2. $G_n = a\left(\frac{b}{a}\right)^{\frac{n}{n+1}}$</td>
+                                        <td>1. $S_n = \frac{a_1(1-r^n)}{1-r}$ ($|r|<1$)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>3. $G_1 \cdot G_2 \cdot G_3 \dots G_n = (\sqrt{ab})^n$</td>
+                                        <td>2. $S_n = \frac{a_1(r^n-1)}{r-1}$ ($|r|>1$)</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>For Infinite Series:</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>3. $S_{\infty} = \frac{a_1}{1-r}$ ($|r|<1$)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Harmonic Progression (H.P.)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('hpMainContent')">Show/Hide Details</span>
+            <div id="hpMainContent" class="content">
+                <ul>
+                    <li>A sequence of numbers is called a Harmonic Sequence or Harmonic Progression if the reciprocals of its terms are in Arithmetic Progression.</li>
+                    <li>General term of H.P.: $a_n = \frac{1}{a_1+(n-1)d}$.</li>
+                    <li>Every H.P. has a corresponding A.P.</li>
+                    <li>No term of H.P. can be zero.</li>
+                    <li>There is no general method to find the sum of H.P.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Harmonic Mean (H.M.)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('hmSubContent')">Show/Hide Details</span>
+                        <div id="hmSubContent" class="content">
+                            <ul>
+                                <li>If three terms are in H.P., then the middle term is called Harmonic Mean (H.M.) of the other two terms.</li>
+                                <li>If $a, H, b$ are in H.P., then $H = \frac{2ab}{a+b}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>n Harmonic Means Between Two Numbers</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('nHmSubContent')">Show/Hide Details</span>
+                        <div id="nHmSubContent" class="content">
+                            <ul>
+                                <li>If $a, H_1, H_2, H_3, \dots, H_n, b$ are in H.P., then the numbers $H_1, H_2, H_3, \dots, H_n$ are called n Harmonic Means between $a$ and $b$.</li>
+                                <li>$n^{th}$ harmonic mean between $a$ and $b$: $H.M. = \frac{(n+1)ab}{na+b}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Relations between A.M., G.M., and H.M.</h2>
+            <span class="toggle-button" onclick="toggleVisibility('amGmHmRelationsContent')">Show/Hide Details</span>
+            <div id="amGmHmRelationsContent" class="content">
+                <ul>
+                    <li>$G^2 = A \cdot H$. (A, G, H are in G.P.).</li>
+                    <li>If $a$ and $b$ are two distinct positive real numbers and $G>0$: $A > G > H$.</li>
+                    <li>If $a$ and $b$ are two distinct negative real numbers and $G<0$: $A < G < H$.</li>
+                    <li>If $a=b$: $A=G=H$.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Sigma Notation or Summation Notation</h2>
+            <span class="toggle-button" onclick="toggleVisibility('sigmaNotationContent')">Show/Hide Details</span>
+            <div id="sigmaNotationContent" class="content">
+                <ul>
+                    <li>Sum of $1^{st}$ $n$ natural numbers: $1+2+3+\dots+n = \sum_{k=1}^{n}k = \frac{n(n+1)}{2}$.</li>
+                    <li>Sum of squares of $1^{st}$ $n$ natural numbers: $1^2+2^2+3^2+\dots+n^2 = \sum_{k=1}^{n}k^2 = \frac{n(n+1)(2n+1)}{6}$.</li>
+                    <li>Sum of cubes of $1^{st}$ $n$ natural numbers: $1^3+2^3+3^3+\dots+n^3 = \sum_{k=1}^{n}k^3 = \left(\frac{n(n+1)}{2}\right)^2 = \frac{n^2(n+1)^2}{4} = \left(\sum_{k=1}^{n}k\right)^2$.</li>
+                    <li>$\sum_{k=1}^{m}[k^m-(k-1)^m]=n^m$. (Note: The PDF has 'm' in the summation limit and exponent, which seems like a typo and should likely be 'n' for consistency with the result $n^m$. I've kept it as per the PDF for accuracy to source, but flagging this for your awareness).</li>
+                    <li>$1+1+1+\dots+n~\text{terms} = \sum_{k=1}^{n}1 = n$.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

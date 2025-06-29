@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parabola Elements</title>
+    <script src="index.js"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the canvas to ensure it's responsive */
+        canvas {
+            display: block;
+            background-color: #f8fafc; /* Light blue-gray background */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0; /* bg-slate-200 */
+        }
+    </style>
+    <!-- MathJax CDN for LaTeX rendering -->
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script>
+        // MathJax configuration to process dollar signs
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+<nav class="w-full flex justify-start p-4">
+    <a href="../conics.html" class="text-blue-600 hover:underline font-semibold text-lg flex items-center">
+        &larr; Back to Conics
+    </a>
+</nav>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-4xl w-full">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Elements of a Parabola</h1>
+
+        <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
+            <div class="md:w-1/2 w-full mb-6 md:mb-0">
+                <canvas id="parabolaCanvas" class="w-full h-auto"></canvas>
+                <div class="mt-4 flex items-center space-x-2">
+                    <label for="aSlider" class="text-gray-700 font-medium">Parameter 'a':</label>
+                    <input type="range" id="aSlider" min="0.1" max="3" value="1" step="0.1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <span id="aValue" class="text-gray-800 font-bold">1.0</span>
+                </div>
+            </div>
+            <div class="md:w-1/2 w-full text-gray-700 space-y-4">
+                <p>This interactive graph illustrates the key components of a parabola based on the equation $x^2 = 4ay$. You can adjust the parameter 'a' using the slider below the graph.</p>
+                <ul class="list-disc list-inside space-y-2">
+                    <li><strong class="text-green-600">Vertex:</strong> The turning point of the parabola, located at $(0,0)$.</li>
+                    <li><strong class="text-red-600">Focus:</strong> A fixed point $(0, a)$ that defines the parabola. All points on the parabola are equidistant from the focus and the directrix.</li>
+                    <li><strong class="text-purple-600">Directrix:</strong> A fixed line $y = -a$ that defines the parabola.</li>
+                    <li><strong class="text-gray-600">Axis of Parabola:</strong> The line passing through the focus and perpendicular to the directrix, which is the line of symmetry for the parabola ($x=0$).</li>
+                    <li><strong class="text-orange-600">Latus Rectum:</strong> A focal chord perpendicular to the axis of the parabola. Its endpoints are $(\pm 2a, a)$.</li>
+                    <li><strong class="text-brown-600">Focal Chord:</strong> Any chord of the parabola that passes through the focus.</li>
+                </ul>
+                <p>The graph automatically adjusts to fit the screen size, ensuring a clear view of all elements.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('parabolaCanvas');
+        const ctx = canvas.getContext('2d');
+        const aSlider = document.getElementById('aSlider');
+        const aValueSpan = document.getElementById('aValue');
+
+        // Initial parabola parameter 'a'
+        let a = parseFloat(aSlider.value);
+
+        // Function to convert Cartesian coordinates to canvas coordinates
+        // This makes (0,0) the center of the canvas
+        function toCanvasCoords(x, y, scaleX, scaleY, centerX, centerY) {
+            return {
+                x: centerX + x * scaleX,
+                y: centerY - y * scaleY // Y-axis is inverted in canvas
+            };
+        }
+
+        // Function to draw everything on the canvas
+        function drawParabolaElements() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Determine scale and center based on canvas size
+            const padding = 50; // Padding from canvas edges
+            const effectiveWidth = canvas.width - 2 * padding;
+            const effectiveHeight = canvas.height - 2 * padding;
+
+            // Define the range for x and y in Cartesian coordinates
+            // Adjust Y-max based on 'a' to keep the parabola visible
+            const cartesianXMin = -5 * Math.sqrt(a); // Scale X range with 'a'
+            const cartesianXMax = 5 * Math.sqrt(a);
+            const cartesianYMin = -2 * a; // To show directrix, scale with 'a'
+            const cartesianYMax = 6 * a;  // To show upper part of parabola, scale with 'a'
+
+            const cartesianWidth = cartesianXMax - cartesianXMin;
+            const cartesianHeight = cartesianYMax - cartesianYMin;
+
+            const scaleX = effectiveWidth / cartesianWidth;
+            const scaleY = effectiveHeight / cartesianHeight;
+
+            // Calculate canvas center for Cartesian (0,0)
+            const centerX = padding + (-cartesianXMin) * scaleX;
+            const centerY = padding + (cartesianYMax) * scaleY; // Adjust for canvas inverted Y
+
+            // --- Draw Grid and Axes ---
+            ctx.strokeStyle = '#cbd5e1'; // slate-300
+            ctx.lineWidth = 0.5;
+
+            // Draw horizontal grid lines
+            for (let i = Math.floor(cartesianYMin); i <= Math.ceil(cartesianYMax); i++) {
+                if (i === 0) continue; // Don't draw over main axis
+                const p = toCanvasCoords(0, i, scaleX, scaleY, centerX, centerY);
+                ctx.beginPath();
+                ctx.moveTo(0, p.y);
+                ctx.lineTo(canvas.width, p.y);
+                ctx.stroke();
+            }
+            // Draw vertical grid lines
+            for (let i = Math.floor(cartesianXMin); i <= Math.ceil(cartesianXMax); i++) {
+                if (i === 0) continue; // Don't draw over main axis
+                const p = toCanvasCoords(i, 0, scaleX, scaleY, centerX, centerY);
+                ctx.beginPath();
+                ctx.moveTo(p.x, 0);
+                ctx.lineTo(p.x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Draw X and Y axes
+            ctx.strokeStyle = '#475569'; // slate-600
+            ctx.lineWidth = 1;
+
+            // Y-axis (x=0)
+            ctx.beginPath();
+            ctx.moveTo(centerX, 0);
+            ctx.lineTo(centerX, canvas.height);
+            ctx.stroke();
+
+            // X-axis (y=0)
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(canvas.width, centerY);
+            ctx.stroke();
+
+            // --- Draw Parabola ---
+            ctx.beginPath();
+            ctx.strokeStyle = '#3b82f6'; // blue-500
+            ctx.lineWidth = 3;
+            for (let i = cartesianXMin; i <= cartesianXMax; i += 0.05) {
+                const y = (i * i) / (4 * a);
+                const p = toCanvasCoords(i, y, scaleX, scaleY, centerX, centerY);
+                if (i === cartesianXMin) {
+                    ctx.moveTo(p.x, p.y);
+                } else {
+                    ctx.lineTo(p.x, p.y);
+                }
+            }
+            ctx.stroke();
+
+            // --- Draw Vertex ---
+            const vertex = { x: 0, y: 0 };
+            const pVertex = toCanvasCoords(vertex.x, vertex.y, scaleX, scaleY, centerX, centerY);
+            ctx.fillStyle = '#16a34a'; // green-600
+            ctx.beginPath();
+            ctx.arc(pVertex.x, pVertex.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Vertex (0,0)', pVertex.x + 10, pVertex.y - 5);
+
+            // --- Draw Focus ---
+            const focus = { x: 0, y: a };
+            const pFocus = toCanvasCoords(focus.x, focus.y, scaleX, scaleY, centerX, centerY);
+            ctx.fillStyle = '#dc2626'; // red-600
+            ctx.beginPath();
+            ctx.arc(pFocus.x, pFocus.y, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText(`Focus (0,${a.toFixed(1)})`, pFocus.x + 10, pFocus.y - 5);
+
+            // --- Draw Directrix ---
+            const directrixY = -a;
+            const pDirectrixStart = toCanvasCoords(cartesianXMin, directrixY, scaleX, scaleY, centerX, centerY);
+            const pDirectrixEnd = toCanvasCoords(cartesianXMax, directrixY, scaleX, scaleY, centerX, centerY);
+            ctx.strokeStyle = '#9333ea'; // purple-600
+            ctx.setLineDash([5, 5]); // Dashed line
+            ctx.beginPath();
+            ctx.moveTo(pDirectrixStart.x, pDirectrixStart.y);
+            ctx.lineTo(pDirectrixEnd.x, pDirectrixEnd.y);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset line dash
+            ctx.fillText(`Directrix (y=${directrixY.toFixed(1)})`, pDirectrixEnd.x - 100, pDirectrixEnd.y - 10);
+
+
+            // --- Draw Axis of Parabola ---
+            ctx.strokeStyle = '#64748b'; // slate-500
+            ctx.setLineDash([2, 2]); // Dotted line
+            ctx.beginPath();
+            const pAxisStart = toCanvasCoords(0, cartesianYMin, scaleX, scaleY, centerX, centerY);
+            const pAxisEnd = toCanvasCoords(0, cartesianYMax, scaleX, scaleY, centerX, centerY);
+            ctx.moveTo(pAxisStart.x, pAxisStart.y);
+            ctx.lineTo(pAxisEnd.x, pAxisEnd.y);
+            ctx.stroke();
+            ctx.setLineDash([]); // Reset line dash
+            ctx.fillText('Axis (x=0)', pAxisStart.x + 10, pAxisEnd.y + 10);
+
+            // --- Draw Latus Rectum ---
+            const latusRectumP1 = { x: -2 * a, y: a };
+            const latusRectumP2 = { x: 2 * a, y: a };
+            const pLR1 = toCanvasCoords(latusRectumP1.x, latusRectumP1.y, scaleX, scaleY, centerX, centerY);
+            const pLR2 = toCanvasCoords(latusRectumP2.x, latusRectumP2.y, scaleX, scaleY, centerX, centerY);
+            ctx.strokeStyle = '#ea580c'; // orange-600
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pLR1.x, pLR1.y);
+            ctx.lineTo(pLR2.x, pLR2.y);
+            ctx.stroke();
+            ctx.fillStyle = '#ea580c';
+            ctx.beginPath();
+            ctx.arc(pLR1.x, pLR1.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(pLR2.x, pLR2.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Latus Rectum', pLR2.x + 10, pLR2.y - 5);
+
+
+            // --- Draw Example Focal Chord ---
+            // Points calculated to pass through (0,a) for y = x^2 / (4a)
+            // P1 = (-3*a, 9*a/4)
+            // P2 = (4*a/3, 4*a/9)
+            const focalChordP1 = { x: -3 * a, y: 9 * a / 4 };
+            const focalChordP2 = { x: 4 * a / 3, y: 4 * a / 9 };
+            const pFC1 = toCanvasCoords(focalChordP1.x, focalChordP1.y, scaleX, scaleY, centerX, centerY);
+            const pFC2 = toCanvasCoords(focalChordP2.x, focalChordP2.y, scaleX, scaleY, centerX, centerY);
+            ctx.strokeStyle = '#a16207'; // brown-600
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(pFC1.x, pFC1.y);
+            ctx.lineTo(pFC2.x, pFC2.y);
+            ctx.stroke();
+            ctx.fillStyle = '#a16207';
+            ctx.beginPath();
+            ctx.arc(pFC1.x, pFC1.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(pFC2.x, pFC2.y, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Focal Chord', pFC1.x - 80, pFC1.y - 10);
+
+
+            // --- Labels for Axes ---
+            ctx.fillStyle = '#475569'; // slate-600
+            ctx.font = '12px Inter';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillText('X-axis', canvas.width - padding, centerY + 5);
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('Y-axis', centerX + 5, padding);
+        }
+
+        // Set canvas dimensions and draw
+        function setupCanvas() {
+            // Set canvas size dynamically to fill its container
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            // Maintain aspect ratio, or set a fixed height
+            canvas.height = Math.min(container.clientWidth * 0.9, 600); // Max height 600px, or 90% of width
+
+            drawParabolaElements();
+            // Trigger MathJax rendering after drawing elements
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise();
+            }
+        }
+
+        // Event listener for the slider
+        aSlider.addEventListener('input', () => {
+            a = parseFloat(aSlider.value);
+            aValueSpan.textContent = a.toFixed(1);
+            drawParabolaElements();
+        });
+
+        // Initial setup
+        window.onload = setupCanvas;
+        // Redraw on window resize
+        window.addEventListener('resize', setupCanvas);
+
+    </script>
+</body>
+</html>

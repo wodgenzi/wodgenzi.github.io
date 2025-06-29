@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Optical Instruments</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 10: Optical Instruments</h1>
+
+    <ul>
+        <li>
+            <h2>Lens</h2>
+            <span class="toggle-button" onclick="toggleVisibility('lensMainContent')">Show/Hide Details</span>
+            <div id="lensMainContent" class="content">
+                <ul>
+                    <li>Transparent medium bounded by two surfaces, at least one of which is curved.</li>
+                    <li>Every lens is part of some sphere.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Types of Lenses</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('lensTypesSubContent')">Show/Hide Details</span>
+                        <div id="lensTypesSubContent" class="content">
+                            <h4>Convex Lens (Converging Lens):</h4>
+                            <ul>
+                                <li>Thicker at the middle, thinner at the edges.</li>
+                                <li>Positive focal length.</li>
+                            </ul>
+                            <h4>Concave Lens (Diverging Lens):</h4>
+                            <ul>
+                                <li>Thinner at the middle, thicker at the edges.</li>
+                                <li>Negative focal length.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Convex Lens</th>
+                                        <th>Concave Lens</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Double convex</td>
+                                        <td>Double concave</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Plano convex</td>
+                                        <td>Plano concave</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Concavo convex</td>
+                                        <td>Convexo concave</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Important Definitions</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('lensDefinitionsSubContent')">Show/Hide Details</span>
+                        <div id="lensDefinitionsSubContent" class="content">
+                            <ul>
+                                <li><strong>Centre of Curvature ($C_1, C_2$):</strong> Centre of sphere from which lens surface is obtained. Every lens has two centers of curvature.</li>
+                                <li><strong>Radius of Curvature ($R_1, R_2$):</strong> Radius of sphere from which lens surface is obtained. Every lens has two radii of curvature.</li>
+                                <li><strong>Principal Axis:</strong> Line joining the two centers of curvature.</li>
+                                <li><strong>Principal Focus (F):</strong>
+                                    <ul>
+                                        <li>For convex lens: Point of convergence of refracted light ray (real point).</li>
+                                        <li>For concave lens: Point from which refracted light ray appears to diverge (imaginary point).</li>
+                                        <li>Every lens has two foci, one on each side.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Optical Centre (O):</strong> Point inside the body of lens through which light rays pass undeviated.</li>
+                                <li><strong>Focal Length (f):</strong> Distance between principal focus and optical center. Positive for convex, negative for concave.</li>
+                                <li><strong>Aperture:</strong> Size of diameter of lens.</li>
+                                <li><strong>Power of a Lens (P):</strong> Ability to deviate light ray from its original path.
+                                    <ul>
+                                        <li>$P = \frac{1}{f}$ (where $f$ is focal length in meters).</li>
+                                        <li>If $f$ is in cm, $P = \frac{100}{f}$.</li>
+                                        <li>SI unit: Dioptre (D). $1~D = 1~m^{-1}$.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Combination of Lenses</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('lensCombinationSubContent')">Show/Hide Details</span>
+                        <div id="lensCombinationSubContent" class="content">
+                            <ul>
+                                <li>General rule for combination of 'n' lenses: $P = P_1 + P_2 + ... + P_n$.</li>
+                                <li>$\frac{1}{f} = \frac{1}{f_1} + \frac{1}{f_2} + ... + \frac{1}{f_n}$.</li>
+                                <li>For two double convex lenses: $P = P_1 + P_2$, $\frac{1}{f} = \frac{1}{f_1} + \frac{1}{f_2} = \frac{f_1+f_2}{f_1f_2} \implies f = \frac{f_1f_2}{f_1+f_2}$. (Behaves as a convex lens).</li>
+                                <li>For two concave lenses: $P = P_1 + P_2$, $\frac{1}{f} = \frac{1}{-f_1} + \frac{1}{-f_2} = -\frac{(f_1+f_2)}{f_1f_2} \implies f = -\frac{f_1f_2}{f_1+f_2}$. (Behaves as a concave lens).</li>
+                                <li>For one convex and one concave lens: $\frac{1}{f} = \frac{1}{f_1} + \frac{1}{-f_2} = \frac{f_2-f_1}{f_1f_2} \implies f = \frac{f_1f_2}{f_2-f_1}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Lens Formula</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('lensFormulaSubContent')">Show/Hide Details</span>
+                        <div id="lensFormulaSubContent" class="content">
+                            <ul>
+                                <li>$\frac{1}{p} + \frac{1}{q} = \frac{1}{f}$.</li>
+                                <li>$p$: object distance (positive for real object, negative for virtual object).</li>
+                                <li>$q$: image distance (positive for real image, negative for virtual image).</li>
+                                <li>$f$: focal length (positive for convex, negative for concave).</li>
+                                <li>Positive sign is used where rays actually intersect. If not, negative sign.</li>
+                            </ul>
+                            <h4>Position and Nature of Image for Convex Lens:</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Object</th>
+                                        <th>Position of Image</th>
+                                        <th>Nature of Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Beyond 2F</td>
+                                        <td>Between F and 2F</td>
+                                        <td>Real, inverted, small</td>
+                                    </tr>
+                                    <tr>
+                                        <td>At 2F</td>
+                                        <td>At 2F</td>
+                                        <td>Real, inverted, equal</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Between F and 2F</td>
+                                        <td>Beyond 2F</td>
+                                        <td>Real, inverted, enlarged</td>
+                                    </tr>
+                                    <tr>
+                                        <td>At F</td>
+                                        <td>At infinity</td>
+                                        <td>Real, inverted, enlarged</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inside F</td>
+                                        <td>On same side further away from lens than the object</td>
+                                        <td>Virtual, erect, enlarged</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Magnification of a Lens (M)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('magnificationLensSubContent')">Show/Hide Details</span>
+                        <div id="magnificationLensSubContent" class="content">
+                            <ul>
+                                <li>Linear magnification: $M = \frac{q}{p} = \frac{h_i}{h_o}$ (size of image / size of object).</li>
+                                <li>Angular magnification: $M_a = \frac{\text{Angle formed at aided eye}}{\text{Angle formed at naked eye}}$.</li>
+                                <li>For real image: $M = \frac{q}{p}$. For virtual image: $M = -\frac{q}{p}$.</li>
+                                <li>For very small angles, linear and angular magnifications can be equated.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Visual Angle</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('visualAngleSubContent')">Show/Hide Details</span>
+                        <div id="visualAngleSubContent" class="content">
+                            <ul>
+                                <li>Angle made by object at observer's eye.</li>
+                                <li>Apparent size of object varies with visual angle.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Resolving Power</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resolvingPowerSubContent')">Show/Hide Details</span>
+                        <div id="resolvingPowerSubContent" class="content">
+                            <ul>
+                                <li>Ability of an instrument to reveal the minor details of the object under examination.</li>
+                                <li>Angle of Resolution ($\alpha_{min}$): Minimum angle that allows two point sources to appear distinctly separated.</li>
+                                <li>$\alpha_{min} = 1.22 \frac{\lambda}{D}$.</li>
+                                <li>Rayleigh showed that resolving power of a lens of aperture $D$, under a light source of wavelength $\lambda$ is $R = \frac{D}{1.22\lambda}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Lens Aberrations</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('lensAberrationsSubContent')">Show/Hide Details</span>
+                        <div id="lensAberrationsSubContent" class="content">
+                            <ul>
+                                <li><strong>Spherical Aberration:</strong> Blurred image due to size of lens (outer rays undergo more refraction). Remedy: Use stops or combine convex and concave lenses.</li>
+                                <li><strong>Chromatic Aberration:</strong> Inability of a lens to bring all light rays (all colors) at single focus. Remedy: Use achromatic lenses.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Least Distance of Distinct Vision</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('leastDistanceSubContent')">Show/Hide Details</span>
+                        <div id="leastDistanceSubContent" class="content">
+                            <ul>
+                                <li>Minimum distance at which a normal eye can see an object clearly.</li>
+                                <li>$d = 25~cm$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Optical Instruments</h2>
+            <span class="toggle-button" onclick="toggleVisibility('opticalInstrumentsContent')">Show/Hide Details</span>
+            <div id="opticalInstrumentsContent" class="content">
+                <ul>
+                    <li>Simple microscope, Compound microscope, Telescope, Spectrometer, Camera, Periscope.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Simple Microscope (Magnifying Glass)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('simpleMicroscopeSubContent')">Show/Hide Details</span>
+                        <div id="simpleMicroscopeSubContent" class="content">
+                            <ul>
+                                <li>Double convex lens of short focal length.</li>
+                                <li>Magnifying power: $M = 1 + \frac{d}{f}$.</li>
+                                <li>Forms virtual, erect, and magnified image at $d=25~cm$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Compound Microscope</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('compoundMicroscopeSubContent')">Show/Hide Details</span>
+                        <div id="compoundMicroscopeSubContent" class="content">
+                            <ul>
+                                <li>Consists of two convex lenses:
+                                    <ul>
+                                        <li>Objective lens: small size, short focal length.</li>
+                                        <li>Eyepiece lens: large size, large focal length.</li>
+                                    </ul>
+                                </li>
+                                <li>Objective forms real, inverted, magnified image. Eyepiece forms virtual, erect, magnified image of objective's image.</li>
+                                <li>Magnification: $M = \frac{L}{f_o}\left(1+\frac{d}{f_e}\right)$.</li>
+                                <li>$L$: distance between lenses. $f_o$: objective focal length. $f_e$: eyepiece focal length.</li>
+                                <li>Magnification of objective: $\frac{L}{f_o}$. Magnification of eyepiece: $1+\frac{d}{f_e}$.</li>
+                                <li>A wider objective and use of blue light of short wavelength produces less diffraction and allows more details to be seen.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Telescope</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('telescopeMainContent')">Show/Hide Details</span>
+                        <div id="telescopeMainContent" class="content">
+                            <ul>
+                                <li>Optical instrument to see fine details of a far off object.</li>
+                                <li>Two major classes: Reflecting and Refracting.</li>
+                            </ul>
+                            <h4>Astronomical Telescope:</h4>
+                            <ul>
+                                <li>Consists of two lenses: Objective (large focal length, large aperture), Eyepiece (small focal length, small aperture).</li>
+                                <li>For infinity/parallel rays, $L = f_o + f_e$.</li>
+                                <li>Advantages: High magnifying power ($M = \frac{f_o}{f_e}$), Large field of view.</li>
+                                <li>Disadvantage: Final image is inverted.</li>
+                            </ul>
+                            <h4>Galilean Telescope:</h4>
+                            <ul>
+                                <li>Uses a positive objective and a negative eyepiece.</li>
+                                <li>Gives erect images and is shorter than astronomical telescope.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Defects of Vision</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('visionDefectsSubContent')">Show/Hide Details</span>
+                        <div id="visionDefectsSubContent" class="content">
+                            <ul>
+                                <li><strong>Myopia (Short-Sightedness or Near-Sightedness):</strong> Distant objects are not clearly visible. Image formed before retina. Remedy: Concave lens (negative focal length/power).</li>
+                                <li><strong>Hyperopia (Long-Sightedness or Far-Sightedness):</strong> Near objects are not clearly visible. Image formed behind retina. Remedy: Convex lens (positive focal length/power).</li>
+                                <li><strong>Presbyopia:</strong> Old age defect where eye muscles lose elasticity. Remedy: Bifocal lenses.</li>
+                                <li><strong>Astigmatism:</strong> Eye defect where vision is blurred due to irregular curvature of cornea or lens.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Spectrometer</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('spectrometerSubContent')">Show/Hide Details</span>
+                        <div id="spectrometerSubContent" class="content">
+                            <ul>
+                                <li>Optical instrument used to study spectrum of light.</li>
+                                <li>Components: Collimator (produces parallel beam), Telescope (astronomical telescope), Turn Table (prism or diffraction grating), Leveling Screws.</li>
+                                <li>Working:
+                                    <ul>
+                                        <li>Telescope is set for infinity and fixed.</li>
+                                        <li>Source of monochromatic light is placed in front of slit and collimator is adjusted for parallel rays.</li>
+                                        <li>Angle of minimum deviation ($D_m$) is experimentally determined.</li>
+                                    </ul>
+                                </li>
+                                <li>Refractive index of prism: $n = \frac{\sin\left(\frac{A+D_m}{2}\right)}{\sin\left(\frac{A}{2}\right)}$. ($A$: angle of prism or apex angle).</li>
+                                <li>For wavelength of monochromatic light diffraction grating is used: $d \sin\theta = m\lambda$.</li>
+                                <li>Usually $m=1$ (first order diffraction).</li>
+                                <li>$d$: grating element = $\frac{1}{N}$ ($N$: number of rulings per centimeter).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Speed of Light</h2>
+            <span class="toggle-button" onclick="toggleVisibility('speedOfLightMainContent')">Show/Hide Details</span>
+            <div id="speedOfLightMainContent" class="content">
+                <ul>
+                    <li>First attempt to measure speed of light by Galileo.</li>
+                    <li>First time speed measured by Michelson.</li>
+                    <li>Michelson's formula: $c = 16fd$. ($f$: frequency of rotation of octagonal mirror, $d$: distance between plane mirror and octagonal mirror).</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Index of Refraction (n)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('refractionIndexSubContent')">Show/Hide Details</span>
+                        <div id="refractionIndexSubContent" class="content">
+                            <ul>
+                                <li>Ratio of speed of light in vacuum to speed of light in medium.</li>
+                                <li>$n = \frac{c}{v}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Snell's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('snellsLawSubContent')">Show/Hide Details</span>
+                        <div id="snellsLawSubContent" class="content">
+                            <ul>
+                                <li>Relates indices of refraction and angles of incidence/refraction.</li>
+                                <li>$n_1 \sin\theta_1 = n_2 \sin\theta_2$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Fibre Optics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('fibreOpticsMainContent')">Show/Hide Details</span>
+            <div id="fibreOpticsMainContent" class="content">
+                <ul>
+                    <li>Graham Bell invented photo phone to transmit voice message via beam of light.</li>
+                    <li>Optical fiber: Light is used as a transmission carrier wave.</li>
+                    <li>Principle: Total internal reflection.</li>
+                    <li>Optical fibre is a fine glass rod having diameter in range of micrometers.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Classification of Optical Fibres</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('fibreOpticsClassificationSubContent')">Show/Hide Details</span>
+                        <div id="fibreOpticsClassificationSubContent" class="content">
+                            <ul>
+                                <li><strong>Single Mode Step Index Fibre:</strong> Mono mode fibre, very narrow core ($\sim 5~\mu m$).</li>
+                                <li><strong>Multimode Step Index Fibre:</strong> Larger core ($\sim 50~\mu m$), constant refractive index. Mode of transmission is total internal reflection. Useful for short distance.</li>
+                                <li><strong>Multimode Graded Index Fibre:</strong> Core diameter 50 to 1000 $\mu m$. No noticeable boundary between core and cladding. Mode of transmission is continuous refraction. Suitable for long distance transmission.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Signal Communication</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('signalCommunicationSubContent')">Show/Hide Details</span>
+                        <div id="signalCommunicationSubContent" class="content">
+                            <ul>
+                                <li>Fibre optic communication system has three parts:
+                                    <ul>
+                                        <li>Transmitter: Converts electrical signals to light signals.</li>
+                                        <li>Optical Fibre: Guides the light signals.</li>
+                                        <li>Receiver: Captures the light signal and converts them to electric signals.</li>
+                                    </ul>
+                                </li>
+                                <li>Light signals travel through fibre in 'on' and 'off' fashion (digital modulation).</li>
+                                <li>Advantages:
+                                    <ul>
+                                        <li>Light signals travel faster than electrical signals in copper cable.</li>
+                                        <li>More messages per cable length (high signal strength).</li>
+                                        <li>Clear sound is received.</li>
+                                    </ul>
+                                </li>
+                                <li>Losses in optical fibre:
+                                    <ul>
+                                        <li>Power loss due to scattering of light from impurity atoms in glass.</li>
+                                        <li>Power loss due to dispersion (can be reduced by graded index fibre).</li>
+                                        <li>Repeaters reduce power loss due to scattering from impurity atoms.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

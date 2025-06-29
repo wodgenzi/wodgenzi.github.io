@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Measurements</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        ul ul li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 1: Measurements</h1>
+
+    <ul>
+        <li>
+            <h2>Introduction to Measurements</h2>
+            <span class="toggle-button" onclick="toggleVisibility('introMeasurementsContent')">Show/Hide Details</span>
+            <div id="introMeasurementsContent" class="content">
+                <p>Physics is an experimental science that deals with the study of matter, energy and their mutual relationship.</p>
+                <h3>Natural Philosophy</h3>
+                <p>Originally, science was a single discipline known as Natural Philosophy, which later branched into Biological sciences (dealing with living things) and Physical sciences (concerned with non-living things), including Physics, Chemistry, Astronomy, and more.</p>
+                <h3>Fundamental Sciences</h3>
+                <p>Physics deals with phenomena across various scales:</p>
+                <ul>
+                    <li>World of extremely large things (e.g., universe).</li>
+                    <li>World of extremely small things (e.g., electrons, protons).</li>
+                    <li>World of complex matter or middle-sized things (e.g., molecules, Earth).</li>
+                </ul>
+                <p>Silicon chips, processed from sand, are utilized in computers and electronic devices to control various systems, forming interconnected networks of workstations.</p>
+            </div>
+        </li>
+
+        <li>
+            <h2>Physical Quantities</h2>
+            <span class="toggle-button" onclick="toggleVisibility('physicalQuantitiesContent')">Show/Hide Details</span>
+            <div id="physicalQuantitiesContent" class="content">
+                <p>Physical quantities are measurable quantities, and the laws of physics are expressed in terms of them.</p>
+                <h3>Classification of Physical Quantities</h3>
+                <ul>
+                    <li><strong>Base Quantities:</strong> Could not be expressed in terms of other quantities.</li>
+                    <li><strong>Derived Quantities:</strong> Are expressed in terms of other quantities.</li>
+                </ul>
+                <h3>Chain of Mechanical Quantities</h3>
+                <p>This illustrates how various mechanical quantities are derived from fundamental ones:</p>
+                <ul>
+                    <li>Length $\div$ Time = Speed</li>
+                    <li>Speed $\div$ Time = Acceleration</li>
+                    <li>Mass $\times$ Acceleration = Force</li>
+                    <li>Force $\times$ Length = Work</li>
+                    <li>Work $\div$ Time = Power</li>
+                </ul>
+                <p>Measurements of quantities require:</p>
+                <ol>
+                    <li>Comparison of quantity to be measured with a standard measuring tool.</li>
+                    <li>Encoding the result of comparison in standard format containing a suitable precise number along with appropriate unit.</li>
+                </ol>
+                <p>Ideal standards should be accessible and invariable.</p>
+            </div>
+        </li>
+
+        <li>
+            <h2>International System of Units (SI)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('siUnitsContent')">Show/Hide Details</span>
+            <div id="siUnitsContent" class="content">
+                <p>Prior to 1960, three measuring systems were in practice: CGS System (centimeter, gram, second), FPS System (foot, pound, second) or British Engineering system, and MKS System (meter, kilogram, second).</p>
+                <div class="point-to-ponder">
+                    Ideal standard measuring tool should be fool-proof via accessibility & invariability.
+                </div>
+                <p>After 1960, the internationally accepted standard is the SI system. In the SI system, there are three types of units:</p>
+                <ul>
+                    <li>Basic Mechanical Units</li>
+                    <li>Supplementary Units</li>
+                    <li>Derived Units (Many other derived units are also used for other derived quantities.)</li>
+                </ul>
+
+                <h3>Basic Mechanical Units and Derived Units</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Physical Quantity</th>
+                            <th>SI Unit (MKS)</th>
+                            <th>(CGS)</th>
+                            <th>U.S. Common</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Length [L]</td>
+                            <td>meter (m)</td>
+                            <td>centimeter (cm)</td>
+                            <td>foot (ft)</td>
+                        </tr>
+                        <tr>
+                            <td>Time [T]</td>
+                            <td>second (s)</td>
+                            <td>second (s)</td>
+                            <td>second (s)</td>
+                        </tr>
+                        <tr>
+                            <td>Mass [M]</td>
+                            <td>kilogram (kg)</td>
+                            <td>gram (gm)</td>
+                            <td>slug</td>
+                        </tr>
+                        <tr>
+                            <td>Velocity [L/T]</td>
+                            <td>$m/s$</td>
+                            <td>$cm/s$</td>
+                            <td>$ft/s$</td>
+                        </tr>
+                        <tr>
+                            <td>Acceleration $[L/T^{2}]$</td>
+                            <td>$m/s^{2}$</td>
+                            <td>$cm/s^{2}$</td>
+                            <td>$ft/s^{2}$</td>
+                        </tr>
+                        <tr>
+                            <td>Force $[ML/T^{2}]$</td>
+                            <td>$kg~m/s^{2}=$ newton (N)</td>
+                            <td>$gm~cm/s^{2}=$ dyne</td>
+                            <td>$slug~ft/s^{2}=$ pound (lb)</td>
+                        </tr>
+                        <tr>
+                            <td>Work $[ML^{2}/T^{2}]$</td>
+                            <td>$Nm=$ joule (J)</td>
+                            <td>dyne cm = erg</td>
+                            <td>lb $ft=ftlb$</td>
+                        </tr>
+                        <tr>
+                            <td>Energy $[ML^{2}/T^{2}]$</td>
+                            <td>joule</td>
+                            <td>erg</td>
+                            <td>ft lb</td>
+                        </tr>
+                        <tr>
+                            <td>Power $[ML^{2}/T^{3}]$</td>
+                            <td>$J/s=$ watt (W)</td>
+                            <td>$erg/s$</td>
+                            <td>ft $.lb/s$</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Supplementary Units</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Physical Quantity</th>
+                            <th>Symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Plane angle</td>
+                            <td>radian (rad)</td>
+                        </tr>
+                        <tr>
+                            <td>Solid angle</td>
+                            <td>steradian (sr)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Scientific Notation</h2>
+            <span class="toggle-button" onclick="toggleVisibility('scientificNotationContent')">Show/Hide Details</span>
+            <div id="scientificNotationContent" class="content">
+                <p>The standard to express a number in terms of power of ten is called scientific notation.</p>
+                <div class="point-to-ponder">
+                    There should be one non-zero digit to the left of decimal in scientific notation.
+                </div>
+                <h3>Standard Prefixes for Power of Ten</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Factor</th>
+                            <th>Prefix</th>
+                            <th>Symbol</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>$10^{-18}$</td><td>atto</td><td>a</td></tr>
+                        <tr><td>$10^{-15}$</td><td>femto</td><td>f</td></tr>
+                        <tr><td>$10^{-12}$</td><td>pico</td><td>p</td></tr>
+                        <tr><td>$10^{-9}$</td><td>nano</td><td>n</td></tr>
+                        <tr><td>$10^{-6}$</td><td>micro</td><td>μ</td></tr>
+                        <tr><td>$10^{-3}$</td><td>milli</td><td>m</td></tr>
+                        <tr><td>$10^{-2}$</td><td>centi</td><td>c</td></tr>
+                        <tr><td>$10^{-1}$</td><td>deci</td><td>d</td></tr>
+                        <tr><td>$10^{1}$</td><td>deca</td><td>da</td></tr>
+                        <tr><td>$10^{3}$</td><td>kilo</td><td>k</td></tr>
+                        <tr><td>$10^{6}$</td><td>mega</td><td>M</td></tr>
+                        <tr><td>$10^{9}$</td><td>giga</td><td>G</td></tr>
+                        <tr><td>$10^{12}$</td><td>tera</td><td>T</td></tr>
+                        <tr><td>$10^{15}$</td><td>peta</td><td>P</td></tr>
+                        <tr><td>$10^{18}$</td><td>exa</td><td>E</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Errors and Uncertainties</h2>
+            <span class="toggle-button" onclick="toggleVisibility('errorsUncertaintiesContent')">Show/Hide Details</span>
+            <div id="errorsUncertaintiesContent" class="content">
+                <p>The difference between standard and experimental values is called error.</p>
+                <h3>Classification of Errors</h3>
+                <ul>
+                    <li><strong>Assignable Errors (Systematic Errors):</strong> Errors to which we can assign a cause (e.g., due to least count of instrument). These can be controlled experimentally.</li>
+                    <li><strong>Unassignable Errors (Random Errors):</strong> Errors to which we cannot assign a cause as they do not follow a trend. These can be minimized by taking the average of several values.</li>
+                </ul>
+
+                <h3>Significant Figures</h3>
+                <div class="point-to-ponder">
+                    Greater the significant figures in a measurement, the more accurate it is.
+                </div>
+                <p>In any measurement, all the accurately known digits and the first doubtful digit are named as significant figures.</p>
+                <h4>Rules of Significant Figures:</h4>
+                <ol>
+                    <li>All non-zero digits are significant figures. (e.g., 3.456 has four significant figures).</li>
+                    <li>Zeros between non-zero digits are significant. (e.g., 2306 has four significant figures).</li>
+                    <li>Zeros locating the position of decimal in numbers of magnitude less than one are not significant. (e.g., in 0.2224 and 0.000034, zeros are not significant).</li>
+                    <li>Final zeros to the right of the decimal point are significant. (e.g., 3.0000 has five significant figures).</li>
+                    <li>Zeros that locate decimal point in numbers greater than one are not significant. (e.g., 30000 has only one significant figure, unless specified by instrument accuracy, e.g., $8.000 \times 10^3$ kg).</li>
+                </ol>
+
+                <h3>Algebra with Significant Figures</h3>
+                <h4>Division and Multiplication:</h4>
+                <p>The product and quotient cannot have more significant figures than the least accurate factor (the factor with the smallest number of significant figures).</p>
+                <ul>
+                    <li>Example: $\frac{4.54 \times 2.324}{1.3365} = 7.89447063 \approx 7.89$ (retained to three digits).</li>
+                    <li>Example: $4.3458 \times 2.7 = 11.73366 \approx 12$ (retained to two digits).</li>
+                </ul>
+                <h4>Addition and Subtraction:</h4>
+                <p>The result should have the same number of decimal places as the number with the least number of decimal places.</p>
+                <ul>
+                    <li>Example: $4.345 + 23.51 = 27.855 \approx 27.86$ (retained to two decimal places).</li>
+                    <li>Example: $101.2401 - 1.0 = 100.2401 \approx 100.2$ (retained to one decimal place).</li>
+                    <li>Example: $101.2401 - 1 = 100.2401 \approx 100$ (retained to no decimal place).</li>
+                </ul>
+
+                <h3>Rounding Off Data</h3>
+                <ul>
+                    <li><strong>Rule #1 (Digit > 5):</strong> If the digit to be dropped is greater than 5, add "1" to the last retained digit. (e.g., 3.677 to 3.68 or 3.7).</li>
+                    <li><strong>Rule #2 (Digit < 5):</strong> If the digit to be dropped is less than 5, simply drop it. (e.g., 6.632 to 6.63 or 6.6).</li>
+                    <li><strong>Rule #3 (Digit = 5):</strong>
+                        <ul>
+                            <li>If the digit to be retained is even, just drop the "5". (e.g., 6.65 to 6.6).</li>
+                            <li>If the digit to be retained is odd, add "1" to it. (e.g., 6.35 to 6.4).</li>
+                            <li>Remember: Zero is an even number (e.g., 3.05 to 3.0).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Precision & Accuracy</h2>
+            <span class="toggle-button" onclick="toggleVisibility('precisionAccuracyContent')">Show/Hide Details</span>
+            <div id="precisionAccuracyContent" class="content">
+                <h3>Precision</h3>
+                <p>The precision of a measurement is determined by the least count of the instrument or device. Smaller the least count, more precise the measurement. Maximum absolute uncertainty is equal to one least count of the measuring instrument.</p>
+                <h3>Accuracy</h3>
+                <p>The accuracy of a measurement depends upon the fractional or percentage uncertainty in the measurement. Smaller the percentage error, more accurate the measurement.</p>
+                <p>Percentage uncertainty = $\frac{L.C}{\text{measured value}} \times 100$</p>
+
+                <h3>Assessment of Total Uncertainty in the Final Result</h3>
+                <ul>
+                    <li>In case of addition and subtraction, absolute uncertainties are added.</li>
+                    <li>In case of multiplication and division, fractional or percentage errors are added.</li>
+                    <li>For power factor, the power is multiplied with the percentage uncertainty. (e.g., In $u_1 = kx^a$, uncertainty is $a \times$ percentage error in x, where k is constant of proportionality).</li>
+                    <li>Uncertainty in the average value of many measurements of the same quantity is the mean of absolute differences of measurements from the average value.</li>
+                    <li>For time measurement, uncertainty is obtained by dividing the least count of the timing device with the number of vibrations.</li>
+                    <li>Uncertainty in timing experiment = $\frac{L.C}{\text{no. of vibration}}$</li>
+                </ul>
+                <div class="point-to-ponder">
+                    Counting more number of vibrations can reduce the uncertainty in timing experiments.
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <h2>Dimensions of Physical Quantities</h2>
+            <span class="toggle-button" onclick="toggleVisibility('dimensionsContent')">Show/Hide Details</span>
+            <div id="dimensionsContent" class="content">
+                <p>Each basic measurable physical quantity is represented in terms of base quantities by a specific symbol for them, written within square brackets, called dimension.</p>
+                <h3>Uses of Dimensions:</h3>
+                <ul>
+                    <li>Deriving a possible formula.</li>
+                    <li>Checking the homogeneity of a physical equation or formula.</li>
+                </ul>
+                <h3>Limitations of Dimensional Analysis:</h3>
+                <ul>
+                    <li>Dimensional analysis has no information of proportionality constants.</li>
+                    <li>If a quantity is dependent on trigonometric or exponential function, this method cannot be used.</li>
+                    <li>In some cases, it is difficult to guess the factors while deriving the relation connecting two or more physical quantities.</li>
+                    <li>This method cannot be used in an equation containing two or more variables with same dimensions.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

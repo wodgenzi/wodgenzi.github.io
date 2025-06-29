@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 13: Current Electricity</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 13: Current Electricity</h1>
+
+    <ul>
+        <li>
+            <h2>Electric Current (I)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricCurrentMainContent')">Show/Hide Details</span>
+            <div id="electricCurrentMainContent" class="content">
+                <ul>
+                    <li>Rate of flow of charge.</li>
+                    <li>$I = \frac{\Delta Q}{\Delta t}$.</li>
+                    <li>Unit: Ampere (A) = C/s.</li>
+                    <li>Dimensions: $[A]$.</li>
+                    <li>Scalar quantity (though direction is associated, it doesn't follow vector addition rules).</li>
+                    <li>Conventional current: direction of positive charge flow.</li>
+                    <li>Electron flow: opposite to conventional current.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Current Density (J)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('currentDensitySubContent')">Show/Hide Details</span>
+                        <div id="currentDensitySubContent" class="content">
+                            <ul>
+                                <li>Current per unit cross-sectional area.</li>
+                                <li>$J = \frac{I}{A}$.</li>
+                                <li>Unit: $A/m^2$.</li>
+                                <li>Vector quantity.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Drift Velocity ($v_d$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('driftVelocitySubContent')">Show/Hide Details</span>
+                        <div id="driftVelocitySubContent" class="content">
+                            <ul>
+                                <li>Average velocity of charge carriers in a conductor due to electric field.</li>
+                                <li>$I = n A v_d q$.</li>
+                                <li>$n$: number density of charge carriers.</li>
+                                <li>$A$: cross-sectional area.</li>
+                                <li>$q$: charge of each carrier.</li>
+                                <li>$v_d$ is typically very small.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Ohm's Law</h2>
+            <span class="toggle-button" onclick="toggleVisibility('ohmsLawMainContent')">Show/Hide Details</span>
+            <div id="ohmsLawMainContent" class="content">
+                <ul>
+                    <li>Current through a conductor is directly proportional to the potential difference across its ends, provided temperature and other physical conditions remain constant.</li>
+                    <li>$V = IR$.</li>
+                    <li>$V$: potential difference.</li>
+                    <li>$I$: current.</li>
+                    <li>$R$: resistance.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Resistance (R)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resistanceSubContent')">Show/Hide Details</span>
+                        <div id="resistanceSubContent" class="content">
+                            <ul>
+                                <li>Opposition to the flow of current.</li>
+                                <li>Unit: Ohm ($\Omega$) = V/A.</li>
+                                <li>Dimensions: $[ML^2T^{-3}A^{-2}]$.</li>
+                                <li>Depends on:
+                                    <ul>
+                                        <li>Nature of material (resistivity).</li>
+                                        <li>Length of conductor ($R \propto L$).</li>
+                                        <li>Cross-sectional area ($R \propto \frac{1}{A}$).</li>
+                                        <li>Temperature.</li>
+                                    </ul>
+                                </li>
+                                <li>$R = \rho \frac{L}{A}$.</li>
+                                <li>$\rho$: resistivity.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Resistivity ($\rho$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resistivitySubContent')">Show/Hide Details</span>
+                        <div id="resistivitySubContent" class="content">
+                            <ul>
+                                <li>Intrinsic property of a material.</li>
+                                <li>Unit: Ohm-meter ($\Omega~m$).</li>
+                                <li>Temperature dependence: $\rho_T = \rho_o (1 + \alpha \Delta T)$.</li>
+                                <li>$\alpha$: temperature coefficient of resistivity.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Conductance (G)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('conductanceSubContent')">Show/Hide Details</span>
+                        <div id="conductanceSubContent" class="content">
+                            <ul>
+                                <li>Reciprocal of resistance.</li>
+                                <li>$G = \frac{1}{R}$.</li>
+                                <li>Unit: Siemens (S) or mho ($\Omega^{-1}$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Conductivity ($\sigma$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('conductivitySubContent')">Show/Hide Details</span>
+                        <div id="conductivitySubContent" class="content">
+                            <ul>
+                                <li>Reciprocal of resistivity.</li>
+                                <li>$\sigma = \frac{1}{\rho}$.</li>
+                                <li>Unit: Siemens per meter ($S/m$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Combinations of Resistors</h2>
+            <span class="toggle-button" onclick="toggleVisibility('resistorCombinationsMainContent')">Show/Hide Details</span>
+            <div id="resistorCombinationsMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Series Combination</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resistorSeriesSubContent')">Show/Hide Details</span>
+                        <div id="resistorSeriesSubContent" class="content">
+                            <ul>
+                                <li>Current is same through each resistor.</li>
+                                <li>Total voltage: $V = V_1 + V_2 + ...$.</li>
+                                <li>Equivalent resistance: $R_{eq} = R_1 + R_2 + ...$.</li>
+                                <li>$R_{eq}$ is always greater than the largest individual resistance.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Parallel Combination</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('resistorParallelSubContent')">Show/Hide Details</span>
+                        <div id="resistorParallelSubContent" class="content">
+                            <ul>
+                                <li>Voltage is same across each resistor.</li>
+                                <li>Total current: $I = I_1 + I_2 + ...$.</li>
+                                <li>Equivalent resistance: $\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + ...$.</li>
+                                <li>For two resistors: $R_{eq} = \frac{R_1 R_2}{R_1 + R_2}$.</li>
+                                <li>$R_{eq}$ is always less than the smallest individual resistance.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Joule's Law (Heating Effect of Current)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('joulesLawContent')">Show/Hide Details</span>
+            <div id="joulesLawContent" class="content">
+                <ul>
+                    <li>Heat produced in a resistor is proportional to the square of current, resistance, and time.</li>
+                    <li>$H = I^2 R t$.</li>
+                    <li>Also: $H = V I t = \frac{V^2}{R} t$.</li>
+                    <li>Unit: Joule (J).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electric Power (P)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricPowerContent')">Show/Hide Details</span>
+            <div id="electricPowerContent" class="content">
+                <ul>
+                    <li>Rate at which electrical energy is converted into other forms of energy.</li>
+                    <li>$P = V I = I^2 R = \frac{V^2}{R}$.</li>
+                    <li>Unit: Watt (W).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electromotive Force (EMF) and Terminal Potential Difference (TPD)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('emfTpdMainContent')">Show/Hide Details</span>
+            <div id="emfTpdMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Electromotive Force (EMF, $\mathcal{E}$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('emfSubContent')">Show/Hide Details</span>
+                        <div id="emfSubContent" class="content">
+                            <ul>
+                                <li>Energy supplied by a source per unit charge to drive current around a circuit.</li>
+                                <li>Maximum potential difference across the terminals of a source when no current is drawn.</li>
+                                <li>Unit: Volt (V).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Terminal Potential Difference (TPD, V)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('tpdSubContent')">Show/Hide Details</span>
+                        <div id="tpdSubContent" class="content">
+                            <ul>
+                                <li>Potential difference across the terminals of a source when current is drawn.</li>
+                                <li>$V = \mathcal{E} - Ir$.</li>
+                                <li>$r$: internal resistance of the source.</li>
+                                <li>If $I=0$, then $V = \mathcal{E}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Internal Resistance (r)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('internalResistanceSubContent')">Show/Hide Details</span>
+                        <div id="internalResistanceSubContent" class="content">
+                            <ul>
+                                <li>Resistance offered by the source itself to the flow of current.</li>
+                                <li>Causes a voltage drop within the source.</li>
+                                <li>$r = \frac{\mathcal{E} - V}{I}$.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Kirchhoff's Rules</h2>
+            <span class="toggle-button" onclick="toggleVisibility('kirchhoffsRulesMainContent')">Show/Hide Details</span>
+            <div id="kirchhoffsRulesMainContent" class="content">
+                <ul>
+                    <li>Used to analyze complex circuits.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Kirchhoff's First Rule (Current Rule / Junction Rule)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('kirchhoffsFirstRuleSubContent')">Show/Hide Details</span>
+                        <div id="kirchhoffsFirstRuleSubContent" class="content">
+                            <ul>
+                                <li>Sum of currents entering a junction equals sum of currents leaving it.</li>
+                                <li>$\sum I_{in} = \sum I_{out}$.</li>
+                                <li>Based on conservation of charge.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Kirchhoff's Second Rule (Voltage Rule / Loop Rule)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('kirchhoffsSecondRuleSubContent')">Show/Hide Details</span>
+                        <div id="kirchhoffsSecondRuleSubContent" class="content">
+                            <ul>
+                                <li>Algebraic sum of potential changes around any closed loop is zero.</li>
+                                <li>$\sum \Delta V = 0$.</li>
+                                <li>Based on conservation of energy.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Wheatstone Bridge</h2>
+            <span class="toggle-button" onclick="toggleVisibility('wheatstoneBridgeContent')">Show/Hide Details</span>
+            <div id="wheatstoneBridgeContent" class="content">
+                <ul>
+                    <li>Circuit used to measure an unknown resistance accurately.</li>
+                    <li>Balanced condition: $\frac{R_1}{R_2} = \frac{R_3}{R_4}$.</li>
+                    <li>No current flows through the galvanometer in balanced condition.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Potentiometer</h2>
+            <span class="toggle-button" onclick="toggleVisibility('potentiometerContent')">Show/Hide Details</span>
+            <div id="potentiometerContent" class="content">
+                <ul>
+                    <li>Device used to measure potential difference or EMF accurately.</li>
+                    <li>Works on the principle that potential drop across a wire is proportional to its length (for uniform wire and constant current).</li>
+                    <li>Can compare EMFs of two cells.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 17: Physics of Solids</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 17: Physics of Solids</h1>
+
+    <ul>
+        <li>
+            <h2>Types of Solids</h2>
+            <span class="toggle-button" onclick="toggleVisibility('typesOfSolidsContent')">Show/Hide Details</span>
+            <div id="typesOfSolidsContent" class="content">
+                <ul>
+                    <li><strong>Crystalline Solids:</strong> Atoms/molecules arranged in a regular, repeating 3D pattern (e.g., NaCl, Quartz).</li>
+                    <li><strong>Amorphous Solids:</strong> Atoms/molecules arranged randomly, no long-range order (e.g., glass, plastic).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Mechanical Properties of Solids</h2>
+            <span class="toggle-button" onclick="toggleVisibility('mechanicalPropertiesMainContent')">Show/Hide Details</span>
+            <div id="mechanicalPropertiesMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Stress ($\sigma$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('stressSubContent')">Show/Hide Details</span>
+                        <div id="stressSubContent" class="content">
+                            <ul>
+                                <li>Internal restoring force per unit cross-sectional area.</li>
+                                <li>$\sigma = \frac{F}{A}$.</li>
+                                <li>Unit: Pascal (Pa) or $N/m^2$.</li>
+                                <li>Types: Tensile, Compressive, Shear.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Strain ($\epsilon$)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('strainSubContent')">Show/Hide Details</span>
+                        <div id="strainSubContent" class="content">
+                            <ul>
+                                <li>Ratio of change in dimension to original dimension.</li>
+                                <li>Longitudinal Strain: $\epsilon_L = \frac{\Delta L}{L_o}$.</li>
+                                <li>Volumetric Strain: $\epsilon_V = \frac{\Delta V}{V_o}$.</li>
+                                <li>Shear Strain: $\epsilon_S = \tan\theta \approx \theta$.</li>
+                                <li>Unit: Dimensionless.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Hooke's Law</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('hookesLawSubContent')">Show/Hide Details</span>
+                        <div id="hookesLawSubContent" class="content">
+                            <ul>
+                                <li>Within elastic limit, stress is directly proportional to strain.</li>
+                                <li>$\sigma \propto \epsilon \implies \sigma = Y \epsilon$.</li>
+                                <li>$Y$: Modulus of Elasticity.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Young's Modulus (Y)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('youngsModulusSubContent')">Show/Hide Details</span>
+                        <div id="youngsModulusSubContent" class="content">
+                            <ul>
+                                <li>Ratio of tensile/compressive stress to longitudinal strain.</li>
+                                <li>$Y = \frac{\text{Tensile Stress}}{\text{Longitudinal Strain}} = \frac{F/A}{\Delta L/L_o} = \frac{FL_o}{A\Delta L}$.</li>
+                                <li>Unit: Pascal (Pa) or $N/m^2$.</li>
+                                <li>Measure of stiffness/rigidity for stretching/compression.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Bulk Modulus (B)</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('bulkModulusSubContent')">Show/Hide Details</span>
+                        <div id="bulkModulusSubContent" class="content">
+                            <ul>
+                                <li>Ratio of volumetric stress (pressure) to volumetric strain.</li>
+                                <li>$B = \frac{\text{Volumetric Stress}}{\text{Volumetric Strain}} = \frac{-\Delta P}{\Delta V/V_o}$.</li>
+                                <li>Unit: Pascal (Pa).</li>
+                                <li>Measure of resistance to compression.</li>
+                                <li>Reciprocal is Compressibility ($K = 1/B$).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Shear Modulus (G) / Modulus of Rigidity</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('shearModulusSubContent')">Show/Hide Details</span>
+                        <div id="shearModulusSubContent" class="content">
+                            <ul>
+                                <li>Ratio of shear stress to shear strain.</li>
+                                <li>$G = \frac{\text{Shear Stress}}{\text{Shear Strain}} = \frac{F/A}{\theta}$.</li>
+                                <li>Unit: Pascal (Pa).</li>
+                                <li>Measure of resistance to shape change.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Elastic Limit and Yield Strength</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('elasticLimitSubContent')">Show/Hide Details</span>
+                        <div id="elasticLimitSubContent" class="content">
+                            <ul>
+                                <li><strong>Elastic Limit:</strong> Maximum stress a material can withstand and still return to its original shape.</li>
+                                <li><strong>Yield Strength:</strong> Stress at which a material begins to deform plastically (permanently).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Ultimate Tensile Strength and Fracture Stress</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('ultimateTensileSubContent')">Show/Hide Details</span>
+                        <div id="ultimateTensileSubContent" class="content">
+                            <ul>
+                                <li><strong>Ultimate Tensile Strength (UTS):</strong> Maximum stress a material can withstand before necking begins.</li>
+                                <li><strong>Fracture Stress (Breaking Stress):</strong> Stress at which the material breaks.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electrical Properties of Solids</h2>
+            <span class="toggle-button" onclick="toggleVisibility('electricalPropertiesMainContent')">Show/Hide Details</span>
+            <div id="electricalPropertiesMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Conductors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('conductorsSubContent')">Show/Hide Details</span>
+                        <div id="conductorsSubContent" class="content">
+                            <ul>
+                                <li>Materials with many free electrons.</li>
+                                <li>Low resistivity ($\sim 10^{-8}~\Omega~m$).</li>
+                                <li>Conductivity decreases with increasing temperature (due to increased atomic vibrations hindering electron flow).</li>
+                                <li>Examples: Copper, Aluminum, Silver.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Insulators</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('insulatorsSubContent')">Show/Hide Details</span>
+                        <div id="insulatorsSubContent" class="content">
+                            <ul>
+                                <li>Materials with very few free electrons.</li>
+                                <li>High resistivity ($\sim 10^{10} - 10^{14}~\Omega~m$).</li>
+                                <li>Examples: Glass, Rubber, Plastic.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Semiconductors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('semiconductorsSubContent')">Show/Hide Details</span>
+                        <div id="semiconductorsSubContent" class="content">
+                            <ul>
+                                <li>Materials with resistivity between conductors and insulators ($\sim 10^{-5} - 10^6~\Omega~m$).</li>
+                                <li>Conductivity increases with increasing temperature (more electrons gain enough energy to become free).</li>
+                                <li>Examples: Silicon (Si), Germanium (Ge).</li>
+                                <li>Basis for modern electronics.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Superconductors</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('superconductorsSubContent')">Show/Hide Details</span>
+                        <div id="superconductorsSubContent" class="content">
+                            <ul>
+                                <li>Materials that exhibit zero electrical resistance below a critical temperature ($T_c$).</li>
+                                <li>No energy loss as heat.</li>
+                                <li>Examples: Mercury ($T_c = 4.2~K$), Niobium.</li>
+                                <li>Applications: MRI, maglev trains, power transmission (future).</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Magnetic Properties of Solids</h2>
+            <span class="toggle-button" onclick="toggleVisibility('magneticPropertiesMainContent')">Show/Hide Details</span>
+            <div id="magneticPropertiesMainContent" class="content">
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Diamagnetic Materials</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('diamagneticSubContent')">Show/Hide Details</span>
+                        <div id="diamagneticSubContent" class="content">
+                            <ul>
+                                <li>Weakly repelled by external magnetic fields.</li>
+                                <li>No permanent magnetic dipole moment.</li>
+                                <li>Relative permeability ($K_m$) slightly less than 1 ($K_m < 1$).</li>
+                                <li>Examples: Bismuth, Copper, Water, Gold.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Paramagnetic Materials</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('paramagneticSubContent')">Show/Hide Details</span>
+                        <div id="paramagneticSubContent" class="content">
+                            <ul>
+                                <li>Weakly attracted by external magnetic fields.</li>
+                                <li>Have permanent magnetic dipole moments, but randomly oriented.</li>
+                                <li>Relative permeability ($K_m$) slightly greater than 1 ($K_m > 1$).</li>
+                                <li>Examples: Aluminum, Platinum, Oxygen.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Ferromagnetic Materials</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('ferromagneticSubContent')">Show/Hide Details</span>
+                        <div id="ferromagneticSubContent" class="content">
+                            <ul>
+                                <li>Strongly attracted by external magnetic fields.</li>
+                                <li>Exhibit magnetic domains (regions of aligned atomic moments).</li>
+                                <li>Can be permanently magnetized.</li>
+                                <li>Relative permeability ($K_m$) much greater than 1 ($K_m \gg 1$).</li>
+                                <li>Examples: Iron, Nickel, Cobalt.</li>
+                                <li>Curie Temperature: Temperature above which ferromagnetic materials become paramagnetic.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>

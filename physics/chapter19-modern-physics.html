@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 19: Dawn of Modern Physics</title>
+    <script src="index.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-size: 1.2em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for nested collapsible content */
+        .content {
+            display: none;
+            margin-left: 20px;
+            padding-top: 10px;
+            border-top: 1px dashed #ccc;
+            margin-top: 10px;
+            font-size: 0.95em;
+            color: #555;
+            width: 100%;
+        }
+
+        /* Adjust padding for nested list items to prevent excessive indentation */
+        ul ul.nested-list-container li {
+            padding: 10px 15px; /* Slightly less padding for nested items */
+            margin-bottom: 10px;
+            background-color: #fcfcfc; /* Lighter background for nested items */
+            border: 1px solid #eee; /* Lighter border */
+        }
+
+        .toggle-button {
+            cursor: pointer;
+            color: #3498db;
+            text-decoration: underline;
+            font-weight: bold;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .toggle-button:hover {
+            color: #2980b9;
+        }
+
+        ul ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 15px;
+            list-style: disc;
+        }
+
+        /* Specific styling for nested ul within collapsible content */
+        .content > ul {
+            list-style: none; /* Remove default list style for the direct ul inside content */
+            padding-left: 0; /* Remove default padding */
+        }
+
+        .content > ul > li {
+            background-color: #f9f9f9;
+            border: none;
+            box-shadow: none;
+            padding: 8px 10px;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .point-to-ponder {
+            background-color: #e6f7ff;
+            border-left: 5px solid #3498db;
+            padding: 10px 15px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #2c3e50;
+            border-radius: 5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            li {
+                padding: 10px 15px;
+            }
+
+            .content {
+                margin-left: 10px;
+            }
+        }
+    </style>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+          "HTML-CSS": {
+            linebreaks: { automatic: true }
+          },
+          SVG: {
+            linebreaks: { automatic: true }
+          }
+        });
+    </script>
+    <script>
+        // Function to toggle visibility of content
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Chapter 19: Dawn of Modern Physics</h1>
+
+    <ul>
+        <li>
+            <h2>Classical Physics vs. Modern Physics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('physicsComparisonContent')">Show/Hide Details</span>
+            <div id="physicsComparisonContent" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Classical Physics</th>
+                            <th>Modern Physics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Based on classical/Newtonian mechanics.</td>
+                            <td>Based on quantum mechanics.</td>
+                        </tr>
+                        <tr>
+                            <td>Deals with macroscopic level, ordinary everyday life.</td>
+                            <td>Deals with microscopic level, and macro levels as special cases.</td>
+                        </tr>
+                        <tr>
+                            <td>Span includes: Newton's laws of motion, Newton's law of gravitation, Four laws of thermodynamics, Gas laws, Maxwell's equations of E.M. waves.</td>
+                            <td>Span includes: Michelson's and Morley's findings, Schrodinger wave equations, De-Broglie hypothesis, Bohr's ideas, Heisenberg's uncertainty principle, Planck's theory, Special theory of relativity, General theory of relativity.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </li>
+
+        <li>
+            <h2>Ideas of Modern Physics</h2>
+            <span class="toggle-button" onclick="toggleVisibility('modernPhysicsIdeasContent')">Show/Hide Details</span>
+            <div id="modernPhysicsIdeasContent" class="content">
+                <ul>
+                    <li>Light is an electromagnetic wave.</li>
+                    <li>Light consists of photons, each having energy $E=hf$.</li>
+                    <li>Speed of light is a universal constant in vacuum, independent of motion of source and observers.</li>
+                    <li>Absorption and emission of electromagnetic waves take place in packets of energy called photons.</li>
+                    <li>True laws of physics retain their mathematical form in all inertial frames of reference.</li>
+                    <li>All motions and rest are relative; nothing like absolute rest or motion.</li>
+                    <li>Wave-particle duality.</li>
+                    <li>Reaction takes some time to replay, after action.</li>
+                    <li>Matter waves are associated with moving particles.</li>
+                    <li>Einstein's Mass-Energy relation: $E=mc^2$.</li>
+                    <li>Pair production: Photon splits into electron-positron pair.</li>
+                    <li>Positron and electron annihilate to photons.</li>
+                    <li>Position, momentum, energy, and time cannot be measured accurately at the same time (Heisenberg's Uncertainty Principle).</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Relative Motion & Frame of Reference</h2>
+            <span class="toggle-button" onclick="toggleVisibility('relativeMotionContent')">Show/Hide Details</span>
+            <div id="relativeMotionContent" class="content">
+                <ul>
+                    <li>Concept of direction is purely relative.</li>
+                    <li>Experiments give same results in same frame of reference; different results in different frames.</li>
+                    <li><strong>Frame of Reference:</strong> Coordinate system (x, y, z axes) from where observation is made.</li>
+                    <li><strong>Inertial Frame:</strong> At rest or moving with uniform velocity. Law of inertia is valid. Earth can be considered an inertial frame for motion on Earth.</li>
+                    <li><strong>Non-inertial Frame:</strong> Moving with accelerated motion.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Theory of Relativity (Special Theory)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('relativityTheoryContent')">Show/Hide Details</span>
+            <div id="relativityTheoryContent" class="content">
+                <ul>
+                    <li>Proposed by Einstein in 1905.</li>
+                    <li>Deals with inertial frames of reference.</li>
+                    <li>Important Results:
+                        <ul>
+                            <li>Relativistic Mass: $m=\frac{m_o}{\sqrt{1-\frac{v^2}{c^2}}}$. ($m_o$: rest mass, $v$: relativistic speed, $c$: speed of light).</li>
+                            <li>Lorentz Contraction (Length Contraction): $l=l_o\sqrt{1-\frac{v^2}{c^2}}$. ($l_o$: proper length).</li>
+                            <li>Time Dilation: $t=\frac{t_o}{\sqrt{1-\frac{v^2}{c^2}}}$. ($t_o$: proper time).</li>
+                            <li>Mass-Energy Equivalence: $E=mc^2$.</li>
+                            <li>No body moves with velocity greater than velocity of light.</li>
+                            <li>At ordinary speeds ($v \approx 0$), $m \approx m_o$, $l \approx l_o$, $t \approx t_o$. This is why relativistic effects are not observed in daily life.</li>
+                            <li>If $v = 0.999c$, then $m = 22.4 m_o$.</li>
+                            <li>If $v \ge 2.6 \times 10^8~m/s$, then $l = l_o/2$ and $m = 2 m_o$.</li>
+                        </ul>
+                    </li>
+                    <li>NAVSTAR Navigation System uses results of special theory of relativity for accurate location and speed measurements.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Black Body Radiation</h2>
+            <span class="toggle-button" onclick="toggleVisibility('blackBodyRadiationMainContent')">Show/Hide Details</span>
+            <div id="blackBodyRadiationMainContent" class="content">
+                <ul>
+                    <li>Black body: Ideal radiator and ideal absorber. Emissive/absorptive power is 1. Very bad reflector.</li>
+                    <li>Emits electromagnetic waves.</li>
+                    <li>Intensity Distribution (Lummer and Pringsheim): Energy is not uniformly distributed across wavelengths at a given temperature.</li>
+                    <li>Wien's Displacement Law: $\lambda_{max} T = \text{constant} = 2.9 \times 10^{-3}~m K$. So, $T \propto \frac{1}{\lambda}$. (Holds for shorter wavelengths).</li>
+                    <li>Stefan-Boltzmann Law: Total energy (area under curve) $E = \sigma T^4$. ($\sigma = 5.67 \times 10^{-8}~W m^{-2} K^{-4}$ is Stefan's constant).</li>
+                    <li>Shape of black body radiation curve is independent of material.</li>
+                    <li>Classical theories (Wein's, Rayleigh-Jeans) failed to explain the full spectrum. Rayleigh-Jeans holds for longer wavelengths.</li>
+                    <li>Planck's Quantum Theory: Absorption and emission of radiation takes place in packets of energy called quanta ($E=hf$). Explains black body radiation at all wavelengths. Max Planck received Nobel Prize in 1918.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>The Photons</h2>
+            <span class="toggle-button" onclick="toggleVisibility('photonsContent')">Show/Hide Details</span>
+            <div id="photonsContent" class="content">
+                <ul>
+                    <li>Einstein: Light energy consists of packets of electromagnetic energy (photons).</li>
+                    <li>Planck: Emission and absorption by atoms is in form of indivisible packets (quanta).</li>
+                    <li>Light has discontinuous (granular) nature.</li>
+                    <li>Beam of light with wavelength $\lambda$ consists of stream of photons traveling at speed $c$ and carrying energy $hf$.</li>
+                    <li>Energy: $E = hf = \frac{hc}{\lambda}$.</li>
+                    <li>Momentum: $p = mc = \frac{hf}{c} = \frac{h}{\lambda}$.</li>
+                    <li>Emission or absorption of energy applies to any oscillating system.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Interaction of Electromagnetic Radiation with Matter</h2>
+            <span class="toggle-button" onclick="toggleVisibility('emInteractionMainContent')">Show/Hide Details</span>
+            <div id="emInteractionMainContent" class="content">
+                <ul>
+                    <li>Three types depending on photon energy:</li>
+                    <li>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Energy Range</th>
+                                    <th>Type of Interaction</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>$hf < 0.1~MeV$</td>
+                                    <td>Photoelectric effect</td>
+                                </tr>
+                                <tr>
+                                    <td>$0.1~MeV < hf < 1~MeV$</td>
+                                    <td>Compton effect</td>
+                                </tr>
+                                <tr>
+                                    <td>$hf > 1~MeV$</td>
+                                    <td>Pair production</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Photoelectric Effect & Photon Theory of Light</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('photoelectricEffectSubContent')">Show/Hide Details</span>
+                        <div id="photoelectricEffectSubContent" class="content">
+                            <ul>
+                                <li>Emission of electrons from a metal surface when light is incident on it.</li>
+                                <li>Supports quantum nature of light. Emitted electrons are photoelectrons.</li>
+                                <li>Based on energy conservation. Explained by Einstein (Nobel Prize 1921).</li>
+                                <li>Photoelectric current ($i$) is proportional to intensity of light ($I$). ($i \propto I$).</li>
+                                <li>Saturation current: Maximum photoelectric current at fixed positive potential.</li>
+                                <li>Stopping potential ($-V_o$): Negative potential at which photoelectric current becomes zero.</li>
+                                <li>Stopping potential is proportional to maximum kinetic energy ($K.E_{max}$) of photoelectrons.</li>
+                                <li>Stopping potential depends on frequency of incident light, NOT on intensity.</li>
+                                <li><strong>Einstein's Photoelectric Equation:</strong> $K.E_{max} = hf - \phi_o = hf - hf_o = h(f-f_o)$.</li>
+                                <li>Also, $eV_o = K.E_{max} = \frac{1}{2}mv_{max}^2$.</li>
+                                <li><strong>Laws of Photoelectric Effect:</strong>
+                                    <ol>
+                                        <li>Rate of emission $\propto$ intensity of incident light.</li>
+                                        <li>Existence of threshold frequency ($f_o$): Minimum frequency below which no electrons are ejected, regardless of intensity.</li>
+                                        <li>Work function ($\phi_o$): Minimum energy to eject an electron. $\phi_o = hf_o = \frac{hc}{\lambda_o}$. Depends on nature of metal and impurities. Unit: eV, Joule, erg.</li>
+                                        <li>Maximum K.E. of photoelectrons $\propto$ frequency of incident light, independent of intensity.</li>
+                                        <li>Instantaneous process: Time interval between light incidence and electron emission is negligible ($<10^{-8}s$).</li>
+                                    </ol>
+                                </li>
+                                <li><strong>Failure of Classical Theory:</strong> Could not explain independence of K.E. from intensity, existence of threshold frequency, and instantaneous emission.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Phenomenon</th>
+                                        <th>Explained by Waves</th>
+                                        <th>Explained by Particles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Reflection</td>
+                                        <td>✓</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refraction</td>
+                                        <td>✓</td>
+                                        <td>✓</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Interference</td>
+                                        <td>✓</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diffraction</td>
+                                        <td>✓</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polarization</td>
+                                        <td>✓</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Photoelectric effect</td>
+                                        <td></td>
+                                        <td>✓</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Photocell</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('photocellSubContent')">Show/Hide Details</span>
+                        <div id="photocellSubContent" class="content">
+                            <ul>
+                                <li>Based on photoelectric effect.</li>
+                                <li>Consists of cathode (photo-emissive surface) and anode.</li>
+                                <li>Sodium/Potassium for visible light, Cesium coated oxidized silver for infrared, Selenium/Silicon for UV/X-rays/gamma-rays.</li>
+                                <li>Applications: Security systems, Counting systems, Automatic doors/street lighting, Exposure meters, Sound tracks of movies, Solar panels.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Compton Effect</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('comptonEffectSubContent')">Show/Hide Details</span>
+                        <div id="comptonEffectSubContent" class="content">
+                            <ul>
+                                <li>When a photon hits an electron, it scatters with a frequency less than incident photon (wavelength increases).</li>
+                                <li>Usually X-ray photons used ($E \ge 17.5~KeV$).</li>
+                                <li>Compton shift ($\Delta\lambda$): Increase in wavelength.</li>
+                                <li>$\Delta\lambda = \lambda_f - \lambda_i = \frac{h}{m_o c}(1-\cos\theta)$.</li>
+                                <li>Compton wavelength: $\frac{h}{m_o c} = 2.43 \times 10^{-12}~m$.</li>
+                                <li>$\Delta\lambda = 0$ when $\theta = 0^\circ$.</li>
+                                <li>$\Delta\lambda = \frac{h}{m_o c}$ when $\theta = 90^\circ$.</li>
+                                <li>$\Delta\lambda = \frac{2h}{m_o c}$ when $\theta = 180^\circ$.</li>
+                                <li>Strong evidence for particle (photon) nature of E.M. waves.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Pair Production</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('pairProductionSubContent')">Show/Hide Details</span>
+                        <div id="pairProductionSubContent" class="content">
+                            <ul>
+                                <li>Decomposition of a photon into an electron-positron pair.</li>
+                                <li>Requires photon energy $hf > 1.02~MeV$.</li>
+                                <li>Energy equation: $hf = 2m_o c^2 + K.E_{e^-} + K.E_{e^+}$.</li>
+                                <li>Rest mass energy of electron/positron = $m_o c^2 = 0.51~MeV$.</li>
+                                <li>Cannot take place in vacuum; usually occurs near a heavy nucleus (for momentum conservation).</li>
+                                <li>Materialization of energy.</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Annihilation of Matter</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('annihilationMatterSubContent')">Show/Hide Details</span>
+                        <div id="annihilationMatterSubContent" class="content">
+                            <ul>
+                                <li>Reverse process of pair production. Conversion of mass into energy.</li>
+                                <li>Electron and positron annihilate to produce two photons.</li>
+                                <li>Two photons move in opposite directions to conserve momentum.</li>
+                                <li>Each photon has energy $0.51~MeV$ (equivalent to rest mass energy of electron).</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Antimatter</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('antimatterSubContent')">Show/Hide Details</span>
+                        <div id="antimatterSubContent" class="content">
+                            <ul>
+                                <li>P.A.M. Dirac theoretically predicted in 1928.</li>
+                                <li>Anderson discovered positron in 1932.</li>
+                                <li>Every antiparticle has same mass, same spin, but opposite magnetic moment and charge to its respective particle.</li>
+                            </ul>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Particle</th>
+                                        <th>Antiparticle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Electron</td>
+                                        <td>Positron</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Proton</td>
+                                        <td>Antiproton</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Neutron</td>
+                                        <td>Antineutron</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Neutrino</td>
+                                        <td>Antineutrino</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>De-Broglie's Hypothesis (Wave-Particle Duality)</h2>
+            <span class="toggle-button" onclick="toggleVisibility('deBroglieHypothesisContent')">Show/Hide Details</span>
+            <div id="deBroglieHypothesisContent" class="content">
+                <ul>
+                    <li>All moving particles behave as waves (matter waves or particle waves).</li>
+                    <li>Wavelength associated with moving particles: $\lambda = \frac{h}{mv} = \frac{h}{p}$.</li>
+                    <li>$\lambda \propto \frac{1}{m}$, $\lambda \propto \frac{1}{v}$.</li>
+                    <li>For large mass and ordinary speed objects, wavelength is too small for wave effects (interference, diffraction) to be observable.</li>
+                    <li>Prince Louis Victor de Broglie received 1929 Nobel Prize.</li>
+                </ul>
+                <ul class="nested-list-container">
+                    <li>
+                        <h3>Davisson and Germer Experiment</h3>
+                        <span class="toggle-button" onclick="toggleVisibility('davissonGermerSubContent')">Show/Hide Details</span>
+                        <div id="davissonGermerSubContent" class="content">
+                            <ul>
+                                <li>Experimental confirmation of de-Broglie's hypothesis.</li>
+                                <li>Showed electrons are diffracted from metal crystals like X-rays.</li>
+                                <li>Wavelength associated with moving electrons: $\lambda = \frac{h}{\sqrt{2mVe}}$. ($V$: accelerating potential).</li>
+                                <li>For $V=54~V$, $\lambda = 1.66 \times 10^{-10}~m$.</li>
+                                <li>This matches Bragg's equation for 1st order diffraction from nickel crystal ($d=0.91 \times 10^{-10}~m$), which gives $\lambda = 1.65 \times 10^{-10}~m$.</li>
+                                <li>Davisson and Thomson shared Nobel Prize in 1937.</li>
+                                <li>Electron microscope is a practical application of wave-particle duality.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Heisenberg's Uncertainty Principle</h2>
+            <span class="toggle-button" onclick="toggleVisibility('heisenbergUncertaintyContent')">Show/Hide Details</span>
+            <div id="heisenbergUncertaintyContent" class="content">
+                <ul>
+                    <li>Certain pairs of quantities cannot be measured with perfect accuracy at the same time.</li>
+                    <li>Conjugate quantities: Linear momentum and position ($\Delta p \cdot \Delta x \approx h$). Energy and time ($\Delta E \cdot \Delta t \approx h$).</li>
+                    <li>To increase accuracy in measuring position, use short wavelength.</li>
+                    <li>To increase accuracy in measuring momentum, use long wavelength.</li>
+                </ul>
+            </div>
+        </li>
+
+        <li>
+            <h2>Electromagnetic Spectrum</h2>
+            <span class="toggle-button" onclick="toggleVisibility('emSpectrumContent')">Show/Hide Details</span>
+            <div id="emSpectrumContent" class="content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.#</th>
+                            <th>Name</th>
+                            <th>Wavelength Range (metre)</th>
+                            <th>Frequency Range (hertz)</th>
+                            <th>How Produced</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1.</td>
+                            <td>Gamma rays</td>
+                            <td>$6 \times 10^{-13} - 1 \times 10^{-10}$</td>
+                            <td>$5 \times 10^{20} - 3 \times 10^{19}$</td>
+                            <td>Nuclei of atoms</td>
+                        </tr>
+                        <tr>
+                            <td>2.</td>
+                            <td>X-rays</td>
+                            <td>$1 \times 10^{-10} - 3 \times 10^{-8}$</td>
+                            <td>$3 \times 10^{19} - 1 \times 10^{16}$</td>
+                            <td>Bombardment of high Z target by electrons</td>
+                        </tr>
+                        <tr>
+                            <td>3.</td>
+                            <td>Ultraviolet rays</td>
+                            <td>$3 \times 10^{-8} - 4 \times 10^{-7}$</td>
+                            <td>$1 \times 10^{16} - 8 \times 10^{14}$</td>
+                            <td>Excitation of atoms and vacuum spark</td>
+                        </tr>
+                        <tr>
+                            <td>4.</td>
+                            <td>Visible light</td>
+                            <td>$4 \times 10^{-7} - 8 \times 10^{-7}$</td>
+                            <td>$8 \times 10^{14} - 4 \times 10^{14}$</td>
+                            <td>Excitation of atoms, spark and arc flame</td>
+                        </tr>
+                        <tr>
+                            <td>5.</td>
+                            <td>Infrared rays</td>
+                            <td>$8 \times 10^{-7} - 3 \times 10^{-5}$</td>
+                            <td>$4 \times 10^{14} - 3 \times 10^{13}$</td>
+                            <td>Excitation of atoms and molecules</td>
+                        </tr>
+                        <tr>
+                            <td>6.</td>
+                            <td>Heat radiation</td>
+                            <td>$1 \times 10^{-5} - 1 \times 10^{-1}$</td>
+                            <td>$3 \times 10^{13} - 3 \times 10^{9}$</td>
+                            <td>Heating</td>
+                        </tr>
+                        <tr>
+                            <td>7.</td>
+                            <td>Microwaves</td>
+                            <td>$1 \times 10^{-3} - 3 \times 10^{-1}$</td>
+                            <td>$3 \times 10^{11} - 1 \times 10^{9}$</td>
+                            <td>Oscillating currents in special vacuum tubes</td>
+                        </tr>
+                        <tr>
+                            <td>8.</td>
+                            <td>Ultra high radio frequencies</td>
+                            <td>$1 \times 10^{-1} - 1$</td>
+                            <td>$3 \times 10^{9} - 3 \times 10^{8}$</td>
+                            <td>Oscillating circuits</td>
+                        </tr>
+                        <tr>
+                            <td>9.</td>
+                            <td>Very high radio frequencies</td>
+                            <td>$1 - 10$</td>
+                            <td>$3 \times 10^{8} - 3 \times 10^{7}$</td>
+                            <td>Oscillating circuits</td>
+                        </tr>
+                        <tr>
+                            <td>10.</td>
+                            <td>Radio frequencies</td>
+                            <td>$10 - 10^4$</td>
+                            <td>$3 \times 10^{7} - 3 \times 10^{4}$</td>
+                            <td>Oscillating circuits</td>
+                        </tr>
+                        <tr>
+                            <td>11.</td>
+                            <td>Power frequencies</td>
+                            <td>$5 \times 10^6 - 6 \times 10^4$</td>
+                            <td>$60 - 50$</td>
+                            <td>Weak radiations from A.C. circuits</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li>Human body emits E.M. waves in infrared region at only 310K.</li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+
+    <p style="text-align: center; margin-top: 40px;">
+        <a href="index.html" style="text-decoration: none; color: #007bff; font-weight: bold;">Back to Table of Contents</a>
+    </p>
+
+</body>
+</html>
