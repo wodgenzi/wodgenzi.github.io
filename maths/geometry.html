@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Introduction to Analytic Geometry</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3B82F6; /* Blue-500 */
+            --primary-hover: #2563EB; /* Blue-600 */
+            --bg-color: #F3F4F6; /* Gray-100 */
+            --container-bg: #FFFFFF;
+            --text-color: #374151; /* Gray-700 */
+            --heading-color: #111827; /* Gray-900 */
+            --border-color: #D1D5DB; /* Gray-300 */
+            --details-bg: #F9FAFB; /* Gray-50 */
+            --details-open-bg: #EFF6FF; /* Blue-50 */
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: var(--heading-color);
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        details {
+            background: var(--details-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        details[open] {
+            background: var(--details-open-bg);
+        }
+        summary {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--heading-color);
+            cursor: pointer;
+            list-style: none;
+            position: relative;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            transition: background-color 0.2s ease;
+        }
+        summary:hover {
+            background-color: rgba(0,0,0,0.03);
+        }
+        summary::before {
+            content: '+';
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.4em;
+            font-weight: 400;
+            transition: transform 0.2s ease-in-out;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        details[open] > summary::before {
+            content: '−';
+            transform: translateY(-50%);
+        }
+        .content {
+            padding: 0 1.5rem 1rem 3rem;
+            margin-top: -0.5rem;
+        }
+        .item {
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--primary-color);
+        }
+        .item-title {
+            font-weight: 600;
+            color: var(--primary-hover);
+            margin-bottom: 0.5rem;
+        }
+        .context {
+            font-size: 0.9em;
+            font-style: italic;
+            color: #6B7280; /* Gray-500 */
+            margin-top: 0.5rem;
+        }
+        code {
+            background-color: #E5E7EB; /* Gray-200 */
+            padding: 3px 7px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background-color: var(--details-bg);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Chapter 4: Introduction to Analytic Geometry</h1>
+
+    <details>
+        <summary>Coordinate System & Basic Terms</summary>
+        <div class="content">
+            <div class="item">
+                <div class="item-title">Quadrants</div>
+                <ul>
+                    <li><b>Quadrant I:</b> All points \((x,y)\) with \(x &gt; 0, y &gt; 0\)</li>
+                    <li><b>Quadrant II:</b> All points \((x,y)\) with \(x &lt; 0, y &gt; 0\)</li>
+                    <li><b>Quadrant III:</b> All points \((x,y)\) with \(x &lt; 0, y &lt; 0\)</li>
+                    <li><b>Quadrant IV:</b> All points \((x,y)\) with \(x &gt; 0, y &lt; 0\)</li>
+                </ul>
+                <div class="context">Page: 94</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Basic Terms</div>
+                <ul>
+                    <li><b>Abscissa:</b> The distance of a point from Y-axis (x-coordinate).</li>
+                    <li><b>Ordinate:</b> The distance of a point from X-axis (y-coordinate).</li>
+                    <li><b>Cartesian Coordinates:</b> The two distances taken together \((x,y)\).</li>
+                </ul>
+                <div class="context">Page: 94</div>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Distance, Section, and Locus Formulas</summary>
+        <div class="content">
+            <div class="item">
+                <div class="item-title">The Distance Formula</div>
+                <div>\( d = |AB| = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} \)</div>
+                <div class="context">The distance between points \(A(x_1, y_1)\) and \(B(x_2, y_2)\). (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Distance of a Point from Origin</div>
+                <div>\( |OA| = \sqrt{x_1^2 + y_1^2} \)</div>
+                <div class="context">The distance of point \(A(x_1, y_1)\) from the origin \(O(0,0)\). (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">The Ratio Formula (Internal Division)</div>
+                <div>\( \left(\frac{k_1x_2 + k_2x_1}{k_1 + k_2}, \frac{k_1y_2 + k_2y_1}{k_1 + k_2}\right) \)</div>
+                <div class="context">Coordinates of a point dividing the line segment AB in the ratio \(k_1:k_2\) internally. (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">The Ratio Formula (External Division)</div>
+                <div>\( \left(\frac{k_1x_2 - k_2x_1}{k_1 - k_2}, \frac{k_1y_2 - k_2y_1}{k_1 - k_2}\right) \)</div>
+                <div class="context">Coordinates of a point dividing the line segment AB in the ratio \(k_1:k_2\) externally. (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">The Midpoint Formula</div>
+                <div>\( \left(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}\right) \)</div>
+                <div class="context">A special case of the ratio formula where \(k_1:k_2 = 1:1\). (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Centroid of a Triangle</div>
+                <div>\( \left(\frac{x_1 + x_2 + x_3}{3}, \frac{y_1 + y_2 + y_3}{3}\right) \)</div>
+                <div class="context">The point of intersection of medians of a triangle with vertices \(A(x_1,y_1)\), \(B(x_2,y_2)\), and \(C(x_3,y_3)\). (Page: 95)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">In-centre of a Triangle</div>
+                <div>\( \left(\frac{ax_1 + bx_2 + cx_3}{a+b+c}, \frac{ay_1 + by_2 + cy_3}{a+b+c}\right) \)</div>
+                <div class="context">The point of intersection of angle bisectors. a, b, c are side lengths opposite to vertices A, B, C. (Page: 95)</div>
+            </div>
+             <div class="item">
+                <div class="item-title">Area of a Triangular Region</div>
+                <div>\( \Delta = \frac{1}{2} \begin{vmatrix} x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \\ x_3 & y_3 & 1 \end{vmatrix} \)</div>
+                <div class="context">Area of a triangle with vertices \(A(x_1,y_1)\), \(B(x_2,y_2)\), and \(C(x_3,y_3)\). (Page: 99)</div>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>Transformations of Axes</summary>
+        <div class="content">
+            <div class="item">
+                <div class="item-title">Translation of Axes</div>
+                <div>\( X = x - h \)</div>
+                <div>\( Y = y - k \)</div>
+                <div class="context">Transforms coordinates \((x,y)\) to \((X,Y)\) when the origin is shifted to \(O'(h,k)\). (Page: 96)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Rotation of Axes</div>
+                <div>\( X = x \cos\theta + y \sin\theta \)</div>
+                <div>\( Y = y \cos\theta - x \sin\theta \)</div>
+                <div class="context">Transforms coordinates \((x,y)\) to \((X,Y)\) when axes are rotated by an angle \(\theta\). (Page: 96)</div>
+            </div>
+        </div>
+    </details>
+
+    <details>
+        <summary>The Straight Line</summary>
+        <div class="content">
+            <details>
+                <summary>Slope and Inclination</summary>
+                <div class="content">
+                    <div class="item">
+                        <div class="item-title">Slope/Gradient</div>
+                        <div>\( m = \tan\alpha \)</div>
+                        <div class="context">Where \(\alpha\) is the inclination \((0^\circ &lt; \alpha &lt; 180^\circ)\). (Page: 96)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Slope of a Line Segment</div>
+                        <div>\( m = \frac{y_2 - y_1}{x_2 - x_1} \)</div>
+                        <div class="context">Slope of the line joining points \(A(x_1, y_1)\) and \(B(x_2, y_2)\). (Page: 96)</div>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Equations of Straight Lines</summary>
+                <div class="content">
+                    <div class="item">
+                        <div class="item-title">Slope-Intercept Form</div>
+                        <div>\( y = mx + c \)</div>
+                        <div class="context">Line with slope 'm' and y-intercept 'c'. (Page: 97)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Point-Slope Form</div>
+                        <div>\( y - y_1 = m(x - x_1) \)</div>
+                        <div class="context">Line with slope 'm' passing through point \(P(x_1, y_1)\). (Page: 97)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Two-Points Form</div>
+                        <div>\( \frac{y-y_1}{y_2-y_1} = \frac{x-x_1}{x_2-x_1} \) or \( \begin{vmatrix} x & y & 1 \\ x_1 & y_1 & 1 \\ x_2 & y_2 & 1 \end{vmatrix} = 0 \)</div>
+                        <div class="context">Line passing through points \(A(x_1, y_1)\) and \(B(x_2, y_2)\). (Page: 97)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Intercepts Form</div>
+                        <div>\( \frac{x}{a} + \frac{y}{b} = 1 \)</div>
+                        <div class="context">Line making x-intercept 'a' and y-intercept 'b'. (Page: 97)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Normal/Perpendicular Form</div>
+                        <div>\( x \cos\alpha + y \sin\alpha = p \)</div>
+                        <div class="context">Line with perpendicular length 'p' from origin, where the perpendicular makes angle \(\alpha\) with the positive X-axis. (Page: 97)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">General Form & Parameters</div>
+                        <div>Line: \( ax + by + c = 0 \)</div>
+                        <ul>
+                            <li>Slope: \( m = -\frac{a}{b} \)</li>
+                            <li>x-intercept: \( -\frac{c}{a} \)</li>
+                            <li>y-intercept: \( -\frac{c}{b} \)</li>
+                            <li>Distance from origin: \( p = \frac{|c|}{\sqrt{a^2+b^2}} \)</li>
+                        </ul>
+                        <div class="context">Page: 97</div>
+                    </div>
+                     <div class="item">
+                        <div class="item-title">Family of Lines</div>
+                        <div>\( (a_1x+b_1y+c_1) + h(a_2x+b_2y+c_2) = 0 \)</div>
+                        <div class="context">Represents a family of lines passing through the intersection of lines \(l_1\) and \(l_2\). (Page: 99)</div>
+                    </div>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Relationships Between Lines</summary>
+                <div class="content">
+                    <div class="item">
+                        <div class="item-title">Conditions for Two Lines</div>
+                        <div class="context">For lines \(l_1: a_1x+b_1y+c_1=0\) and \(l_2: a_2x+b_2y+c_2=0\). (Page: 98)</div>
+                        <ul>
+                            <li><b>Parallel:</b> \( \frac{a_1}{a_2} = \frac{b_1}{b_2} \)</li>
+                            <li><b>Perpendicular:</b> \( a_1a_2 + b_1b_2 = 0 \)</li>
+                            <li><b>Identical:</b> \( \frac{a_1}{a_2} = \frac{b_1}{b_2} = \frac{c_1}{c_2} \)</li>
+                            <li><b>Intersecting:</b> \( a_1b_2 - a_2b_1 \neq 0 \)</li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Point of Intersection</div>
+                        <div>\( \left(\frac{b_1c_2 - b_2c_1}{a_1b_2 - a_2b_1}, \frac{a_2c_1 - a_1c_2}{a_1b_2 - a_2b_1}\right) \)</div>
+                        <div class="context">The intersection point of two non-parallel lines. (Page: 98)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Condition of Concurrency of Three Lines</div>
+                        <div>\( \begin{vmatrix} a_1 & b_1 & c_1 \\ a_2 & b_2 & c_2 \\ a_3 & b_3 & c_3 \end{vmatrix} = 0 \)</div>
+                        <div class="context">The necessary and sufficient condition for three lines to be concurrent. (Page: 98)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Distance of a Point from a Line</div>
+                        <div>\( d = \frac{|ax_1+by_1+c|}{\sqrt{a^2+b^2}} \)</div>
+                        <div class="context">Distance from point \(P(x_1, y_1)\) to the line \(ax+by+c=0\). (Page: 98)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Distance Between Two Parallel Lines</div>
+                        <div>\( d = \frac{|c-c'|}{\sqrt{a^2+b^2}} \)</div>
+                        <div class="context">Distance between lines \(ax+by+c=0\) and \(ax+by+c'=0\). (Page: 99)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Angle Between Two Lines</div>
+                        <div>\( \tan\theta = \frac{m_2 - m_1}{1 + m_1m_2} \)</div>
+                        <div class="context">Angle from line \(l_1\) (slope \(m_1\)) to line \(l_2\) (slope \(m_2\)). (Page: 99)</div>
+                    </div>
+                    <div class="item">
+                        <div class="item-title">Acute Angle Between Two Lines</div>
+                        <div>\( \tan\theta = \left|\frac{a_1b_2 - a_2b_1}{a_1a_2 + b_1b_2}\right| \)</div>
+                        <div class="context">Acute angle between lines \(a_1x+b_1y+c_1=0\) and \(a_2x+b_2y+c_2=0\). (Page: 99)</div>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </details>
+
+    <details>
+        <summary>Pair of Straight Lines</summary>
+        <div class="content">
+            <div class="item">
+                <div class="item-title">Homogeneous Equation of Second Degree</div>
+                <div>\( ax^2 + 2hxy + by^2 = 0 \)</div>
+                <div class="context">Represents a pair of lines through the origin. (Page: 100)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Nature of the Pair of Lines</div>
+                <ul>
+                    <li><b>Real and distinct:</b> if \( h^2 &gt; ab \)</li>
+                    <li><b>Real and coincident:</b> if \( h^2 = ab \)</li>
+                    <li><b>Imaginary:</b> if \( h^2 &lt; ab \)</li>
+                </ul>
+                <div class="context">Conditions based on the coefficients of the homogeneous equation. (Page: 100)</div>
+            </div>
+            <div class="item">
+                <div class="item-title">Angle Between the Pair of Lines</div>
+                <div>\( \tan\theta = \frac{2\sqrt{h^2 - ab}}{a+b} \)</div>
+                <div class="context">Angle \(\theta\) between the lines represented by \(ax^2 + 2hxy + by^2 = 0\). (Page: 100)</div>
+            </div>
+             <div class="item">
+                <div class="item-title">Conditions for Angle</div>
+                <ul>
+                    <li><b>Coincident Lines (\(\theta=0\)):</b> \( h^2 - ab = 0 \)</li>
+                    <li><b>Perpendicular Lines (\(\theta=\frac{\pi}{2}\)):</b> \( a+b = 0 \)</li>
+                </ul>
+                <div class="context">Special cases for the angle between the pair of lines. (Page: 100)</div>
+            </div>
+        </div>
+    </details>
+
+</div>
+
+</body>
+</html>
