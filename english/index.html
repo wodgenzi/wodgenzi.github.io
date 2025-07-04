@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NET Past Papers Words</title>
-    <script src="index.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Styles for the details panel, initially hidden */
         .details-panel {
             display: none;
         }
-        /* Styles for the status boxes (green/red marks) */
         .status-box {
             width: 24px;
             height: 24px;
@@ -20,11 +17,9 @@
             transition: all 0.2s;
             border: 2px solid transparent;
         }
-        /* Styles for the definition box to control visibility on hover */
         .definition-box div {
             visibility: hidden;
         }
-
         .definition-box:hover div {
             visibility: visible;
         }
@@ -58,12 +53,6 @@
 
 <script>
 
-    let currentApiResults = null;
-    let currentWord = '';
-
-    // --- Embedded Initial Data ---
-    // This object contains the data that would normally be in words.json.
-    // It's embedded directly into the HTML for easy sharing and local file access.
     const EMBEDDED_INITIAL_WORDS = {
         "ebullient": [
             {
@@ -2710,52 +2699,23 @@
         ]
     };
 
-
-    // --- LocalStorage Data Management ---
-    /**
-     * Loads the glossary words from local storage.
-     * @returns {Object} An object containing words and their definitions.
-     */
-    function loadWordsFromStorage() {
-        const wordsJSON = localStorage.getItem('glossaryAppWords');
-        return wordsJSON ? JSON.parse(wordsJSON) : {};
+    function loadInitialData() {
+        renderTable(EMBEDDED_INITIAL_WORDS);
     }
-
-    async function loadInitialData() {
-        let existingWords = loadWordsFromStorage();
-
-        // If local storage is empty, use the embedded data as the initial set
-        if (Object.keys(existingWords).length === 0) {
-            console.log("Local storage is empty. Loading initial data from embedded JSON.");
-            existingWords = EMBEDDED_INITIAL_WORDS;
-            saveWordsToStorage(existingWords); // Save this initial data to local storage
-        } else {
-            console.log("Local storage contains data. Using existing data.");
-        }
-
-        renderTable(); // Always render the table with the loaded data
-    }
-
-
 
     function appendRow(word, entry) {
-        if (entry.is_hidden) return; // Do not append if hidden
+        if (entry.is_hidden) return; 
 
         const tbody = document.querySelector('#wordsTable tbody');
         const tr = document.createElement('tr');
         tr.className = 'border-b border-gray-200 hover:bg-gray-50';
-        tr.dataset.word = word; // Store word in data attribute for easy lookup
-        tr.dataset.definition = entry.definition; // Store definition in data attribute
-
-        // Sanitize definition for use in HTML attributes
-        const safeDefinition = (entry.definition || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        // Determine initial classes for status boxes based on marked status
-        const greenMarkClass = entry.marked_green ? 'bg-green-500' : 'bg-green-200 hover:border-green-500';
-        const redMarkClass = entry.marked_red ? 'bg-red-500' : 'bg-red-200 hover:border-red-500';
+        tr.dataset.word = word; 
+        tr.dataset.definition = entry.definition; 
 
         tr.innerHTML = `
         <td class="py-3 px-4 font-medium">
-              <span>${word}</span>
+            <span>${word}</span>
+        </td>
         <td class="py-3 px-4 definition-box">
           <div class="relative">
             <span>${entry.definition || 'N/A'}</span>
@@ -2773,88 +2733,21 @@
         tbody.appendChild(tr);
     }
 
-    /**
-     * Updates the 'marked_green' or 'marked_red' status for a definition entry.
-     * @param {HTMLElement} element - The status box element that was clicked.
-     * @param {string} word - The word associated with the definition.
-     * @param {string} definition - The definition text.
-     * @param {string} markType - 'green' or 'red'.
-     */
-    function updateMark(element, word, definition, markType) {
-        const allWords = loadWordsFromStorage();
-        const safeDefinition = definition.replace(/&quot;/g, '"'); // Unescape HTML entities
-        const entry = allWords[word]?.find(e => e.definition === safeDefinition);
-
-        if (entry) {
-            // Update the class directly for immediate visual feedback
-            element.classList.remove(`bg-${markType}-200`, `bg-${markType}-500`);
-            element.classList.add(newStatus ? `bg-${markType}-500` : `bg-${markType}-200`);
-            element.classList.toggle(`hover:border-${markType}-500`, !newStatus); // Re-add hover effect if not marked
-        }
-    }
-
-    /**
-     * Hides a specific definition entry from the table and marks it as hidden in storage.
-     * @param {string} word - The word associated with the definition.
-     * @param {string} definition - The definition text.
-     * @param {HTMLElement} element - The 'Hide' span element that was clicked.
-     */
-    function hideEntry(word, definition, element) {
-        const allWords = loadWordsFromStorage();
-        const safeDefinition = definition.replace(/&quot;/g, '"'); // Unescape HTML entities
-        const entry = allWords[word]?.find(e => e.definition === safeDefinition);
-
-    }
-
-    /**
-     * Unhides all hidden definitions and re-renders the table.
-     */
-    function unhideAll() {
-        const allWords = loadWordsFromStorage();
-        // Iterate through all words and their definitions, setting is_hidden to false
-        Object.values(allWords).forEach(entries => {
-            entries.forEach(entry => entry.is_hidden = false);
-        });
-        saveWordsToStorage(allWords); // Save updated status
-        renderTable(); // Re-render the entire table to show unhidden entries
-    }
-
-    /**
-     * Deletes a specific definition entry from the glossary.
-     * @param {string} word - The word associated with the definition.
-     * @param {string} definitionText - The definition text to delete.
-     * @param {HTMLElement} btn - The 'Delete' span element that was clicked.
-     */
-    
-
-    /**
-     * Renders (or re-renders) the entire glossary table from local storage.
-     */
-    function renderTable() {
-        const allWords = loadWordsFromStorage();
-        document.querySelector('#wordsTable tbody').innerHTML = ''; // Clear existing table rows
-        // Iterate through all words and their definitions to append them to the table
+    function renderTable(allWords) {
+        const tbody = document.querySelector('#wordsTable tbody');
+        tbody.innerHTML = '';
         for (let word in allWords) {
             allWords[word].forEach(entry => appendRow(word, entry));
         }
     }
 
-    // --- UI Helpers & Event Listeners ---
-    /**
-     * Toggles the visibility of the details panel for a definition.
-     * @param {HTMLElement} el - The 'Details' span element that was clicked.
-     */
     function toggleDetails(el) {
-        // Find the details panel relative to the clicked element
         const panel = el.closest('div').nextElementSibling;
         panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
     }
 
-    
-    
-
-    // Call the new loadInitialData function when the window loads
     window.onload = loadInitialData;
+
 </script>
 </body>
 </html>
